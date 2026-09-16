@@ -9,7 +9,7 @@ them as SVG or PNG.
 
 [Quickstart](#quickstart) · [Documentation](#documentation)
 
-<!-- Add an editor screenshot or a short demo GIF here. -->
+![GraphPilot demo showing the AI assistant and diagram editor](docs/assets/graphpilot-demo.gif)
 
 ## Features
 
