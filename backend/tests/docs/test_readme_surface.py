@@ -1,18 +1,8 @@
-"""`README.md`'s integration surface is the real one.
+"""The canonical integration catalogs match the real MCP and browser API surfaces.
 
-It is the first thing a stranger reads and the last thing anybody updates. Both of its
-lists had drifted: **nine MCP tools listed against eleven registered** (`diagram_read` and
-`diagram_update` shipped and were never added), and **six REST routes against seven**
-(`POST /api/diagrams/resolve` missing). The same file also still described the backend as
-doing "LLM-backed generation (Azure OpenAI)" four paragraphs above the sentence explaining
-that GraphPilot calls no model.
-
-Nothing could have caught it. `test_command_reference.py` guards management commands and
-`test_operation_errors_doc.py` guards error codes, but the surface a reader meets first
-was compared to nothing.
-
-Both lists are read from the code, not restated here, so this test cannot itself become a
-third copy to maintain.
+The root README introduces the product; full inventories belong to the MCP and API
+architecture documents. Compare their tables with code so missing or invented entries
+cannot drift silently. Retain the root README's no-provider claim check.
 """
 
 import ast
@@ -24,12 +14,28 @@ from django.test import SimpleTestCase
 
 BACKEND = Path(settings.BASE_DIR)
 README = BACKEND.parent / "README.md"
+MCP_REFERENCE = BACKEND.parent / "docs/02-architecture/01-mcp-tools/README.md"
+API_REFERENCE = BACKEND.parent / "docs/02-architecture/05-api-routes.md"
 
 
-def _readme_section(heading, stop="\n## "):
-    text = README.read_text(encoding="utf-8")
+def _document_section(path, heading, stop="\n## "):
+    text = path.read_text(encoding="utf-8")
     start = text.index(heading)
-    return text[start:text.index(stop, start + len(heading))]
+    return text[start:].split(stop, 1)[0]
+
+
+def _documented_tools():
+    section = _document_section(MCP_REFERENCE, "## Public surface")
+    return set(re.findall(r"^\|\s*`([a-z][a-z0-9_]*)`\s*\|", section, re.M))
+
+
+def _documented_routes():
+    section = _document_section(API_REFERENCE, "## 4. Route Summary")
+    rows = re.findall(
+        r"^\|\s*`(/api/[^`?]+)(?:\?[^`]*)?`\s*\|\s*(GET|POST|PUT|PATCH|DELETE|HEAD|OPTIONS)\s*\|",
+        section, re.M,
+    )
+    return {f"{method} {path}" for path, method in rows}
 
 
 def _tool_definitions():
@@ -107,37 +113,25 @@ def _registered_routes():
 
 
 class ReadmeSurfaceTests(SimpleTestCase):
-    def test_the_readme_lists_every_registered_mcp_tool(self):
-        section = _readme_section("## Integration surface")
-        quoted = set(re.findall(r"`([a-z][a-z0-9_]*)`", section))
-        missing = sorted(_registered_tools() - quoted)
+    def test_the_mcp_catalog_lists_every_registered_tool(self):
+        missing = sorted(_registered_tools() - _documented_tools())
 
-        self.assertEqual(missing, [], "registered, and the README never mentions it")
+        self.assertEqual(missing, [], "registered, and the MCP catalog never mentions it")
 
-    def test_the_readme_invents_no_mcp_tool(self):
-        section = _readme_section("## Integration surface")
-        listed = set(re.findall(r"`(diagram_[a-z_]+|health|echo)`", section))
-        invented = sorted(listed - _registered_tools())
+    def test_the_mcp_catalog_invents_no_tool(self):
+        invented = sorted(_documented_tools() - _registered_tools())
 
         self.assertEqual(invented, [], "advertised to a reader and registered by nothing")
 
-    def test_the_readme_states_the_real_tool_and_route_counts(self):
-        """The counts are prose beside the list, which is where drift is cheapest."""
-        section = _readme_section("## Integration surface")
-        tools = re.search(r"MCP tools \(IDE\), (\d+):", section)
-        routes = re.search(r"REST API \(browser\), (\d+):", section)
+    def test_the_api_summary_invents_no_route(self):
+        invented = sorted(_documented_routes() - _registered_routes())
 
-        self.assertIsNotNone(tools, "the README no longer states a tool count")
-        self.assertIsNotNone(routes, "the README no longer states a route count")
-        self.assertEqual(int(tools.group(1)), len(_registered_tools()))
-        self.assertEqual(int(routes.group(1)), len(_registered_routes()))
+        self.assertEqual(invented, [], "advertised to a reader and routed by nothing")
 
-    def test_the_readme_lists_every_route(self):
-        section = _readme_section("## Integration surface")
-        quoted = set(re.findall(r"`((?:GET|POST|PUT|PATCH|DELETE) /api/[a-z/]*)`", section))
-        missing = sorted(_registered_routes() - quoted)
+    def test_the_api_summary_lists_every_route(self):
+        missing = sorted(_registered_routes() - _documented_routes())
 
-        self.assertEqual(missing, [], "routed, and the README never mentions it")
+        self.assertEqual(missing, [], "routed, and the API summary never mentions it")
 
     def test_the_readers_of_the_code_actually_find_something(self):
         """Every check above passes on an empty set. Six such checks certified clean in
