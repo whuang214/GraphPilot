@@ -13,27 +13,6 @@ The MVP is local-first, database-free, and requires no authentication.
 > **AI coding agents:** start with [`AGENTS.md`](AGENTS.md) (the agent entry point), then
 > follow its read order. This README is the human-facing front door.
 
-## Current status
-
-The backend and frontend are both substantially implemented. **Live delivery status and next steps:**
-`docs/05-delivery/01-current-state.md`.
-
-This README's quickstart and integration list describe the **current runnable repository**. Active design docs describe
-the coherent intended system; passing offline implementation gates does not imply visible provider calibration, freeze,
-hidden certification, or production promotion.
-
-- **`docs/`** is the source of truth; **`docs/README.md`** is the reading index.
-- **`backend/`** — a runnable Django + DRF service with the shared core logic:
-  diagram file storage, validation, SVG rendering, layout, and deterministic
-  materialization of a host-authored draft. It exposes both the MCP tool
-  surface and the browser-facing REST API.
-- **`frontend/`** — a React 19 + React Flow editor (Vite, TypeScript, Tailwind v4)
-  with a single catalog-driven node renderer (`gpNode`), bounded per-type palettes, undo/redo, dark mode,
-  standalone blank/open/recent entry, drag-to-create, and SVG/PNG export.
-- **`requirements.txt`** (backend Python deps) and `backend/.env.example` /
-  `frontend/.env.example` are provided. Local tooling folders and real environment
-  files are excluded from Git.
-
 ## Repo layout
 
 ```text
