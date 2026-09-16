@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "graphpilot.delivery.workflow-optimization-ledger.v1",
+  "kind": "workflowOptimizationLedger",
+  "acceptedLiveBaseline": {
+    "runId": "run-live-workflow-anchor-block5-cold-room-20260728-03",
+    "completeWallMs": 186759.67260004627,
+    "providerCalls": 5,
+    "quality": "pass",
+    "browser": "pass"
+  },
+  "currentProviderFreeGuard": {
+    "runId": "run-workflow-audit-block6-semantic-review-revert-20260729-01",
+    "reportDigest": "sha256:fdfcbc928ac87e2dab6afa2efbd4467601f9362ade83e5cfcb1beb612c4aa639",
+    "compatibilityKey": "sha256:d77f21f801006fe95a436171697ac1d38869bde834c619b802971fde5529ebd1",
+    "baselineEligible": true,
+    "azureCalls": 0
+  },
+  "waves": [
+    {
+      "waveId": "wave-b1-semantic-review-contract",
+      "owner": "semantic_review_prompt_projection_schema_validator_contract",
+      "baselineRepairMs": 37787.58720000042,
+      "candidateRunId": "run-live-workflow-anchor-block6-semantic-review-cold-room-20260729-03",
+      "candidateState": "failed_pre_dispatch",
+      "candidateProviderCalls": 0,
+      "decision": "reverted",
+      "claimState": "unmeasured",
+      "completeWallEffectMs": null,
+      "completeWallEffectPercent": null,
+      "repairCallEffect": null,
+      "controlledCallEffect": 0,
+      "qualityEffect": "not_measured",
+      "compatibilityEffect": "baseline_restored",
+      "rollbackCommit": "3ccf5cf25370bc165e3c350412e42dcdeb4c84da",
+      "evidenceDigest": "sha256:f6dca02cd7085639477fcb15a2d6fa08c4e77d0d1f25c188c3e1d8379f60c70b"
+    }
+  ],
+  "cumulative": {
+    "retainedWaves": 0,
+    "revertedWaves": 1,
+    "liveMeasuredImprovementMs": 0,
+    "liveMeasuredImprovementPercent": 0,
+    "controlledCallsUsed": 10,
+    "aggregateCallsUsed": 11,
+    "ceiling": 1000
+  },
+  "digest": "sha256:2168a569d96548045382dd1260b197da0452e46d062e0cade07b584eb9d423a3"
+}

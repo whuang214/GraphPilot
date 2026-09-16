@@ -1,0 +1,489 @@
+{
+  "diagramType": "bdd_diagram",
+  "edges": [
+    {
+      "data": {
+        "semanticType": "composition"
+      },
+      "id": "edge-1-compressor-hvac",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "compressor",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "hvac",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "composition"
+      },
+      "id": "edge-2-thermostat-hvac",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "thermostat",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "hvac",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "composition"
+      },
+      "id": "edge-3-targettemp-hvac",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "targettemp",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "hvac",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "composition"
+      },
+      "id": "edge-4-powerdraw-hvac",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "powerdraw",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "hvac",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association",
+        "targetEnd": {
+          "navigable": true
+        }
+      },
+      "id": "edge-5-hvac-fanmode",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "hvac",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "fanmode",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association",
+        "targetEnd": {
+          "navigable": true
+        }
+      },
+      "id": "edge-6-thermostat-state",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "thermostat",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "state",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association",
+        "targetEnd": {
+          "navigable": true
+        }
+      },
+      "id": "edge-7-efficiency-hvac",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "efficiency",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "hvac",
+      "type": "default"
+    }
+  ],
+  "id": "diagram_hvac_system",
+  "kind": "diagram",
+  "metadata": {
+    "authoring": "generated",
+    "authority": "conceptual",
+    "createdAt": "2026-08-03T21:42:16.163747+00:00",
+    "generatedBy": "graphpilot-materializer",
+    "intent": "hvac-system",
+    "notation": "sysml",
+    "originalType": "bdd_diagram",
+    "requests": [
+      {
+        "at": "2026-08-05T16:32:01.697714+00:00",
+        "text": "An HVAC system is composed of a compressor and a thermostat and has a target temperature and a power draw; it references a fan mode (auto, on, circulate), the thermostat references a system state (heat, cool, off), and the system must meet an efficiency of SEER >= 14."
+      }
+    ],
+    "source": "mcp",
+    "updatedAt": "2026-08-03T21:42:16.163747+00:00"
+  },
+  "name": "hvac-system",
+  "nodes": [
+    {
+      "data": {
+        "features": {
+          "operations": [
+            {
+              "name": "start"
+            },
+            {
+              "name": "stop"
+            }
+          ],
+          "properties": [
+            {
+              "kind": "value",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "name": "targetTemp",
+              "type": "C"
+            },
+            {
+              "kind": "value",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "name": "powerDraw",
+              "type": "W"
+            }
+          ]
+        },
+        "label": "HVAC System",
+        "semanticType": "block"
+      },
+      "height": 154.4,
+      "id": "hvac",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 492.0,
+        "y": 197.6
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    },
+    {
+      "data": {
+        "label": "Compressor",
+        "semanticType": "block"
+      },
+      "height": 48.0,
+      "id": "compressor",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 0.0,
+        "y": 38.8
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    },
+    {
+      "data": {
+        "features": {
+          "operations": [
+            {
+              "name": "readTemp"
+            }
+          ],
+          "properties": [
+            {
+              "kind": "value",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "name": "setpoint",
+              "type": "C"
+            }
+          ]
+        },
+        "label": "Thermostat",
+        "semanticType": "block"
+      },
+      "height": 125.6,
+      "id": "thermostat",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 984.0,
+        "y": 0.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    },
+    {
+      "data": {
+        "label": "Target Temp",
+        "semanticType": "block"
+      },
+      "height": 48.0,
+      "id": "targettemp",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 246.0,
+        "y": 38.8
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    },
+    {
+      "data": {
+        "label": "Power Draw",
+        "semanticType": "block"
+      },
+      "height": 48.0,
+      "id": "powerdraw",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 492.0,
+        "y": 38.8
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    },
+    {
+      "data": {
+        "label": "SEER >= 14",
+        "semanticType": "block"
+      },
+      "height": 48.0,
+      "id": "efficiency",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 738.0,
+        "y": 38.8
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    },
+    {
+      "data": {
+        "features": {
+          "literals": [
+            "AUTO",
+            "ON",
+            "CIRCULATE"
+          ]
+        },
+        "label": "Fan Mode",
+        "semanticType": "block"
+      },
+      "height": 111.6,
+      "id": "fanmode",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 492.0,
+        "y": 424.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    },
+    {
+      "data": {
+        "features": {
+          "literals": [
+            "HEAT",
+            "COOL",
+            "OFF"
+          ]
+        },
+        "label": "System State",
+        "semanticType": "block"
+      },
+      "height": 111.6,
+      "id": "state",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 984.0,
+        "y": 219.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    }
+  ],
+  "schemaVersion": "graphpilot.diagram.v1",
+  "viewport": {
+    "x": 0,
+    "y": 0,
+    "zoom": 1
+  }
+}

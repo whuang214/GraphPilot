@@ -1,0 +1,401 @@
+{
+  "diagramType": "use_case_diagram",
+  "edges": [
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "edge-1-customer-makepay",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "customer",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "makepay",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "generalization"
+      },
+      "id": "edge-2-card-makepay",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "card",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "makepay",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "generalization"
+      },
+      "id": "edge-3-wallet-makepay",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "wallet",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "makepay",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "generalization"
+      },
+      "id": "edge-4-bank-makepay",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "bank",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "makepay",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "generalization"
+      },
+      "id": "edge-5-credit-card",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "credit",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "card",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "generalization"
+      },
+      "id": "edge-6-debit-card",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "debit",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "card",
+      "type": "default"
+    }
+  ],
+  "id": "diagram_payment_gateway",
+  "kind": "diagram",
+  "metadata": {
+    "authoring": "generated",
+    "authority": "conceptual",
+    "createdAt": "2026-08-03T21:42:16.229425+00:00",
+    "generatedBy": "graphpilot-materializer",
+    "intent": "payment-gateway",
+    "notation": "uml",
+    "originalType": "use_case_diagram",
+    "requests": [
+      {
+        "at": "2026-08-05T16:32:01.672064+00:00",
+        "text": "A customer makes a payment, which can be a card payment, a wallet payment, or a bank transfer; a card payment can in turn be a credit-card or a debit-card payment."
+      }
+    ],
+    "source": "mcp",
+    "updatedAt": "2026-08-03T21:42:16.229425+00:00"
+  },
+  "name": "payment-gateway",
+  "nodes": [
+    {
+      "data": {
+        "label": "Customer",
+        "semanticType": "actor"
+      },
+      "height": 120.0,
+      "id": "customer",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 0.0,
+        "y": 168.5
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 96.0
+    },
+    {
+      "data": {
+        "label": "Payment Gateway",
+        "semanticType": "subject"
+      },
+      "height": 457.0,
+      "id": "sys",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 192.0,
+        "y": 0.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 840.0
+    },
+    {
+      "data": {
+        "label": "Make Payment",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "makepay",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "parentId": "sys",
+      "position": {
+        "x": 616.0,
+        "y": 229.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 200.0
+    },
+    {
+      "data": {
+        "label": "Pay by Card",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "card",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "parentId": "sys",
+      "position": {
+        "x": 320.0,
+        "y": 95.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 200.0
+    },
+    {
+      "data": {
+        "label": "Pay by Wallet",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "wallet",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "parentId": "sys",
+      "position": {
+        "x": 320.0,
+        "y": 229.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 200.0
+    },
+    {
+      "data": {
+        "label": "Pay by Bank Transfer",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "bank",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "parentId": "sys",
+      "position": {
+        "x": 320.0,
+        "y": 363.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 200.0
+    },
+    {
+      "data": {
+        "label": "Pay by Credit Card",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "credit",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "parentId": "sys",
+      "position": {
+        "x": 24.0,
+        "y": 28.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 200.0
+    },
+    {
+      "data": {
+        "label": "Pay by Debit Card",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "debit",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "parentId": "sys",
+      "position": {
+        "x": 24.0,
+        "y": 162.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 200.0
+    }
+  ],
+  "schemaVersion": "graphpilot.diagram.v1",
+  "viewport": {
+    "x": 0,
+    "y": 0,
+    "zoom": 1
+  }
+}

@@ -1,0 +1,486 @@
+{
+  "diagramType": "bdd_diagram",
+  "edges": [
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "edge-1-catalog-title",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "catalog",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "title",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "generalization"
+      },
+      "id": "edge-2-series-title",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "series",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "title",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "generalization"
+      },
+      "id": "edge-3-movie-title",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "movie",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "title",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "composition"
+      },
+      "id": "edge-4-season-series",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "season",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "series",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association",
+        "targetEnd": {
+          "navigable": true
+        }
+      },
+      "id": "edge-5-title-genre",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "title",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "genre",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association",
+        "targetEnd": {
+          "navigable": true
+        }
+      },
+      "id": "edge-6-title-studio",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "title",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "studio",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association",
+        "targetEnd": {
+          "navigable": true
+        }
+      },
+      "id": "edge-7-title-rating",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "title",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "rating",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "dependency"
+      },
+      "id": "edge-8-title-cdn",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "title",
+      "style": {
+        "stroke": "#333333",
+        "strokeDasharray": "6 4",
+        "strokeWidth": 2
+      },
+      "target": "cdn",
+      "type": "default"
+    }
+  ],
+  "id": "diagram_streaming_catalog",
+  "kind": "diagram",
+  "metadata": {
+    "authoring": "generated",
+    "authority": "conceptual",
+    "createdAt": "2026-08-03T21:42:16.158036+00:00",
+    "generatedBy": "graphpilot-materializer",
+    "intent": "streaming-catalog",
+    "notation": "sysml",
+    "originalType": "bdd_diagram",
+    "requests": [
+      {
+        "at": "2026-08-05T16:32:01.696209+00:00",
+        "text": "A catalog is associated with titles; a series and a movie are each kinds of title; a series is composed of seasons; every title references a genre, a studio, and a rating (G, PG, R); and a title depends on a CDN service for delivery."
+      }
+    ],
+    "source": "mcp",
+    "updatedAt": "2026-08-03T21:42:16.158036+00:00"
+  },
+  "name": "streaming-catalog",
+  "nodes": [
+    {
+      "data": {
+        "label": "Catalog",
+        "semanticType": "block"
+      },
+      "height": 48.0,
+      "id": "catalog",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 123.0,
+        "y": 120.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    },
+    {
+      "data": {
+        "label": "Title",
+        "semanticType": "block"
+      },
+      "height": 48.0,
+      "id": "title",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 369.0,
+        "y": 240.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    },
+    {
+      "data": {
+        "label": "Season",
+        "semanticType": "block"
+      },
+      "height": 48.0,
+      "id": "season",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 369.0,
+        "y": 0.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    },
+    {
+      "data": {
+        "label": "Series",
+        "semanticType": "block"
+      },
+      "height": 48.0,
+      "id": "series",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 369.0,
+        "y": 120.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    },
+    {
+      "data": {
+        "label": "Movie",
+        "semanticType": "block"
+      },
+      "height": 48.0,
+      "id": "movie",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 615.0,
+        "y": 120.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    },
+    {
+      "data": {
+        "label": "Studio",
+        "semanticType": "block"
+      },
+      "height": 48.0,
+      "id": "studio",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 0.0,
+        "y": 391.8
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    },
+    {
+      "data": {
+        "label": "Genre",
+        "semanticType": "block"
+      },
+      "height": 48.0,
+      "id": "genre",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 246.0,
+        "y": 391.8
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    },
+    {
+      "data": {
+        "label": "CDN Service",
+        "semanticType": "block"
+      },
+      "height": 48.0,
+      "id": "cdn",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 492.0,
+        "y": 391.8
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    },
+    {
+      "data": {
+        "features": {
+          "literals": [
+            "G",
+            "PG",
+            "R"
+          ]
+        },
+        "label": "Rating",
+        "semanticType": "block"
+      },
+      "height": 111.6,
+      "id": "rating",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 738.0,
+        "y": 360.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    }
+  ],
+  "schemaVersion": "graphpilot.diagram.v1",
+  "viewport": {
+    "x": 0,
+    "y": 0,
+    "zoom": 1
+  }
+}

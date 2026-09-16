@@ -1,0 +1,720 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "shelfmark-actors-and-goals",
+  "diagramType": "use_case_diagram",
+  "authority": "as_implemented",
+  "requests": [
+    "Who uses this system, and what they use it for."
+  ],
+  "evidence": [
+    {
+      "id": "ev-installed-apps",
+      "kind": "configuration",
+      "locator": {
+        "lineRange": {
+          "end": 21,
+          "start": 9
+        },
+        "path": "shelfmark/settings.py",
+        "symbol": "INSTALLED_APPS"
+      },
+      "summary": "The shelfmark project is made up of five local apps: members, catalog, circulation, fines and desk."
+    },
+    {
+      "id": "ev-catalog-list",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 14,
+          "start": 7
+        },
+        "path": "catalog/views.py",
+        "symbol": "catalog"
+      },
+      "summary": "The catalogue view searches title, author and isbn and carries no login decorator, so anyone can reach it."
+    },
+    {
+      "id": "ev-book-detail",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 25,
+          "start": 17
+        },
+        "path": "catalog/views.py",
+        "symbol": "book_detail"
+      },
+      "summary": "The book detail view is also unauthenticated; it shows the title's copies and its uncancelled holds, and marks the viewer's own hold when signed in."
+    },
+    {
+      "id": "ev-nav",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 12,
+          "start": 8
+        },
+        "path": "templates/base.html",
+        "symbol": "user.is_librarian"
+      },
+      "summary": "The navigation offers the catalogue to everyone, adds My loans and My account once signed in, and shows the Desk link only when user.is_librarian is true."
+    },
+    {
+      "id": "ev-join",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 15,
+          "start": 7
+        },
+        "path": "members/views.py",
+        "symbol": "join"
+      },
+      "summary": "The join view is open to anonymous visitors: it saves a new Member from JoinForm and signs them in immediately."
+    },
+    {
+      "id": "ev-is-librarian",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 8,
+          "start": 5
+        },
+        "path": "members/models.py",
+        "symbol": "is_librarian"
+      },
+      "summary": "Member carries an is_librarian boolean, so a librarian is an ordinary member row with that flag set rather than a separate type of account."
+    },
+    {
+      "id": "ev-my-loans",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 29,
+          "start": 12
+        },
+        "path": "circulation/views.py",
+        "symbol": "my_loans"
+      },
+      "summary": "The login-required my_loans view lists the member's open loans with whether each may be renewed, their recent history, and the account lock reason."
+    },
+    {
+      "id": "ev-renew-view",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 45,
+          "start": 32
+        },
+        "path": "circulation/views.py",
+        "symbol": "renew_loan"
+      },
+      "summary": "The login-required renew_loan view calls account_is_locked before anything else and refuses when locked, otherwise calling the renew service."
+    },
+    {
+      "id": "ev-place-hold",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 53,
+          "start": 48
+        },
+        "path": "circulation/views.py",
+        "symbol": "place_hold"
+      },
+      "summary": "The login-required place_hold view puts the signed-in member in the queue for a title."
+    },
+    {
+      "id": "ev-cancel-hold",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 61,
+          "start": 56
+        },
+        "path": "circulation/views.py",
+        "symbol": "cancel_hold"
+      },
+      "summary": "The login-required cancel_hold view stamps cancelled_at on one of the signed-in member's own holds."
+    },
+    {
+      "id": "ev-fines-account",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 24,
+          "start": 11
+        },
+        "path": "fines/views.py",
+        "symbol": "account"
+      },
+      "summary": "The login-required account view shows the member's itemised charges, their outstanding total, the lock state and past payments."
+    },
+    {
+      "id": "ev-pay",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 33,
+          "start": 27
+        },
+        "path": "fines/views.py",
+        "symbol": "pay"
+      },
+      "summary": "The login-required pay view accepts a POST and calls settle for the signed-in member, passing that same member as taken_by."
+    },
+    {
+      "id": "ev-settle",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 16,
+          "start": 7
+        },
+        "path": "fines/services.py",
+        "symbol": "settle"
+      },
+      "summary": "settle walks the member's itemised charges and writes one FinePayment per owed loan."
+    },
+    {
+      "id": "ev-outstanding",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 32,
+          "start": 30
+        },
+        "path": "fines/assessment.py",
+        "symbol": "outstanding_for"
+      },
+      "summary": "outstanding_for computes, on demand, everything a member owes across every loan they have ever had."
+    },
+    {
+      "id": "ev-librarian-gate",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 10,
+          "start": 10
+        },
+        "path": "desk/views.py",
+        "symbol": "librarian_only"
+      },
+      "summary": "The desk is gated by librarian_only, which passes only an authenticated user whose is_librarian is true."
+    },
+    {
+      "id": "ev-desk-issue",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 30,
+          "start": 13
+        },
+        "path": "desk/views.py",
+        "symbol": "desk"
+      },
+      "summary": "The desk view, behind login_required and librarian_only, validates the checkout form and calls check_out to issue a copy to a member."
+    },
+    {
+      "id": "ev-desk-checkin",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 57,
+          "start": 33
+        },
+        "path": "desk/views.py",
+        "symbol": "do_checkin"
+      },
+      "summary": "The librarian-only do_checkin view closes the loan for a scanned barcode and reports lateness, any balance owed and a waiting hold."
+    },
+    {
+      "id": "ev-checkout-service",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 22,
+          "start": 13
+        },
+        "path": "circulation/services.py",
+        "symbol": "check_out"
+      },
+      "summary": "check_out asks can_borrow before doing anything else and refuses with its reason when the member may not borrow."
+    },
+    {
+      "id": "ev-eligibility",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 26,
+          "start": 8
+        },
+        "path": "circulation/eligibility.py",
+        "symbol": "account_is_locked"
+      },
+      "summary": "account_is_locked reports locked for anything overdue and only then reads the balance against the limit; can_borrow calls it before checking the ten-item ceiling."
+    },
+    {
+      "id": "ev-admin-mount",
+      "kind": "configuration",
+      "locator": {
+        "lineRange": {
+          "end": 5,
+          "start": 5
+        },
+        "path": "shelfmark/urls.py",
+        "symbol": "admin.site.urls"
+      },
+      "summary": "The Django admin site is mounted at /admin/."
+    },
+    {
+      "id": "ev-admin-catalog",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 6,
+          "start": 1
+        },
+        "path": "catalog/admin.py",
+        "symbol": "admin.site.register"
+      },
+      "summary": "Book and BookCopy are registered with the admin site, which is the only place in the project where either can be created."
+    },
+    {
+      "id": "ev-admin-circulation",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 6,
+          "start": 1
+        },
+        "path": "circulation/admin.py",
+        "symbol": "admin.site.register"
+      },
+      "summary": "Loan and Hold are registered with the admin site as well, so records can be edited directly there."
+    }
+  ],
+  "elements": [
+    {
+      "id": "shelfmark",
+      "semanticType": "subject",
+      "label": "shelfmark",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-installed-apps"
+      ]
+    },
+    {
+      "id": "visitor",
+      "semanticType": "actor",
+      "label": "Visitor",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-catalog-list",
+        "ev-join"
+      ]
+    },
+    {
+      "id": "member",
+      "semanticType": "actor",
+      "label": "Member",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-is-librarian",
+        "ev-nav"
+      ]
+    },
+    {
+      "id": "librarian",
+      "semanticType": "actor",
+      "label": "Librarian",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-is-librarian",
+        "ev-librarian-gate"
+      ]
+    },
+    {
+      "id": "administrator",
+      "semanticType": "actor",
+      "label": "Administrator",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-admin-mount"
+      ]
+    },
+    {
+      "id": "search-catalogue",
+      "semanticType": "useCase",
+      "label": "Search the catalogue",
+      "parentId": "shelfmark",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-catalog-list"
+      ]
+    },
+    {
+      "id": "view-title",
+      "semanticType": "useCase",
+      "label": "View a title and who is waiting",
+      "parentId": "shelfmark",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-book-detail"
+      ]
+    },
+    {
+      "id": "join",
+      "semanticType": "useCase",
+      "label": "Join the library",
+      "parentId": "shelfmark",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-join"
+      ]
+    },
+    {
+      "id": "see-my-loans",
+      "semanticType": "useCase",
+      "label": "See my loans and what is due",
+      "parentId": "shelfmark",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-my-loans"
+      ]
+    },
+    {
+      "id": "renew-loan",
+      "semanticType": "useCase",
+      "label": "Renew a loan",
+      "parentId": "shelfmark",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-renew-view"
+      ]
+    },
+    {
+      "id": "place-hold",
+      "semanticType": "useCase",
+      "label": "Place a hold on a title",
+      "parentId": "shelfmark",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-place-hold"
+      ]
+    },
+    {
+      "id": "cancel-hold",
+      "semanticType": "useCase",
+      "label": "Cancel a hold",
+      "parentId": "shelfmark",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-cancel-hold"
+      ]
+    },
+    {
+      "id": "see-balance",
+      "semanticType": "useCase",
+      "label": "See what I owe",
+      "parentId": "shelfmark",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-fines-account"
+      ]
+    },
+    {
+      "id": "pay-balance",
+      "semanticType": "useCase",
+      "label": "Pay off my balance",
+      "parentId": "shelfmark",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-pay",
+        "ev-settle"
+      ]
+    },
+    {
+      "id": "issue-copy",
+      "semanticType": "useCase",
+      "label": "Issue a copy to a member",
+      "parentId": "shelfmark",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-desk-issue"
+      ]
+    },
+    {
+      "id": "take-copy-back",
+      "semanticType": "useCase",
+      "label": "Take a copy back",
+      "parentId": "shelfmark",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-desk-checkin"
+      ]
+    },
+    {
+      "id": "manage-records",
+      "semanticType": "useCase",
+      "label": "Manage records in the Django admin",
+      "parentId": "shelfmark",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-admin-mount",
+        "ev-admin-catalog",
+        "ev-admin-circulation"
+      ]
+    },
+    {
+      "id": "check-not-locked",
+      "semanticType": "useCase",
+      "label": "Check the account is not locked",
+      "parentId": "shelfmark",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-eligibility"
+      ]
+    },
+    {
+      "id": "work-out-owed",
+      "semanticType": "useCase",
+      "label": "Work out what the member owes",
+      "parentId": "shelfmark",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-outstanding"
+      ]
+    },
+    {
+      "id": "note-lock-order",
+      "semanticType": "note",
+      "label": "Anything overdue locks the account on its own; the balance is only looked at when nothing is overdue.",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-eligibility"
+      ]
+    },
+    {
+      "id": "note-self-payment",
+      "semanticType": "note",
+      "label": "The only way to pay is the member's own page, which records them as having taken their own payment.",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-pay"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "visitor-searches",
+      "semanticType": "association",
+      "source": "visitor",
+      "target": "search-catalogue",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-catalog-list"
+      ]
+    },
+    {
+      "id": "visitor-views-title",
+      "semanticType": "association",
+      "source": "visitor",
+      "target": "view-title",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-book-detail"
+      ]
+    },
+    {
+      "id": "visitor-joins",
+      "semanticType": "association",
+      "source": "visitor",
+      "target": "join",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-join"
+      ]
+    },
+    {
+      "id": "member-is-a-visitor",
+      "semanticType": "generalization",
+      "source": "member",
+      "target": "visitor",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-nav",
+        "ev-catalog-list"
+      ]
+    },
+    {
+      "id": "librarian-is-a-member",
+      "semanticType": "generalization",
+      "source": "librarian",
+      "target": "member",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-is-librarian",
+        "ev-nav"
+      ]
+    },
+    {
+      "id": "member-sees-loans",
+      "semanticType": "association",
+      "source": "member",
+      "target": "see-my-loans",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-my-loans"
+      ]
+    },
+    {
+      "id": "member-renews",
+      "semanticType": "association",
+      "source": "member",
+      "target": "renew-loan",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-renew-view"
+      ]
+    },
+    {
+      "id": "member-places-hold",
+      "semanticType": "association",
+      "source": "member",
+      "target": "place-hold",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-place-hold"
+      ]
+    },
+    {
+      "id": "member-cancels-hold",
+      "semanticType": "association",
+      "source": "member",
+      "target": "cancel-hold",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-cancel-hold"
+      ]
+    },
+    {
+      "id": "member-sees-balance",
+      "semanticType": "association",
+      "source": "member",
+      "target": "see-balance",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-fines-account"
+      ]
+    },
+    {
+      "id": "member-pays",
+      "semanticType": "association",
+      "source": "member",
+      "target": "pay-balance",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-pay"
+      ]
+    },
+    {
+      "id": "librarian-issues",
+      "semanticType": "association",
+      "source": "librarian",
+      "target": "issue-copy",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-desk-issue",
+        "ev-librarian-gate"
+      ]
+    },
+    {
+      "id": "librarian-takes-back",
+      "semanticType": "association",
+      "source": "librarian",
+      "target": "take-copy-back",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-desk-checkin",
+        "ev-librarian-gate"
+      ]
+    },
+    {
+      "id": "administrator-manages",
+      "semanticType": "association",
+      "source": "administrator",
+      "target": "manage-records",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-admin-mount",
+        "ev-admin-catalog"
+      ]
+    },
+    {
+      "id": "renew-includes-lock-check",
+      "semanticType": "include",
+      "source": "renew-loan",
+      "target": "check-not-locked",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-renew-view",
+        "ev-eligibility"
+      ]
+    },
+    {
+      "id": "issue-includes-lock-check",
+      "semanticType": "include",
+      "source": "issue-copy",
+      "target": "check-not-locked",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-checkout-service",
+        "ev-eligibility"
+      ]
+    },
+    {
+      "id": "balance-includes-owed",
+      "semanticType": "include",
+      "source": "see-balance",
+      "target": "work-out-owed",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-fines-account",
+        "ev-outstanding"
+      ]
+    },
+    {
+      "id": "pay-includes-owed",
+      "semanticType": "include",
+      "source": "pay-balance",
+      "target": "work-out-owed",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-settle",
+        "ev-outstanding"
+      ]
+    },
+    {
+      "id": "note-lock-order-link",
+      "semanticType": "commentLink",
+      "source": "note-lock-order",
+      "target": "check-not-locked",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-eligibility"
+      ]
+    },
+    {
+      "id": "note-self-payment-link",
+      "semanticType": "commentLink",
+      "source": "note-self-payment",
+      "target": "pay-balance",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-pay"
+      ]
+    }
+  ]
+}

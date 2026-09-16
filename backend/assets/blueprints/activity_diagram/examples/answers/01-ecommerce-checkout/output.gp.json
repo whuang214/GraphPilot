@@ -1,0 +1,661 @@
+{
+  "diagramType": "activity_diagram",
+  "edges": [
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "edge-1-start-cart",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "source": "start",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "cart",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "edge-2-cart-checkout",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "source": "cart",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "checkout",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "edge-3-checkout-d1",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "source": "checkout",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "d1",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "No",
+        "semanticType": "controlFlow"
+      },
+      "id": "edge-4-d1-login",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "source": "d1",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "login",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "edge-5-login-m1",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "source": "login",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "m1",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "Yes",
+        "semanticType": "controlFlow"
+      },
+      "id": "edge-6-d1-m1",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "source": "d1",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "m1",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "edge-7-m1-pay",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "source": "m1",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "pay",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "edge-8-pay-d2",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "source": "pay",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "d2",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "No",
+        "semanticType": "controlFlow"
+      },
+      "id": "edge-9-d2-err",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "source": "d2",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "err",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "edge-10-err-end-fail",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "source": "err",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "end-fail",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "Yes",
+        "semanticType": "controlFlow"
+      },
+      "id": "edge-11-d2-place",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "source": "d2",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "place",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "edge-12-place-confirm",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "source": "place",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "confirm",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "edge-13-confirm-end-ok",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "source": "confirm",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "end-ok",
+      "type": "default"
+    }
+  ],
+  "id": "diagram_e_commerce_checkout",
+  "kind": "diagram",
+  "metadata": {
+    "authoring": "generated",
+    "authority": "conceptual",
+    "createdAt": "2026-08-03T21:42:15.953922+00:00",
+    "generatedBy": "graphpilot-materializer",
+    "intent": "e-commerce-checkout",
+    "notation": "uml",
+    "originalType": "activity_diagram",
+    "requests": [
+      {
+        "at": "2026-08-05T16:32:01.628157+00:00",
+        "text": "A shopper adds items to a cart and checks out; guests log in first, then payment is entered. Failed payments show an error, successful ones place the order and send a confirmation."
+      }
+    ],
+    "source": "mcp",
+    "updatedAt": "2026-08-03T21:42:15.953922+00:00"
+  },
+  "name": "e-commerce-checkout",
+  "nodes": [
+    {
+      "data": {
+        "label": "Initial",
+        "semanticType": "initialNode"
+      },
+      "height": 60.0,
+      "id": "start",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 147.0,
+        "y": 0.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 90.0
+    },
+    {
+      "data": {
+        "label": "Add to Cart",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "cart",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 112.0,
+        "y": 132.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 160.0
+    },
+    {
+      "data": {
+        "label": "Checkout",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "checkout",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 112.0,
+        "y": 264.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 160.0
+    },
+    {
+      "data": {
+        "label": "Logged In?",
+        "semanticType": "decisionNode"
+      },
+      "height": 90.0,
+      "id": "d1",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 117.0,
+        "y": 396.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 150.0
+    },
+    {
+      "data": {
+        "label": "Log In",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "login",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 24.0,
+        "y": 558.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 160.0
+    },
+    {
+      "data": {
+        "label": "Merge",
+        "semanticType": "mergeNode"
+      },
+      "height": 50.0,
+      "id": "m1",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 132.0,
+        "y": 690.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 120.0
+    },
+    {
+      "data": {
+        "label": "Enter Payment",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "pay",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 112.0,
+        "y": 812.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 160.0
+    },
+    {
+      "data": {
+        "label": "Payment OK?",
+        "semanticType": "decisionNode"
+      },
+      "height": 90.0,
+      "id": "d2",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 117.0,
+        "y": 944.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 150.0
+    },
+    {
+      "data": {
+        "label": "Show Error",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "err",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 0.0,
+        "y": 1106.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 160.0
+    },
+    {
+      "data": {
+        "label": "End (Failed)",
+        "semanticType": "activityFinalNode"
+      },
+      "height": 60.0,
+      "id": "end-fail",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 17.0,
+        "y": 1238.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 126.0
+    },
+    {
+      "data": {
+        "label": "Place Order",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "place",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 224.0,
+        "y": 1106.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 160.0
+    },
+    {
+      "data": {
+        "label": "Send Confirmation",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "confirm",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 222.25,
+        "y": 1238.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 163.5
+    },
+    {
+      "data": {
+        "label": "End (Success)",
+        "semanticType": "activityFinalNode"
+      },
+      "height": 60.0,
+      "id": "end-ok",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 237.25,
+        "y": 1370.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 133.5
+    }
+  ],
+  "schemaVersion": "graphpilot.diagram.v1",
+  "viewport": {
+    "x": 0,
+    "y": 0,
+    "zoom": 1
+  }
+}

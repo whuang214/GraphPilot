@@ -1,0 +1,189 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "e-commerce-checkout",
+  "diagramType": "activity_diagram",
+  "authority": "conceptual",
+  "requests": [
+    "A shopper adds items to a cart and checks out; guests log in first, then payment is entered. Failed payments show an error, successful ones place the order and send a confirmation."
+  ],
+  "evidence": [],
+  "elements": [
+    {
+      "id": "start",
+      "semanticType": "initialNode",
+      "label": "Initial",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "cart",
+      "semanticType": "opaqueAction",
+      "label": "Add to Cart",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "checkout",
+      "semanticType": "opaqueAction",
+      "label": "Checkout",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "d1",
+      "semanticType": "decisionNode",
+      "label": "Logged In?",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "login",
+      "semanticType": "opaqueAction",
+      "label": "Log In",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "m1",
+      "semanticType": "mergeNode",
+      "label": "Merge",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "pay",
+      "semanticType": "opaqueAction",
+      "label": "Enter Payment",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "d2",
+      "semanticType": "decisionNode",
+      "label": "Payment OK?",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "err",
+      "semanticType": "opaqueAction",
+      "label": "Show Error",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "end-fail",
+      "semanticType": "activityFinalNode",
+      "label": "End (Failed)",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "place",
+      "semanticType": "opaqueAction",
+      "label": "Place Order",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "confirm",
+      "semanticType": "opaqueAction",
+      "label": "Send Confirmation",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "end-ok",
+      "semanticType": "activityFinalNode",
+      "label": "End (Success)",
+      "assurance": "conceptual"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "edge-1-start-cart",
+      "semanticType": "controlFlow",
+      "source": "start",
+      "target": "cart",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-2-cart-checkout",
+      "semanticType": "controlFlow",
+      "source": "cart",
+      "target": "checkout",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-3-checkout-d1",
+      "semanticType": "controlFlow",
+      "source": "checkout",
+      "target": "d1",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-4-d1-login",
+      "semanticType": "controlFlow",
+      "source": "d1",
+      "target": "login",
+      "assurance": "conceptual",
+      "guard": "No"
+    },
+    {
+      "id": "edge-5-login-m1",
+      "semanticType": "controlFlow",
+      "source": "login",
+      "target": "m1",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-6-d1-m1",
+      "semanticType": "controlFlow",
+      "source": "d1",
+      "target": "m1",
+      "assurance": "conceptual",
+      "guard": "Yes"
+    },
+    {
+      "id": "edge-7-m1-pay",
+      "semanticType": "controlFlow",
+      "source": "m1",
+      "target": "pay",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-8-pay-d2",
+      "semanticType": "controlFlow",
+      "source": "pay",
+      "target": "d2",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-9-d2-err",
+      "semanticType": "controlFlow",
+      "source": "d2",
+      "target": "err",
+      "assurance": "conceptual",
+      "guard": "No"
+    },
+    {
+      "id": "edge-10-err-end-fail",
+      "semanticType": "controlFlow",
+      "source": "err",
+      "target": "end-fail",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-11-d2-place",
+      "semanticType": "controlFlow",
+      "source": "d2",
+      "target": "place",
+      "assurance": "conceptual",
+      "guard": "Yes"
+    },
+    {
+      "id": "edge-12-place-confirm",
+      "semanticType": "controlFlow",
+      "source": "place",
+      "target": "confirm",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-13-confirm-end-ok",
+      "semanticType": "controlFlow",
+      "source": "confirm",
+      "target": "end-ok",
+      "assurance": "conceptual"
+    }
+  ],
+  "assumptions": []
+}

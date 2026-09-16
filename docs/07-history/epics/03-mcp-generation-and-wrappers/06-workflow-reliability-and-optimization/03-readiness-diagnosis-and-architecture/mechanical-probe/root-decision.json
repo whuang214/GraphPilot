@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "graphpilot.delivery.readiness-diagnosis-root-decision.v1",
+  "kind": "readinessDiagnosisRootDecision",
+  "decisionId": "decision-readiness-diagnosis-block3-20260728-01",
+  "recommendation": "focused_implementation_correction",
+  "owner": "readiness_prompt_projection_validator_contract",
+  "confidence": "high_mechanical",
+  "evidence": {
+    "e0Digest": "sha256:da39b40e7caf23e3b6ebfa7e61d47c339cc4d79ad57d52c05d35f68fd1f73076",
+    "e1Digest": "sha256:c8059f5d1d5fa1c604dc41340480e759899f364623c233c49b228c209bb83a56",
+    "e2Digest": "sha256:32ff890695b635e7ed40337a88031758a793a4f809db6bd4957dbbd226394733",
+    "rootProofDigest": "sha256:5f93e55027d8bf80daf2e42993559561efdc09a8a920221dd3251cf7f8c43d22"
+  },
+  "threshold": {
+    "exactLiveSignature": true,
+    "singleLocalOwner": true,
+    "providerFreeReproduction": true,
+    "locallyCorrectedWitnessValid": true,
+    "providerControlDisconfirmedAsValidityRoot": true,
+    "componentRedesignNotNarrowest": true
+  },
+  "rootEvidence": [
+    "High and medium reproduced identical invalid_coverage_combination paths at responsibility, concurrency, and exceptionPaths.",
+    "Both repairs reproduced four invalid_recommendation_ref paths while no unselected indexed claim existed.",
+    "The prompt omits the empty-support half of the non-applicable coverage rule.",
+    "The projection exposes selected and indexed allowlists with complete overlap and no explicit unselected list.",
+    "Provider-free exact witnesses reproduce both live trigger classes while provider/full schemas accept them.",
+    "A locally corrected witness passes backend validation without changing accepted readiness meaning."
+  ],
+  "alternatives": [
+    {
+      "kind": "provider_control_response",
+      "status": "disconfirmed_as_validity_root",
+      "reason": "High and medium produced the identical first trigger; medium changes latency and token usage only."
+    },
+    {
+      "kind": "readiness_component_redesign",
+      "status": "strongest_alternative_deferred",
+      "reason": "Complete-input generic repair is expensive and unreliable, but a focused contract correction is the narrower first remedy."
+    },
+    {
+      "kind": "additional_evidence",
+      "status": "not_required_for_root_selection",
+      "reason": "Live signatures, cross-control discrimination, provider-free reproduction, and a valid local witness satisfy the corrected threshold."
+    }
+  ],
+  "azureAccounting": {
+    "completed": 4,
+    "failed": 0,
+    "uncertain": 0,
+    "used": 4,
+    "ceiling": 1000,
+    "remaining": 996
+  },
+  "block4": {
+    "authorized": true,
+    "primaryCorrection": [
+      "Make non-applicable/uncertain coverage requirements explicit: null rating and empty support arrays.",
+      "Expose unselectedIndexedClaimRefs directly, including an explicit empty array.",
+      "Prohibit recommendations when that allowlist is empty and make repair preserve deterministic action-policy constraints."
+    ],
+    "nonGoals": [
+      "Do not change readiness validator policy, rubric, finding policies, blocker authority, response schema, provenance, or persistence.",
+      "Do not redesign complete-input repair unless the focused correction fails or repair remains necessary.",
+      "Do not promote medium effort as a default until correctness is restored and separately evaluated.",
+      "Do not claim calibration, certification, semantic quality, or promotion."
+    ],
+    "offlineProof": [
+      "Add failing exact E1/E2 trigger regressions before correction.",
+      "Add prompt/projection packet assertions that expose every corrected rule directly.",
+      "Pass first-response, repair, failure, interruption, no-rerun, security, and compatibility tests after correction."
+    ],
+    "liveProof": "After offline gates and implementation audit, freeze one new-identity same-case medium manifest; allow readiness plus only naturally reached repair; never rerun E1 or E2.",
+    "rollback": "Revert the focused prompt/projection/repair changes as one commit while retaining all Block 3 evidence and terminal identities."
+  },
+  "risks": [
+    "Prompt changes may affect other cases; require packet and focused readiness regressions.",
+    "The projection field addition changes private provider input; verify all consumers and exact digests.",
+    "Repair may still fail another policy; one new-identity live proof is required.",
+    "Medium is faster but remains an optimization candidate, not part of the root correction."
+  ],
+  "audit": {
+    "state": "passed",
+    "reviewer": "independent-read-only-subagent-ac2cd1a9",
+    "remainingCritical": 0,
+    "remainingHigh": 0,
+    "remainingMedium": 0
+  },
+  "scope": {
+    "mechanicalProviderPerformanceOnly": true,
+    "calibration": false,
+    "certification": false,
+    "promotion": false
+  },
+  "digest": "sha256:d9cea931d5e39a9f3720ee51cda1ca53d6a50c20cfec528096c9725eadef0d7c"
+}

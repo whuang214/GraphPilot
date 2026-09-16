@@ -1,0 +1,1631 @@
+{
+  "diagramType": "bdd_diagram",
+  "edges": [
+    {
+      "data": {
+        "semanticType": "composition",
+        "sourceEnd": {
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "role": "wallet"
+        },
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          }
+        }
+      },
+      "id": "wallet-of-user",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-wallet"
+        ],
+        "rationale": "Established by cited evidence: ev-wallet.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "wallet",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "user",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "composition",
+        "sourceEnd": {
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "role": "ledger_account"
+        },
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          }
+        }
+      },
+      "id": "account-of-wallet",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-account"
+        ],
+        "rationale": "Established by cited evidence: ev-account.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "ledger-account",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "wallet",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "composition",
+        "sourceEnd": {
+          "multiplicity": {
+            "lower": 0,
+            "upper": "*"
+          },
+          "role": "entries"
+        },
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          }
+        }
+      },
+      "id": "entries-of-account",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-entry"
+        ],
+        "rationale": "Established by cited evidence: ev-entry.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "ledger-entry",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "ledger-account",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "composition",
+        "sourceEnd": {
+          "multiplicity": {
+            "lower": 0,
+            "upper": "*"
+          },
+          "role": "linked"
+        },
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          }
+        }
+      },
+      "id": "linked-of-user",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-linked"
+        ],
+        "rationale": "Established by cited evidence: ev-linked.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "linked-account",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "user",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "composition",
+        "sourceEnd": {
+          "multiplicity": {
+            "lower": 0,
+            "upper": "*"
+          },
+          "role": "deposits"
+        },
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          }
+        }
+      },
+      "id": "deposits-of-user",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-deposit"
+        ],
+        "rationale": "Established by cited evidence: ev-deposit.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "deposit",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "user",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "composition",
+        "sourceEnd": {
+          "multiplicity": {
+            "lower": 0,
+            "upper": "*"
+          },
+          "role": "withdrawals"
+        },
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          }
+        }
+      },
+      "id": "withdrawals-of-user",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-withdrawal"
+        ],
+        "rationale": "Established by cited evidence: ev-withdrawal.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "withdrawal",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "user",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "composition",
+        "sourceEnd": {
+          "multiplicity": {
+            "lower": 0,
+            "upper": "*"
+          },
+          "role": "notifications"
+        },
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          }
+        }
+      },
+      "id": "notifications-of-user",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-notification"
+        ],
+        "rationale": "Established by cited evidence: ev-notification.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "notification",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "user",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "composition",
+        "sourceEnd": {
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "role": "feed_item"
+        },
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          }
+        }
+      },
+      "id": "feeditem-of-payment",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-feeditem"
+        ],
+        "rationale": "Established by cited evidence: ev-feeditem.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "feed-item",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "payment",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association",
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "navigable": true,
+          "role": "sender"
+        }
+      },
+      "id": "payment-sender",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-payment"
+        ],
+        "rationale": "Established by cited evidence: ev-payment.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "payment",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "user",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association",
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "navigable": true,
+          "role": "recipient"
+        }
+      },
+      "id": "payment-recipient",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-payment"
+        ],
+        "rationale": "Established by cited evidence: ev-payment.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "payment",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "user",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association",
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "navigable": true,
+          "role": "requester"
+        }
+      },
+      "id": "request-requester",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-request"
+        ],
+        "rationale": "Established by cited evidence: ev-request.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "payment-request",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "user",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association",
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "navigable": true,
+          "role": "payer"
+        }
+      },
+      "id": "request-payer",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-request"
+        ],
+        "rationale": "Established by cited evidence: ev-request.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "payment-request",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "user",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association",
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "navigable": true,
+          "role": "settled_payment"
+        }
+      },
+      "id": "request-settled-by",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-request"
+        ],
+        "rationale": "Established by cited evidence: ev-request.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "payment-request",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "payment",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association",
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "navigable": true,
+          "role": "follower"
+        }
+      },
+      "id": "follow-follower",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-follow"
+        ],
+        "rationale": "Established by cited evidence: ev-follow.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "follow",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "user",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association",
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "navigable": true,
+          "role": "followed"
+        }
+      },
+      "id": "follow-followed",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-follow"
+        ],
+        "rationale": "Established by cited evidence: ev-follow.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "follow",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "user",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association",
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "navigable": true,
+          "role": "actor"
+        }
+      },
+      "id": "feeditem-actor",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-feeditem"
+        ],
+        "rationale": "Established by cited evidence: ev-feeditem.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "feed-item",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "user",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association",
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "navigable": true,
+          "role": "payment"
+        }
+      },
+      "id": "entry-explains-payment",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-entry"
+        ],
+        "rationale": "Established by cited evidence: ev-entry.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "ledger-entry",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "payment",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association",
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "navigable": true,
+          "role": "deposit"
+        }
+      },
+      "id": "entry-explains-deposit",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-entry"
+        ],
+        "rationale": "Established by cited evidence: ev-entry.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "ledger-entry",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "deposit",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association",
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "navigable": true,
+          "role": "withdrawal"
+        }
+      },
+      "id": "entry-explains-withdrawal",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-entry"
+        ],
+        "rationale": "Established by cited evidence: ev-entry.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "ledger-entry",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "withdrawal",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association",
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "navigable": true,
+          "role": "source"
+        }
+      },
+      "id": "deposit-source",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-deposit"
+        ],
+        "rationale": "Established by cited evidence: ev-deposit.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "deposit",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "linked-account",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association",
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "navigable": true,
+          "role": "destination"
+        }
+      },
+      "id": "withdrawal-destination",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-withdrawal"
+        ],
+        "rationale": "Established by cited evidence: ev-withdrawal.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "withdrawal",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "linked-account",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "commentLink"
+      },
+      "id": "note-balance-link",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-wallet"
+        ],
+        "rationale": "Established by cited evidence: ev-wallet.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "note-balance",
+      "style": {
+        "stroke": "#333333",
+        "strokeDasharray": "6 4",
+        "strokeWidth": 2
+      },
+      "target": "wallet",
+      "type": "default"
+    }
+  ],
+  "id": "diagram_kitepay_domain_structure",
+  "kind": "diagram",
+  "metadata": {
+    "authoring": "generated",
+    "authority": "as_implemented",
+    "createdAt": "2026-08-05T19:29:58.793243+00:00",
+    "evidence": [
+      {
+        "contentDigest": "sha256:6ad921ca9ac9c34b7aecc6afeaab8e1feb19e2efc2aa4cd9a311b9749c3107fc",
+        "id": "ev-user",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 22,
+            "start": 5
+          },
+          "path": "accounts/models.py",
+          "symbol": "User"
+        },
+        "summary": "User extends AbstractUser with a unique handle, display_name, unique email, avatar_colour and joined_from_invite."
+      },
+      {
+        "contentDigest": "sha256:fd0e5460aac7292e965e34de09a5b7d9eb62c563e9cb30909fee39a335020974",
+        "id": "ev-follow",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 33,
+            "start": 25
+          },
+          "path": "accounts/models.py",
+          "symbol": "Follow"
+        },
+        "summary": "Follow joins a follower User to a followed User, unique together, and decides who sees FRIENDS-visibility payments."
+      },
+      {
+        "contentDigest": "sha256:a35692ae7914dafe6dd9dc34c9174d8f1e69cf8b052abb966339b8ea495a98f3",
+        "id": "ev-wallet",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 17,
+            "start": 5
+          },
+          "path": "wallets/models.py",
+          "symbol": "Wallet"
+        },
+        "summary": "Wallet is one-to-one with User, carries a currency and created_at, and deliberately has no balance column."
+      },
+      {
+        "contentDigest": "sha256:e2ef55d13d4873676f33202a8a3c8c62b2d56ab2d9fb987679a509583f55ad63",
+        "id": "ev-account",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 22,
+            "start": 4
+          },
+          "path": "ledger/models.py",
+          "symbol": "Account"
+        },
+        "summary": "Account is a postable place, kind USER or HOUSE, optionally one-to-one with a Wallet; the house account has none."
+      },
+      {
+        "contentDigest": "sha256:4abbd3f6875ede51dc95f1f34f92550b7093f2df2b072120d504d7afbe552f82",
+        "id": "ev-entry",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 56,
+            "start": 25
+          },
+          "path": "ledger/models.py",
+          "symbol": "LedgerEntry"
+        },
+        "summary": "LedgerEntry is one side of a movement on an Account, created in balanced pairs and never edited, optionally linked to the Payment, Deposit or Withdrawal that caused it."
+      },
+      {
+        "contentDigest": "sha256:7a7b17cbfe819e6eba6eb93390ca7c431f57fec11884f49448fbb6800886f782",
+        "id": "ev-payment",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 28,
+            "start": 6
+          },
+          "path": "payments/models.py",
+          "symbol": "Payment"
+        },
+        "summary": "Payment records sender, recipient, amount_minor, note, a PUBLIC/FRIENDS/PRIVATE visibility and an idempotency_key."
+      },
+      {
+        "contentDigest": "sha256:ab928f9e6706859b57690f380ae8a0b710a4bfbfececbfbb6ef9eddb7ed82a22",
+        "id": "ev-request",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 55,
+            "start": 31
+          },
+          "path": "payments/models.py",
+          "symbol": "PaymentRequest"
+        },
+        "summary": "PaymentRequest records requester, payer, amount, note, status and expires_at, and points at the Payment that settled it via SET_NULL."
+      },
+      {
+        "contentDigest": "sha256:6bf84aa233f5ff84aca95193eed3c27a3a49db6bf53eb8b14a31ba89827cb4b6",
+        "id": "ev-linked",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 17,
+            "start": 5
+          },
+          "path": "rails/models.py",
+          "symbol": "LinkedAccount"
+        },
+        "summary": "LinkedAccount is a user's CARD or BANK funding instrument with a label and masked_number."
+      },
+      {
+        "contentDigest": "sha256:ffff7cf2e211912e163fe744d698fcb1f299b69a42da3f5b015f3a34d76f3bb3",
+        "id": "ev-deposit",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 32,
+            "start": 20
+          },
+          "path": "rails/models.py",
+          "symbol": "Deposit"
+        },
+        "summary": "Deposit is money entering the platform for a user from a LinkedAccount source (SET_NULL), with a status and a settles_on date."
+      },
+      {
+        "contentDigest": "sha256:6c8bad5450b3456125b9954054e93a8ec2f4f7d97a329cb215ade883cce5594b",
+        "id": "ev-withdrawal",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 49,
+            "start": 35
+          },
+          "path": "rails/models.py",
+          "symbol": "Withdrawal"
+        },
+        "summary": "Withdrawal is money leaving the platform for a user to a LinkedAccount destination (SET_NULL), with a status and a settles_on date."
+      },
+      {
+        "contentDigest": "sha256:425f583ce1deacb9d295ba76dc2b85445178e7dafe53128283b0822c521a0c0e",
+        "id": "ev-feeditem",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 11,
+            "start": 5
+          },
+          "path": "feed/models.py",
+          "symbol": "FeedItem"
+        },
+        "summary": "FeedItem is one-to-one with a Payment and names the acting User, newest first."
+      },
+      {
+        "contentDigest": "sha256:4aad25bfc6c8911abac645e7dbb57d2a79d6960a93e200b0749266d3feed18c4",
+        "id": "ev-notification",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 15,
+            "start": 5
+          },
+          "path": "notifications/models.py",
+          "symbol": "Notification"
+        },
+        "summary": "Notification stores per-user text, a link and a read flag, newest first."
+      },
+      {
+        "contentDigest": "sha256:791a6c1a7dc9580d8a113c1c4d5b0652aa2a739c34fb5d580cef1293d9b3df9f",
+        "id": "ev-balance",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 19,
+            "start": 8
+          },
+          "path": "wallets/utils.py",
+          "symbol": "available_balance"
+        },
+        "summary": "available_balance sums settled LedgerEntry rows for the wallet's account rather than reading a stored column."
+      }
+    ],
+    "generatedBy": "graphpilot-materializer",
+    "intent": "kitepay-domain-structure",
+    "notation": "sysml",
+    "originalType": "bdd_diagram",
+    "requests": [
+      {
+        "at": "2026-08-05T19:29:58.793243+00:00",
+        "text": "The structure of what this system stores, and how those things relate."
+      }
+    ],
+    "source": "mcp",
+    "updatedAt": "2026-08-05T19:29:58.793243+00:00"
+  },
+  "name": "kitepay-domain-structure",
+  "nodes": [
+    {
+      "data": {
+        "features": {
+          "properties": [
+            {
+              "kind": "value",
+              "name": "handle",
+              "type": "CharField(30) unique"
+            },
+            {
+              "kind": "value",
+              "name": "display_name",
+              "type": "CharField(80)"
+            },
+            {
+              "kind": "value",
+              "name": "email",
+              "type": "EmailField unique"
+            },
+            {
+              "default": "#4a6fa5",
+              "kind": "value",
+              "name": "avatar_colour",
+              "type": "CharField(7)"
+            },
+            {
+              "kind": "value",
+              "name": "joined_from_invite",
+              "type": "CharField(30)"
+            }
+          ]
+        },
+        "label": "User",
+        "semanticType": "block"
+      },
+      "height": 140.4,
+      "id": "user",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-user"
+        ],
+        "rationale": "Established by cited evidence: ev-user.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 1111.25,
+        "y": 722.8
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 313.5
+    },
+    {
+      "data": {
+        "features": {
+          "constraints": [
+            {
+              "expression": "one row per (follower, followed)",
+              "name": "unique_together"
+            }
+          ],
+          "properties": [
+            {
+              "kind": "value",
+              "name": "created_at",
+              "type": "DateTimeField"
+            }
+          ]
+        },
+        "label": "Follow",
+        "semanticType": "block"
+      },
+      "height": 140.0,
+      "id": "follow",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-follow"
+        ],
+        "rationale": "Established by cited evidence: ev-follow.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 0.0,
+        "y": 503.4
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "features": {
+          "constraints": [
+            {
+              "expression": "balance is the sum of the ledger, never a column",
+              "name": "no stored balance"
+            }
+          ],
+          "properties": [
+            {
+              "default": "GBP",
+              "kind": "value",
+              "name": "currency",
+              "type": "CharField(3)"
+            },
+            {
+              "kind": "value",
+              "name": "created_at",
+              "type": "DateTimeField"
+            }
+          ]
+        },
+        "label": "Wallet",
+        "semanticType": "block"
+      },
+      "height": 154.4,
+      "id": "wallet",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-wallet"
+        ],
+        "rationale": "Established by cited evidence: ev-wallet.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 376.0,
+        "y": 496.2
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "features": {
+          "properties": [
+            {
+              "kind": "value",
+              "name": "kind",
+              "type": "USER | HOUSE"
+            },
+            {
+              "kind": "value",
+              "name": "name",
+              "type": "CharField(60)"
+            }
+          ]
+        },
+        "label": "Account",
+        "semanticType": "block"
+      },
+      "height": 97.2,
+      "id": "ledger-account",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-account"
+        ],
+        "rationale": "Established by cited evidence: ev-account.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 403.0,
+        "y": 291.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    },
+    {
+      "data": {
+        "features": {
+          "constraints": [
+            {
+              "expression": "entries are created in balanced pairs and never edited",
+              "name": "balanced pairs"
+            }
+          ],
+          "properties": [
+            {
+              "kind": "value",
+              "name": "amount_minor",
+              "type": "BigIntegerField"
+            },
+            {
+              "kind": "value",
+              "name": "description",
+              "type": "CharField(140)"
+            },
+            {
+              "default": "True",
+              "kind": "value",
+              "name": "settled",
+              "type": "BooleanField"
+            },
+            {
+              "kind": "value",
+              "name": "created_at",
+              "type": "DateTimeField"
+            }
+          ]
+        },
+        "label": "LedgerEntry",
+        "semanticType": "block"
+      },
+      "height": 183.2,
+      "id": "ledger-entry",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-entry"
+        ],
+        "rationale": "Established by cited evidence: ev-entry.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 785.0,
+        "y": 0.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "features": {
+          "properties": [
+            {
+              "kind": "value",
+              "name": "amount_minor",
+              "type": "BigIntegerField"
+            },
+            {
+              "kind": "value",
+              "name": "note",
+              "type": "CharField(140)"
+            },
+            {
+              "default": "PUBLIC",
+              "kind": "value",
+              "name": "visibility",
+              "type": "PUBLIC | FRIENDS | PRIVATE"
+            },
+            {
+              "kind": "value",
+              "name": "idempotency_key",
+              "type": "CharField(48)"
+            },
+            {
+              "kind": "value",
+              "name": "created_at",
+              "type": "DateTimeField"
+            }
+          ]
+        },
+        "label": "Payment",
+        "semanticType": "block"
+      },
+      "height": 154.8,
+      "id": "payment",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-payment"
+        ],
+        "rationale": "Established by cited evidence: ev-payment.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 1452.0,
+        "y": 496.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "features": {
+          "operations": [
+            {
+              "name": "is_open"
+            }
+          ],
+          "properties": [
+            {
+              "kind": "value",
+              "name": "amount_minor",
+              "type": "BigIntegerField"
+            },
+            {
+              "kind": "value",
+              "name": "note",
+              "type": "CharField(140)"
+            },
+            {
+              "default": "pending",
+              "kind": "value",
+              "name": "status",
+              "type": "CharField(12)"
+            },
+            {
+              "kind": "value",
+              "name": "expires_at",
+              "type": "DateTimeField"
+            }
+          ]
+        },
+        "label": "PaymentRequest",
+        "semanticType": "block"
+      },
+      "height": 168.8,
+      "id": "payment-request",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-request"
+        ],
+        "rationale": "Established by cited evidence: ev-request.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 1298.75,
+        "y": 255.2
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 268.5
+    },
+    {
+      "data": {
+        "features": {
+          "properties": [
+            {
+              "kind": "value",
+              "name": "kind",
+              "type": "CARD | BANK"
+            },
+            {
+              "kind": "value",
+              "name": "label",
+              "type": "CharField(60)"
+            },
+            {
+              "kind": "value",
+              "name": "masked_number",
+              "type": "CharField(24)"
+            }
+          ]
+        },
+        "label": "LinkedAccount",
+        "semanticType": "block"
+      },
+      "height": 111.6,
+      "id": "linked-account",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-linked"
+        ],
+        "rationale": "Established by cited evidence: ev-linked.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 866.0,
+        "y": 517.6
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 246.0
+    },
+    {
+      "data": {
+        "features": {
+          "properties": [
+            {
+              "kind": "value",
+              "name": "amount_minor",
+              "type": "BigIntegerField"
+            },
+            {
+              "default": "pending",
+              "kind": "value",
+              "name": "status",
+              "type": "CharField(10)"
+            },
+            {
+              "kind": "value",
+              "name": "settles_on",
+              "type": "DateField"
+            }
+          ]
+        },
+        "label": "Deposit",
+        "semanticType": "block"
+      },
+      "height": 111.6,
+      "id": "deposit",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-deposit"
+        ],
+        "rationale": "Established by cited evidence: ev-deposit.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 648.75,
+        "y": 283.8
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 268.5
+    },
+    {
+      "data": {
+        "features": {
+          "properties": [
+            {
+              "kind": "value",
+              "name": "amount_minor",
+              "type": "BigIntegerField"
+            },
+            {
+              "default": "pending",
+              "kind": "value",
+              "name": "status",
+              "type": "CharField(10)"
+            },
+            {
+              "kind": "value",
+              "name": "settles_on",
+              "type": "DateField"
+            }
+          ]
+        },
+        "label": "Withdrawal",
+        "semanticType": "block"
+      },
+      "height": 111.6,
+      "id": "withdrawal",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-withdrawal"
+        ],
+        "rationale": "Established by cited evidence: ev-withdrawal.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 973.75,
+        "y": 283.8
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 268.5
+    },
+    {
+      "data": {
+        "features": {
+          "properties": [
+            {
+              "kind": "value",
+              "name": "created_at",
+              "type": "DateTimeField"
+            }
+          ]
+        },
+        "label": "FeedItem",
+        "semanticType": "block"
+      },
+      "height": 90.0,
+      "id": "feed-item",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-feeditem"
+        ],
+        "rationale": "Established by cited evidence: ev-feeditem.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 1742.25,
+        "y": 294.6
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 223.5
+    },
+    {
+      "data": {
+        "features": {
+          "properties": [
+            {
+              "kind": "value",
+              "name": "text",
+              "type": "CharField(200)"
+            },
+            {
+              "kind": "value",
+              "name": "link",
+              "type": "CharField(200)"
+            },
+            {
+              "default": "False",
+              "kind": "value",
+              "name": "read",
+              "type": "BooleanField"
+            },
+            {
+              "kind": "value",
+              "name": "created_at",
+              "type": "DateTimeField"
+            }
+          ]
+        },
+        "label": "Notification",
+        "semanticType": "block"
+      },
+      "height": 126.0,
+      "id": "notification",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-notification"
+        ],
+        "rationale": "Established by cited evidence: ev-notification.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 1941.5,
+        "y": 510.4
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 231.0
+    },
+    {
+      "data": {
+        "label": "No balance is stored. Spendable money is the sum of settled LedgerEntry rows for the wallet's Account.",
+        "semanticType": "note"
+      },
+      "height": 80.0,
+      "id": "note-balance",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-wallet",
+          "ev-balance"
+        ],
+        "rationale": "Established by cited evidence: ev-wallet, ev-balance.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 376.0,
+        "y": 698.6
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    }
+  ],
+  "schemaVersion": "graphpilot.diagram.v1",
+  "viewport": {
+    "x": 0,
+    "y": 0,
+    "zoom": 1
+  }
+}

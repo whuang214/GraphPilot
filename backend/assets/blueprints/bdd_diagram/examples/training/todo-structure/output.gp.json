@@ -1,0 +1,607 @@
+{
+  "diagramType": "bdd_diagram",
+  "edges": [
+    {
+      "data": {
+        "semanticType": "composition",
+        "sourceEnd": {
+          "multiplicity": {
+            "lower": 0,
+            "upper": "*"
+          },
+          "role": "todos"
+        },
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          }
+        }
+      },
+      "id": "todos-in-list",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-todo"
+        ],
+        "rationale": "Established by cited evidence: ev-todo.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "todo",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "todo-list",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association",
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "navigable": true,
+          "role": "state"
+        }
+      },
+      "id": "todo-has-state",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-todo"
+        ],
+        "rationale": "Established by cited evidence: ev-todo.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "todo",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "todo-state",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association",
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 0,
+            "upper": "*"
+          },
+          "navigable": true,
+          "role": "members"
+        }
+      },
+      "id": "members-have-roles",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-list"
+        ],
+        "rationale": "Established by cited evidence: ev-list.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "todo-list",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "role",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "generalization"
+      },
+      "id": "sql-implements-port",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-sql",
+          "ev-port"
+        ],
+        "rationale": "Established by cited evidence: ev-sql, ev-port.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "sql-repo",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "port",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "dependency"
+      },
+      "id": "port-stores-todo",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-port"
+        ],
+        "rationale": "Established by cited evidence: ev-port.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "port",
+      "style": {
+        "stroke": "#333333",
+        "strokeDasharray": "6 4",
+        "strokeWidth": 2
+      },
+      "target": "todo",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "commentLink"
+      },
+      "id": "owner-note-link",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-list"
+        ],
+        "rationale": "Established by cited evidence: ev-list.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "note-owner",
+      "style": {
+        "stroke": "#333333",
+        "strokeDasharray": "6 4",
+        "strokeWidth": 2
+      },
+      "target": "todo-list",
+      "type": "default"
+    }
+  ],
+  "id": "diagram_todo_structure",
+  "kind": "diagram",
+  "metadata": {
+    "authoring": "generated",
+    "authority": "as_implemented",
+    "createdAt": "2026-08-03T22:45:54.070856+00:00",
+    "evidence": [
+      {
+        "contentDigest": "sha256:60adccabdd4ce2e16048692d2d2f851f6e81e832ce023cc89d8677f67e6f83e1",
+        "id": "ev-list",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 85,
+            "start": 73
+          },
+          "path": "src/todo_api/domain/models.py",
+          "symbol": "TodoList"
+        },
+        "summary": "TodoList holds a name, an owner and a member-to-role mapping."
+      },
+      {
+        "contentDigest": "sha256:6167df9a3bace44758efb6ef448d176acc7016e86bc1412a2d441ba395873d7e",
+        "id": "ev-todo",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 69,
+            "start": 51
+          },
+          "path": "src/todo_api/domain/models.py",
+          "symbol": "Todo"
+        },
+        "summary": "Todo names the list it belongs to and carries its own state and priority."
+      },
+      {
+        "contentDigest": "sha256:eb74864af89c52083e1cab4d38fb4f86e86d8e4c63849c7b4a40eeb210446c24",
+        "id": "ev-state",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 29,
+            "start": 23
+          },
+          "path": "src/todo_api/domain/models.py",
+          "symbol": "TodoState"
+        },
+        "summary": "The three states a todo can be in."
+      },
+      {
+        "contentDigest": "sha256:33ca00a7e35e415910453dbb25acdc4923c900dd09511cbf0ac907abfc1883fc",
+        "id": "ev-role",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 38,
+            "start": 32
+          },
+          "path": "src/todo_api/domain/models.py",
+          "symbol": "Role"
+        },
+        "summary": "The four membership roles."
+      },
+      {
+        "contentDigest": "sha256:b5652053fd27ff1acbba691e91f5ca1de0c3fa6242b9ae9f87c3f0005409f0b9",
+        "id": "ev-port",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 25,
+            "start": 14
+          },
+          "path": "src/todo_api/repositories/base.py",
+          "symbol": "TodoRepository"
+        },
+        "summary": "The repository port: add, get, update, list_for, count_for, due_before."
+      },
+      {
+        "contentDigest": "sha256:2b5af5cc0e960f2cb59d7bc215da201923903d7d922e25a1cb251e5df82686d1",
+        "id": "ev-sql",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 73,
+            "start": 18
+          },
+          "path": "src/todo_api/repositories/sql.py",
+          "symbol": "SqlTodoRepository"
+        },
+        "summary": "A SQL adapter implementing every method of the port."
+      }
+    ],
+    "generatedBy": "graphpilot-materializer",
+    "intent": "todo-structure",
+    "notation": "sysml",
+    "originalType": "bdd_diagram",
+    "requests": [
+      {
+        "at": "2026-08-05T16:32:01.702928+00:00",
+        "text": "Show how the todo service is put together."
+      }
+    ],
+    "source": "mcp",
+    "updatedAt": "2026-08-03T22:45:54.070856+00:00"
+  },
+  "name": "todo-structure",
+  "nodes": [
+    {
+      "data": {
+        "features": {
+          "operations": [
+            {
+              "name": "role_of"
+            }
+          ],
+          "properties": [
+            {
+              "kind": "value",
+              "name": "name",
+              "type": "str"
+            },
+            {
+              "kind": "value",
+              "name": "ownerId",
+              "type": "str"
+            },
+            {
+              "kind": "reference",
+              "multiplicity": {
+                "lower": 0,
+                "upper": "*"
+              },
+              "name": "members",
+              "type": "Role"
+            },
+            {
+              "default": "False",
+              "kind": "value",
+              "name": "archived",
+              "type": "bool"
+            }
+          ]
+        },
+        "label": "TodoList",
+        "semanticType": "block"
+      },
+      "height": 197.2,
+      "id": "todo-list",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-list"
+        ],
+        "rationale": "Established by cited evidence: ev-list.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 91.5,
+        "y": 558.8
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 201.0
+    },
+    {
+      "data": {
+        "features": {
+          "operations": [
+            {
+              "name": "is_overdue"
+            }
+          ],
+          "properties": [
+            {
+              "kind": "value",
+              "name": "title",
+              "type": "str"
+            },
+            {
+              "kind": "value",
+              "name": "state",
+              "type": "TodoState"
+            },
+            {
+              "kind": "value",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "name": "dueAt",
+              "type": "datetime"
+            }
+          ]
+        },
+        "label": "Todo",
+        "semanticType": "block"
+      },
+      "height": 154.4,
+      "id": "todo",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-todo"
+        ],
+        "rationale": "Established by cited evidence: ev-todo.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 375.5,
+        "y": 332.4
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 201.0
+    },
+    {
+      "data": {
+        "features": {
+          "literals": [
+            "OPEN",
+            "DONE",
+            "ARCHIVED"
+          ]
+        },
+        "label": "TodoState",
+        "semanticType": "block"
+      },
+      "height": 111.6,
+      "id": "todo-state",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-state"
+        ],
+        "rationale": "Established by cited evidence: ev-state.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 381.0,
+        "y": 601.6
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    },
+    {
+      "data": {
+        "features": {
+          "literals": [
+            "VIEWER",
+            "COLLABORATOR",
+            "OWNER",
+            "ADMIN"
+          ]
+        },
+        "label": "Role",
+        "semanticType": "block"
+      },
+      "height": 126.0,
+      "id": "role",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-role"
+        ],
+        "rationale": "Established by cited evidence: ev-role.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 97.0,
+        "y": 828.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    },
+    {
+      "data": {
+        "features": {
+          "operations": [
+            {
+              "name": "add"
+            },
+            {
+              "name": "get"
+            },
+            {
+              "name": "update"
+            },
+            {
+              "name": "list_for"
+            },
+            {
+              "name": "due_before"
+            }
+          ]
+        },
+        "label": "TodoRepository",
+        "semanticType": "block"
+      },
+      "height": 140.4,
+      "id": "port",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-port"
+        ],
+        "rationale": "Established by cited evidence: ev-port.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 381.0,
+        "y": 120.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    },
+    {
+      "data": {
+        "label": "SqlTodoRepository",
+        "semanticType": "block"
+      },
+      "height": 48.0,
+      "id": "sql-repo",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-sql"
+        ],
+        "rationale": "Established by cited evidence: ev-sql.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 381.0,
+        "y": 0.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    },
+    {
+      "data": {
+        "label": "role_of returns OWNER for the owner without consulting members, so the owner is never listed as a member.",
+        "semanticType": "note"
+      },
+      "height": 80.0,
+      "id": "note-owner",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-list"
+        ],
+        "rationale": "Established by cited evidence: ev-list.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": -276.5,
+        "y": 558.8
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    }
+  ],
+  "schemaVersion": "graphpilot.diagram.v1",
+  "viewport": {
+    "x": 0,
+    "y": 0,
+    "zoom": 1
+  }
+}

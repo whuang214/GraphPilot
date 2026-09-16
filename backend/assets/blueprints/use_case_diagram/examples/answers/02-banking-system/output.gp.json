@@ -1,0 +1,400 @@
+{
+  "diagramType": "use_case_diagram",
+  "edges": [
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "edge-1-cust-withdraw",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "cust",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "withdraw",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "edge-2-cust-deposit",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "cust",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "deposit",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "edge-3-cust-transfer",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "cust",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "transfer",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "edge-4-teller-withdraw",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "teller",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "withdraw",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "include"
+      },
+      "id": "edge-5-withdraw-auth",
+      "label": "«include»",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "withdraw",
+      "style": {
+        "stroke": "#333333",
+        "strokeDasharray": "6 4",
+        "strokeWidth": 2
+      },
+      "target": "auth",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "include"
+      },
+      "id": "edge-6-deposit-auth",
+      "label": "«include»",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "deposit",
+      "style": {
+        "stroke": "#333333",
+        "strokeDasharray": "6 4",
+        "strokeWidth": 2
+      },
+      "target": "auth",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "include"
+      },
+      "id": "edge-7-transfer-auth",
+      "label": "«include»",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "transfer",
+      "style": {
+        "stroke": "#333333",
+        "strokeDasharray": "6 4",
+        "strokeWidth": 2
+      },
+      "target": "auth",
+      "type": "default"
+    }
+  ],
+  "id": "diagram_banking_system",
+  "kind": "diagram",
+  "metadata": {
+    "authoring": "generated",
+    "authority": "conceptual",
+    "createdAt": "2026-08-03T21:42:16.174754+00:00",
+    "generatedBy": "graphpilot-materializer",
+    "intent": "banking-system",
+    "notation": "uml",
+    "originalType": "use_case_diagram",
+    "requests": [
+      {
+        "at": "2026-08-05T16:32:01.657182+00:00",
+        "text": "In a banking system a customer withdraws cash, deposits funds, and transfers money, each of which includes authentication; a teller can also process a withdrawal."
+      }
+    ],
+    "source": "mcp",
+    "updatedAt": "2026-08-03T21:42:16.174754+00:00"
+  },
+  "name": "banking-system",
+  "nodes": [
+    {
+      "data": {
+        "label": "Customer",
+        "semanticType": "actor"
+      },
+      "height": 120.0,
+      "id": "cust",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 0.0,
+        "y": 135.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 96.0
+    },
+    {
+      "data": {
+        "label": "Teller",
+        "semanticType": "actor"
+      },
+      "height": 120.0,
+      "id": "teller",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 3.0,
+        "y": 319.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 90.0
+    },
+    {
+      "data": {
+        "label": "Banking System",
+        "semanticType": "subject"
+      },
+      "height": 390.0,
+      "id": "sys",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 192.0,
+        "y": 0.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 544.0
+    },
+    {
+      "data": {
+        "label": "Withdraw Cash",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "withdraw",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "parentId": "sys",
+      "position": {
+        "x": 24.0,
+        "y": 28.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 200.0
+    },
+    {
+      "data": {
+        "label": "Deposit Funds",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "deposit",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "parentId": "sys",
+      "position": {
+        "x": 24.0,
+        "y": 162.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 200.0
+    },
+    {
+      "data": {
+        "label": "Transfer Money",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "transfer",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "parentId": "sys",
+      "position": {
+        "x": 24.0,
+        "y": 296.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 200.0
+    },
+    {
+      "data": {
+        "label": "Authenticate",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "auth",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "parentId": "sys",
+      "position": {
+        "x": 320.0,
+        "y": 162.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 200.0
+    }
+  ],
+  "schemaVersion": "graphpilot.diagram.v1",
+  "viewport": {
+    "x": 0,
+    "y": 0,
+    "zoom": 1
+  }
+}

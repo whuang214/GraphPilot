@@ -1,0 +1,607 @@
+{
+  "diagramType": "bdd_diagram",
+  "edges": [
+    {
+      "data": {
+        "semanticType": "composition"
+      },
+      "id": "edge-1-sensors-vehicle",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "sensors",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "vehicle",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "composition"
+      },
+      "id": "edge-2-control-vehicle",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "control",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "vehicle",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "composition"
+      },
+      "id": "edge-3-lidar-sensors",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "lidar",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "sensors",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "edge-4-sensors-camera",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "sensors",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "camera",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "composition"
+      },
+      "id": "edge-5-maxspeed-vehicle",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "maxspeed",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "vehicle",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association",
+        "targetEnd": {
+          "navigable": true
+        }
+      },
+      "id": "edge-6-vehicle-drivemode",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "vehicle",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "drivemode",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association",
+        "targetEnd": {
+          "navigable": true
+        }
+      },
+      "id": "edge-7-range-vehicle",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "range",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "vehicle",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "edge-8-vehicle-maker",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "vehicle",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "maker",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "dependency"
+      },
+      "id": "edge-9-control-firmware",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "control",
+      "style": {
+        "stroke": "#333333",
+        "strokeDasharray": "6 4",
+        "strokeWidth": 2
+      },
+      "target": "firmware",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "generalization"
+      },
+      "id": "edge-10-ev-vehicle",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "ev",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "vehicle",
+      "type": "default"
+    }
+  ],
+  "id": "diagram_autonomous_vehicle",
+  "kind": "diagram",
+  "metadata": {
+    "authoring": "generated",
+    "authority": "conceptual",
+    "createdAt": "2026-08-03T21:42:16.146069+00:00",
+    "generatedBy": "graphpilot-materializer",
+    "intent": "autonomous-vehicle",
+    "notation": "sysml",
+    "originalType": "bdd_diagram",
+    "requests": [
+      {
+        "at": "2026-08-05T16:32:01.693365+00:00",
+        "text": "An autonomous vehicle is composed of a sensor suite and a control unit and has a max speed; the sensor suite is composed of a lidar and references a camera. The vehicle references a drive mode (manual, assisted, auto), is associated with a manufacturer, must have a range of at least 500 km, the control unit depends on a firmware service, and an electric vehicle is a kind of vehicle."
+      }
+    ],
+    "source": "mcp",
+    "updatedAt": "2026-08-03T21:42:16.146069+00:00"
+  },
+  "name": "autonomous-vehicle",
+  "nodes": [
+    {
+      "data": {
+        "features": {
+          "properties": [
+            {
+              "kind": "value",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "name": "mass",
+              "type": "kg"
+            },
+            {
+              "kind": "value",
+              "multiplicity": {
+                "lower": 1,
+                "upper": 1
+              },
+              "name": "topSpeed",
+              "type": "km/h"
+            }
+          ]
+        },
+        "label": "Vehicle",
+        "semanticType": "block"
+      },
+      "height": 97.2,
+      "id": "vehicle",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 492.0,
+        "y": 240.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    },
+    {
+      "data": {
+        "label": "Sensor Suite",
+        "semanticType": "block"
+      },
+      "height": 48.0,
+      "id": "sensors",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 0.0,
+        "y": 120.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    },
+    {
+      "data": {
+        "label": "Control Unit",
+        "semanticType": "block"
+      },
+      "height": 48.0,
+      "id": "control",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 984.0,
+        "y": 120.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    },
+    {
+      "data": {
+        "label": "Manufacturer",
+        "semanticType": "block"
+      },
+      "height": 48.0,
+      "id": "maker",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 369.0,
+        "y": 441.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    },
+    {
+      "data": {
+        "label": "Firmware Service",
+        "semanticType": "block"
+      },
+      "height": 48.0,
+      "id": "firmware",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 984.0,
+        "y": 264.6
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    },
+    {
+      "data": {
+        "label": "Electric Vehicle",
+        "semanticType": "block"
+      },
+      "height": 48.0,
+      "id": "ev",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 246.0,
+        "y": 120.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    },
+    {
+      "data": {
+        "label": "Lidar",
+        "semanticType": "block"
+      },
+      "height": 48.0,
+      "id": "lidar",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    },
+    {
+      "data": {
+        "label": "Camera",
+        "semanticType": "block"
+      },
+      "height": 48.0,
+      "id": "camera",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 0.0,
+        "y": 264.6
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    },
+    {
+      "data": {
+        "label": "Max Speed",
+        "semanticType": "block"
+      },
+      "height": 48.0,
+      "id": "maxspeed",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 492.0,
+        "y": 120.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    },
+    {
+      "data": {
+        "label": "Range >= 500 km",
+        "semanticType": "block"
+      },
+      "height": 48.0,
+      "id": "range",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 738.0,
+        "y": 120.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    },
+    {
+      "data": {
+        "features": {
+          "literals": [
+            "MANUAL",
+            "ASSISTED",
+            "AUTO"
+          ]
+        },
+        "label": "DriveMode",
+        "semanticType": "block"
+      },
+      "height": 111.6,
+      "id": "drivemode",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 615.0,
+        "y": 409.2
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    }
+  ],
+  "schemaVersion": "graphpilot.diagram.v1",
+  "viewport": {
+    "x": 0,
+    "y": 0,
+    "zoom": 1
+  }
+}

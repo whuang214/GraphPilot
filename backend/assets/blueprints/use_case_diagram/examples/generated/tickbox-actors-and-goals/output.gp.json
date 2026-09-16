@@ -1,0 +1,1601 @@
+{
+  "diagramType": "use_case_diagram",
+  "edges": [
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "visitor-registers",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-register"
+        ],
+        "rationale": "Established by cited evidence: ev-register.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "visitor",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "uc-register",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "visitor-signs-in",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-login"
+        ],
+        "rationale": "Established by cited evidence: ev-login.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "visitor",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "uc-sign-in",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "viewer-sees-workspaces",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-list-workspaces"
+        ],
+        "rationale": "Established by cited evidence: ev-list-workspaces.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "viewer",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "uc-my-workspaces",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "viewer-browses",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-list-projects",
+          "ev-list-tasks"
+        ],
+        "rationale": "Established by cited evidence: ev-list-projects, ev-list-tasks.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "viewer",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "uc-browse-board",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "viewer-reads-comments",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-list-comments"
+        ],
+        "rationale": "Established by cited evidence: ev-list-comments.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "viewer",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "uc-read-comments",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "viewer-sees-members",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-list-members"
+        ],
+        "rationale": "Established by cited evidence: ev-list-members.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "viewer",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "uc-see-members",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "viewer-completes-v1",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-legacy-complete"
+        ],
+        "rationale": "Established by cited evidence: ev-legacy-complete.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "viewer",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "uc-v1-complete",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "editor-starts-project",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-create-project"
+        ],
+        "rationale": "Established by cited evidence: ev-create-project.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "editor",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "uc-start-project",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "editor-adds-task",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-create-task"
+        ],
+        "rationale": "Established by cited evidence: ev-create-task.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "editor",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "uc-add-task",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "editor-moves-task",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-update-task"
+        ],
+        "rationale": "Established by cited evidence: ev-update-task.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "editor",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "uc-move-task",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "editor-adds-subtask",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-add-subtask"
+        ],
+        "rationale": "Established by cited evidence: ev-add-subtask.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "editor",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "uc-add-subtask",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "editor-ticks-subtask",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-toggle-subtask"
+        ],
+        "rationale": "Established by cited evidence: ev-toggle-subtask.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "editor",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "uc-tick-subtask",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "editor-comments",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-add-comment"
+        ],
+        "rationale": "Established by cited evidence: ev-add-comment.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "editor",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "uc-comment",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "owner-sets-role",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-set-role"
+        ],
+        "rationale": "Established by cited evidence: ev-set-role.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "owner",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "uc-set-role",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "integration-lists",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-legacy-list",
+          "ev-legacy-doc"
+        ],
+        "rationale": "Established by cited evidence: ev-legacy-list, ev-legacy-doc.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "integration",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "uc-v1-list",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "integration-posts",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-legacy-add",
+          "ev-legacy-doc"
+        ],
+        "rationale": "Established by cited evidence: ev-legacy-add, ev-legacy-doc.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "integration",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "uc-v1-add",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "integration-completes",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-legacy-complete",
+          "ev-legacy-doc"
+        ],
+        "rationale": "Established by cited evidence: ev-legacy-complete, ev-legacy-doc.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "integration",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "uc-v1-complete",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "generalization"
+      },
+      "id": "editor-is-a-viewer",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-tiers"
+        ],
+        "rationale": "Established by cited evidence: ev-tiers.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "editor",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "viewer",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "generalization"
+      },
+      "id": "owner-is-an-editor",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-tiers"
+        ],
+        "rationale": "Established by cited evidence: ev-tiers.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "owner",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "editor",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "commentLink"
+      },
+      "id": "note-v1-link",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-legacy-complete"
+        ],
+        "rationale": "Established by cited evidence: ev-legacy-complete.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "note-v1-complete",
+      "style": {
+        "stroke": "#333333",
+        "strokeDasharray": "6 4",
+        "strokeWidth": 2
+      },
+      "target": "uc-v1-complete",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "commentLink"
+      },
+      "id": "note-comment-link",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-can-comment"
+        ],
+        "rationale": "Established by cited evidence: ev-can-comment.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "note-comment-ui",
+      "style": {
+        "stroke": "#333333",
+        "strokeDasharray": "6 4",
+        "strokeWidth": 2
+      },
+      "target": "uc-comment",
+      "type": "default"
+    }
+  ],
+  "id": "diagram_tickbox_actors_and_goals",
+  "kind": "diagram",
+  "metadata": {
+    "authoring": "generated",
+    "authority": "as_implemented",
+    "createdAt": "2026-08-04T21:56:58.574260+00:00",
+    "evidence": [
+      {
+        "contentDigest": "sha256:15d8ddbb154d345dcecbf088b15d59e93eac3acfb19fdb9e888b854639449c59",
+        "id": "ev-roles",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 21,
+            "start": 18
+          },
+          "path": "backend/app/models.py",
+          "symbol": "Role"
+        },
+        "summary": "A membership carries one of three roles: owner, editor, viewer."
+      },
+      {
+        "contentDigest": "sha256:17c145aafa0b8198f181ff91f420813066ffdda2d7ec7d7da95254253bb3030c",
+        "id": "ev-tiers",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 43,
+            "start": 9
+          },
+          "path": "backend/app/permissions.py",
+          "symbol": "require_writer"
+        },
+        "summary": "Three permission tiers: require_member accepts any role, require_writer accepts only owner or editor (WRITERS), require_owner accepts only owner."
+      },
+      {
+        "contentDigest": "sha256:6583b49701c9eca6655eae3a72b2248dc14e4050b641c62f2f9adb923287e785",
+        "id": "ev-register",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 21,
+            "start": 14
+          },
+          "path": "backend/app/routers/auth.py",
+          "symbol": "register"
+        },
+        "summary": "Anyone unauthenticated can register an email, name and password and receive a token."
+      },
+      {
+        "contentDigest": "sha256:ac0de1a914baff93d5b29051f4b6d2d34d99ef8c2e4687398df33406392fffe1",
+        "id": "ev-login",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 29,
+            "start": 24
+          },
+          "path": "backend/app/routers/auth.py",
+          "symbol": "login"
+        },
+        "summary": "Login exchanges an email and password for a bearer token; no token is needed to call it."
+      },
+      {
+        "contentDigest": "sha256:cd930383307a8fc2d1cdd7257b4174bd479f71fedcabf70090768ebfb9c291ac",
+        "id": "ev-list-workspaces",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 20,
+            "start": 14
+          },
+          "path": "backend/app/routers/workspaces.py",
+          "symbol": "list_workspaces"
+        },
+        "summary": "A signed-in user lists the workspaces they hold a membership in."
+      },
+      {
+        "contentDigest": "sha256:f07b57703dd6f86659c71751e63b161253619aedebd397b52875fdf71202a82b",
+        "id": "ev-list-members",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 31,
+            "start": 23
+          },
+          "path": "backend/app/routers/workspaces.py",
+          "symbol": "list_members"
+        },
+        "summary": "Any member of a workspace can list its members and their roles."
+      },
+      {
+        "contentDigest": "sha256:7c7658f62afea2cccd511f08cde8bd75e9e0354c7c2051446ea17da16e075ed8",
+        "id": "ev-set-role",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 51,
+            "start": 34
+          },
+          "path": "backend/app/routers/workspaces.py",
+          "symbol": "set_role"
+        },
+        "summary": "Changing a member's role calls require_owner, so only an owner may do it."
+      },
+      {
+        "contentDigest": "sha256:b4c1a179240b16e2484160bceccdfe30e0e3e8e05c3f7ddd5fce312430fb66b3",
+        "id": "ev-list-projects",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 25,
+            "start": 14
+          },
+          "path": "backend/app/routers/projects.py",
+          "symbol": "list_projects"
+        },
+        "summary": "Any member can list a workspace's unarchived projects."
+      },
+      {
+        "contentDigest": "sha256:da14774e576178dfb091c0257703377ff14f183e60cf00dd9210583e194f0923",
+        "id": "ev-create-project",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 39,
+            "start": 28
+          },
+          "path": "backend/app/routers/projects.py",
+          "symbol": "create_project"
+        },
+        "summary": "Creating a project calls require_writer, so an owner or editor may do it and a viewer may not."
+      },
+      {
+        "contentDigest": "sha256:acd486b3b7b697f60bce651dc2926eae9c865a2c959b4d31ebfe05b69db7a068",
+        "id": "ev-list-tasks",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 23,
+            "start": 17
+          },
+          "path": "backend/app/routers/tasks.py",
+          "symbol": "list_tasks"
+        },
+        "summary": "Any member can read a project's tasks in board order."
+      },
+      {
+        "contentDigest": "sha256:7a88e0574182868ab7db99ace7f0e121b17c3a8ffcf8de435d99c17539758917",
+        "id": "ev-create-task",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 47,
+            "start": 26
+          },
+          "path": "backend/app/routers/tasks.py",
+          "symbol": "create_task"
+        },
+        "summary": "Adding a task calls require_writer and records a 'created' activity event."
+      },
+      {
+        "contentDigest": "sha256:a8c7d824a2f94c7b6426531c97a55d5f616c7ff52fd8d412c823579ad1fdbe95",
+        "id": "ev-update-task",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 79,
+            "start": 57
+          },
+          "path": "backend/app/routers/tasks.py",
+          "symbol": "update_task"
+        },
+        "summary": "Patching a task calls require_writer; sending 'state' moves it between the board's columns."
+      },
+      {
+        "contentDigest": "sha256:72c4afb4c9b09448a93193f96fdf951d4b9aa420cf515ed51723527cb35f9245",
+        "id": "ev-add-subtask",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 93,
+            "start": 82
+          },
+          "path": "backend/app/routers/tasks.py",
+          "symbol": "add_subtask"
+        },
+        "summary": "Adding a subtask calls require_writer and appends it at the end of the task's list."
+      },
+      {
+        "contentDigest": "sha256:7a77ec57769ebe7a6511e745e05f64cc771d502e7535596f0a73af795a68e395",
+        "id": "ev-toggle-subtask",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 107,
+            "start": 96
+          },
+          "path": "backend/app/routers/tasks.py",
+          "symbol": "toggle_subtask"
+        },
+        "summary": "Ticking or unticking a subtask calls require_writer on the workspace that owns its task."
+      },
+      {
+        "contentDigest": "sha256:5eada5ede40c0f4d8ff194ce86636bc5c61d2498bb24fdc71503f0ee040ab994",
+        "id": "ev-list-comments",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 122,
+            "start": 110
+          },
+          "path": "backend/app/routers/tasks.py",
+          "symbol": "list_comments"
+        },
+        "summary": "Any member can read a task's comments with their authors."
+      },
+      {
+        "contentDigest": "sha256:5d0069a6e2ec1b03ead53c2a2b16cb2ef5f05c161b3ea4b63195c9f272bfa68b",
+        "id": "ev-add-comment",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 138,
+            "start": 125
+          },
+          "path": "backend/app/routers/tasks.py",
+          "symbol": "add_comment"
+        },
+        "summary": "Posting a comment calls require_writer, so a viewer cannot comment."
+      },
+      {
+        "contentDigest": "sha256:95058071d353046953cc39dd13d131bb4d155b0c77734b0735a342d8f8f71415",
+        "id": "ev-legacy-doc",
+        "kind": "documentation",
+        "locator": {
+          "lineRange": {
+            "end": 5,
+            "start": 1
+          },
+          "path": "backend/app/routers/legacy.py"
+        },
+        "summary": "The module docstring: the web client stopped calling the v1 endpoints, but two integrations still post to them, so they stay."
+      },
+      {
+        "contentDigest": "sha256:0155fa6aaa3a4872c003d09a2a84e8b02e0a4686bf535d7d14e78f4d8fe50c32",
+        "id": "ev-legacy-list",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 30,
+            "start": 19
+          },
+          "path": "backend/app/routers/legacy.py",
+          "symbol": "all_todos"
+        },
+        "summary": "GET /api/v1/todos returns every not-done task in any workspace the caller is a member of, as a flat list."
+      },
+      {
+        "contentDigest": "sha256:463b1f0acdd6d0de400eab5e687412dbcf49981ba1f7d14a9ed7bb7985806d88",
+        "id": "ev-legacy-add",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 39,
+            "start": 33
+          },
+          "path": "backend/app/routers/legacy.py",
+          "symbol": "add_todo"
+        },
+        "summary": "POST /api/v1/todos calls require_writer and creates a task from a project id and a line of text."
+      },
+      {
+        "contentDigest": "sha256:f1af1f681a221b63f203e87c1522f4c760ef71500a46b3e1227b3beb7e53ffbb",
+        "id": "ev-legacy-complete",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 51,
+            "start": 42
+          },
+          "path": "backend/app/routers/legacy.py",
+          "symbol": "complete_todo"
+        },
+        "summary": "POST /api/v1/todos/{id}/complete calls require_member, not require_writer, and sets the task to done."
+      },
+      {
+        "contentDigest": "sha256:756f7d522c52ad8418ee4c99a22c6f1d48f6d4eb2d5e0a748d5d8b792159b6e4",
+        "id": "ev-can-comment",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 20,
+            "start": 18
+          },
+          "path": "frontend/src/lib/can.ts",
+          "symbol": "canComment"
+        },
+        "summary": "The client shows the comment box to anyone with any role, including a viewer."
+      }
+    ],
+    "generatedBy": "graphpilot-materializer",
+    "intent": "tickbox-actors-and-goals",
+    "notation": "uml",
+    "originalType": "use_case_diagram",
+    "requests": [
+      {
+        "at": "2026-08-04T21:56:58.574260+00:00",
+        "text": "Who uses this system, and what they use it for."
+      }
+    ],
+    "source": "mcp",
+    "updatedAt": "2026-08-04T21:56:58.574260+00:00"
+  },
+  "name": "tickbox-actors-and-goals",
+  "nodes": [
+    {
+      "data": {
+        "label": "tickbox",
+        "semanticType": "subject"
+      },
+      "height": 2132.0,
+      "id": "tickbox",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-tiers"
+        ],
+        "rationale": "Established by cited evidence: ev-tiers.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 788.0,
+        "y": 0.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 301.5
+    },
+    {
+      "data": {
+        "label": "Visitor",
+        "semanticType": "actor"
+      },
+      "height": 120.0,
+      "id": "visitor",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-register",
+          "ev-login"
+        ],
+        "rationale": "Established by cited evidence: ev-register, ev-login.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 487.0,
+        "y": 242.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 90.0
+    },
+    {
+      "data": {
+        "label": "Viewer",
+        "semanticType": "actor"
+      },
+      "height": 120.0,
+      "id": "viewer",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-roles",
+          "ev-tiers"
+        ],
+        "rationale": "Established by cited evidence: ev-roles, ev-tiers.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 487.0,
+        "y": 1006.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 90.0
+    },
+    {
+      "data": {
+        "label": "Editor",
+        "semanticType": "actor"
+      },
+      "height": 120.0,
+      "id": "editor",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-roles",
+          "ev-tiers"
+        ],
+        "rationale": "Established by cited evidence: ev-roles, ev-tiers.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 186.0,
+        "y": 689.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 90.0
+    },
+    {
+      "data": {
+        "label": "Owner",
+        "semanticType": "actor"
+      },
+      "height": 120.0,
+      "id": "owner",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-roles",
+          "ev-tiers"
+        ],
+        "rationale": "Established by cited evidence: ev-roles, ev-tiers.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 0.0,
+        "y": 544.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 90.0
+    },
+    {
+      "data": {
+        "label": "v1 integration",
+        "semanticType": "actor"
+      },
+      "height": 120.0,
+      "id": "integration",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-legacy-doc"
+        ],
+        "rationale": "Established by cited evidence: ev-legacy-doc.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 461.5,
+        "y": 1190.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 141.0
+    },
+    {
+      "data": {
+        "label": "Register an account",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "uc-register",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-register"
+        ],
+        "rationale": "Established by cited evidence: ev-register.",
+        "schemaRules": []
+      },
+      "parentId": "tickbox",
+      "position": {
+        "x": 50.75,
+        "y": 2038.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 200.0
+    },
+    {
+      "data": {
+        "label": "Sign in",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "uc-sign-in",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-login"
+        ],
+        "rationale": "Established by cited evidence: ev-login.",
+        "schemaRules": []
+      },
+      "parentId": "tickbox",
+      "position": {
+        "x": 50.75,
+        "y": 1904.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 200.0
+    },
+    {
+      "data": {
+        "label": "See my workspaces",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "uc-my-workspaces",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-list-workspaces"
+        ],
+        "rationale": "Established by cited evidence: ev-list-workspaces.",
+        "schemaRules": []
+      },
+      "parentId": "tickbox",
+      "position": {
+        "x": 50.75,
+        "y": 1770.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 200.0
+    },
+    {
+      "data": {
+        "label": "Browse a project board",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "uc-browse-board",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-list-projects",
+          "ev-list-tasks"
+        ],
+        "rationale": "Established by cited evidence: ev-list-projects, ev-list-tasks.",
+        "schemaRules": []
+      },
+      "parentId": "tickbox",
+      "position": {
+        "x": 50.25,
+        "y": 1636.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 201.0
+    },
+    {
+      "data": {
+        "label": "Read a task's comments",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "uc-read-comments",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-list-comments"
+        ],
+        "rationale": "Established by cited evidence: ev-list-comments.",
+        "schemaRules": []
+      },
+      "parentId": "tickbox",
+      "position": {
+        "x": 50.25,
+        "y": 1502.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 201.0
+    },
+    {
+      "data": {
+        "label": "See who else is here",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "uc-see-members",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-list-members"
+        ],
+        "rationale": "Established by cited evidence: ev-list-members.",
+        "schemaRules": []
+      },
+      "parentId": "tickbox",
+      "position": {
+        "x": 50.75,
+        "y": 1368.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 200.0
+    },
+    {
+      "data": {
+        "label": "Start a project",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "uc-start-project",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-create-project"
+        ],
+        "rationale": "Established by cited evidence: ev-create-project.",
+        "schemaRules": []
+      },
+      "parentId": "tickbox",
+      "position": {
+        "x": 50.75,
+        "y": 1234.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 200.0
+    },
+    {
+      "data": {
+        "label": "Add a task",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "uc-add-task",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-create-task"
+        ],
+        "rationale": "Established by cited evidence: ev-create-task.",
+        "schemaRules": []
+      },
+      "parentId": "tickbox",
+      "position": {
+        "x": 50.75,
+        "y": 1100.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 200.0
+    },
+    {
+      "data": {
+        "label": "Move a task to another column",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "uc-move-task",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-update-task"
+        ],
+        "rationale": "Established by cited evidence: ev-update-task.",
+        "schemaRules": []
+      },
+      "parentId": "tickbox",
+      "position": {
+        "x": 24.0,
+        "y": 966.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 253.5
+    },
+    {
+      "data": {
+        "label": "Break a task into subtasks",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "uc-add-subtask",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-add-subtask"
+        ],
+        "rationale": "Established by cited evidence: ev-add-subtask.",
+        "schemaRules": []
+      },
+      "parentId": "tickbox",
+      "position": {
+        "x": 35.25,
+        "y": 832.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 231.0
+    },
+    {
+      "data": {
+        "label": "Tick a subtask off",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "uc-tick-subtask",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-toggle-subtask"
+        ],
+        "rationale": "Established by cited evidence: ev-toggle-subtask.",
+        "schemaRules": []
+      },
+      "parentId": "tickbox",
+      "position": {
+        "x": 50.75,
+        "y": 698.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 200.0
+    },
+    {
+      "data": {
+        "label": "Comment on a task",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "uc-comment",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-add-comment"
+        ],
+        "rationale": "Established by cited evidence: ev-add-comment.",
+        "schemaRules": []
+      },
+      "parentId": "tickbox",
+      "position": {
+        "x": 50.75,
+        "y": 564.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 200.0
+    },
+    {
+      "data": {
+        "label": "Change a member's role",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "uc-set-role",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-set-role"
+        ],
+        "rationale": "Established by cited evidence: ev-set-role.",
+        "schemaRules": []
+      },
+      "parentId": "tickbox",
+      "position": {
+        "x": 50.25,
+        "y": 430.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 201.0
+    },
+    {
+      "data": {
+        "label": "List open todos (v1)",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "uc-v1-list",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-legacy-list"
+        ],
+        "rationale": "Established by cited evidence: ev-legacy-list.",
+        "schemaRules": []
+      },
+      "parentId": "tickbox",
+      "position": {
+        "x": 50.75,
+        "y": 296.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 200.0
+    },
+    {
+      "data": {
+        "label": "Post a todo (v1)",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "uc-v1-add",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-legacy-add"
+        ],
+        "rationale": "Established by cited evidence: ev-legacy-add.",
+        "schemaRules": []
+      },
+      "parentId": "tickbox",
+      "position": {
+        "x": 50.75,
+        "y": 162.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 200.0
+    },
+    {
+      "data": {
+        "label": "Complete a todo (v1)",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "uc-v1-complete",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-legacy-complete"
+        ],
+        "rationale": "Established by cited evidence: ev-legacy-complete.",
+        "schemaRules": []
+      },
+      "parentId": "tickbox",
+      "position": {
+        "x": 50.75,
+        "y": 28.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 200.0
+    },
+    {
+      "data": {
+        "label": "This one checks membership only, not write access, so a viewer can finish a task through the old API.",
+        "semanticType": "note"
+      },
+      "height": 80.0,
+      "id": "note-v1-complete",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-legacy-complete"
+        ],
+        "rationale": "Established by cited evidence: ev-legacy-complete.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 838.75,
+        "y": -100.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "label": "The client offers the comment box to a viewer too; the server refuses it with 403.",
+        "semanticType": "note"
+      },
+      "height": 80.0,
+      "id": "note-comment-ui",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-can-comment",
+          "ev-add-comment"
+        ],
+        "rationale": "Established by cited evidence: ev-can-comment, ev-add-comment.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 372.0,
+        "y": 1518.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    }
+  ],
+  "schemaVersion": "graphpilot.diagram.v1",
+  "viewport": {
+    "x": 0,
+    "y": 0,
+    "zoom": 1
+  }
+}

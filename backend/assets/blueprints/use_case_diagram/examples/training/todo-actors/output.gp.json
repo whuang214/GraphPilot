@@ -1,0 +1,634 @@
+{
+  "diagramType": "use_case_diagram",
+  "edges": [
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "collab-creates",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-actions"
+        ],
+        "rationale": "Established by cited evidence: ev-actions.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "collaborator",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "create-todo",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "collab-completes",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-actions"
+        ],
+        "rationale": "Established by cited evidence: ev-actions.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "collaborator",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "complete-todo",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "owner-invites",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-actions"
+        ],
+        "rationale": "Established by cited evidence: ev-actions.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "owner",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "invite-member",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "owner-archives",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-actions"
+        ],
+        "rationale": "Established by cited evidence: ev-actions.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "owner",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "archive-list",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "scheduler-sends",
+      "origin": {
+        "assumptionRefs": [
+          "asm-scheduler-outside"
+        ],
+        "assurance": "assumed",
+        "evidenceRefs": [],
+        "rationale": "Accepted as an assumption: asm-scheduler-outside.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "scheduler",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "send-reminders",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "generalization"
+      },
+      "id": "owner-is-a-collaborator",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-actions"
+        ],
+        "rationale": "Established by cited evidence: ev-actions.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "owner",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "collaborator",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "include"
+      },
+      "id": "complete-includes-check",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-require"
+        ],
+        "rationale": "Established by cited evidence: ev-require.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "complete-todo",
+      "style": {
+        "stroke": "#333333",
+        "strokeDasharray": "6 4",
+        "strokeWidth": 2
+      },
+      "target": "check-role",
+      "type": "default"
+    },
+    {
+      "data": {
+        "condition": "the todo was still open when its reminder fell due",
+        "extensionLocations": [
+          "once the todo is saved"
+        ],
+        "semanticType": "extend"
+      },
+      "id": "reminders-extend-complete",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-reminders"
+        ],
+        "rationale": "Established by cited evidence: ev-reminders.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "send-reminders",
+      "style": {
+        "stroke": "#333333",
+        "strokeDasharray": "6 4",
+        "strokeWidth": 2
+      },
+      "target": "complete-todo",
+      "type": "default"
+    }
+  ],
+  "id": "diagram_todo_actors",
+  "kind": "diagram",
+  "metadata": {
+    "assurance": {
+      "assumedElementIds": [
+        "scheduler",
+        "scheduler-sends"
+      ],
+      "assumptions": [
+        {
+          "acceptedBy": "host",
+          "id": "asm-scheduler-outside",
+          "reason": "run_once takes the cutoff as an argument and nothing here calls it, so its caller is not visible in the source.",
+          "statement": "Reminder runs are triggered from outside this repository."
+        }
+      ]
+    },
+    "authoring": "generated",
+    "authority": "as_implemented",
+    "createdAt": "2026-08-03T22:45:54.148611+00:00",
+    "evidence": [
+      {
+        "contentDigest": "sha256:241768c0eec1485232065f7e157d8874a2c6c4ac6eb69ee9ab55404baa49271b",
+        "id": "ev-actions",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 24,
+            "start": 17
+          },
+          "path": "src/todo_api/services/permissions.py",
+          "symbol": "_REQUIRED"
+        },
+        "summary": "The six actions and the roles each one needs."
+      },
+      {
+        "contentDigest": "sha256:33ca00a7e35e415910453dbb25acdc4923c900dd09511cbf0ac907abfc1883fc",
+        "id": "ev-roles",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 38,
+            "start": 32
+          },
+          "path": "src/todo_api/domain/models.py",
+          "symbol": "Role"
+        },
+        "summary": "VIEWER, COLLABORATOR, OWNER and ADMIN, in ascending privilege."
+      },
+      {
+        "contentDigest": "sha256:c843896bb166c3ffb753f73485737e641d443e424cb15dfcb3442c028b743f2a",
+        "id": "ev-require",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 41,
+            "start": 36
+          },
+          "path": "src/todo_api/services/permissions.py",
+          "symbol": "PermissionService.require"
+        },
+        "summary": "Every guarded action goes through one check."
+      },
+      {
+        "contentDigest": "sha256:e38d8f9d4c41993de42212cc54d93fa7c9b14a3ac476ea5a7bee3ca1662d12d6",
+        "id": "ev-invite",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 30,
+            "start": 18
+          },
+          "path": "src/todo_api/api/routes_lists.py",
+          "symbol": "invite_member"
+        },
+        "summary": "Inviting a member to a list."
+      },
+      {
+        "contentDigest": "sha256:0a834df57b439d25cacf6933f2aacfab43b8f7d42561b247111e4781e94bade0",
+        "id": "ev-reminders",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 83,
+            "start": 57
+          },
+          "path": "src/todo_api/services/reminder_service.py",
+          "symbol": "ReminderService.run_once"
+        },
+        "summary": "run_once sweeps todos due before a cutoff and notifies about them."
+      }
+    ],
+    "generatedBy": "graphpilot-materializer",
+    "intent": "todo-actors",
+    "notation": "uml",
+    "originalType": "use_case_diagram",
+    "requests": [
+      {
+        "at": "2026-08-05T16:32:01.681311+00:00",
+        "text": "Who can do what with the todo service?"
+      }
+    ],
+    "source": "mcp",
+    "updatedAt": "2026-08-03T22:45:54.148611+00:00"
+  },
+  "name": "todo-actors",
+  "nodes": [
+    {
+      "data": {
+        "label": "Todo service",
+        "semanticType": "subject"
+      },
+      "height": 524.0,
+      "id": "system",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-actions"
+        ],
+        "rationale": "Established by cited evidence: ev-actions.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 408.0,
+        "y": 0.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 907.3
+    },
+    {
+      "data": {
+        "label": "Collaborator",
+        "semanticType": "actor"
+      },
+      "height": 120.0,
+      "id": "collaborator",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-roles"
+        ],
+        "rationale": "Established by cited evidence: ev-roles.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 186.0,
+        "y": 202.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 126.0
+    },
+    {
+      "data": {
+        "label": "Owner",
+        "semanticType": "actor"
+      },
+      "height": 120.0,
+      "id": "owner",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-roles"
+        ],
+        "rationale": "Established by cited evidence: ev-roles.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 0.0,
+        "y": 13.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 90.0
+    },
+    {
+      "data": {
+        "label": "Scheduler",
+        "semanticType": "actor"
+      },
+      "height": 120.0,
+      "id": "scheduler",
+      "origin": {
+        "assumptionRefs": [
+          "asm-scheduler-outside"
+        ],
+        "assurance": "assumed",
+        "evidenceRefs": [],
+        "rationale": "Accepted as an assumption: asm-scheduler-outside.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 197.25,
+        "y": 386.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 103.5
+    },
+    {
+      "data": {
+        "label": "Create a todo",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "create-todo",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-actions"
+        ],
+        "rationale": "Established by cited evidence: ev-actions.",
+        "schemaRules": []
+      },
+      "parentId": "system",
+      "position": {
+        "x": 24.0,
+        "y": 430.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 200.0
+    },
+    {
+      "data": {
+        "extensionPoints": [
+          "once the todo is saved"
+        ],
+        "label": "Complete a todo",
+        "semanticType": "useCase"
+      },
+      "height": 100.0,
+      "id": "complete-todo",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-actions"
+        ],
+        "rationale": "Established by cited evidence: ev-actions.",
+        "schemaRules": []
+      },
+      "parentId": "system",
+      "position": {
+        "x": 320.0,
+        "y": 281.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 258.8
+    },
+    {
+      "data": {
+        "label": "Check the caller's role",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "check-role",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-require"
+        ],
+        "rationale": "Established by cited evidence: ev-require.",
+        "schemaRules": []
+      },
+      "parentId": "system",
+      "position": {
+        "x": 674.8,
+        "y": 296.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 208.5
+    },
+    {
+      "data": {
+        "label": "Invite a member",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "invite-member",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-invite"
+        ],
+        "rationale": "Established by cited evidence: ev-invite.",
+        "schemaRules": []
+      },
+      "parentId": "system",
+      "position": {
+        "x": 24.0,
+        "y": 162.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 200.0
+    },
+    {
+      "data": {
+        "label": "Archive a list",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "archive-list",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-actions"
+        ],
+        "rationale": "Established by cited evidence: ev-actions.",
+        "schemaRules": []
+      },
+      "parentId": "system",
+      "position": {
+        "x": 24.0,
+        "y": 28.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 200.0
+    },
+    {
+      "data": {
+        "label": "Send due reminders",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "send-reminders",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-reminders"
+        ],
+        "rationale": "Established by cited evidence: ev-reminders.",
+        "schemaRules": []
+      },
+      "parentId": "system",
+      "position": {
+        "x": 24.0,
+        "y": 296.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 200.0
+    }
+  ],
+  "schemaVersion": "graphpilot.diagram.v1",
+  "viewport": {
+    "x": 0,
+    "y": 0,
+    "zoom": 1
+  }
+}

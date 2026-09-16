@@ -1,0 +1,239 @@
+{
+  "diagramType": "bdd_diagram",
+  "edges": [
+    {
+      "data": {
+        "semanticType": "composition",
+        "sourceEnd": {
+          "multiplicity": {
+            "lower": 1,
+            "upper": "*"
+          },
+          "role": "lines"
+        }
+      },
+      "id": "line-order",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "line",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "order",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association",
+        "targetEnd": {
+          "role": "placedBy"
+        }
+      },
+      "id": "order-customer",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "order",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "customer",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "payment-order",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "payment",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "order",
+      "type": "default"
+    }
+  ],
+  "id": "diagram_checkout_refunds",
+  "kind": "diagram",
+  "metadata": {
+    "authoring": "custom",
+    "authority": "conceptual",
+    "createdAt": "2026-08-05T22:08:43.934773+00:00",
+    "generatedBy": "graphpilot-materializer",
+    "intent": "checkout-refunds",
+    "notation": "sysml",
+    "originalType": "bdd_diagram",
+    "requests": [
+      {
+        "at": "2026-08-05T22:08:43.934773+00:00",
+        "text": "Draw what the checkout stores."
+      }
+    ],
+    "source": "mcp",
+    "updatedAt": "2026-08-05T22:08:43.934773+00:00"
+  },
+  "name": "checkout-refunds",
+  "nodes": [
+    {
+      "data": {
+        "description": "Immutable once paid. Confirmed with Priya, Aug 2026.",
+        "features": {
+          "properties": [
+            {
+              "kind": "value",
+              "name": "placedAt",
+              "type": "datetime"
+            },
+            {
+              "kind": "value",
+              "name": "total",
+              "type": "Money"
+            }
+          ]
+        },
+        "label": "Order",
+        "semanticType": "block"
+      },
+      "height": 97.2,
+      "id": "order",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 340.0
+    },
+    {
+      "data": {
+        "label": "Order Line",
+        "semanticType": "block"
+      },
+      "height": 48.0,
+      "id": "line",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": -360.0,
+        "y": 260.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    },
+    {
+      "data": {
+        "label": "Customer",
+        "semanticType": "block"
+      },
+      "height": 48.0,
+      "id": "customer",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 360.0,
+        "y": 260.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    },
+    {
+      "data": {
+        "label": "Payment",
+        "semanticType": "block"
+      },
+      "height": 48.0,
+      "id": "payment",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 0.0,
+        "y": 520.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    }
+  ],
+  "schemaVersion": "graphpilot.diagram.v1",
+  "viewport": {
+    "x": 0,
+    "y": 0,
+    "zoom": 1
+  }
+}

@@ -1,0 +1,770 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "tickbox-move-a-card",
+  "diagramType": "activity_diagram",
+  "authority": "as_implemented",
+  "requests": [
+    "What happens when someone moves a card to another column."
+  ],
+  "evidence": [
+    {
+      "id": "ev-board-buttons",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 64,
+          "start": 56
+        },
+        "path": "frontend/src/pages/Board.tsx",
+        "symbol": "moveTask"
+      },
+      "summary": "Each card renders one button per other column, only when editable, and the click calls moveTask(task.id, column)."
+    },
+    {
+      "id": "ev-can-edit",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 12,
+          "start": 10
+        },
+        "path": "frontend/src/lib/can.ts",
+        "symbol": "canEditTask"
+      },
+      "summary": "canEditTask is true only for an owner or an editor, and it is what hides the move buttons from a viewer."
+    },
+    {
+      "id": "ev-move",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 43,
+          "start": 27
+        },
+        "path": "frontend/src/store/board.ts",
+        "symbol": "moveTask"
+      },
+      "summary": "moveTask keeps the current list as 'before', repaints the card in the new column immediately, PATCHes the task, swaps in the saved copy on success, and restores 'before' plus an error message on failure."
+    },
+    {
+      "id": "ev-patch-task",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 86,
+          "start": 80
+        },
+        "path": "frontend/src/api/client.ts",
+        "symbol": "patchTask"
+      },
+      "summary": "patchTask sends PATCH /api/tasks/{id} with the patch body and passes the reply through adoptTask."
+    },
+    {
+      "id": "ev-call-error",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 27,
+          "start": 24
+        },
+        "path": "frontend/src/api/client.ts"
+      },
+      "summary": "Any non-2xx reply is turned into a thrown Error carrying the server's 'detail' text, or the status line if there is none."
+    },
+    {
+      "id": "ev-adopt",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 37,
+          "start": 32
+        },
+        "path": "frontend/src/api/client.ts",
+        "symbol": "adoptTask"
+      },
+      "summary": "adoptTask renames the API's 'state' field to the client's 'status' on every task that crosses the boundary."
+    },
+    {
+      "id": "ev-current-user",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 20,
+          "start": 9
+        },
+        "path": "backend/app/deps.py",
+        "symbol": "current_user"
+      },
+      "summary": "Every guarded route resolves the caller from the Authorization header first, 401ing on a missing, expired or unknown token."
+    },
+    {
+      "id": "ev-workspace-of-task",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 59,
+          "start": 53
+        },
+        "path": "backend/app/permissions.py",
+        "symbol": "workspace_of_task"
+      },
+      "summary": "workspace_of_task joins the task to its project to find the workspace id, and raises 404 'No such task.' when that join finds nothing."
+    },
+    {
+      "id": "ev-require-writer",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 36,
+          "start": 9
+        },
+        "path": "backend/app/permissions.py",
+        "symbol": "require_writer"
+      },
+      "summary": "require_member raises 404 when the caller has no membership; require_writer then raises 403 unless that role is in WRITERS, which is owner or editor."
+    },
+    {
+      "id": "ev-update-task",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 79,
+          "start": 57
+        },
+        "path": "backend/app/routers/tasks.py",
+        "symbol": "update_task"
+      },
+      "summary": "PATCH /api/tasks/{id} requires a writer, loads the task, maps body['state'] onto Status (422 if unknown), stamps or clears completed_at, records an 'updated' activity event and commits."
+    },
+    {
+      "id": "ev-task-out",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 19,
+          "start": 7
+        },
+        "path": "backend/app/serialise.py",
+        "symbol": "task_out"
+      },
+      "summary": "task_out returns the task with its status under the field name 'state', alongside completed_at, subtasks and labels."
+    },
+    {
+      "id": "ev-board-error",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 29,
+          "start": 29
+        },
+        "path": "frontend/src/pages/Board.tsx"
+      },
+      "summary": "The board renders the store's error string above the columns when it is set."
+    },
+    {
+      "id": "ev-stamp-tests",
+      "kind": "test",
+      "locator": {
+        "lineRange": {
+          "end": 246,
+          "start": 222
+        },
+        "path": "backend/tests/test_api.py",
+        "symbol": "test_moving_a_task_to_done_stamps_the_time"
+      },
+      "summary": "Two tests pin the timestamp behaviour: patching state to done fills completed_at, and patching it back to doing clears it."
+    }
+  ],
+  "elements": [
+    {
+      "id": "start",
+      "semanticType": "initialNode",
+      "label": "Someone clicks another column's button on a card",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-board-buttons"
+      ]
+    },
+    {
+      "id": "a-optimistic",
+      "semanticType": "opaqueAction",
+      "label": "Show the card in the new column at once, keeping the old list",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-move"
+      ]
+    },
+    {
+      "id": "a-patch",
+      "semanticType": "opaqueAction",
+      "label": "PATCH /api/tasks/{id} with the new state",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-move",
+        "ev-patch-task"
+      ]
+    },
+    {
+      "id": "d-token",
+      "semanticType": "decisionNode",
+      "label": "Is the bearer token good?",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-current-user"
+      ]
+    },
+    {
+      "id": "d-resolve",
+      "semanticType": "decisionNode",
+      "label": "Does the task resolve to a workspace?",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-workspace-of-task"
+      ]
+    },
+    {
+      "id": "d-member",
+      "semanticType": "decisionNode",
+      "label": "Is the caller a member of it?",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-require-writer"
+      ]
+    },
+    {
+      "id": "d-writer",
+      "semanticType": "decisionNode",
+      "label": "Is that membership owner or editor?",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-require-writer"
+      ]
+    },
+    {
+      "id": "a-load-task",
+      "semanticType": "opaqueAction",
+      "label": "Load the task row",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-update-task"
+      ]
+    },
+    {
+      "id": "d-task",
+      "semanticType": "decisionNode",
+      "label": "Did the row come back?",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-update-task"
+      ]
+    },
+    {
+      "id": "d-state",
+      "semanticType": "decisionNode",
+      "label": "Is the new state a known one?",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-update-task"
+      ]
+    },
+    {
+      "id": "a-set-status",
+      "semanticType": "opaqueAction",
+      "label": "Set the task's status to it",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-update-task"
+      ]
+    },
+    {
+      "id": "d-done",
+      "semanticType": "decisionNode",
+      "label": "Is the new state done?",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-update-task",
+        "ev-stamp-tests"
+      ]
+    },
+    {
+      "id": "a-stamp",
+      "semanticType": "opaqueAction",
+      "label": "Stamp completed_at with now",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-update-task",
+        "ev-stamp-tests"
+      ]
+    },
+    {
+      "id": "a-clear",
+      "semanticType": "opaqueAction",
+      "label": "Clear completed_at",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-update-task",
+        "ev-stamp-tests"
+      ]
+    },
+    {
+      "id": "m-stamped",
+      "semanticType": "mergeNode",
+      "label": "Timestamp settled",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-update-task"
+      ]
+    },
+    {
+      "id": "a-commit",
+      "semanticType": "opaqueAction",
+      "label": "Record an 'updated' activity event, then commit and reload",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-update-task"
+      ]
+    },
+    {
+      "id": "a-respond",
+      "semanticType": "opaqueAction",
+      "label": "Answer with the task, its status under the name 'state'",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-task-out"
+      ]
+    },
+    {
+      "id": "a-adopt",
+      "semanticType": "opaqueAction",
+      "label": "Rename 'state' back to 'status' as it crosses into the client",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-adopt"
+      ]
+    },
+    {
+      "id": "a-replace",
+      "semanticType": "opaqueAction",
+      "label": "Swap the saved copy in for the card",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-move"
+      ]
+    },
+    {
+      "id": "final-ok",
+      "semanticType": "activityFinalNode",
+      "label": "Card stays in its new column",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-move"
+      ]
+    },
+    {
+      "id": "m-refused",
+      "semanticType": "mergeNode",
+      "label": "Request refused",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-call-error"
+      ]
+    },
+    {
+      "id": "a-throw",
+      "semanticType": "opaqueAction",
+      "label": "Throw the reply's 'detail' text as an Error",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-call-error"
+      ]
+    },
+    {
+      "id": "a-revert",
+      "semanticType": "opaqueAction",
+      "label": "Put the whole task list back as it was",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-move"
+      ]
+    },
+    {
+      "id": "a-show-error",
+      "semanticType": "opaqueAction",
+      "label": "Show the message above the columns",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-move",
+        "ev-board-error"
+      ]
+    },
+    {
+      "id": "final-snap",
+      "semanticType": "activityFinalNode",
+      "label": "Card snaps back to its old column",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-move"
+      ]
+    },
+    {
+      "id": "note-viewer",
+      "semanticType": "note",
+      "label": "A viewer never sees these buttons: canEditTask hides them. The server checks again regardless.",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-board-buttons",
+        "ev-can-edit"
+      ]
+    },
+    {
+      "id": "note-dead-check",
+      "semanticType": "note",
+      "label": "workspace_of_task has already refused an unknown id, so this second check does not fire in practice.",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-workspace-of-task",
+        "ev-update-task"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "f-start",
+      "semanticType": "controlFlow",
+      "source": "start",
+      "target": "a-optimistic",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-board-buttons",
+        "ev-move"
+      ]
+    },
+    {
+      "id": "f-optimistic",
+      "semanticType": "controlFlow",
+      "source": "a-optimistic",
+      "target": "a-patch",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-move"
+      ]
+    },
+    {
+      "id": "f-patch",
+      "semanticType": "controlFlow",
+      "source": "a-patch",
+      "target": "d-token",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-current-user"
+      ]
+    },
+    {
+      "id": "f-token-ok",
+      "semanticType": "controlFlow",
+      "source": "d-token",
+      "target": "d-resolve",
+      "guard": "signed in",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-current-user"
+      ]
+    },
+    {
+      "id": "f-token-bad",
+      "semanticType": "controlFlow",
+      "source": "d-token",
+      "target": "m-refused",
+      "guard": "missing or expired, 401",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-current-user"
+      ]
+    },
+    {
+      "id": "f-resolve-ok",
+      "semanticType": "controlFlow",
+      "source": "d-resolve",
+      "target": "d-member",
+      "guard": "it resolves",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-workspace-of-task"
+      ]
+    },
+    {
+      "id": "f-resolve-bad",
+      "semanticType": "controlFlow",
+      "source": "d-resolve",
+      "target": "m-refused",
+      "guard": "no such task, 404",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-workspace-of-task"
+      ]
+    },
+    {
+      "id": "f-member-ok",
+      "semanticType": "controlFlow",
+      "source": "d-member",
+      "target": "d-writer",
+      "guard": "a member",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-require-writer"
+      ]
+    },
+    {
+      "id": "f-member-bad",
+      "semanticType": "controlFlow",
+      "source": "d-member",
+      "target": "m-refused",
+      "guard": "not a member, 404",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-require-writer"
+      ]
+    },
+    {
+      "id": "f-writer-ok",
+      "semanticType": "controlFlow",
+      "source": "d-writer",
+      "target": "a-load-task",
+      "guard": "owner or editor",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-require-writer"
+      ]
+    },
+    {
+      "id": "f-writer-bad",
+      "semanticType": "controlFlow",
+      "source": "d-writer",
+      "target": "m-refused",
+      "guard": "viewer, 403",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-require-writer"
+      ]
+    },
+    {
+      "id": "f-load",
+      "semanticType": "controlFlow",
+      "source": "a-load-task",
+      "target": "d-task",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-update-task"
+      ]
+    },
+    {
+      "id": "f-task-ok",
+      "semanticType": "controlFlow",
+      "source": "d-task",
+      "target": "d-state",
+      "guard": "it did",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-update-task"
+      ]
+    },
+    {
+      "id": "f-task-bad",
+      "semanticType": "controlFlow",
+      "source": "d-task",
+      "target": "m-refused",
+      "guard": "no such task, 404",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-update-task"
+      ]
+    },
+    {
+      "id": "f-state-ok",
+      "semanticType": "controlFlow",
+      "source": "d-state",
+      "target": "a-set-status",
+      "guard": "todo, doing or done",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-update-task"
+      ]
+    },
+    {
+      "id": "f-state-bad",
+      "semanticType": "controlFlow",
+      "source": "d-state",
+      "target": "m-refused",
+      "guard": "anything else, 422",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-update-task"
+      ]
+    },
+    {
+      "id": "f-set-status",
+      "semanticType": "controlFlow",
+      "source": "a-set-status",
+      "target": "d-done",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-update-task"
+      ]
+    },
+    {
+      "id": "f-done-yes",
+      "semanticType": "controlFlow",
+      "source": "d-done",
+      "target": "a-stamp",
+      "guard": "done",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-update-task"
+      ]
+    },
+    {
+      "id": "f-done-no",
+      "semanticType": "controlFlow",
+      "source": "d-done",
+      "target": "a-clear",
+      "guard": "todo or doing",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-update-task"
+      ]
+    },
+    {
+      "id": "f-stamp-merge",
+      "semanticType": "controlFlow",
+      "source": "a-stamp",
+      "target": "m-stamped",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-update-task"
+      ]
+    },
+    {
+      "id": "f-clear-merge",
+      "semanticType": "controlFlow",
+      "source": "a-clear",
+      "target": "m-stamped",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-update-task"
+      ]
+    },
+    {
+      "id": "f-merge-commit",
+      "semanticType": "controlFlow",
+      "source": "m-stamped",
+      "target": "a-commit",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-update-task"
+      ]
+    },
+    {
+      "id": "f-commit",
+      "semanticType": "controlFlow",
+      "source": "a-commit",
+      "target": "a-respond",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-update-task",
+        "ev-task-out"
+      ]
+    },
+    {
+      "id": "f-respond",
+      "semanticType": "controlFlow",
+      "source": "a-respond",
+      "target": "a-adopt",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-adopt"
+      ]
+    },
+    {
+      "id": "f-adopt",
+      "semanticType": "controlFlow",
+      "source": "a-adopt",
+      "target": "a-replace",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-move"
+      ]
+    },
+    {
+      "id": "f-replace",
+      "semanticType": "controlFlow",
+      "source": "a-replace",
+      "target": "final-ok",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-move"
+      ]
+    },
+    {
+      "id": "f-refused",
+      "semanticType": "controlFlow",
+      "source": "m-refused",
+      "target": "a-throw",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-call-error"
+      ]
+    },
+    {
+      "id": "f-throw",
+      "semanticType": "controlFlow",
+      "source": "a-throw",
+      "target": "a-revert",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-move"
+      ]
+    },
+    {
+      "id": "f-revert",
+      "semanticType": "controlFlow",
+      "source": "a-revert",
+      "target": "a-show-error",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-move"
+      ]
+    },
+    {
+      "id": "f-error",
+      "semanticType": "controlFlow",
+      "source": "a-show-error",
+      "target": "final-snap",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-move",
+        "ev-board-error"
+      ]
+    },
+    {
+      "id": "cl-viewer",
+      "semanticType": "commentLink",
+      "source": "note-viewer",
+      "target": "start",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-can-edit"
+      ]
+    },
+    {
+      "id": "cl-dead",
+      "semanticType": "commentLink",
+      "source": "note-dead-check",
+      "target": "d-task",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-workspace-of-task"
+      ]
+    }
+  ]
+}

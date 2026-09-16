@@ -1,0 +1,183 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "autonomous-vehicle",
+  "diagramType": "bdd_diagram",
+  "authority": "conceptual",
+  "requests": [
+    "An autonomous vehicle is composed of a sensor suite and a control unit and has a max speed; the sensor suite is composed of a lidar and references a camera. The vehicle references a drive mode (manual, assisted, auto), is associated with a manufacturer, must have a range of at least 500 km, the control unit depends on a firmware service, and an electric vehicle is a kind of vehicle."
+  ],
+  "evidence": [],
+  "elements": [
+    {
+      "id": "vehicle",
+      "semanticType": "block",
+      "label": "Vehicle",
+      "assurance": "conceptual",
+      "features": {
+        "properties": [
+          {
+            "kind": "value",
+            "name": "mass",
+            "type": "kg",
+            "multiplicity": {
+              "lower": 1,
+              "upper": 1
+            }
+          },
+          {
+            "kind": "value",
+            "name": "topSpeed",
+            "type": "km/h",
+            "multiplicity": {
+              "lower": 1,
+              "upper": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "sensors",
+      "semanticType": "block",
+      "label": "Sensor Suite",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "control",
+      "semanticType": "block",
+      "label": "Control Unit",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "maker",
+      "semanticType": "block",
+      "label": "Manufacturer",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "firmware",
+      "semanticType": "block",
+      "label": "Firmware Service",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "ev",
+      "semanticType": "block",
+      "label": "Electric Vehicle",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "lidar",
+      "semanticType": "block",
+      "label": "Lidar",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "camera",
+      "semanticType": "block",
+      "label": "Camera",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "maxspeed",
+      "semanticType": "block",
+      "label": "Max Speed",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "range",
+      "semanticType": "block",
+      "label": "Range >= 500 km",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "drivemode",
+      "semanticType": "block",
+      "label": "DriveMode",
+      "assurance": "conceptual",
+      "features": {
+        "literals": [
+          "MANUAL",
+          "ASSISTED",
+          "AUTO"
+        ]
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "edge-1-sensors-vehicle",
+      "semanticType": "composition",
+      "source": "sensors",
+      "target": "vehicle",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-2-control-vehicle",
+      "semanticType": "composition",
+      "source": "control",
+      "target": "vehicle",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-3-lidar-sensors",
+      "semanticType": "composition",
+      "source": "lidar",
+      "target": "sensors",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-4-sensors-camera",
+      "semanticType": "association",
+      "source": "sensors",
+      "target": "camera",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-5-maxspeed-vehicle",
+      "semanticType": "composition",
+      "source": "maxspeed",
+      "target": "vehicle",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-6-vehicle-drivemode",
+      "semanticType": "association",
+      "source": "vehicle",
+      "target": "drivemode",
+      "assurance": "conceptual",
+      "targetNavigable": true
+    },
+    {
+      "id": "edge-7-range-vehicle",
+      "semanticType": "association",
+      "source": "range",
+      "target": "vehicle",
+      "assurance": "conceptual",
+      "targetNavigable": true
+    },
+    {
+      "id": "edge-8-vehicle-maker",
+      "semanticType": "association",
+      "source": "vehicle",
+      "target": "maker",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-9-control-firmware",
+      "semanticType": "dependency",
+      "source": "control",
+      "target": "firmware",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-10-ev-vehicle",
+      "semanticType": "generalization",
+      "source": "ev",
+      "target": "vehicle",
+      "assurance": "conceptual"
+    }
+  ],
+  "assumptions": []
+}

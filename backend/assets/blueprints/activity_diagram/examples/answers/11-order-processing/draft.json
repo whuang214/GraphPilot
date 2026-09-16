@@ -1,0 +1,181 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "order-processing",
+  "diagramType": "activity_diagram",
+  "authority": "conceptual",
+  "requests": [
+    "When an order comes in, if the item is out of stock it is backordered; if it is in stock the warehouse picks the items and accounting generates the invoice in parallel. Either way the order is then shipped."
+  ],
+  "evidence": [],
+  "elements": [
+    {
+      "id": "start",
+      "semanticType": "initialNode",
+      "label": "Initial",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "receive",
+      "semanticType": "opaqueAction",
+      "label": "Receive Order",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "d",
+      "semanticType": "decisionNode",
+      "label": "In Stock?",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "note",
+      "semanticType": "note",
+      "label": "Backorders ship separately",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "backorder",
+      "semanticType": "opaqueAction",
+      "label": "Backorder Item",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "f",
+      "semanticType": "forkNode",
+      "label": "Fork",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "pick",
+      "semanticType": "opaqueAction",
+      "label": "Pick Items",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "invoice",
+      "semanticType": "opaqueAction",
+      "label": "Generate Invoice",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "j",
+      "semanticType": "joinNode",
+      "label": "Join",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "m",
+      "semanticType": "mergeNode",
+      "label": "Merge",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "ship",
+      "semanticType": "opaqueAction",
+      "label": "Ship",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "end",
+      "semanticType": "activityFinalNode",
+      "label": "Activity Final",
+      "assurance": "conceptual"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "edge-1-start-receive",
+      "semanticType": "controlFlow",
+      "source": "start",
+      "target": "receive",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-2-receive-note",
+      "semanticType": "commentLink",
+      "source": "receive",
+      "target": "note",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-3-receive-d",
+      "semanticType": "controlFlow",
+      "source": "receive",
+      "target": "d",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-4-d-backorder",
+      "semanticType": "controlFlow",
+      "source": "d",
+      "target": "backorder",
+      "assurance": "conceptual",
+      "guard": "No"
+    },
+    {
+      "id": "edge-5-backorder-m",
+      "semanticType": "controlFlow",
+      "source": "backorder",
+      "target": "m",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-6-d-f",
+      "semanticType": "controlFlow",
+      "source": "d",
+      "target": "f",
+      "assurance": "conceptual",
+      "guard": "Yes"
+    },
+    {
+      "id": "edge-7-f-pick",
+      "semanticType": "controlFlow",
+      "source": "f",
+      "target": "pick",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-8-f-invoice",
+      "semanticType": "controlFlow",
+      "source": "f",
+      "target": "invoice",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-9-pick-j",
+      "semanticType": "controlFlow",
+      "source": "pick",
+      "target": "j",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-10-invoice-j",
+      "semanticType": "controlFlow",
+      "source": "invoice",
+      "target": "j",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-11-j-m",
+      "semanticType": "controlFlow",
+      "source": "j",
+      "target": "m",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-12-m-ship",
+      "semanticType": "controlFlow",
+      "source": "m",
+      "target": "ship",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-13-ship-end",
+      "semanticType": "controlFlow",
+      "source": "ship",
+      "target": "end",
+      "assurance": "conceptual"
+    }
+  ],
+  "assumptions": []
+}

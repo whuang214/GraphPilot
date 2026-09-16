@@ -1,0 +1,77 @@
+{
+  "authority": "conceptual",
+  "basis": {
+    "diagram": "sha256:8b79ec013a97ab1dc1219afc81661b27004fa806c7ec6b04f6ec7d53481c11fc",
+    "readAt": "2026-08-05T22:45:40.037754+00:00"
+  },
+  "diagramName": "onboarding-trimmed",
+  "diagramType": "activity_diagram",
+  "elements": [
+    {
+      "assurance": "conceptual",
+      "id": "start",
+      "label": "Start",
+      "semanticType": "initialNode"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "form",
+      "label": "Fill in the form",
+      "semanticType": "opaqueAction"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "verify",
+      "label": "Verify the email",
+      "semanticType": "opaqueAction"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "welcome",
+      "label": "Send the welcome mail",
+      "semanticType": "opaqueAction"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "done",
+      "label": "Done",
+      "semanticType": "activityFinalNode"
+    }
+  ],
+  "kind": "diagramDraft",
+  "relationships": [
+    {
+      "assurance": "conceptual",
+      "id": "f1",
+      "semanticType": "controlFlow",
+      "source": "start",
+      "target": "form"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "f2",
+      "semanticType": "controlFlow",
+      "source": "form",
+      "target": "verify"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "f5",
+      "semanticType": "controlFlow",
+      "source": "welcome",
+      "target": "done"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "f3b",
+      "semanticType": "controlFlow",
+      "source": "verify",
+      "target": "welcome"
+    }
+  ],
+  "requests": [
+    "What happens when somebody signs up.",
+    "We do not fax anything any more. Take that step out."
+  ],
+  "schemaVersion": "graphpilot.draft.v1"
+}

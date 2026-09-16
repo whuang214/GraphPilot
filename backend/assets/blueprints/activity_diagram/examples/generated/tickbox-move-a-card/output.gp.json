@@ -1,0 +1,1755 @@
+{
+  "diagramType": "activity_diagram",
+  "edges": [
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f-start",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-board-buttons",
+          "ev-move"
+        ],
+        "rationale": "Established by cited evidence: ev-board-buttons, ev-move.",
+        "schemaRules": []
+      },
+      "source": "start",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "a-optimistic",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f-optimistic",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-move"
+        ],
+        "rationale": "Established by cited evidence: ev-move.",
+        "schemaRules": []
+      },
+      "source": "a-optimistic",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "a-patch",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f-patch",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-current-user"
+        ],
+        "rationale": "Established by cited evidence: ev-current-user.",
+        "schemaRules": []
+      },
+      "source": "a-patch",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "d-token",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "signed in",
+        "semanticType": "controlFlow"
+      },
+      "id": "f-token-ok",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-current-user"
+        ],
+        "rationale": "Established by cited evidence: ev-current-user.",
+        "schemaRules": []
+      },
+      "source": "d-token",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "d-resolve",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "missing or expired, 401",
+        "semanticType": "controlFlow"
+      },
+      "id": "f-token-bad",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-current-user"
+        ],
+        "rationale": "Established by cited evidence: ev-current-user.",
+        "schemaRules": []
+      },
+      "source": "d-token",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "m-refused",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "it resolves",
+        "semanticType": "controlFlow"
+      },
+      "id": "f-resolve-ok",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-workspace-of-task"
+        ],
+        "rationale": "Established by cited evidence: ev-workspace-of-task.",
+        "schemaRules": []
+      },
+      "source": "d-resolve",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "d-member",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "no such task, 404",
+        "semanticType": "controlFlow"
+      },
+      "id": "f-resolve-bad",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-workspace-of-task"
+        ],
+        "rationale": "Established by cited evidence: ev-workspace-of-task.",
+        "schemaRules": []
+      },
+      "source": "d-resolve",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "m-refused",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "a member",
+        "semanticType": "controlFlow"
+      },
+      "id": "f-member-ok",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-require-writer"
+        ],
+        "rationale": "Established by cited evidence: ev-require-writer.",
+        "schemaRules": []
+      },
+      "source": "d-member",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "d-writer",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "not a member, 404",
+        "semanticType": "controlFlow"
+      },
+      "id": "f-member-bad",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-require-writer"
+        ],
+        "rationale": "Established by cited evidence: ev-require-writer.",
+        "schemaRules": []
+      },
+      "source": "d-member",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "m-refused",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "owner or editor",
+        "semanticType": "controlFlow"
+      },
+      "id": "f-writer-ok",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-require-writer"
+        ],
+        "rationale": "Established by cited evidence: ev-require-writer.",
+        "schemaRules": []
+      },
+      "source": "d-writer",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "a-load-task",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "viewer, 403",
+        "semanticType": "controlFlow"
+      },
+      "id": "f-writer-bad",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-require-writer"
+        ],
+        "rationale": "Established by cited evidence: ev-require-writer.",
+        "schemaRules": []
+      },
+      "source": "d-writer",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "m-refused",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f-load",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-update-task"
+        ],
+        "rationale": "Established by cited evidence: ev-update-task.",
+        "schemaRules": []
+      },
+      "source": "a-load-task",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "d-task",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "it did",
+        "semanticType": "controlFlow"
+      },
+      "id": "f-task-ok",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-update-task"
+        ],
+        "rationale": "Established by cited evidence: ev-update-task.",
+        "schemaRules": []
+      },
+      "source": "d-task",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "d-state",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "no such task, 404",
+        "semanticType": "controlFlow"
+      },
+      "id": "f-task-bad",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-update-task"
+        ],
+        "rationale": "Established by cited evidence: ev-update-task.",
+        "schemaRules": []
+      },
+      "source": "d-task",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "m-refused",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "todo, doing or done",
+        "semanticType": "controlFlow"
+      },
+      "id": "f-state-ok",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-update-task"
+        ],
+        "rationale": "Established by cited evidence: ev-update-task.",
+        "schemaRules": []
+      },
+      "source": "d-state",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "a-set-status",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "anything else, 422",
+        "semanticType": "controlFlow"
+      },
+      "id": "f-state-bad",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-update-task"
+        ],
+        "rationale": "Established by cited evidence: ev-update-task.",
+        "schemaRules": []
+      },
+      "source": "d-state",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "m-refused",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f-set-status",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-update-task"
+        ],
+        "rationale": "Established by cited evidence: ev-update-task.",
+        "schemaRules": []
+      },
+      "source": "a-set-status",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "d-done",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "done",
+        "semanticType": "controlFlow"
+      },
+      "id": "f-done-yes",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-update-task"
+        ],
+        "rationale": "Established by cited evidence: ev-update-task.",
+        "schemaRules": []
+      },
+      "source": "d-done",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "a-stamp",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "todo or doing",
+        "semanticType": "controlFlow"
+      },
+      "id": "f-done-no",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-update-task"
+        ],
+        "rationale": "Established by cited evidence: ev-update-task.",
+        "schemaRules": []
+      },
+      "source": "d-done",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "a-clear",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f-stamp-merge",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-update-task"
+        ],
+        "rationale": "Established by cited evidence: ev-update-task.",
+        "schemaRules": []
+      },
+      "source": "a-stamp",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "m-stamped",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f-clear-merge",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-update-task"
+        ],
+        "rationale": "Established by cited evidence: ev-update-task.",
+        "schemaRules": []
+      },
+      "source": "a-clear",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "m-stamped",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f-merge-commit",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-update-task"
+        ],
+        "rationale": "Established by cited evidence: ev-update-task.",
+        "schemaRules": []
+      },
+      "source": "m-stamped",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "a-commit",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f-commit",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-update-task",
+          "ev-task-out"
+        ],
+        "rationale": "Established by cited evidence: ev-update-task, ev-task-out.",
+        "schemaRules": []
+      },
+      "source": "a-commit",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "a-respond",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f-respond",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-adopt"
+        ],
+        "rationale": "Established by cited evidence: ev-adopt.",
+        "schemaRules": []
+      },
+      "source": "a-respond",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "a-adopt",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f-adopt",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-move"
+        ],
+        "rationale": "Established by cited evidence: ev-move.",
+        "schemaRules": []
+      },
+      "source": "a-adopt",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "a-replace",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f-replace",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-move"
+        ],
+        "rationale": "Established by cited evidence: ev-move.",
+        "schemaRules": []
+      },
+      "source": "a-replace",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "final-ok",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f-refused",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-call-error"
+        ],
+        "rationale": "Established by cited evidence: ev-call-error.",
+        "schemaRules": []
+      },
+      "source": "m-refused",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "a-throw",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f-throw",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-move"
+        ],
+        "rationale": "Established by cited evidence: ev-move.",
+        "schemaRules": []
+      },
+      "source": "a-throw",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "a-revert",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f-revert",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-move"
+        ],
+        "rationale": "Established by cited evidence: ev-move.",
+        "schemaRules": []
+      },
+      "source": "a-revert",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "a-show-error",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f-error",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-move",
+          "ev-board-error"
+        ],
+        "rationale": "Established by cited evidence: ev-move, ev-board-error.",
+        "schemaRules": []
+      },
+      "source": "a-show-error",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "final-snap",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "commentLink"
+      },
+      "id": "cl-viewer",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-can-edit"
+        ],
+        "rationale": "Established by cited evidence: ev-can-edit.",
+        "schemaRules": []
+      },
+      "source": "note-viewer",
+      "style": {
+        "stroke": "#333333",
+        "strokeDasharray": "6 4",
+        "strokeWidth": 2
+      },
+      "target": "start",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "commentLink"
+      },
+      "id": "cl-dead",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-workspace-of-task"
+        ],
+        "rationale": "Established by cited evidence: ev-workspace-of-task.",
+        "schemaRules": []
+      },
+      "source": "note-dead-check",
+      "style": {
+        "stroke": "#333333",
+        "strokeDasharray": "6 4",
+        "strokeWidth": 2
+      },
+      "target": "d-task",
+      "type": "default"
+    }
+  ],
+  "id": "diagram_tickbox_move_a_card",
+  "kind": "diagram",
+  "metadata": {
+    "authoring": "generated",
+    "authority": "as_implemented",
+    "createdAt": "2026-08-04T21:08:25.986022+00:00",
+    "evidence": [
+      {
+        "contentDigest": "sha256:1ab517e998ccd66305c8bf0fa9622a262e7d46dddb918b75928b7c352f6fc58b",
+        "id": "ev-board-buttons",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 64,
+            "start": 56
+          },
+          "path": "frontend/src/pages/Board.tsx",
+          "symbol": "moveTask"
+        },
+        "summary": "Each card renders one button per other column, only when editable, and the click calls moveTask(task.id, column)."
+      },
+      {
+        "contentDigest": "sha256:390198c56bf30e93e5fe3e341ff3bd3662c71b40cc77dc4df956964931e24d93",
+        "id": "ev-can-edit",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 12,
+            "start": 10
+          },
+          "path": "frontend/src/lib/can.ts",
+          "symbol": "canEditTask"
+        },
+        "summary": "canEditTask is true only for an owner or an editor, and it is what hides the move buttons from a viewer."
+      },
+      {
+        "contentDigest": "sha256:15e8a0501488ce1226ad54d3f50051ad891c0c77128e35a615993a3195aba199",
+        "id": "ev-move",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 43,
+            "start": 27
+          },
+          "path": "frontend/src/store/board.ts",
+          "symbol": "moveTask"
+        },
+        "summary": "moveTask keeps the current list as 'before', repaints the card in the new column immediately, PATCHes the task, swaps in the saved copy on success, and restores 'before' plus an error message on failure."
+      },
+      {
+        "contentDigest": "sha256:76cb85cb73a9dade07d753031653bcd5a0b858c901269269c492e7c8fe99f42b",
+        "id": "ev-patch-task",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 86,
+            "start": 80
+          },
+          "path": "frontend/src/api/client.ts",
+          "symbol": "patchTask"
+        },
+        "summary": "patchTask sends PATCH /api/tasks/{id} with the patch body and passes the reply through adoptTask."
+      },
+      {
+        "contentDigest": "sha256:10ea2e282f17e4aaf452535179a8cd3087fab4fe57e9dac4d4d8e8e59727d210",
+        "id": "ev-call-error",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 27,
+            "start": 24
+          },
+          "path": "frontend/src/api/client.ts"
+        },
+        "summary": "Any non-2xx reply is turned into a thrown Error carrying the server's 'detail' text, or the status line if there is none."
+      },
+      {
+        "contentDigest": "sha256:9ec7f863d0e24ca143ad0e5d737e79f4fa848f9e6f5227f659e20b95d3fd0fc8",
+        "id": "ev-adopt",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 37,
+            "start": 32
+          },
+          "path": "frontend/src/api/client.ts",
+          "symbol": "adoptTask"
+        },
+        "summary": "adoptTask renames the API's 'state' field to the client's 'status' on every task that crosses the boundary."
+      },
+      {
+        "contentDigest": "sha256:8fc9b4d610ca6933f9dfb33cf2e3678adefb1db51a8cd7aa27ceca3883036a38",
+        "id": "ev-current-user",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 20,
+            "start": 9
+          },
+          "path": "backend/app/deps.py",
+          "symbol": "current_user"
+        },
+        "summary": "Every guarded route resolves the caller from the Authorization header first, 401ing on a missing, expired or unknown token."
+      },
+      {
+        "contentDigest": "sha256:0cebee73aa50febc4472e7a68f7fcd351fc877362965c74107f3a206f2780be6",
+        "id": "ev-workspace-of-task",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 59,
+            "start": 53
+          },
+          "path": "backend/app/permissions.py",
+          "symbol": "workspace_of_task"
+        },
+        "summary": "workspace_of_task joins the task to its project to find the workspace id, and raises 404 'No such task.' when that join finds nothing."
+      },
+      {
+        "contentDigest": "sha256:e4d8b75eeec286602457d9fee5ba779addf88f409c5a3330426cc13e797df63d",
+        "id": "ev-require-writer",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 36,
+            "start": 9
+          },
+          "path": "backend/app/permissions.py",
+          "symbol": "require_writer"
+        },
+        "summary": "require_member raises 404 when the caller has no membership; require_writer then raises 403 unless that role is in WRITERS, which is owner or editor."
+      },
+      {
+        "contentDigest": "sha256:a8c7d824a2f94c7b6426531c97a55d5f616c7ff52fd8d412c823579ad1fdbe95",
+        "id": "ev-update-task",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 79,
+            "start": 57
+          },
+          "path": "backend/app/routers/tasks.py",
+          "symbol": "update_task"
+        },
+        "summary": "PATCH /api/tasks/{id} requires a writer, loads the task, maps body['state'] onto Status (422 if unknown), stamps or clears completed_at, records an 'updated' activity event and commits."
+      },
+      {
+        "contentDigest": "sha256:881abd775fcf44109a25f86f3ca5b68f874b35ab14f181b38854605ce3bef8c0",
+        "id": "ev-task-out",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 19,
+            "start": 7
+          },
+          "path": "backend/app/serialise.py",
+          "symbol": "task_out"
+        },
+        "summary": "task_out returns the task with its status under the field name 'state', alongside completed_at, subtasks and labels."
+      },
+      {
+        "contentDigest": "sha256:90b3aa32b9de6f62d51d0d4f1789b6d4d6f0cc9ff1ab3e0fb3b3076648da54dc",
+        "id": "ev-board-error",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 29,
+            "start": 29
+          },
+          "path": "frontend/src/pages/Board.tsx"
+        },
+        "summary": "The board renders the store's error string above the columns when it is set."
+      },
+      {
+        "contentDigest": "sha256:1ce07d57bb8003c4c0bfe4c96224762eaceb1e3857f47532d15a4299a16fd399",
+        "id": "ev-stamp-tests",
+        "kind": "test",
+        "locator": {
+          "lineRange": {
+            "end": 246,
+            "start": 222
+          },
+          "path": "backend/tests/test_api.py",
+          "symbol": "test_moving_a_task_to_done_stamps_the_time"
+        },
+        "summary": "Two tests pin the timestamp behaviour: patching state to done fills completed_at, and patching it back to doing clears it."
+      }
+    ],
+    "generatedBy": "graphpilot-materializer",
+    "intent": "tickbox-move-a-card",
+    "notation": "uml",
+    "originalType": "activity_diagram",
+    "requests": [
+      {
+        "at": "2026-08-04T21:08:25.986022+00:00",
+        "text": "What happens when someone moves a card to another column."
+      }
+    ],
+    "source": "mcp",
+    "updatedAt": "2026-08-04T21:08:25.986022+00:00"
+  },
+  "name": "tickbox-move-a-card",
+  "nodes": [
+    {
+      "data": {
+        "label": "Someone clicks another column's button on a card",
+        "semanticType": "initialNode"
+      },
+      "height": 60.0,
+      "id": "start",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-board-buttons"
+        ],
+        "rationale": "Established by cited evidence: ev-board-buttons.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 757.25,
+        "y": 152.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "label": "Show the card in the new column at once, keeping the old list",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "a-optimistic",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-move"
+        ],
+        "rationale": "Established by cited evidence: ev-move.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 757.25,
+        "y": 284.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "label": "PATCH /api/tasks/{id} with the new state",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "a-patch",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-move",
+          "ev-patch-task"
+        ],
+        "rationale": "Established by cited evidence: ev-move, ev-patch-task.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 757.25,
+        "y": 416.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "label": "Is the bearer token good?",
+        "semanticType": "decisionNode"
+      },
+      "height": 90.0,
+      "id": "d-token",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-current-user"
+        ],
+        "rationale": "Established by cited evidence: ev-current-user.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 805.5,
+        "y": 548.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 223.5
+    },
+    {
+      "data": {
+        "label": "Does the task resolve to a workspace?",
+        "semanticType": "decisionNode"
+      },
+      "height": 90.0,
+      "id": "d-resolve",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-workspace-of-task"
+        ],
+        "rationale": "Established by cited evidence: ev-workspace-of-task.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 633.5,
+        "y": 710.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 313.5
+    },
+    {
+      "data": {
+        "label": "Is the caller a member of it?",
+        "semanticType": "decisionNode"
+      },
+      "height": 90.0,
+      "id": "d-member",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-require-writer"
+        ],
+        "rationale": "Established by cited evidence: ev-require-writer.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 563.5,
+        "y": 872.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 253.5
+    },
+    {
+      "data": {
+        "label": "Is that membership owner or editor?",
+        "semanticType": "decisionNode"
+      },
+      "height": 90.0,
+      "id": "d-writer",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-require-writer"
+        ],
+        "rationale": "Established by cited evidence: ev-require-writer.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 389.0,
+        "y": 1034.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 298.5
+    },
+    {
+      "data": {
+        "label": "Load the task row",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "a-load-task",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-update-task"
+        ],
+        "rationale": "Established by cited evidence: ev-update-task.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 393.5,
+        "y": 1206.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 163.5
+    },
+    {
+      "data": {
+        "label": "Did the row come back?",
+        "semanticType": "decisionNode"
+      },
+      "height": 90.0,
+      "id": "d-task",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-update-task"
+        ],
+        "rationale": "Established by cited evidence: ev-update-task.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 277.75,
+        "y": 1348.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 201.0
+    },
+    {
+      "data": {
+        "label": "Is the new state a known one?",
+        "semanticType": "decisionNode"
+      },
+      "height": 90.0,
+      "id": "d-state",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-update-task"
+        ],
+        "rationale": "Established by cited evidence: ev-update-task.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 173.5,
+        "y": 1510.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 253.5
+    },
+    {
+      "data": {
+        "label": "Set the task's status to it",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "a-set-status",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-update-task"
+        ],
+        "rationale": "Established by cited evidence: ev-update-task.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 181.0,
+        "y": 1672.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 238.5
+    },
+    {
+      "data": {
+        "label": "Is the new state done?",
+        "semanticType": "decisionNode"
+      },
+      "height": 90.0,
+      "id": "d-done",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-update-task",
+          "ev-stamp-tests"
+        ],
+        "rationale": "Established by cited evidence: ev-update-task, ev-stamp-tests.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 199.75,
+        "y": 1804.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 201.0
+    },
+    {
+      "data": {
+        "label": "Stamp completed_at with now",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "a-stamp",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-update-task",
+          "ev-stamp-tests"
+        ],
+        "rationale": "Established by cited evidence: ev-update-task, ev-stamp-tests.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 0.0,
+        "y": 1966.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 238.5
+    },
+    {
+      "data": {
+        "label": "Clear completed_at",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "a-clear",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-update-task",
+          "ev-stamp-tests"
+        ],
+        "rationale": "Established by cited evidence: ev-update-task, ev-stamp-tests.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 302.75,
+        "y": 1966.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 171.0
+    },
+    {
+      "data": {
+        "label": "Timestamp settled",
+        "semanticType": "mergeNode"
+      },
+      "height": 50.0,
+      "id": "m-stamped",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-update-task"
+        ],
+        "rationale": "Established by cited evidence: ev-update-task.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 165.5,
+        "y": 2103.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 163.5
+    },
+    {
+      "data": {
+        "label": "Record an 'updated' activity event, then commit and reload",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "a-commit",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-update-task"
+        ],
+        "rationale": "Established by cited evidence: ev-update-task.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 87.25,
+        "y": 2230.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "label": "Answer with the task, its status under the name 'state'",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "a-respond",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-task-out"
+        ],
+        "rationale": "Established by cited evidence: ev-task-out.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 87.25,
+        "y": 2362.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "label": "Rename 'state' back to 'status' as it crosses into the client",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "a-adopt",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-adopt"
+        ],
+        "rationale": "Established by cited evidence: ev-adopt.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 87.25,
+        "y": 2494.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "label": "Swap the saved copy in for the card",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "a-replace",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-move"
+        ],
+        "rationale": "Established by cited evidence: ev-move.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 98.0,
+        "y": 2626.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 298.5
+    },
+    {
+      "data": {
+        "label": "Card stays in its new column",
+        "semanticType": "activityFinalNode"
+      },
+      "height": 60.0,
+      "id": "final-ok",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-move"
+        ],
+        "rationale": "Established by cited evidence: ev-move.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 124.25,
+        "y": 2758.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 246.0
+    },
+    {
+      "data": {
+        "label": "Request refused",
+        "semanticType": "mergeNode"
+      },
+      "height": 50.0,
+      "id": "m-refused",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-call-error"
+        ],
+        "rationale": "Established by cited evidence: ev-call-error.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 645.0,
+        "y": 1677.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 148.5
+    },
+    {
+      "data": {
+        "label": "Throw the reply's 'detail' text as an Error",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "a-throw",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-call-error"
+        ],
+        "rationale": "Established by cited evidence: ev-call-error.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 559.25,
+        "y": 1819.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "label": "Put the whole task list back as it was",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "a-revert",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-move"
+        ],
+        "rationale": "Established by cited evidence: ev-move.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 559.25,
+        "y": 1966.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "label": "Show the message above the columns",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "a-show-error",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-move",
+          "ev-board-error"
+        ],
+        "rationale": "Established by cited evidence: ev-move, ev-board-error.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 573.75,
+        "y": 2098.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 291.0
+    },
+    {
+      "data": {
+        "label": "Card snaps back to its old column",
+        "semanticType": "activityFinalNode"
+      },
+      "height": 60.0,
+      "id": "final-snap",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-move"
+        ],
+        "rationale": "Established by cited evidence: ev-move.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 577.5,
+        "y": 2230.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 283.5
+    },
+    {
+      "data": {
+        "label": "A viewer never sees these buttons: canEditTask hides them. The server checks again regardless.",
+        "semanticType": "note"
+      },
+      "height": 80.0,
+      "id": "note-viewer",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-board-buttons",
+          "ev-can-edit"
+        ],
+        "rationale": "Established by cited evidence: ev-board-buttons, ev-can-edit.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 389.25,
+        "y": 152.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "label": "workspace_of_task has already refused an unknown id, so this second check does not fire in practice.",
+        "semanticType": "note"
+      },
+      "height": 80.0,
+      "id": "note-dead-check",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-workspace-of-task",
+          "ev-update-task"
+        ],
+        "rationale": "Established by cited evidence: ev-workspace-of-task, ev-update-task.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": -90.25,
+        "y": 1348.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    }
+  ],
+  "schemaVersion": "graphpilot.diagram.v1",
+  "viewport": {
+    "x": 0,
+    "y": 0,
+    "zoom": 1
+  }
+}

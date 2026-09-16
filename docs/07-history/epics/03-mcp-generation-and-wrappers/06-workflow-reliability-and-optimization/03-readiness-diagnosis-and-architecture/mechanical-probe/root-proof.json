@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "graphpilot.delivery.readiness-diagnosis-root-proof.v1",
+  "kind": "readinessDiagnosisRootProof",
+  "proofId": "proof-readiness-diagnosis-block3-local-contract-20260728-01",
+  "providerMode": "provider_free",
+  "azureCalls": 0,
+  "caseId": "case-readiness-diagnostic-block3-mechanical-return-authorization-01",
+  "witnesses": [
+    {
+      "id": "invalid-coverage-combination",
+      "providerSchemaValid": true,
+      "fullSchemaValid": true,
+      "backendIssues": [
+        {"code": "invalid_coverage_combination", "path": "$.coverage[3]"},
+        {"code": "invalid_coverage_combination", "path": "$.coverage[6]"},
+        {"code": "invalid_coverage_combination", "path": "$.coverage[7]"}
+      ]
+    },
+    {
+      "id": "invalid-recommendation-ref",
+      "providerSchemaValid": true,
+      "fullSchemaValid": true,
+      "backendIssues": [
+        {"code": "invalid_recommendation_ref", "path": "$.recommendedSelections[0].claimRef"},
+        {"code": "invalid_recommendation_ref", "path": "$.recommendedSelections[1].claimRef"},
+        {"code": "invalid_recommendation_ref", "path": "$.recommendedSelections[2].claimRef"},
+        {"code": "invalid_recommendation_ref", "path": "$.recommendedSelections[3].claimRef"}
+      ]
+    },
+    {
+      "id": "locally-corrected-shape",
+      "providerSchemaValid": true,
+      "fullSchemaValid": true,
+      "backendValid": true,
+      "backendIssues": []
+    }
+  ],
+  "contractTrace": {
+    "promptRequiresNullRatingOtherwise": true,
+    "promptRequiresEmptySupportOtherwise": false,
+    "selectedClaimCount": 4,
+    "indexedClaimCount": 4,
+    "overlapCount": 4,
+    "unselectedIndexedCount": 0,
+    "explicitUnselectedAllowlist": false
+  },
+  "candidateCorrectionBoundary": [
+    "Explicitly require null rating and empty supportingClaimRefs/assumptionRefs for non-applicable or uncertain coverage.",
+    "Expose unselectedIndexedClaimRefs directly, including an explicit empty array.",
+    "Prohibit recommendedSelections when unselectedIndexedClaimRefs is empty and make repair preserve action-policy constraints."
+  ],
+  "block4ProofRequired": [
+    "Failing exact E1/E2 regression tests before production correction.",
+    "Prompt/projection packet assertions after correction.",
+    "Corrected fake first/repair/failure/interruption/no-rerun/security tests.",
+    "New-identity same-case live proof only after offline gates."
+  ],
+  "scope": {
+    "diagnosticOnly": true,
+    "mechanicalOnly": true,
+    "calibration": false,
+    "certification": false,
+    "promotion": false
+  },
+  "digest": "sha256:5f93e55027d8bf80daf2e42993559561efdc09a8a920221dd3251cf7f8c43d22"
+}

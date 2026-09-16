@@ -1,0 +1,133 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "order-fulfillment",
+  "diagramType": "activity_diagram",
+  "authority": "conceptual",
+  "requests": [
+    "After an order is confirmed, the warehouse picks the items while accounting generates the invoice; once both are ready the shipment is packed and shipped."
+  ],
+  "evidence": [],
+  "elements": [
+    {
+      "id": "start",
+      "semanticType": "initialNode",
+      "label": "Initial",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "confirm",
+      "semanticType": "opaqueAction",
+      "label": "Confirm Order",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "f",
+      "semanticType": "forkNode",
+      "label": "Fork",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "pick",
+      "semanticType": "opaqueAction",
+      "label": "Pick Items",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "invoice",
+      "semanticType": "opaqueAction",
+      "label": "Generate Invoice",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "j",
+      "semanticType": "joinNode",
+      "label": "Join",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "pack",
+      "semanticType": "opaqueAction",
+      "label": "Pack Shipment",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "ship",
+      "semanticType": "opaqueAction",
+      "label": "Ship",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "end",
+      "semanticType": "activityFinalNode",
+      "label": "Activity Final",
+      "assurance": "conceptual"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "edge-1-start-confirm",
+      "semanticType": "controlFlow",
+      "source": "start",
+      "target": "confirm",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-2-confirm-f",
+      "semanticType": "controlFlow",
+      "source": "confirm",
+      "target": "f",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-3-f-pick",
+      "semanticType": "controlFlow",
+      "source": "f",
+      "target": "pick",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-4-f-invoice",
+      "semanticType": "controlFlow",
+      "source": "f",
+      "target": "invoice",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-5-pick-j",
+      "semanticType": "controlFlow",
+      "source": "pick",
+      "target": "j",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-6-invoice-j",
+      "semanticType": "controlFlow",
+      "source": "invoice",
+      "target": "j",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-7-j-pack",
+      "semanticType": "controlFlow",
+      "source": "j",
+      "target": "pack",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-8-pack-ship",
+      "semanticType": "controlFlow",
+      "source": "pack",
+      "target": "ship",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-9-ship-end",
+      "semanticType": "controlFlow",
+      "source": "ship",
+      "target": "end",
+      "assurance": "conceptual"
+    }
+  ],
+  "assumptions": []
+}

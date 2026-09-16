@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "restaurant-domain",
+  "diagramType": "bdd_diagram",
+  "authority": "conceptual",
+  "requests": [
+    "An order is associated with a table and is composed of order lines; each order line refers to a menu item, and a menu item refers to its category. Prices exclude tax."
+  ],
+  "evidence": [],
+  "elements": [
+    {
+      "id": "order",
+      "semanticType": "block",
+      "label": "Order",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "table",
+      "semanticType": "block",
+      "label": "Table",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "line",
+      "semanticType": "block",
+      "label": "Order Line",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "menuitem",
+      "semanticType": "block",
+      "label": "Menu Item",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "category",
+      "semanticType": "block",
+      "label": "Category",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "note",
+      "semanticType": "note",
+      "label": "Prices exclude tax",
+      "assurance": "conceptual"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "edge-1-order-table",
+      "semanticType": "association",
+      "source": "order",
+      "target": "table",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-2-line-order",
+      "semanticType": "composition",
+      "source": "line",
+      "target": "order",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-3-line-menuitem",
+      "semanticType": "association",
+      "source": "line",
+      "target": "menuitem",
+      "assurance": "conceptual",
+      "targetNavigable": true
+    },
+    {
+      "id": "edge-4-menuitem-category",
+      "semanticType": "association",
+      "source": "menuitem",
+      "target": "category",
+      "assurance": "conceptual",
+      "targetNavigable": true
+    },
+    {
+      "id": "edge-5-note-menuitem",
+      "semanticType": "commentLink",
+      "source": "note",
+      "target": "menuitem",
+      "assurance": "conceptual"
+    }
+  ],
+  "assumptions": []
+}

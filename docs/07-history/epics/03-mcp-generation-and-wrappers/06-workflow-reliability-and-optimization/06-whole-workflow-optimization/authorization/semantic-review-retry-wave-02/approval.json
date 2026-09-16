@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "graphpilot.delivery.semantic-review-wave-approval.v1",
+  "kind": "semanticReviewWaveApproval",
+  "approvalId": "approval-live-anchor-block6-semantic-review-20260730-02",
+  "packageId": "package-live-anchor-b6-semantic-cold-room-20260730-01",
+  "anchorDigest": "sha256:d41d0f09b12c7d52088bc115f2f249d0cfd1c5e54712a1f87e225745fcc19e17",
+  "decision": "approve",
+  "reviewer": {"kind": "product_owner", "id": "product-owner-user", "attestation": "I am the human product owner making this decision; no agent made it for me."},
+  "reviewedAt": "2026-07-30T01:06:34.672746Z",
+  "sections": {
+    "identity": {"decision": "approve", "notes": "Use the unchanged human-approved cold-room semantics/checklist with new short request, diagram, package, run, observation, diagnostics, browser, and synthesis identities. Historical semantic and g2 identities are forbidden."},
+    "readiness": {"decision": "approve", "notes": "The same complete source-backed meaning remains the mandatory final-readiness input; readiness behavior is unchanged."},
+    "requiredMeaning": {"decision": "approve", "notes": "The original required checklist remains exact and evaluator-only; no future diagram is pre-approved."},
+    "forbiddenMeaning": {"decision": "approve", "notes": "The original forbidden unsupported-meaning boundary remains exact."},
+    "delivery": {"decision": "approve", "notes": "Generation and semantic review must both be first-response valid with no repair roles; retention also requires reviewed quality, provenance, persistence, SVG, exact editor identity, browser health, compatibility, recovery, and incremental measured benefit over g2. Contract cleanliness alone is not a retention benefit."},
+    "liveSchedule": {"decision": "approve", "notes": "Authorize exactly one medium-effort sequential candidate with at most nine naturally reached calls, aggregate 14/1000 before and 23/1000 worst case after; no retry or second candidate."},
+    "scope": {"decision": "approve", "notes": "This authorizes one current-V1 semantic-review retry proof after committed S10 and package audit, not generation, Lane A, packet/cache, readiness, local, calibration, certification, promotion, deployment, or another live wave. If incremental measured benefit over g2 does not exceed noise, risk, and complexity, S10 reverts while evidence is retained."}
+  },
+  "attestations": {"humanReview": true, "agentReviewExcluded": true, "notCalibrationOrCertification": true, "checklistExcludedFromProvider": true, "singleCandidateOnly": true, "aggregateBudgetAccepted": true, "s10CommitBound": true},
+  "overallNotes": "The user's current Lane B instruction explicitly authorizes exactly one new short controlled candidate for this semantic retry after committed S10 and every provider-free, path-safety, clean-source, package, resource, security, and budget gate passes. g2 already had a first-response-valid semantic review with zero repair under unchanged semantic code, so the candidate may not credit the historical repair or retain S10 on unmeasured reliability. Failure, block, interruption, uncertainty, quality failure, browser failure, or lack of incremental measured benefit is terminal; no retry.",
+  "digest": "sha256:37db12a393ff167ce661043e32f46691fb0df09dd6b612542778c8033d23f88e"
+}

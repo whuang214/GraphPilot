@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GraphPilot Block 5 Anchor Review</title>
+  <link rel="icon" href="data:,">
+  <style>
+    :root { color-scheme: light; font-family: Inter, ui-sans-serif, system-ui, sans-serif; background: #eef2f6; color: #172033; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    header { background: #14213d; color: #fff; padding: 24px max(24px, calc((100vw - 1120px) / 2)); }
+    header h1 { margin: 0 0 8px; font-size: 28px; }
+    header p { margin: 4px 0; color: #dbe7ff; }
+    main { max-width: 1120px; margin: 24px auto 64px; padding: 0 20px; }
+    section, form { background: #fff; border: 1px solid #d7deea; border-radius: 10px; margin: 16px 0; padding: 20px; box-shadow: 0 2px 8px rgb(20 33 61 / 6%); }
+    h2 { margin-top: 0; font-size: 21px; }
+    h3 { font-size: 16px; margin-bottom: 8px; }
+    code, pre { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
+    code { overflow-wrap: anywhere; }
+    .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .badge { border-radius: 999px; padding: 5px 10px; font-size: 13px; font-weight: 700; background: #d8e5ff; color: #163a75; }
+    .badge.warning { background: #fff0c2; color: #674b00; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+    .card { border: 1px solid #d7deea; border-radius: 8px; padding: 12px; background: #f8fafc; }
+    .card strong { display: block; margin-bottom: 4px; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { border: 1px solid #d7deea; text-align: left; vertical-align: top; padding: 9px; }
+    th { background: #edf3fc; }
+    ul { padding-left: 22px; }
+    .review-row { display: grid; grid-template-columns: 180px 170px 1fr; gap: 10px; align-items: start; border-top: 1px solid #e1e6ef; padding: 12px 0; }
+    .review-row:first-of-type { border-top: 0; }
+    label { font-weight: 700; }
+    select, input[type=text], textarea { width: 100%; border: 1px solid #aeb9ca; border-radius: 6px; padding: 9px; font: inherit; background: #fff; }
+    textarea { min-height: 70px; resize: vertical; }
+    .checks label { display: block; font-weight: 500; margin: 10px 0; }
+    button { border: 0; border-radius: 7px; padding: 11px 16px; font: inherit; font-weight: 700; cursor: pointer; margin: 6px 8px 6px 0; }
+    button.approve { background: #136f3a; color: #fff; }
+    button.revise { background: #9f3a21; color: #fff; }
+    button.secondary { background: #dce5f2; color: #172033; }
+    button:focus, select:focus, input:focus, textarea:focus { outline: 3px solid #88b8ff; outline-offset: 1px; }
+    #status { border-radius: 7px; padding: 12px; margin-top: 12px; background: #eef2f6; white-space: pre-wrap; }
+    #status.error { background: #ffe5df; color: #6f1d0f; }
+    #status.success { background: #dcf5e5; color: #14542d; }
+    #exportText { min-height: 180px; }
+    .small { font-size: 13px; color: #526074; }
+    @media (max-width: 760px) { .review-row { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<header>
+  <h1>Block 5 Live Anchor Review</h1>
+  <p>Cold Room Climate Controller — one product-owner readiness and live-budget decision</p>
+  <p class="small">Package digest: <code>sha256:12a4528c6d717bba44d7408a78bb7f1723d0c53a55261984a252eba6f553b51b</code></p>
+  <div class="badges">
+    <span class="badge">Visible BDD anchor</span>
+    <span class="badge">0 assumptions / 0 uncertainties</span>
+    <span class="badge warning">Human approval required</span>
+    <span class="badge warning">Not calibration or certification</span>
+  </div>
+</header>
+<main>
+  <section id="identity-section">
+    <h2>1. Identity and source authority</h2>
+    <div class="grid">
+      <div class="card"><strong>Request</strong><code>request-cold-room-climate-controller</code><br>BDD, standard detail</div>
+      <div class="card"><strong>Evidence</strong><code>sha256:d98a9463078c120cf68b1dadbc244d86c46a2608da415e98d3a8d27369dca998</code></div>
+      <div class="card"><strong>Request digest</strong><code>sha256:4d757a0fe63c61d527dfc9b7a4443cb28300306028050c9a65c1005ba41fc7bb</code></div>
+      <div class="card"><strong>Source fingerprint</strong><code>sha256:3dafce9ab4e99d6c4367b592ea424ffd46a584d454395e753fbff3e1586db7b7</code><br>GraphPilot path+content fingerprint; distinct from raw file SHA-256.</div>
+      <div class="card"><strong>Leakage check</strong>0 training identity overlaps; 0 raw-digest overlaps; no S15/hidden-gold reuse</div>
+    </div>
+    <h3>Canonical source documents</h3>
+    <ul>
+      <li><code>backend/graphpilot/evaluation/live-anchor/cold-room-climate-controller/cold-room-climate-controller.md</code> — <code>sha256:0384478e…</code></li>
+      <li><code>backend/graphpilot/evaluation/live-anchor/cold-room-climate-controller/evidence.gp-evidence.json</code> — <code>sha256:f5ed4dd3…</code></li>
+      <li><code>backend/graphpilot/evaluation/live-anchor/cold-room-climate-controller/request.gp-request.json</code> — <code>sha256:8d74d11b…</code></li>
+    </ul>
+  </section>
+
+  <section id="readiness-section">
+    <h2>2. Readiness expectation</h2>
+    <p><strong>Expected status:</strong> <code>ready</code>, with no blocker or warning code.</p>
+    <p>The bounded specification directly establishes all requested definitions, compositions, multiplicities, property type/value, association ends, and exclusions. The request selects all seven active claims and contains no assumption, uncertainty, or decision.</p>
+    <p>Approval means you agree this packet is genuinely ready to attempt generation. It does not guarantee that the provider will agree or that generation will succeed.</p>
+  </section>
+
+  <section id="required-section">
+    <h2>3. Required meaning</h2>
+    <table>
+      <thead><tr><th>ID</th><th>Expected family</th><th>Requirement</th><th>Bound authority</th></tr></thead>
+      <tbody>
+        <tr data-requirement="required-controller"><td>required-controller</td><td>Block</td><td>Cold Room Climate Controller is the structural whole.</td><td>definitions / controller claim</td></tr>
+        <tr data-requirement="required-probe"><td>required-probe</td><td>Block</td><td>Temperature Probe definition is present.</td><td>definitions / probe claim</td></tr>
+        <tr data-requirement="required-relay"><td>required-relay</td><td>Block</td><td>Cooling Relay definition is present.</td><td>definitions / relay claim</td></tr>
+        <tr data-requirement="required-probe-composition"><td>required-probe-composition</td><td>Composition</td><td>Probe part/source → controller whole/target; role <code>probes</code>; 2..8.</td><td>composition / owns-probes claim</td></tr>
+        <tr data-requirement="required-relay-composition"><td>required-relay-composition</td><td>Composition</td><td>Relay part/source → controller whole/target; role <code>coolingRelays</code>; 1..4.</td><td>composition / owns-relays claim</td></tr>
+        <tr data-requirement="required-sample-property"><td>required-sample-property</td><td>Value feature</td><td><code>sampleIntervalSeconds: Integer = 30</code>, multiplicity 1.</td><td>sample interval / property claim</td></tr>
+        <tr data-requirement="required-probe-relay-association"><td>required-probe-relay-association</td><td>Association</td><td>Relay end 1; probe end 1..*; endpoints are existing Blocks.</td><td>association / link claim</td></tr>
+        <tr data-requirement="required-provenance"><td>required-provenance</td><td>Origin</td><td>Every generated node, feature, and relationship has smallest-sufficient exact claim provenance.</td><td>all seven claims</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="forbidden-section">
+    <h2>4. Forbidden unsupported meaning</h2>
+    <ul>
+      <li data-forbidden="forbidden-cloud-network">No cloud service, network protocol, remote API, or message broker.</li>
+      <li data-forbidden="forbidden-heating-alarm">No heating equipment or alarm workflow.</li>
+      <li data-forbidden="forbidden-deployment-runtime">No deployment node, runtime sequence, state machine, or invented control behavior.</li>
+      <li data-forbidden="forbidden-extra-structure">No unsupported Block, part, property, association, multiplicity, or stereotype.</li>
+    </ul>
+  </section>
+
+  <section id="delivery-section">
+    <h2>5. Delivery and quality gate</h2>
+    <ul>
+      <li>Strict canonical schema, provenance, and context stability pass.</li>
+      <li>Reviewed semantic quality and mandatory final review pass without fallback.</li>
+      <li>Exact request owns atomically persisted JSON and SVG, or a typed allowed render warning.</li>
+      <li>Backend-built editor link visibly loads the exact diagram without material console/network error.</li>
+      <li>Host/provider/MCP/local/browser evidence is bounded, safe, terminal, and no-rerun.</li>
+    </ul>
+  </section>
+
+  <section id="schedule-section">
+    <h2>6. Exact live schedule</h2>
+    <table>
+      <thead><tr><th>Role</th><th>Maximum</th></tr></thead>
+      <tbody>
+        <tr><td>readiness</td><td>1</td></tr>
+        <tr><td>readiness_response_repair</td><td>1</td></tr>
+        <tr><td>generation</td><td>1</td></tr>
+        <tr><td>generation_repair</td><td>1</td></tr>
+        <tr><td>semantic_review</td><td>2</td></tr>
+        <tr><td>semantic_review_response_repair</td><td>2</td></tr>
+        <tr><td>semantic_repair</td><td>1</td></tr>
+        <tr><th>Total maximum</th><th>9</th></tr>
+      </tbody>
+    </table>
+    <p>Current use: 5/1000. Worst case after anchor: 14/1000. Medium effort is the frozen condition, not a promoted default. Calls happen only when naturally reached; no call 10, unchanged reroll, favorable retry, parallel schedule, or terminal identity rerun.</p>
+  </section>
+
+  <section id="scope-section">
+    <h2>7. Scope and attestation</h2>
+    <p>This decision approves or revises one visible anchor package and its bounded execution. It is not calibration, certification, promotion, representative validation, deployment, or approval of a runtime default. The evaluator checklist and your approval are never sent to the provider.</p>
+  </section>
+
+  <form id="review-form">
+    <h2>Product-owner decision</h2>
+    <p>No approval is preselected. Every section requires an explicit decision. Selecting approve requires all sections and attestations to pass.</p>
+    <label for="reviewerId">Human product-owner ID</label>
+    <input id="reviewerId" type="text" placeholder="product-owner-your-id" autocomplete="off">
+    <div id="sectionRows"></div>
+    <label for="overallNotes">Overall notes</label>
+    <textarea id="overallNotes" placeholder="Optional approval notes; revision requests should be specific."></textarea>
+    <div class="checks">
+      <label><input type="checkbox" id="humanReview"> I am the human product owner making this decision; no agent made it for me.</label>
+      <label><input type="checkbox" id="agentExcluded"> Agent and browser-test reviews do not count as this approval.</label>
+      <label><input type="checkbox" id="notCertification"> This is not calibration, certification, promotion, or representative validation.</label>
+      <label><input type="checkbox" id="checklistPrivate"> The evaluator checklist and approval stay out of provider messages.</label>
+      <label><input type="checkbox" id="budgetAccepted"> I accept the medium-effort role schedule, 9-call maximum, and worst-case 14/1000 cumulative use.</label>
+    </div>
+    <button class="approve" id="approveButton" type="button">Approve and export</button>
+    <button class="revise" id="reviseButton" type="button">Request revision and export</button>
+    <button class="secondary" id="clearButton" type="button">Clear saved draft</button>
+    <div id="status" role="status" aria-live="polite">No decision exported.</div>
+    <label for="exportText">Machine-readable export</label>
+    <textarea id="exportText" readonly></textarea>
+  </form>
+</main>
+<script>
+(() => {
+  const PACKAGE_ID = 'package-live-anchor-cold-room-climate-controller-20260728-01';
+  const ANCHOR_DIGEST = 'sha256:12a4528c6d717bba44d7408a78bb7f1723d0c53a55261984a252eba6f553b51b';
+  const STORAGE_KEY = `graphpilot:block5-anchor-review:${ANCHOR_DIGEST}`;
+  const sections = [
+    ['identity', 'Identity and source authority'],
+    ['readiness', 'Readiness expectation'],
+    ['requiredMeaning', 'Required meaning'],
+    ['forbiddenMeaning', 'Forbidden meaning'],
+    ['delivery', 'Delivery and quality'],
+    ['liveSchedule', 'Live schedule'],
+    ['scope', 'Scope and attestation']
+  ];
+  const rows = document.getElementById('sectionRows');
+  for (const [id, title] of sections) {
+    const row = document.createElement('div');
+    row.className = 'review-row';
+    row.innerHTML = `<label for="decision-${id}">${title}</label><select id="decision-${id}" data-section="${id}"><option value="">Choose…</option><option value="approve">Approve</option><option value="revise">Revise</option></select><textarea id="notes-${id}" data-notes="${id}" aria-label="${title} notes" placeholder="Notes"></textarea>`;
+    rows.appendChild(row);
+  }
+  const ids = ['reviewerId', 'overallNotes', 'humanReview', 'agentExcluded', 'notCertification', 'checklistPrivate', 'budgetAccepted'];
+  const state = () => {
+    const value = { reviewerId: document.getElementById('reviewerId').value, overallNotes: document.getElementById('overallNotes').value, sections: {} };
+    for (const [id] of sections) value.sections[id] = { decision: document.getElementById(`decision-${id}`).value, notes: document.getElementById(`notes-${id}`).value };
+    for (const id of ids.slice(2)) value[id] = document.getElementById(id).checked;
+    return value;
+  };
+  const restore = () => {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    try {
+      const value = JSON.parse(raw);
+      document.getElementById('reviewerId').value = value.reviewerId || '';
+      document.getElementById('overallNotes').value = value.overallNotes || '';
+      for (const [id] of sections) {
+        document.getElementById(`decision-${id}`).value = value.sections?.[id]?.decision || '';
+        document.getElementById(`notes-${id}`).value = value.sections?.[id]?.notes || '';
+      }
+      for (const id of ids.slice(2)) document.getElementById(id).checked = Boolean(value[id]);
+    } catch { localStorage.removeItem(STORAGE_KEY); }
+  };
+  const save = () => localStorage.setItem(STORAGE_KEY, JSON.stringify(state()));
+  document.getElementById('review-form').addEventListener('input', save);
+  document.getElementById('review-form').addEventListener('change', save);
+  const canonical = value => {
+    if (Array.isArray(value)) return `[${value.map(canonical).join(',')}]`;
+    if (value && typeof value === 'object') return `{${Object.keys(value).sort().map(key => `${JSON.stringify(key)}:${canonical(value[key])}`).join(',')}}`;
+    return JSON.stringify(value);
+  };
+  const digest = async value => {
+    const bytes = new TextEncoder().encode(canonical(value));
+    const hash = await crypto.subtle.digest('SHA-256', bytes);
+    return `sha256:${Array.from(new Uint8Array(hash), b => b.toString(16).padStart(2, '0')).join('')}`;
+  };
+  const setStatus = (message, kind) => {
+    const target = document.getElementById('status');
+    target.textContent = message;
+    target.className = kind || '';
+  };
+  const build = async decision => {
+    const current = state();
+    const errors = [];
+    if (!/^product-owner-[a-z0-9]+(?:-[a-z0-9]+)*$/.test(current.reviewerId)) errors.push('Reviewer ID must match product-owner-<lowercase-id>.');
+    for (const [id, title] of sections) if (!current.sections[id].decision) errors.push(`${title} needs a decision.`);
+    if (decision === 'approve') {
+      for (const [id, title] of sections) if (current.sections[id].decision !== 'approve') errors.push(`${title} must be approved for overall approval.`);
+      for (const id of ids.slice(2)) if (!current[id]) errors.push('Every attestation is required for approval.');
+    } else {
+      const revised = sections.filter(([id]) => current.sections[id].decision === 'revise');
+      if (!revised.length) errors.push('A revision export needs at least one revised section.');
+      for (const [id, title] of revised) if (!current.sections[id].notes.trim()) errors.push(`${title} revision needs notes.`);
+    }
+    if (errors.length) { setStatus(errors.join('\n'), 'error'); return; }
+    const now = new Date();
+    const date = now.toISOString().slice(0, 10).replaceAll('-', '');
+    const record = {
+      schemaVersion: 'graphpilot.delivery.live-anchor-approval.v1',
+      kind: 'liveAnchorApproval',
+      approvalId: `approval-live-anchor-cold-room-${date}-01`,
+      packageId: PACKAGE_ID,
+      anchorDigest: ANCHOR_DIGEST,
+      decision,
+      reviewer: { kind: 'product_owner', id: current.reviewerId, attestation: 'I am the human product owner making this decision; no agent made it for me.' },
+      reviewedAt: now.toISOString().replace('.000Z', 'Z'),
+      sections: current.sections,
+      attestations: {
+        humanReview: current.humanReview,
+        agentReviewExcluded: current.agentExcluded,
+        notCalibrationOrCertification: current.notCertification,
+        checklistExcludedFromProvider: current.checklistPrivate,
+        liveBudgetAccepted: current.budgetAccepted
+      },
+      overallNotes: current.overallNotes,
+      digest: ''
+    };
+    const unsigned = structuredClone(record); delete unsigned.digest;
+    record.digest = await digest(unsigned);
+    const text = JSON.stringify(record, null, 2);
+    document.getElementById('exportText').value = text;
+    const blob = new Blob([text + '\n'], { type: 'application/json' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `${record.approvalId}.json`;
+    link.click();
+    URL.revokeObjectURL(link.href);
+    setStatus(`${decision === 'approve' ? 'Approval' : 'Revision request'} exported with digest ${record.digest}.`, 'success');
+  };
+  document.getElementById('approveButton').addEventListener('click', () => build('approve'));
+  document.getElementById('reviseButton').addEventListener('click', () => build('revise'));
+  document.getElementById('clearButton').addEventListener('click', () => {
+    localStorage.removeItem(STORAGE_KEY);
+    document.getElementById('review-form').reset();
+    document.getElementById('exportText').value = '';
+    setStatus('Saved draft cleared.', 'success');
+  });
+  restore();
+})();
+</script>
+</body>
+</html>

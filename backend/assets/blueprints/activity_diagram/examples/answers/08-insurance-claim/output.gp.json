@@ -1,0 +1,517 @@
+{
+  "diagramType": "activity_diagram",
+  "edges": [
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "edge-1-start-file",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "source": "start",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "file",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "edge-2-file-d1",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "source": "file",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "d1",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "No",
+        "semanticType": "controlFlow"
+      },
+      "id": "edge-3-d1-reject",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "source": "d1",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "reject",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "edge-4-reject-end-rej",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "source": "reject",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "end-rej",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "Yes",
+        "semanticType": "controlFlow"
+      },
+      "id": "edge-5-d1-review",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "source": "d1",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "review",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "edge-6-review-d2",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "source": "review",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "d2",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "No",
+        "semanticType": "controlFlow"
+      },
+      "id": "edge-7-d2-docs",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "source": "d2",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "docs",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "edge-8-docs-review",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "source": "docs",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "review",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "Yes",
+        "semanticType": "controlFlow"
+      },
+      "id": "edge-9-d2-approve",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "source": "d2",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "approve",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "edge-10-approve-end-paid",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "source": "approve",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "end-paid",
+      "type": "default"
+    }
+  ],
+  "id": "diagram_insurance_claim",
+  "kind": "diagram",
+  "metadata": {
+    "authoring": "generated",
+    "authority": "conceptual",
+    "createdAt": "2026-08-03T21:42:16.063890+00:00",
+    "generatedBy": "graphpilot-materializer",
+    "intent": "insurance-claim",
+    "notation": "uml",
+    "originalType": "activity_diagram",
+    "requests": [
+      {
+        "at": "2026-08-05T16:32:01.640883+00:00",
+        "text": "A filed claim on an inactive policy is rejected; otherwise it is reviewed, and while documents are missing they are requested and the claim is reviewed again, then the payout is approved."
+      }
+    ],
+    "source": "mcp",
+    "updatedAt": "2026-08-03T21:42:16.063890+00:00"
+  },
+  "name": "insurance-claim",
+  "nodes": [
+    {
+      "data": {
+        "label": "Initial",
+        "semanticType": "initialNode"
+      },
+      "height": 60.0,
+      "id": "start",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 147.0,
+        "y": 0.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 90.0
+    },
+    {
+      "data": {
+        "label": "File Claim",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "file",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 112.0,
+        "y": 132.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 160.0
+    },
+    {
+      "data": {
+        "label": "Policy Active?",
+        "semanticType": "decisionNode"
+      },
+      "height": 90.0,
+      "id": "d1",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 117.0,
+        "y": 264.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 150.0
+    },
+    {
+      "data": {
+        "label": "Reject Claim",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "reject",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 0.0,
+        "y": 426.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 160.0
+    },
+    {
+      "data": {
+        "label": "End (Rejected)",
+        "semanticType": "activityFinalNode"
+      },
+      "height": 60.0,
+      "id": "end-rej",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 9.5,
+        "y": 573.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 141.0
+    },
+    {
+      "data": {
+        "label": "Review Claim",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "review",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 224.0,
+        "y": 426.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 160.0
+    },
+    {
+      "data": {
+        "label": "Documents Complete?",
+        "semanticType": "decisionNode"
+      },
+      "height": 90.0,
+      "id": "d2",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 371.75,
+        "y": 558.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 178.5
+    },
+    {
+      "data": {
+        "label": "Request Documents",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "docs",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 193.25,
+        "y": 720.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 163.5
+    },
+    {
+      "data": {
+        "label": "Approve Payout",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "approve",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 421.0,
+        "y": 720.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 160.0
+    },
+    {
+      "data": {
+        "label": "End (Paid)",
+        "semanticType": "activityFinalNode"
+      },
+      "height": 60.0,
+      "id": "end-paid",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "conceptual",
+        "evidenceRefs": [],
+        "rationale": "Conceptual: this diagram makes no claim about a repository.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 445.5,
+        "y": 852.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 111.0
+    }
+  ],
+  "schemaVersion": "graphpilot.diagram.v1",
+  "viewport": {
+    "x": 0,
+    "y": 0,
+    "zoom": 1
+  }
+}

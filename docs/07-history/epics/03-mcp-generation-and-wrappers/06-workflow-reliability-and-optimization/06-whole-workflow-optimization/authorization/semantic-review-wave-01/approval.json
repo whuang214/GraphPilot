@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "graphpilot.delivery.semantic-review-wave-approval.v1",
+  "kind": "semanticReviewWaveApproval",
+  "approvalId": "approval-live-anchor-block6-semantic-review-20260729-01",
+  "packageId": "package-live-anchor-block6-semantic-review-cold-room-20260729-01",
+  "anchorDigest": "sha256:a4bdbf626ce6d867350ac69a01a4b51197eb1ccec1f20234c73d4c486cf9eb41",
+  "decision": "approve",
+  "reviewer": {
+    "kind": "product_owner",
+    "id": "product-owner-user",
+    "attestation": "I am the human product owner making this decision; no agent made it for me."
+  },
+  "reviewedAt": "2026-07-29T15:19:25.355705Z",
+  "sections": {
+    "identity": {"decision": "approve", "notes": "Use the unchanged human-approved cold-room anchor/checklist under entirely new package, run, observation, diagnostics, browser, and synthesis identities."},
+    "readiness": {"decision": "approve", "notes": "The same complete source-backed request remains the mandatory final-readiness input; no readiness behavior changes in this wave."},
+    "requiredMeaning": {"decision": "approve", "notes": "The original required checklist remains exact and evaluator-only; no future diagram is pre-approved."},
+    "forbiddenMeaning": {"decision": "approve", "notes": "The original forbidden unsupported-meaning boundary remains exact."},
+    "delivery": {"decision": "approve", "notes": "Retention still requires reviewed quality, provenance, persistence, rendering, exact editor identity, browser health, compatibility, recovery, and no material regression."},
+    "liveSchedule": {"decision": "approve", "notes": "Authorize exactly one medium-effort sequential candidate with at most nine naturally reached calls, aggregate 11/1000 before and 20/1000 worst case after; no retry or second candidate."},
+    "scope": {"decision": "approve", "notes": "This authorizes one Block 6 semantic-review proof after S02 commit and package audit, not generation/host optimization, calibration, certification, promotion, deployment, or another live wave."}
+  },
+  "attestations": {
+    "humanReview": true,
+    "agentReviewExcluded": true,
+    "notCalibrationOrCertification": true,
+    "checklistExcludedFromProvider": true,
+    "singleCandidateOnly": true,
+    "aggregateBudgetAccepted": true,
+    "s02CommitBound": true
+  },
+  "overallNotes": "The user's current Block 6 instruction explicitly authorizes one new-identity controlled cold-room candidate after the committed S02 correction and every package/resource/budget/security gate passes. Failure, block, interruption, uncertainty, quality failure, or browser failure is terminal and never retried.",
+  "digest": "sha256:7503fa7824ed1d420c7ff404bdd56ae0a58c3a7605643e43f0895068cc301143"
+}

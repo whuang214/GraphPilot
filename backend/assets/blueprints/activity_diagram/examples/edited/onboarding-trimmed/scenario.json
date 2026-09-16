@@ -1,0 +1,113 @@
+{
+  "shows": "A removal, which is the operation with teeth: whole desired state means an element left out of the draft is deleted. The card names what went, including the note a person typed on the canvas, because the protection against an accidental deletion is that somebody sees it.",
+  "create": {
+    "schemaVersion": "graphpilot.draft.v1",
+    "kind": "diagramDraft",
+    "diagramName": "onboarding-trimmed",
+    "diagramType": "activity_diagram",
+    "authority": "conceptual",
+    "requests": [
+      "What happens when somebody signs up."
+    ],
+    "elements": [
+      {
+        "id": "start",
+        "semanticType": "initialNode",
+        "label": "Start",
+        "assurance": "conceptual"
+      },
+      {
+        "id": "form",
+        "semanticType": "opaqueAction",
+        "label": "Fill in the form",
+        "assurance": "conceptual"
+      },
+      {
+        "id": "verify",
+        "semanticType": "opaqueAction",
+        "label": "Verify the email",
+        "assurance": "conceptual"
+      },
+      {
+        "id": "fax",
+        "semanticType": "opaqueAction",
+        "label": "Fax the signed waiver",
+        "assurance": "conceptual"
+      },
+      {
+        "id": "welcome",
+        "semanticType": "opaqueAction",
+        "label": "Send the welcome mail",
+        "assurance": "conceptual"
+      },
+      {
+        "id": "done",
+        "semanticType": "activityFinalNode",
+        "label": "Done",
+        "assurance": "conceptual"
+      }
+    ],
+    "relationships": [
+      {
+        "id": "f1",
+        "semanticType": "controlFlow",
+        "source": "start",
+        "target": "form",
+        "assurance": "conceptual"
+      },
+      {
+        "id": "f2",
+        "semanticType": "controlFlow",
+        "source": "form",
+        "target": "verify",
+        "assurance": "conceptual"
+      },
+      {
+        "id": "f3",
+        "semanticType": "controlFlow",
+        "source": "verify",
+        "target": "fax",
+        "assurance": "conceptual"
+      },
+      {
+        "id": "f4",
+        "semanticType": "controlFlow",
+        "source": "fax",
+        "target": "welcome",
+        "assurance": "conceptual"
+      },
+      {
+        "id": "f5",
+        "semanticType": "controlFlow",
+        "source": "welcome",
+        "target": "done",
+        "assurance": "conceptual"
+      }
+    ]
+  },
+  "arrange": {
+    "nodes": {
+      "fax": {
+        "description": "Legal asked for this in 2019. Check with them before removing."
+      },
+      "welcome": {
+        "description": "Templated. Owned by marketing."
+      }
+    }
+  },
+  "edit": {
+    "request": "We do not fax anything any more. Take that step out.",
+    "remove": [
+      "fax"
+    ],
+    "addRelationships": [
+      {
+        "id": "f3b",
+        "semanticType": "controlFlow",
+        "source": "verify",
+        "target": "welcome",
+        "assurance": "conceptual"
+      }
+    ]
+  }
+}

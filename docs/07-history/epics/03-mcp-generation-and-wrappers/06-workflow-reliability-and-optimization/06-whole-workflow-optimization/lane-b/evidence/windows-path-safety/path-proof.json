@@ -1,0 +1,149 @@
+{
+  "schemaVersion": "graphpilot.delivery.windows-path-safety-proof.v1",
+  "kind": "windowsPathSafetyProof",
+  "proofId": "proof-windows-path-safety-b0-20260729-01",
+  "sourceCommit": "cd3b57e2427969e7ad0df41916391a69e7cee667",
+  "createdAt": "2026-07-29T20:26:55Z",
+  "status": "pass",
+  "scope": {
+    "providerFree": true,
+    "providerCalls": 0,
+    "providerObjectsConstructed": 0,
+    "browserProcessesStarted": 0,
+    "environmentFilesRead": false,
+    "absolutePathsPersisted": false,
+    "secretValuesPersisted": false
+  },
+  "policy": {
+    "selector": "os.name == nt",
+    "windowsLegacy": {
+      "fileMaxUtf16Units": 259,
+      "directoryMaxUtf16Units": 247,
+      "componentMaxUtf16Units": 255
+    },
+    "nonWindows": {
+      "totalPathLimit": null,
+      "componentMaxUtf16Units": 255
+    },
+    "identityMaxAsciiCharacters": 64,
+    "environmentOverride": false,
+    "extendedPathOptIn": false
+  },
+  "identityEvidence": {
+    "acceptedBlock5Shape": [
+      {"role": "anchor.packageId", "asciiLength": 60},
+      {"role": "anchor.anchorId", "asciiLength": 47},
+      {"role": "approval.approvalId", "asciiLength": 42},
+      {"role": "runId", "asciiLength": 53},
+      {"role": "observationId", "asciiLength": 61},
+      {"role": "generation.diagnosticsRunId", "asciiLength": 44},
+      {"role": "source.request.requestId", "asciiLength": 36},
+      {"role": "generation.expectedDiagramName", "asciiLength": 28}
+    ],
+    "rejectedBlock6Shape": [
+      {"role": "anchor.packageId", "asciiLength": 73},
+      {"role": "runId", "asciiLength": 69},
+      {"role": "observationId", "asciiLength": 77}
+    ],
+    "boundaryChecks": {
+      "exact64": "pass",
+      "over65": "rejected_before_freeze"
+    }
+  },
+  "pathPlanEvidence": {
+    "tiers": ["runtime", "command"],
+    "fixtureRuntimeRoleCount": 42,
+    "fixtureCommandRoleCount": 53,
+    "fixtureRuntimeFiles": 22,
+    "fixtureRuntimeDirectories": 20,
+    "criticalRoles": [
+      "runtime.run.manifest",
+      "runtime.event.ledger",
+      "runtime.result.safe",
+      "runtime.terminal.strict",
+      "runtime.diagnostics.artifact_envelope",
+      "runtime.generated.diagram",
+      "runtime.generated.svg",
+      "runtime.generated.trace",
+      "runtime.browser.evidence",
+      "command.package.manifest",
+      "command.repository.approval_schema"
+    ],
+    "diagnosticsEnvelope": {
+      "finite": true,
+      "stage": "04-semantic-review",
+      "filenameUtf16Units": 81,
+      "naturalRepairParity": "pass"
+    },
+    "temporaryWriteEnvelope": {
+      "filenameUtf16Units": 15,
+      "candidateRandomUnits": 8
+    },
+    "exactBoundaryChecks": {
+      "file259": "pass",
+      "file260": "rejected",
+      "directory247": "pass",
+      "directory248": "rejected",
+      "component255": "pass",
+      "component256": "rejected",
+      "astralUtf16Measurement": "pass"
+    },
+    "noWriteBeforePass": "pass",
+    "packagePathCheckedBeforeRead": "pass",
+    "safeErrorOmitsAbsolutePath": "pass"
+  },
+  "lifecycleEvidence": {
+    "stagingFailure": {
+      "status": "failed",
+      "providerStartState": "not_started",
+      "providerCallCount": 0,
+      "strictArtifacts": ["result", "observation", "terminal"],
+      "resumeDispatches": 0
+    },
+    "hostEventFailure": {
+      "status": "failed",
+      "providerStartState": "not_started",
+      "providerCallCount": 0
+    },
+    "incompleteFrozenIdentity": "non_rerunnable",
+    "exceptionTextPersisted": false
+  },
+  "verification": {
+    "failingBefore": {
+      "command": "cd backend; uv run --active python manage.py test tests.evaluation.workflow_audit.test_live_anchor_service tests.management.test_live_workflow_anchor_command",
+      "result": "failed_as_expected",
+      "testsDiscovered": 2,
+      "errors": 2,
+      "reason": "new B0 path-plan and typed-error symbols were not implemented"
+    },
+    "passingAfter": {
+      "command": "cd backend; uv run --active python manage.py test tests.evaluation.workflow_audit.test_live_anchor_service tests.management.test_live_workflow_anchor_command",
+      "result": "pass",
+      "tests": 40,
+      "seconds": 51.693
+    },
+    "diffCheck": {
+      "command": "git diff --check",
+      "result": "pass"
+    },
+    "fullBackend": {
+      "command": "cd backend; uv run --active python manage.py test",
+      "result": "pass",
+      "tests": 1060,
+      "skipped": 5,
+      "seconds": 531.862
+    },
+    "implementationAudit": {
+      "result": "pass_after_one_correction",
+      "resolvedFinding": "package_manifest_path_was_checked_after_first_read",
+      "remainingCritical": 0,
+      "remainingHigh": 0,
+      "remainingMedium": 0
+    }
+  },
+  "limits": [
+    "No live package, provider, browser subprocess, promotion, or certification proof was run."
+  ],
+  "digestConvention": "sha256 of canonical UTF-8 JSON with the digest field omitted",
+  "digest": "sha256:dd504dfda9448c0600b7f5327f1042cb72078aa824aafaac01ad5a8f8d0e35be"
+}

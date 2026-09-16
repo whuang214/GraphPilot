@@ -1,0 +1,148 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "manufacturing-qc",
+  "diagramType": "activity_diagram",
+  "authority": "conceptual",
+  "requests": [
+    "Materials are received and assembled, then inspected; failing units are reworked and re-inspected, passing units are packaged and shipped."
+  ],
+  "evidence": [],
+  "elements": [
+    {
+      "id": "start",
+      "semanticType": "initialNode",
+      "label": "Initial",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "recv",
+      "semanticType": "opaqueAction",
+      "label": "Receive Materials",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "assemble",
+      "semanticType": "opaqueAction",
+      "label": "Assemble",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "inspect",
+      "semanticType": "opaqueAction",
+      "label": "Inspect",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "note",
+      "semanticType": "note",
+      "label": "Sample 10% of units",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "decide",
+      "semanticType": "decisionNode",
+      "label": "Pass QC?",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "rework",
+      "semanticType": "opaqueAction",
+      "label": "Rework",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "package",
+      "semanticType": "opaqueAction",
+      "label": "Package",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "ship",
+      "semanticType": "opaqueAction",
+      "label": "Ship",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "end",
+      "semanticType": "activityFinalNode",
+      "label": "Activity Final",
+      "assurance": "conceptual"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "edge-1-start-recv",
+      "semanticType": "controlFlow",
+      "source": "start",
+      "target": "recv",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-2-recv-assemble",
+      "semanticType": "controlFlow",
+      "source": "recv",
+      "target": "assemble",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-3-assemble-inspect",
+      "semanticType": "controlFlow",
+      "source": "assemble",
+      "target": "inspect",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-4-inspect-note",
+      "semanticType": "commentLink",
+      "source": "inspect",
+      "target": "note",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-5-inspect-decide",
+      "semanticType": "controlFlow",
+      "source": "inspect",
+      "target": "decide",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-6-decide-rework",
+      "semanticType": "controlFlow",
+      "source": "decide",
+      "target": "rework",
+      "assurance": "conceptual",
+      "guard": "No"
+    },
+    {
+      "id": "edge-7-rework-inspect",
+      "semanticType": "controlFlow",
+      "source": "rework",
+      "target": "inspect",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-8-decide-package",
+      "semanticType": "controlFlow",
+      "source": "decide",
+      "target": "package",
+      "assurance": "conceptual",
+      "guard": "Yes"
+    },
+    {
+      "id": "edge-9-package-ship",
+      "semanticType": "controlFlow",
+      "source": "package",
+      "target": "ship",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-10-ship-end",
+      "semanticType": "controlFlow",
+      "source": "ship",
+      "target": "end",
+      "assurance": "conceptual"
+    }
+  ],
+  "assumptions": []
+}

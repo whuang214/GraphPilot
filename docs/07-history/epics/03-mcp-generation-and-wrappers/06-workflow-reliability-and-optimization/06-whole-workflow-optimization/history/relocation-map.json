@@ -1,0 +1,257 @@
+{
+    "schemaVersion":  "graphpilot.delivery.block6-relocation-map.v1",
+    "kind":  "block6RelocationMap",
+    "groupRoot":  "docs/03-development-and-delivery/epics/03-mcp-generation-and-wrappers/06-workflow-reliability-and-optimization/06-whole-workflow-optimization",
+    "mergeCommit":  "8e710f9c13f016747105ed584aebc14d673189e9",
+    "note":  "Old-to-new tracked paths for the Block 6 lane split. Paths embedded in frozen machine evidence and in authorization manifests remain historical and are interpreted through this map; those files were not rewritten. Entries with action retained_in_place kept their exact path and bytes.",
+    "counts":  {
+                   "total":  40,
+                   "laneA":  13,
+                   "laneB":  20,
+                   "shared":  2,
+                   "root":  4,
+                   "legacy":  4
+               },
+    "entries":  [
+                    {
+                        "oldPath":  "lane-a-00-group.md",
+                        "newPath":  "history/lane-a/lane-a-00-group.md",
+                        "owner":  "lane-a",
+                        "action":  "moved_intact"
+                    },
+                    {
+                        "oldPath":  "lane-a-01-host-benchmark-contract.md",
+                        "newPath":  "history/lane-a/lane-a-01-host-benchmark-contract.md",
+                        "owner":  "lane-a",
+                        "action":  "moved_intact"
+                    },
+                    {
+                        "oldPath":  "lane-a-02-devin-host-transition.md",
+                        "newPath":  "history/lane-a/lane-a-02-devin-host-transition.md",
+                        "owner":  "lane-a",
+                        "action":  "moved_intact"
+                    },
+                    {
+                        "oldPath":  "lane-a-03-evidence-authoring-unblock.md",
+                        "newPath":  "history/lane-a/lane-a-03-evidence-authoring-unblock.md",
+                        "owner":  "lane-a",
+                        "action":  "moved_intact"
+                    },
+                    {
+                        "oldPath":  "lane-a-05-snapshot-backend.md",
+                        "newPath":  "history/lane-a/lane-a-05-snapshot-backend.md",
+                        "owner":  "lane-a",
+                        "action":  "moved_intact"
+                    },
+                    {
+                        "oldPath":  "lane-a-06-host-interface.md",
+                        "newPath":  "history/lane-a/lane-a-06-host-interface.md",
+                        "owner":  "lane-a",
+                        "action":  "moved_intact"
+                    },
+                    {
+                        "oldPath":  "lane-a-07-integration.md",
+                        "newPath":  "history/lane-a/lane-a-07-integration.md",
+                        "owner":  "lane-a",
+                        "action":  "moved_intact"
+                    },
+                    {
+                        "oldPath":  "lane-a-08-candidate-measurement.md",
+                        "newPath":  "history/lane-a/lane-a-08-candidate-measurement.md",
+                        "owner":  "lane-a",
+                        "action":  "moved_intact"
+                    },
+                    {
+                        "oldPath":  "lane-a-09-wave-decision.md",
+                        "newPath":  "history/lane-a/lane-a-09-wave-decision.md",
+                        "owner":  "lane-a",
+                        "action":  "moved_intact"
+                    },
+                    {
+                        "oldPath":  "lane-a-host-workflow-design.md",
+                        "newPath":  "history/lane-a/lane-a-host-workflow-design.md",
+                        "owner":  "lane-a",
+                        "action":  "moved_intact"
+                    },
+                    {
+                        "oldPath":  "lane-a-reference-host-prompt-v1.txt",
+                        "newPath":  "history/lane-a/lane-a-reference-host-prompt-v1.txt",
+                        "owner":  "lane-a",
+                        "action":  "moved_intact"
+                    },
+                    {
+                        "oldPath":  "lane-a-04-snapshot-and-interface-contracts.md",
+                        "newPath":  "history/lane-a/lane-a-04-authoring-discoverability.md",
+                        "owner":  "lane-a",
+                        "action":  "moved_and_renamed"
+                    },
+                    {
+                        "oldPath":  "b0-windows-path-safety.md",
+                        "newPath":  "history/lane-b/b0-windows-path-safety.md",
+                        "owner":  "lane-b",
+                        "action":  "moved_intact"
+                    },
+                    {
+                        "oldPath":  "01-semantic-review-diagnosis.md",
+                        "newPath":  "history/lane-b/01-semantic-review-diagnosis.md",
+                        "owner":  "lane-b",
+                        "action":  "moved_intact"
+                    },
+                    {
+                        "oldPath":  "02-semantic-review-correction.md",
+                        "newPath":  "history/lane-b/02-semantic-review-correction.md",
+                        "owner":  "lane-b",
+                        "action":  "moved_intact"
+                    },
+                    {
+                        "oldPath":  "03-semantic-review-proof.md",
+                        "newPath":  "history/lane-b/03-semantic-review-proof.md",
+                        "owner":  "lane-b",
+                        "action":  "moved_intact"
+                    },
+                    {
+                        "oldPath":  "04-wave-decision.md",
+                        "newPath":  "history/lane-b/04-wave-decision.md",
+                        "owner":  "lane-b",
+                        "action":  "moved_intact"
+                    },
+                    {
+                        "oldPath":  "05-generation-endpoint-diagnosis.md",
+                        "newPath":  "history/lane-b/05-generation-endpoint-diagnosis.md",
+                        "owner":  "lane-b",
+                        "action":  "moved_intact"
+                    },
+                    {
+                        "oldPath":  "06-generation-endpoint-correction.md",
+                        "newPath":  "history/lane-b/06-generation-endpoint-correction.md",
+                        "owner":  "lane-b",
+                        "action":  "moved_intact"
+                    },
+                    {
+                        "oldPath":  "07-generation-endpoint-proof.md",
+                        "newPath":  "history/lane-b/07-generation-endpoint-proof.md",
+                        "owner":  "lane-b",
+                        "action":  "moved_intact"
+                    },
+                    {
+                        "oldPath":  "08-generation-wave-decision.md",
+                        "newPath":  "history/lane-b/08-generation-wave-decision.md",
+                        "owner":  "lane-b",
+                        "action":  "moved_intact"
+                    },
+                    {
+                        "oldPath":  "09-semantic-review-retry-diagnosis.md",
+                        "newPath":  "history/lane-b/09-semantic-review-retry-diagnosis.md",
+                        "owner":  "lane-b",
+                        "action":  "moved_intact"
+                    },
+                    {
+                        "oldPath":  "10-semantic-review-retry-correction.md",
+                        "newPath":  "history/lane-b/10-semantic-review-retry-correction.md",
+                        "owner":  "lane-b",
+                        "action":  "moved_intact"
+                    },
+                    {
+                        "oldPath":  "11-semantic-review-retry-proof.md",
+                        "newPath":  "history/lane-b/11-semantic-review-retry-proof.md",
+                        "owner":  "lane-b",
+                        "action":  "moved_intact"
+                    },
+                    {
+                        "oldPath":  "12-semantic-review-retry-decision.md",
+                        "newPath":  "history/lane-b/12-semantic-review-retry-decision.md",
+                        "owner":  "lane-b",
+                        "action":  "moved_intact"
+                    },
+                    {
+                        "oldPath":  "00-group.md",
+                        "newPath":  "history/shared/00-group.md",
+                        "owner":  "shared",
+                        "action":  "status_corrected_then_moved"
+                    },
+                    {
+                        "oldPath":  "plan.md",
+                        "newPath":  "history/shared/lane-integration-record.md",
+                        "owner":  "shared",
+                        "action":  "moved_and_renamed_integration_record"
+                    },
+                    {
+                        "oldPath":  "evidence/lane-a-reference-host",
+                        "newPath":  "lane-a/evidence/lane-a-reference-host",
+                        "owner":  "lane-a",
+                        "action":  "moved_intact"
+                    },
+                    {
+                        "oldPath":  "evidence/windows-path-safety",
+                        "newPath":  "lane-b/evidence/windows-path-safety",
+                        "owner":  "lane-b",
+                        "action":  "moved_intact"
+                    },
+                    {
+                        "oldPath":  "evidence/semantic-review-diagnosis",
+                        "newPath":  "lane-b/evidence/semantic-review-diagnosis",
+                        "owner":  "lane-b",
+                        "action":  "moved_intact"
+                    },
+                    {
+                        "oldPath":  "evidence/semantic-review-wave",
+                        "newPath":  "lane-b/evidence/semantic-review-wave",
+                        "owner":  "lane-b",
+                        "action":  "moved_intact"
+                    },
+                    {
+                        "oldPath":  "evidence/generation-endpoint-diagnosis",
+                        "newPath":  "lane-b/evidence/generation-endpoint-diagnosis",
+                        "owner":  "lane-b",
+                        "action":  "moved_intact"
+                    },
+                    {
+                        "oldPath":  "evidence/generation-endpoint-wave",
+                        "newPath":  "lane-b/evidence/generation-endpoint-wave",
+                        "owner":  "lane-b",
+                        "action":  "moved_intact"
+                    },
+                    {
+                        "oldPath":  "evidence/semantic-review-retry-diagnosis",
+                        "newPath":  "lane-b/evidence/semantic-review-retry-diagnosis",
+                        "owner":  "lane-b",
+                        "action":  "moved_intact"
+                    },
+                    {
+                        "oldPath":  "evidence/semantic-review-retry-wave",
+                        "newPath":  "lane-b/evidence/semantic-review-retry-wave",
+                        "owner":  "lane-b",
+                        "action":  "moved_intact"
+                    },
+                    {
+                        "oldPath":  "evidence/lane-b-exit",
+                        "newPath":  "evidence/lane-b-exit",
+                        "owner":  "root",
+                        "action":  "retained_in_place"
+                    },
+                    {
+                        "oldPath":  "authorization/semantic-review-wave-01",
+                        "newPath":  "authorization/semantic-review-wave-01",
+                        "owner":  "legacy",
+                        "action":  "retained_in_place_byte_identical"
+                    },
+                    {
+                        "oldPath":  "authorization/generation-endpoint-wave-01",
+                        "newPath":  "authorization/generation-endpoint-wave-01",
+                        "owner":  "legacy",
+                        "action":  "retained_in_place_byte_identical"
+                    },
+                    {
+                        "oldPath":  "authorization/generation-endpoint-wave-02",
+                        "newPath":  "authorization/generation-endpoint-wave-02",
+                        "owner":  "legacy",
+                        "action":  "retained_in_place_byte_identical"
+                    },
+                    {
+                        "oldPath":  "authorization/semantic-review-retry-wave-02",
+                        "newPath":  "authorization/semantic-review-retry-wave-02",
+                        "owner":  "legacy",
+                        "action":  "retained_in_place_byte_identical"
+                    }
+                ]
+}

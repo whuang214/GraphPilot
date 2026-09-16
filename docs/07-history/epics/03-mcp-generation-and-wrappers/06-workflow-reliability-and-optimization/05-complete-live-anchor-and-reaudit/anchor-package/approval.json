@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "graphpilot.delivery.live-anchor-approval.v1",
+  "kind": "liveAnchorApproval",
+  "approvalId": "approval-live-anchor-cold-room-20260728-01",
+  "packageId": "package-live-anchor-cold-room-climate-controller-20260728-01",
+  "anchorDigest": "sha256:12a4528c6d717bba44d7408a78bb7f1723d0c53a55261984a252eba6f553b51b",
+  "decision": "approve",
+  "reviewer": {
+    "kind": "product_owner",
+    "id": "product-owner-user",
+    "attestation": "I am the human product owner making this decision; no agent made it for me."
+  },
+  "reviewedAt": "2026-07-28T19:36:58.994942Z",
+  "sections": {
+    "identity": {"decision": "approve", "notes": "The exact source/request identity and leakage-disjoint boundary are accepted."},
+    "readiness": {"decision": "approve", "notes": "The complete source-backed request is approved as suitable for one readiness-gated attempt."},
+    "requiredMeaning": {"decision": "approve", "notes": "The required semantic checklist will evaluate the future diagram; no diagram is pre-approved."},
+    "forbiddenMeaning": {"decision": "approve", "notes": "The forbidden unsupported-meaning boundary is accepted."},
+    "delivery": {"decision": "approve", "notes": "Schema, provenance, quality, persistence, rendering, and visible-editor gates are accepted."},
+    "liveSchedule": {"decision": "approve", "notes": "One medium-effort attempt with nine-call maximum and worst-case 14/1000 cumulative use is accepted."},
+    "scope": {"decision": "approve", "notes": "This is anchor-input authorization, not diagram approval, calibration, certification, promotion, or deployment."}
+  },
+  "attestations": {
+    "humanReview": true,
+    "agentReviewExcluded": true,
+    "notCalibrationOrCertification": true,
+    "checklistExcludedFromProvider": true,
+    "liveBudgetAccepted": true
+  },
+  "overallNotes": "The product owner approved the exact package after clarifying that this approves the complete input/checklist and one bounded attempt, not any future generated diagram. Dispatch remains gated by offline harness verification, commit, exact manifest freeze, and independent pre-dispatch audit.",
+  "digest": "sha256:d25ffb3e5638d11e59883578d840819af7d01a935bf53450b1a24bd2dd0f3b88"
+}

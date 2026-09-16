@@ -1,0 +1,167 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "hospital-portal",
+  "diagramType": "use_case_diagram",
+  "authority": "conceptual",
+  "requests": [
+    "In a hospital portal a patient books an appointment (which always verifies insurance) and consults a doctor; a consult can be attended in person or via telehealth, prescribing extends a consult, a specialist is a kind of doctor, and consults are logged."
+  ],
+  "evidence": [],
+  "elements": [
+    {
+      "id": "patient",
+      "semanticType": "actor",
+      "label": "Patient",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "doctor",
+      "semanticType": "actor",
+      "label": "Doctor",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "specialist",
+      "semanticType": "actor",
+      "label": "Specialist",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "sys",
+      "semanticType": "subject",
+      "label": "Hospital System",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "note",
+      "semanticType": "note",
+      "label": "Consults are logged for audit",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "book",
+      "semanticType": "useCase",
+      "label": "Book Appointment",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    },
+    {
+      "id": "verify",
+      "semanticType": "useCase",
+      "label": "Verify Insurance",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    },
+    {
+      "id": "consult",
+      "semanticType": "useCase",
+      "label": "Consult",
+      "assurance": "conceptual",
+      "parentId": "sys",
+      "extensionPoints": [
+        "extensionPoint"
+      ]
+    },
+    {
+      "id": "inperson",
+      "semanticType": "useCase",
+      "label": "Attend In-Person",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    },
+    {
+      "id": "telehealth",
+      "semanticType": "useCase",
+      "label": "Attend Telehealth",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    },
+    {
+      "id": "prescribe",
+      "semanticType": "useCase",
+      "label": "Prescribe",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "edge-1-specialist-doctor",
+      "semanticType": "generalization",
+      "source": "specialist",
+      "target": "doctor",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-2-patient-book",
+      "semanticType": "association",
+      "source": "patient",
+      "target": "book",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-3-patient-consult",
+      "semanticType": "association",
+      "source": "patient",
+      "target": "consult",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-4-doctor-consult",
+      "semanticType": "association",
+      "source": "doctor",
+      "target": "consult",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-5-doctor-prescribe",
+      "semanticType": "association",
+      "source": "doctor",
+      "target": "prescribe",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-6-book-verify",
+      "semanticType": "include",
+      "source": "book",
+      "target": "verify",
+      "assurance": "conceptual",
+      "label": "«include»"
+    },
+    {
+      "id": "edge-7-prescribe-consult",
+      "semanticType": "extend",
+      "source": "prescribe",
+      "target": "consult",
+      "assurance": "conceptual",
+      "condition": "optional",
+      "extensionLocations": [
+        "extensionPoint"
+      ],
+      "label": "«extend»"
+    },
+    {
+      "id": "edge-8-inperson-consult",
+      "semanticType": "generalization",
+      "source": "inperson",
+      "target": "consult",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-9-telehealth-consult",
+      "semanticType": "generalization",
+      "source": "telehealth",
+      "target": "consult",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-10-note-consult",
+      "semanticType": "commentLink",
+      "source": "note",
+      "target": "consult",
+      "assurance": "conceptual"
+    }
+  ],
+  "assumptions": []
+}

@@ -1,0 +1,136 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "streaming-catalog",
+  "diagramType": "bdd_diagram",
+  "authority": "conceptual",
+  "requests": [
+    "A catalog is associated with titles; a series and a movie are each kinds of title; a series is composed of seasons; every title references a genre, a studio, and a rating (G, PG, R); and a title depends on a CDN service for delivery."
+  ],
+  "evidence": [],
+  "elements": [
+    {
+      "id": "catalog",
+      "semanticType": "block",
+      "label": "Catalog",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "title",
+      "semanticType": "block",
+      "label": "Title",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "season",
+      "semanticType": "block",
+      "label": "Season",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "series",
+      "semanticType": "block",
+      "label": "Series",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "movie",
+      "semanticType": "block",
+      "label": "Movie",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "studio",
+      "semanticType": "block",
+      "label": "Studio",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "genre",
+      "semanticType": "block",
+      "label": "Genre",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "cdn",
+      "semanticType": "block",
+      "label": "CDN Service",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "rating",
+      "semanticType": "block",
+      "label": "Rating",
+      "assurance": "conceptual",
+      "features": {
+        "literals": [
+          "G",
+          "PG",
+          "R"
+        ]
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "edge-1-catalog-title",
+      "semanticType": "association",
+      "source": "catalog",
+      "target": "title",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-2-series-title",
+      "semanticType": "generalization",
+      "source": "series",
+      "target": "title",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-3-movie-title",
+      "semanticType": "generalization",
+      "source": "movie",
+      "target": "title",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-4-season-series",
+      "semanticType": "composition",
+      "source": "season",
+      "target": "series",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-5-title-genre",
+      "semanticType": "association",
+      "source": "title",
+      "target": "genre",
+      "assurance": "conceptual",
+      "targetNavigable": true
+    },
+    {
+      "id": "edge-6-title-studio",
+      "semanticType": "association",
+      "source": "title",
+      "target": "studio",
+      "assurance": "conceptual",
+      "targetNavigable": true
+    },
+    {
+      "id": "edge-7-title-rating",
+      "semanticType": "association",
+      "source": "title",
+      "target": "rating",
+      "assurance": "conceptual",
+      "targetNavigable": true
+    },
+    {
+      "id": "edge-8-title-cdn",
+      "semanticType": "dependency",
+      "source": "title",
+      "target": "cdn",
+      "assurance": "conceptual"
+    }
+  ],
+  "assumptions": []
+}

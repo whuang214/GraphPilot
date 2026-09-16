@@ -1,0 +1,107 @@
+{
+  "authority": "conceptual",
+  "basis": {
+    "diagram": "sha256:b18e7b550fdbb04c10e48a6790726052f6fdcdcc088beee9f293585f5742758a",
+    "readAt": "2026-08-05T22:45:40.102279+00:00"
+  },
+  "diagramName": "kiosk-note",
+  "diagramType": "use_case_diagram",
+  "elements": [
+    {
+      "assurance": "conceptual",
+      "id": "kiosk",
+      "label": "Ticket Kiosk",
+      "semanticType": "subject"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "customer",
+      "label": "Customer",
+      "semanticType": "actor"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "buy",
+      "label": "Buy a ticket",
+      "parentId": "kiosk",
+      "semanticType": "useCase"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "collect",
+      "label": "Collect a booking",
+      "parentId": "kiosk",
+      "semanticType": "useCase"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "pay",
+      "label": "Take payment",
+      "parentId": "kiosk",
+      "semanticType": "useCase"
+    },
+    {
+      "assurance": "user",
+      "id": "note-cash",
+      "label": "Cash was dropped in 2025. Card only — confirmed with Ade.",
+      "semanticType": "note"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "engineer",
+      "label": "Service Engineer",
+      "semanticType": "actor"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "service",
+      "label": "Service the kiosk",
+      "parentId": "kiosk",
+      "semanticType": "useCase"
+    }
+  ],
+  "kind": "diagramDraft",
+  "relationships": [
+    {
+      "assurance": "conceptual",
+      "id": "customer-buy",
+      "semanticType": "association",
+      "source": "customer",
+      "target": "buy"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "customer-collect",
+      "semanticType": "association",
+      "source": "customer",
+      "target": "collect"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "buy-pay",
+      "label": "«include»",
+      "semanticType": "include",
+      "source": "buy",
+      "target": "pay"
+    },
+    {
+      "assurance": "user",
+      "id": "note-cash-pay",
+      "semanticType": "commentLink",
+      "source": "note-cash",
+      "target": "pay"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "engineer-service",
+      "semanticType": "association",
+      "source": "engineer",
+      "target": "service"
+    }
+  ],
+  "requests": [
+    "What a customer can do at the ticket kiosk.",
+    "Engineers can service the kiosk too."
+  ],
+  "schemaVersion": "graphpilot.draft.v1"
+}

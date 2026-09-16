@@ -1,0 +1,150 @@
+{
+  "schemaVersion": "graphpilot.context.diagram-request.v1",
+  "kind": "contextDiagramRequest",
+  "requestId": "request-order-processing",
+  "diagramName": "order-processing",
+  "manifestRef": {
+    "path": ".graphpilot/context/evidence/repository.gp-evidence.json",
+    "id": "evidence-order-service",
+    "digest": "sha256:aca425e6ceea38c0ef02c6b5bcf9a5e10e7e388da7c519f315007e454858cca2"
+  },
+  "request": {
+    "original": "Create an activity diagram of order processing.",
+    "goal": "Explain order submission from validation through persistence.",
+    "diagramType": "activity_diagram",
+    "audience": "Backend and application developers",
+    "detailLevel": "standard"
+  },
+  "scope": {
+    "included": [
+      "Order submission, validation, and persistence",
+      "The invalid-order outcome"
+    ],
+    "excluded": [
+      "Frontend behavior",
+      "Background consumer processing"
+    ]
+  },
+  "selectedClaims": [
+    {
+      "claimRef": {
+        "id": "claim-order-boundary",
+        "version": 1
+      },
+      "role": "context",
+      "reason": "Establishes the modeled service boundary."
+    },
+    {
+      "claimRef": {
+        "id": "claim-order-handler",
+        "version": 1
+      },
+      "role": "primary",
+      "reason": "Identifies the orchestrating component."
+    },
+    {
+      "claimRef": {
+        "id": "claim-submit-order",
+        "version": 1
+      },
+      "role": "primary",
+      "reason": "Defines the central capability."
+    },
+    {
+      "claimRef": {
+        "id": "claim-customer-submit-order",
+        "version": 1
+      },
+      "role": "supporting",
+      "reason": "Explains the initiating actor goal."
+    },
+    {
+      "claimRef": {
+        "id": "claim-validate-order",
+        "version": 1
+      },
+      "role": "primary",
+      "reason": "Defines validation ordering and the invalid branch."
+    },
+    {
+      "claimRef": {
+        "id": "claim-handler-submits-order",
+        "version": 1
+      },
+      "role": "supporting",
+      "reason": "Connects the orchestrator to the capability."
+    },
+    {
+      "claimRef": {
+        "id": "claim-order-id-property",
+        "version": 1
+      },
+      "role": "context",
+      "reason": "Supplies a relevant typed identifier."
+    },
+    {
+      "claimRef": {
+        "id": "claim-valid-order-required",
+        "version": 1
+      },
+      "role": "supporting",
+      "reason": "Constrains persistence to valid orders."
+    }
+  ],
+  "uncertaintyDispositions": [
+    {
+      "uncertaintyRef": "uncertainty-persistence-failure",
+      "disposition": "assume",
+      "reason": "Failure behavior is relevant but not established by current evidence.",
+      "assumptionRef": "assumption-persistence-failure-terminates"
+    }
+  ],
+  "assumptions": [
+    {
+      "id": "assumption-persistence-failure-terminates",
+      "statement": "For this diagram only, treat persistence failure as terminating order submission.",
+      "reason": "The repository does not establish a retry or recovery path.",
+      "origin": "host",
+      "acceptedBy": "user",
+      "acceptedAt": "2026-07-13T17:00:00Z"
+    }
+  ],
+  "decisions": [
+    {
+      "id": "decision-emphasize-invalid-order",
+      "kind": "emphasis",
+      "statement": "Show the invalid-order branch explicitly.",
+      "reason": "The audience needs to understand why invalid orders do not persist.",
+      "origin": "user",
+      "acceptedBy": "user",
+      "acceptedAt": "2026-07-13T17:00:00Z"
+    },
+    {
+      "id": "decision-use-service-labels",
+      "kind": "labeling",
+      "statement": "Use service and operation names established by selected claims.",
+      "reason": "Keeps labels traceable to evidence.",
+      "origin": "host",
+      "acceptedBy": "host",
+      "acceptedAt": "2026-07-13T17:00:00Z"
+    },
+    {
+      "id": "decision-group-validation",
+      "kind": "grouping",
+      "statement": "Keep validation and rejection visually adjacent.",
+      "reason": "Makes the supported branch easy to follow.",
+      "origin": "host",
+      "acceptedBy": "user",
+      "acceptedAt": "2026-07-13T17:00:00Z"
+    },
+    {
+      "id": "decision-top-to-bottom",
+      "kind": "presentation",
+      "statement": "Prefer a top-to-bottom orientation.",
+      "reason": "Provides a reversible visual default.",
+      "origin": "host",
+      "acceptedBy": "host",
+      "acceptedAt": "2026-07-13T17:00:00Z"
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "org-chart",
+  "diagramType": "bdd_diagram",
+  "authority": "conceptual",
+  "requests": [
+    "Managers and engineers are kinds of employee, and a director is a kind of manager."
+  ],
+  "evidence": [],
+  "elements": [
+    {
+      "id": "employee",
+      "semanticType": "block",
+      "label": "Employee",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "manager",
+      "semanticType": "block",
+      "label": "Manager",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "engineer",
+      "semanticType": "block",
+      "label": "Engineer",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "director",
+      "semanticType": "block",
+      "label": "Director",
+      "assurance": "conceptual"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "edge-1-manager-employee",
+      "semanticType": "generalization",
+      "source": "manager",
+      "target": "employee",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-2-engineer-employee",
+      "semanticType": "generalization",
+      "source": "engineer",
+      "target": "employee",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-3-director-manager",
+      "semanticType": "generalization",
+      "source": "director",
+      "target": "manager",
+      "assurance": "conceptual"
+    }
+  ],
+  "assumptions": []
+}

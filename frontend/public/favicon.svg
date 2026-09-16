@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" role="img" aria-label="GraphPilot">
+  <title>GraphPilot</title>
+  <defs>
+    <linearGradient id="gpTile" x1="4" y1="2" x2="44" y2="46" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7c3aed" />
+      <stop offset="1" stop-color="#2563eb" />
+    </linearGradient>
+  </defs>
+
+  <!-- App tile -->
+  <rect width="48" height="48" rx="11" fill="url(#gpTile)" />
+
+  <!-- Flight path: a graph node + dotted route into the plane (graph x pilot) -->
+  <circle cx="12" cy="36" r="2" fill="#ffffff" fill-opacity="0.9" />
+  <path d="M12 36 C 16 33 19 29 22.9 24.7" fill="none" stroke="#ffffff" stroke-opacity="0.55"
+        stroke-width="2" stroke-linecap="round" stroke-dasharray="0.01 5" />
+
+  <!-- Paper plane (origami two-tone for the fold) -->
+  <g transform="translate(7.5 6.5) scale(1.4)">
+    <path d="M22 2 15 22 11 13 Z" fill="#ffffff" />
+    <path d="M22 2 11 13 2 9 Z" fill="#ffffff" fill-opacity="0.8" />
+  </g>
+</svg>

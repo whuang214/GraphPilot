@@ -1,0 +1,180 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "e-government-portal",
+  "diagramType": "use_case_diagram",
+  "authority": "conceptual",
+  "requests": [
+    "On an e-government portal a citizen applies for a permit (which verifies identity) and pays a fee that optionally extends the application; an officer processes applications and issues permits, an admin manages users, and an auditor (a kind of officer) views the audit log."
+  ],
+  "evidence": [],
+  "elements": [
+    {
+      "id": "citizen",
+      "semanticType": "actor",
+      "label": "Citizen",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "officer",
+      "semanticType": "actor",
+      "label": "Officer",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "admin",
+      "semanticType": "actor",
+      "label": "Admin",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "auditor",
+      "semanticType": "actor",
+      "label": "Auditor",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "sys",
+      "semanticType": "subject",
+      "label": "E-Gov Portal",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "note",
+      "semanticType": "note",
+      "label": "Permits expire after 1 year",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "apply",
+      "semanticType": "useCase",
+      "label": "Apply for Permit",
+      "assurance": "conceptual",
+      "parentId": "sys",
+      "extensionPoints": [
+        "extensionPoint"
+      ]
+    },
+    {
+      "id": "verify",
+      "semanticType": "useCase",
+      "label": "Verify Identity",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    },
+    {
+      "id": "payfee",
+      "semanticType": "useCase",
+      "label": "Pay Fee",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    },
+    {
+      "id": "process",
+      "semanticType": "useCase",
+      "label": "Process Application",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    },
+    {
+      "id": "issue",
+      "semanticType": "useCase",
+      "label": "Issue Permit",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    },
+    {
+      "id": "manage",
+      "semanticType": "useCase",
+      "label": "Manage Users",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    },
+    {
+      "id": "audit",
+      "semanticType": "useCase",
+      "label": "View Audit Log",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "edge-1-auditor-officer",
+      "semanticType": "generalization",
+      "source": "auditor",
+      "target": "officer",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-2-citizen-apply",
+      "semanticType": "association",
+      "source": "citizen",
+      "target": "apply",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-3-citizen-payfee",
+      "semanticType": "association",
+      "source": "citizen",
+      "target": "payfee",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-4-officer-process",
+      "semanticType": "association",
+      "source": "officer",
+      "target": "process",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-5-officer-issue",
+      "semanticType": "association",
+      "source": "officer",
+      "target": "issue",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-6-admin-manage",
+      "semanticType": "association",
+      "source": "admin",
+      "target": "manage",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-7-auditor-audit",
+      "semanticType": "association",
+      "source": "auditor",
+      "target": "audit",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-8-apply-verify",
+      "semanticType": "include",
+      "source": "apply",
+      "target": "verify",
+      "assurance": "conceptual",
+      "label": "«include»"
+    },
+    {
+      "id": "edge-9-payfee-apply",
+      "semanticType": "extend",
+      "source": "payfee",
+      "target": "apply",
+      "assurance": "conceptual",
+      "condition": "optional",
+      "extensionLocations": [
+        "extensionPoint"
+      ],
+      "label": "«extend»"
+    },
+    {
+      "id": "edge-10-note-process",
+      "semanticType": "commentLink",
+      "source": "note",
+      "target": "process",
+      "assurance": "conceptual"
+    }
+  ],
+  "assumptions": []
+}

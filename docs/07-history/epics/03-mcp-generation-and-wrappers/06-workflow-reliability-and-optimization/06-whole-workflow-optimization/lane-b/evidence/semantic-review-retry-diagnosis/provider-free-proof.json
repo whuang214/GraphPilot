@@ -1,0 +1,342 @@
+{
+  "schemaVersion": "graphpilot.delivery.semantic-review-retry-diagnosis-proof.v1",
+  "kind": "semanticReviewRetryDiagnosisProof",
+  "proofId": "proof-semantic-review-retry-block6-s09-20260731-01",
+  "sourceCommit": "c3409b86a61c62f61ac4a59627da6b3a70db0bd9",
+  "status": "pass",
+  "scope": {
+    "owner": "semantic_review_prompt_projection_schema_validator_contract",
+    "providerFree": true,
+    "productionChanged": false,
+    "testSourceChanged": false,
+    "promptChanged": false,
+    "schemaChanged": false,
+    "sharedDocsChanged": false,
+    "rawProviderResponseAccessed": false,
+    "hiddenReasoningAccessed": false,
+    "generationChanged": false,
+    "hostChanged": false
+  },
+  "historicalS01": {
+    "proof": "../semantic-review-diagnosis/provider-free-proof.json",
+    "root": "../semantic-review-diagnosis/root-decision.json",
+    "audit": "../semantic-review-diagnosis/audit.md",
+    "historicalSourceCommit": "043ff93643025ad0ccefd68f080cc34e265bd72b",
+    "safeBaselineRunId": "run-live-workflow-anchor-block5-cold-room-20260728-03",
+    "safeFailure": {
+      "code": "finding_invalid",
+      "path": "$"
+    },
+    "semanticReviewWallMs": 42267.61340000667,
+    "responseRepairWallMs": 37787.58720000042,
+    "rawResponseRetained": false,
+    "rawResponseVariantKnown": false,
+    "historicalOwner": "semantic_review_prompt_projection_schema_validator_contract",
+    "historicalAudit": "pass_zero_material_findings"
+  },
+  "witnessMethod": {
+    "executableProof": "verify_provider_free.py",
+    "executableProofDigest": "sha256:df8db5df98f0c0f44470f3977873c415e291938770e1dd2ba4c82bcd40df116e",
+    "fixtureAuthority": "current direct/context training fixtures through SemanticReviewServiceTests",
+    "schemaValidation": [
+      "project_strict_output_schema plus Draft202012Validator",
+      "complete semantic-review response schema plus production reference registry",
+      "SemanticReviewService._assemble_result and review through FakeLLMClient"
+    ],
+    "baseResponse": "Complete clean response in exact current rubric order; only the named rating/finding fields change.",
+    "responseRepairProof": "FakeLLMClient queue captures exact current V1 initial and response-repair packets without provider construction.",
+    "filesCreatedByProofCommand": 0,
+    "providerCalls": 0,
+    "fakeCalls": 19
+  },
+  "executableObservation": {
+    "sourceCommit": "c3409b86a61c62f61ac4a59627da6b3a70db0bd9",
+    "scope": {
+      "providerCalls": 0,
+      "productionChangedByProof": false,
+      "testSourceChangedByProof": false,
+      "rawProviderResponseAccessed": false,
+      "hiddenReasoningAccessed": false
+    },
+    "boundedWitnesses": [
+      {
+        "id": "witness-facet-code-mismatch",
+        "mode": "context",
+        "diagramType": "bdd_diagram",
+        "digest": "sha256:725194a6367c1b7ac2feacd18c99c2e9a35a798117a9951973ff5b8d4130d7d3",
+        "mutation": {
+          "containingFacet": "goalFidelity",
+          "rating": 1,
+          "findingFacet": "goalFidelity",
+          "findingCode": "scope_violation"
+        },
+        "providerProjection": "pass",
+        "fullResponseSchema": "pass",
+        "backendValidatorMessage": "Finding code 'scope_violation' is not allowed for semantic-review facet 'goalFidelity'",
+        "backendRuntime": "finding_invalid @ $",
+        "fakeCalls": 2,
+        "postRepairResult": "clean"
+      },
+      {
+        "id": "witness-finding-without-gap",
+        "mode": "context",
+        "diagramType": "bdd_diagram",
+        "digest": "sha256:7bc7f81ed3fc927c351faa8ce2121314672c60e2c00a92b98126b6ed8022deda",
+        "mutation": {
+          "containingFacet": "goalFidelity",
+          "rating": 4,
+          "findingFacet": "goalFidelity",
+          "findingCode": "goal_mismatch"
+        },
+        "providerProjection": "pass",
+        "fullResponseSchema": "pass",
+        "backendValidatorMessage": "A sufficient/N/A facet cannot emit a finding.",
+        "backendRuntime": "finding_invalid @ $",
+        "fakeCalls": 2,
+        "postRepairResult": "clean"
+      },
+      {
+        "id": "witness-finding-facet-mismatch",
+        "mode": "context",
+        "diagramType": "bdd_diagram",
+        "digest": "sha256:0eee4adc44bedecb1705607e711abb68bfe270f3fcdc7702fc45f3314cd8307e",
+        "mutation": {
+          "containingFacet": "goalFidelity",
+          "rating": 1,
+          "findingFacet": "scopeCompliance",
+          "findingCode": "scope_violation"
+        },
+        "providerProjection": "pass",
+        "fullResponseSchema": "pass",
+        "backendValidatorMessage": "Proposed finding facet must match its containing facet.",
+        "backendRuntime": "finding_invalid @ $",
+        "fakeCalls": 2,
+        "postRepairResult": "clean"
+      }
+    ],
+    "sixCellFacetCodeMatrix": [
+      {
+        "mode": "direct",
+        "diagramType": "activity_diagram",
+        "digest": "sha256:67b33468d47e57b301b0c144de1eb68e78b42052d4996541ca95b7b033388256",
+        "providerProjection": "pass",
+        "fullResponseSchema": "pass",
+        "backendRuntime": "finding_invalid @ $",
+        "fakeCalls": 2,
+        "postRepairResult": "clean"
+      },
+      {
+        "mode": "direct",
+        "diagramType": "use_case_diagram",
+        "digest": "sha256:58dedb899c98e6d19582940cc697ddfb270fd2430d1501899ea79d8f7c9cdbb3",
+        "providerProjection": "pass",
+        "fullResponseSchema": "pass",
+        "backendRuntime": "finding_invalid @ $",
+        "fakeCalls": 2,
+        "postRepairResult": "clean"
+      },
+      {
+        "mode": "direct",
+        "diagramType": "bdd_diagram",
+        "digest": "sha256:d70605cb75d01792e5eaa42b7c46d9ffde3ec353abf85aba553c5e66b128f83c",
+        "providerProjection": "pass",
+        "fullResponseSchema": "pass",
+        "backendRuntime": "finding_invalid @ $",
+        "fakeCalls": 2,
+        "postRepairResult": "clean"
+      },
+      {
+        "mode": "context",
+        "diagramType": "activity_diagram",
+        "digest": "sha256:52fd28af61055aa09c510b57edf47db047908358ff1d5df621ca6115e9e11125",
+        "providerProjection": "pass",
+        "fullResponseSchema": "pass",
+        "backendRuntime": "finding_invalid @ $",
+        "fakeCalls": 2,
+        "postRepairResult": "clean"
+      },
+      {
+        "mode": "context",
+        "diagramType": "use_case_diagram",
+        "digest": "sha256:2c2e1791a31cabd149031429d1695633c69128987cb282c14dbdaf4b75e4ed09",
+        "providerProjection": "pass",
+        "fullResponseSchema": "pass",
+        "backendRuntime": "finding_invalid @ $",
+        "fakeCalls": 2,
+        "postRepairResult": "clean"
+      },
+      {
+        "mode": "context",
+        "diagramType": "bdd_diagram",
+        "digest": "sha256:725194a6367c1b7ac2feacd18c99c2e9a35a798117a9951973ff5b8d4130d7d3",
+        "providerProjection": "pass",
+        "fullResponseSchema": "pass",
+        "backendRuntime": "finding_invalid @ $",
+        "fakeCalls": 2,
+        "postRepairResult": "clean"
+      }
+    ],
+    "correctedWitness": {
+      "mode": "context",
+      "diagramType": "bdd_diagram",
+      "digest": "sha256:116afa0499f79c0e648dfd2c43e50d00b9f36193245fb6395ead13be3da45dc0",
+      "containingFacet": "goalFidelity",
+      "rating": 1,
+      "findingFacet": "goalFidelity",
+      "findingCode": "goal_mismatch",
+      "providerProjection": "pass",
+      "fullResponseSchema": "pass",
+      "backendAssembly": "pass",
+      "responseRepairTriggered": false,
+      "fakeCalls": 1,
+      "result": "blocked"
+    },
+    "responseRepairBinding": {
+      "initialResponseDigest": "sha256:725194a6367c1b7ac2feacd18c99c2e9a35a798117a9951973ff5b8d4130d7d3",
+      "initialInputDigest": "sha256:70b7fff782a53eb4fec74a450acd30ea018975a02a580196e44b9a675cbfc750",
+      "repairKind": "contextSemanticReviewRepairInput",
+      "repairInputCarriesIdenticalSemanticReviewInput": true,
+      "rejectedResponseDigest": "sha256:725194a6367c1b7ac2feacd18c99c2e9a35a798117a9951973ff5b8d4130d7d3",
+      "validationIssue": {
+        "code": "finding_invalid",
+        "path": "$"
+      },
+      "repairAttempt": 1,
+      "repairPromptVersion": "graphpilot.context.semantic-review-response-repair-prompt.v1",
+      "responseSchemaVersion": "graphpilot.context.semantic-review-response.v1",
+      "findingCodesByFacetPresent": false,
+      "initialPromptIsCurrentV1": true,
+      "repairPromptIsCurrentV1": true
+    },
+    "currentContractTrace": {
+      "promptVersions": {
+        "direct.semantic_review": "graphpilot.direct.semantic-review-prompt.v1",
+        "context.semantic_review": "graphpilot.context.semantic-review-prompt.v1",
+        "direct.semantic_review_response_repair": "graphpilot.direct.semantic-review-response-repair-prompt.v1",
+        "context.semantic_review_response_repair": "graphpilot.context.semantic-review-response-repair-prompt.v1"
+      },
+      "v1PromptAssetsPresent": true,
+      "v2PromptAssetsPresent": false,
+      "initialPrompts": {
+        "sayAllowlistedFindings": true,
+        "explicitFindingCodesByFacet": false,
+        "explicitContainingFacetEquality": false,
+        "explicitBelowMinimumOnly": false
+      },
+      "repairPrompts": {
+        "preserveAttemptedAssessment": true,
+        "explicitFindingCodesByFacet": false,
+        "explicitContainingFacetEquality": false,
+        "explicitBelowMinimumOnly": false
+      },
+      "reviewInput": {
+        "rubricFacetIdsPresent": true,
+        "rubricMinimumRatingsPresent": true,
+        "referenceAllowlistsPresent": true,
+        "findingCodesByFacetPresent": false,
+        "backendFacetRegistryCompleteForRubric": true
+      },
+      "responseSchema": {
+        "globalFindingCodeEnumCount": 15,
+        "findingCodesByFacetPresent": false,
+        "fullSchemaApplicabilityConditionalPresent": true
+      },
+      "providerProjection": {
+        "globalFindingCodeEnumCount": 15,
+        "findingCodesByFacetPresent": false,
+        "applicabilityConditionalPresent": false
+      },
+      "backendValidator": {
+        "requiresContainingFacetEquality": true,
+        "usesFacetFindingCodeRegistry": true,
+        "requiresBelowMinimumOutcome": true,
+        "findingRegistryEntries": 37
+      },
+      "fileDigests": {
+        "backend/graphpilot/prompts/direct-semantic-review-v1.md": "sha256:11edc5d6eaf76ead006524b8fa8409faa8bf534a5aef3320b9b77986b72db205",
+        "backend/graphpilot/prompts/context-semantic-review-v1.md": "sha256:20a570bc98ce7760879de1938e97badb3864e20f0f2603fd7fcdef2c13337dcd",
+        "backend/graphpilot/prompts/direct-semantic-review-response-repair-v1.md": "sha256:8bf6199e56db94b4cc473972ae7a21b3c2989dea4ae63adfb9530cf13d4f27bf",
+        "backend/graphpilot/prompts/context-semantic-review-response-repair-v1.md": "sha256:e26f3c706b12c88885dafc0978133e75018189329dfecb4d61834d011c089f9f",
+        "backend/graphpilot/schemas/direct-semantic-review-input.json": "sha256:6448f6b22d8858527fd40a2603c4efd96963e70eeb87430f24c448a4ce195c9f",
+        "backend/graphpilot/schemas/context-semantic-review-input.json": "sha256:20f01174cedcc0fe1f34503b8fe3173de72a45800166bd59d8c37e415470cb7d",
+        "backend/graphpilot/schemas/direct-semantic-review-response.json": "sha256:6573ce261d813e59dafcefe99cf7ee8c2374dbb4c086b46d80c6b2628dc095ec",
+        "backend/graphpilot/schemas/context-semantic-review-response.json": "sha256:b88c1e31187e0748a60725c4744dd62d430725d7d3730e98a04df83945e9cdef",
+        "backend/graphpilot/schemas/direct-semantic-review-repair-input.json": "sha256:0b572c413389f67a7ee94b25511184c802c5693050cf4b4027be6769da4d2262",
+        "backend/graphpilot/schemas/context-semantic-review-repair-input.json": "sha256:51df98b4f05e0cc1e7825c09ccac6c6846fe7e23c2536f582dda4e33c6eadec1",
+        "backend/services/contracts/generation_contracts.py": "sha256:ac25c3144f87f33dd89a7ebdfee8b60cce0f4e1c482c2e170217194adf41a8c9",
+        "backend/services/generation/semantic_review_rubric.py": "sha256:3949747a3f42d1a77853ff01a5cc1d9906c50a4d9635e33c5ace68b239013788",
+        "backend/services/generation/semantic_review_service.py": "sha256:4efa014087b458b13703cac60472e3a579ff4b90eed1b178b2edb2a82a4ee09b",
+        "backend/services/llm/llm_client.py": "sha256:bfba5ef30c4e4459aba3a85eb62f0acdfd4484aca53eb770b7b73d7ecbf6d962",
+        "backend/tests/generation/test_semantic_review_service.py": "sha256:5c3b2eb531becb2e79b1b2c93ea1ea4645cd9f7aa38bf2df58e24aaaf07d4a5e"
+      }
+    },
+    "g2Control": {
+      "packageId": "g2",
+      "runId": "run-live-workflow-anchor-g",
+      "observationId": "observation-live-workflow-anchor-g",
+      "diagnosticsRunId": "run-g",
+      "resultDigest": "sha256:dd17501323be29797adf470d3c258ff46c9d43eaeb3ade0c37d22ee7a8b22b6c",
+      "observationDigest": "sha256:7b26d987768ac1bc95670944587311e2e4560de7bb46b228fa6793869ca4e742",
+      "terminalDigest": "sha256:3370fe53bc8c00ff61a1170b99ed25ddbebcd65682fe6c257d2ca40bf17b5e65",
+      "diagnosticsDigest": "sha256:0a29472fd1d30e7c759e8c53f454ef5a2d57f5bb2b6028c97672da1d80f05b65",
+      "diagnosticsFiles": 26,
+      "diagnosticsBytes": 27204,
+      "correctionCommit": "a17bc4095cf79a30089aff39b10aa9fe73426b8d",
+      "roles": [
+        "readiness",
+        "generation",
+        "semantic_review"
+      ],
+      "completedCalls": 3,
+      "semanticReviewFirstResponseValid": true,
+      "semanticReviewResponseRepairCalls": 0,
+      "semanticRepairCalls": 0,
+      "review": "pass",
+      "reviewScore": 100,
+      "sourceDigestValid": true,
+      "sourceDigest": "sha256:a3ee176b9eb431c0c19120e403562e7ab64160d2569599e306c2a93796c954e5",
+      "interpretation": "unchanged semantic V1 produced one valid sample; this does not remove shapes permitted by the provider-visible contract and rejected by backend policy",
+      "currentRepairCallSavingBaseline": false
+    }
+  },
+  "rootConclusion": {
+    "owner": "semantic_review_prompt_projection_schema_validator_contract",
+    "class": "provider_visible_finding_contract_incomplete_current_v1",
+    "singleValidG2DisprovesGap": false,
+    "whyG2DoesNotDisprove": "The contract claim is existential: current provider-visible prompt/input/schema permits bounded responses that backend finding policy rejects. g2 is one accepted draw under unchanged semantic V1 and does not make those permitted-invalid shapes impossible.",
+    "currentRepairCallSavingBaseline": false,
+    "whyUniqueOwner": "All three current exact-signature witnesses pass the provider strict projection and complete response schema, then fail only at semantic-review finding assembly; the same facet/code class reproduces in all six mode/type cells, and a policy-coherent witness passes without repair.",
+    "generationControl": "Retained a17bc40 generation behavior is unchanged and outside this diagnosis."
+  },
+  "limitations": [
+    "The raw Block 5 semantic-review response was intentionally not retained and was not accessed; no current witness is claimed to be its exact private shape.",
+    "The safe finding_invalid @ $ signature cannot distinguish which bounded finding condition occurred in Block 5.",
+    "g2 supplies a valid unchanged-code observation but no current semantic response-repair call; therefore S09 establishes contract correctness only and no incremental repair-call saving baseline.",
+    "This proof does not implement a correction, measure provider performance, authorize a live call, establish representative stability, calibrate, certify, promote, or deploy."
+  ],
+  "verification": {
+    "bootstrapObservationCommand": "$env:AZURE_OPENAI_ENDPOINT=\"\"; $env:AZURE_OPENAI_API_KEY=\"\"; $env:AZURE_OPENAI_DEPLOYMENT=\"\"; $env:PYTHONPATH=\".\"; cd backend; uv run --with-requirements ..\\requirements.txt python ..\\docs\\03-development-and-delivery\\epics\\03-mcp-generation-and-wrappers\\06-workflow-reliability-and-optimization\\06-whole-workflow-optimization\\evidence\\semantic-review-retry-diagnosis\\verify_provider_free.py --observed",
+    "bootstrapObservationResult": {
+      "status": "pass",
+      "providerCalls": 0,
+      "findingWitnesses": 3,
+      "sixCellMatrix": 6,
+      "correctedWitness": "pass_no_response_repair",
+      "responseRepairBinding": "pass"
+    },
+    "focusedTestCommand": "$env:AZURE_OPENAI_ENDPOINT=\"\"; $env:AZURE_OPENAI_API_KEY=\"\"; $env:AZURE_OPENAI_DEPLOYMENT=\"\"; cd backend; uv run --with-requirements ..\\requirements.txt python manage.py test --settings graphpilot.live_anchor_settings tests.llm.test_llm_client.ProviderStrictSchemaTests tests.llm.test_prompt_service.RealTemplatesExistTests tests.generation.test_generation_foundation.GenerationContractIdentityTests tests.generation.test_semantic_review_service",
+    "focusedTestsRun": 18,
+    "focusedTestResult": "pass",
+    "focusedSystemCheckIssues": 0,
+    "providerCalls": 0
+  },
+  "accounting": {
+    "controlledCallsBefore": 13,
+    "controlledCallsAfter": 13,
+    "externalHostCallsBefore": 1,
+    "externalHostCallsAfter": 1,
+    "aggregateCallsAfter": 14,
+    "ceiling": 1000
+  },
+  "digest": "sha256:af89f1f24b25457f4b5e031b431e12ead552f8108512eb0e2af127d7833033ab"
+}

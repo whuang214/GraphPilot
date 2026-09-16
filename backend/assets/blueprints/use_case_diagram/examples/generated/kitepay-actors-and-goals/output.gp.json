@@ -1,0 +1,1718 @@
+{
+  "diagramType": "use_case_diagram",
+  "edges": [
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "visitor-register",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-register"
+        ],
+        "rationale": "Established by cited evidence: ev-register.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "visitor",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "uc-register",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "visitor-signin",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-login"
+        ],
+        "rationale": "Established by cited evidence: ev-login.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "visitor",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "uc-signin",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "member-send",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-pay"
+        ],
+        "rationale": "Established by cited evidence: ev-pay.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "member",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "uc-send-money",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "member-ask",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-request-money"
+        ],
+        "rationale": "Established by cited evidence: ev-request-money.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "member",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "uc-ask-money",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "member-review",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-requests-list"
+        ],
+        "rationale": "Established by cited evidence: ev-requests-list.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "member",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "uc-review-requests",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "member-pay-request",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-accept"
+        ],
+        "rationale": "Established by cited evidence: ev-accept.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "member",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "uc-pay-request",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "member-decline",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-decline"
+        ],
+        "rationale": "Established by cited evidence: ev-decline.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "member",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "uc-decline-request",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "member-cancel",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-cancel"
+        ],
+        "rationale": "Established by cited evidence: ev-cancel.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "member",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "uc-cancel-request",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "member-wallet",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-wallet-view"
+        ],
+        "rationale": "Established by cited evidence: ev-wallet-view.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "member",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "uc-check-wallet",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "member-topup",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-deposit-view"
+        ],
+        "rationale": "Established by cited evidence: ev-deposit-view.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "member",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "uc-top-up",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "member-cashout",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-withdraw-view"
+        ],
+        "rationale": "Established by cited evidence: ev-withdraw-view.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "member",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "uc-cash-out",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "member-linked",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-linked-view"
+        ],
+        "rationale": "Established by cited evidence: ev-linked-view.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "member",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "uc-manage-linked",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "member-feed",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-feed-view"
+        ],
+        "rationale": "Established by cited evidence: ev-feed-view.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "member",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "uc-browse-feed",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "member-find",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-people"
+        ],
+        "rationale": "Established by cited evidence: ev-people.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "member",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "uc-find-people",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "member-profile",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-profile"
+        ],
+        "rationale": "Established by cited evidence: ev-profile.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "member",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "uc-view-profile",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "member-follow",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-follow"
+        ],
+        "rationale": "Established by cited evidence: ev-follow.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "member",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "uc-follow",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "member-notifications",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-inbox"
+        ],
+        "rationale": "Established by cited evidence: ev-inbox.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "member",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "uc-notifications",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "operator-settle",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-settle-cmd",
+          "ev-housekeeping"
+        ],
+        "rationale": "Established by cited evidence: ev-settle-cmd, ev-housekeeping.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "operator",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "uc-settle-rails",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "operator-expire",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-expire-cmd",
+          "ev-housekeeping"
+        ],
+        "rationale": "Established by cited evidence: ev-expire-cmd, ev-housekeeping.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "operator",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "uc-expire-requests",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association"
+      },
+      "id": "admin-manage",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-admin-reg"
+        ],
+        "rationale": "Established by cited evidence: ev-admin-reg.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "administrator",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "uc-admin",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "include"
+      },
+      "id": "pay-request-includes-send",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-accept",
+          "ev-pay"
+        ],
+        "rationale": "Established by cited evidence: ev-accept, ev-pay.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "uc-pay-request",
+      "style": {
+        "stroke": "#333333",
+        "strokeDasharray": "6 4",
+        "strokeWidth": 2
+      },
+      "target": "uc-send-money",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "commentLink"
+      },
+      "id": "note-login-link",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-loginurl"
+        ],
+        "rationale": "Established by cited evidence: ev-loginurl.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "note-login",
+      "style": {
+        "stroke": "#333333",
+        "strokeDasharray": "6 4",
+        "strokeWidth": 2
+      },
+      "target": "member",
+      "type": "default"
+    }
+  ],
+  "id": "diagram_kitepay_actors_and_goals",
+  "kind": "diagram",
+  "metadata": {
+    "authoring": "generated",
+    "authority": "as_implemented",
+    "createdAt": "2026-08-04T20:32:26.155094+00:00",
+    "evidence": [
+      {
+        "contentDigest": "sha256:1bc1a12f215810ed6f84eb0a1c2e02337605221b10894765d85320971c8ce759",
+        "id": "ev-roots",
+        "kind": "configuration",
+        "locator": {
+          "lineRange": {
+            "end": 12,
+            "start": 4
+          },
+          "path": "kitepay/urls.py",
+          "symbol": "urlpatterns"
+        },
+        "summary": "The project routing table: the Django admin plus the feed, accounts, payments, wallet, rails and notifications URL sets."
+      },
+      {
+        "contentDigest": "sha256:000a0203f2263cf0dc1fa3ee19771742fa56f75cb0e88568f7110f560662edf4",
+        "id": "ev-loginurl",
+        "kind": "configuration",
+        "locator": {
+          "lineRange": {
+            "end": 68,
+            "start": 66
+          },
+          "path": "kitepay/settings.py",
+          "symbol": "LOGIN_URL"
+        },
+        "summary": "LOGIN_URL sends anyone hitting a login-protected view to /login/, and sign-in lands on the feed."
+      },
+      {
+        "contentDigest": "sha256:3af803cf74a7dc09cc2ad888be4cedd1221247019d9b595f423c8de6bac01374",
+        "id": "ev-register",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 20,
+            "start": 11
+          },
+          "path": "accounts/views.py",
+          "symbol": "register"
+        },
+        "summary": "register creates the User, creates their Wallet, signs them in and redirects to the feed; an already-authenticated visitor is bounced."
+      },
+      {
+        "contentDigest": "sha256:f22e7e0c0a4506de2edcca2abc83720beb65f454eb0d6bf2da632c506e869fc8",
+        "id": "ev-login",
+        "kind": "configuration",
+        "locator": {
+          "lineRange": {
+            "end": 9,
+            "start": 8
+          },
+          "path": "accounts/urls.py",
+          "symbol": "LoginView"
+        },
+        "summary": "Sign-in and sign-out are Django's stock LoginView and LogoutView on /login/ and /logout/."
+      },
+      {
+        "contentDigest": "sha256:5fb41e98b4d8f849b393d33ff44e48b8b93053146543b36b114dddb142782d67",
+        "id": "ev-pay",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 45,
+            "start": 18
+          },
+          "path": "payments/views.py",
+          "symbol": "pay"
+        },
+        "summary": "The login-protected /pay/ view takes a handle, amount, note and visibility and calls send_payment under an idempotency key."
+      },
+      {
+        "contentDigest": "sha256:92c2d058242ce83a920b08ff430235550d2704187662bb5dcc0f012748d965ba",
+        "id": "ev-request-money",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 61,
+            "start": 48
+          },
+          "path": "payments/views.py",
+          "symbol": "request_money"
+        },
+        "summary": "/request/ creates a PaymentRequest against another user with an expiry taken from REQUEST_EXPIRY_DAYS."
+      },
+      {
+        "contentDigest": "sha256:98453c6184b2de9fcf8380c72a8d8c2aa5732a3665a0da5d5de43028ce2f1658",
+        "id": "ev-requests-list",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 70,
+            "start": 64
+          },
+          "path": "payments/views.py",
+          "symbol": "requests"
+        },
+        "summary": "/requests/ lists the money requests addressed to the user and the ones they raised."
+      },
+      {
+        "contentDigest": "sha256:01af9b6584b781e1726a9aededc078ba686132dbbddeb344d48881e628f12964",
+        "id": "ev-accept",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 94,
+            "start": 73
+          },
+          "path": "payments/views.py",
+          "symbol": "accept_request"
+        },
+        "summary": "accept_request pays an open request by calling send_payment, then marks the request accepted and records the settling payment."
+      },
+      {
+        "contentDigest": "sha256:445b82449c27fcb938788e14d74f686a3faff5c597ca3f198d3adaeed2e55dd6",
+        "id": "ev-decline",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 103,
+            "start": 97
+          },
+          "path": "payments/views.py",
+          "symbol": "decline_request"
+        },
+        "summary": "decline_request lets the payer close a pending request without paying it."
+      },
+      {
+        "contentDigest": "sha256:9cca5a92f3b2bf2f05ae0c6df1e996c1e8d8cf26832d7790ce4dcf2736b4ade8",
+        "id": "ev-cancel",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 112,
+            "start": 106
+          },
+          "path": "payments/views.py",
+          "symbol": "cancel_request"
+        },
+        "summary": "cancel_request lets the requester withdraw a pending request they raised."
+      },
+      {
+        "contentDigest": "sha256:21800fbd4d74b1efd97ee3445afe7f6ee3add6194606d723aa73b2087720bb95",
+        "id": "ev-wallet-view",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 25,
+            "start": 8
+          },
+          "path": "wallets/views.py",
+          "symbol": "wallet"
+        },
+        "summary": "The wallet page shows available and pending balances and the last fifty ledger entries."
+      },
+      {
+        "contentDigest": "sha256:e8a6b2bb8253ecbb85212d9b73db723cd63829aaf937bc8194725d929425d31b",
+        "id": "ev-deposit-view",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 35,
+            "start": 28
+          },
+          "path": "rails/views.py",
+          "symbol": "deposit"
+        },
+        "summary": "The deposit view starts a top up from a linked account and warns that it clears in a couple of days."
+      },
+      {
+        "contentDigest": "sha256:d333db43bf8fb0c3f175cc40224f3e69e8dc84eb99edd7529a61ab439d6c0ab8",
+        "id": "ev-withdraw-view",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 53,
+            "start": 38
+          },
+          "path": "rails/views.py",
+          "symbol": "withdraw"
+        },
+        "summary": "The withdraw view starts a cash out to a linked account and refuses it when the available balance is short."
+      },
+      {
+        "contentDigest": "sha256:7d73a16a5cf04d25cd0203f6909386b2623d0b5a76078b29393a82b9262a92dc",
+        "id": "ev-linked-view",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 25,
+            "start": 12
+          },
+          "path": "rails/views.py",
+          "symbol": "linked_accounts"
+        },
+        "summary": "linked_accounts lists the user's cards and bank accounts and adds new ones."
+      },
+      {
+        "contentDigest": "sha256:5e9febfb4b0cfe61ff9fd3dcc89fe73546efff42f416fe6a7ae1e253257b63bc",
+        "id": "ev-feed-view",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 34,
+            "start": 11
+          },
+          "path": "feed/views.py",
+          "symbol": "feed"
+        },
+        "summary": "The feed shows public payments, friends-only payments from people the viewer follows, and the viewer's own payments."
+      },
+      {
+        "contentDigest": "sha256:419a716234f894439f59eff3bcf1aa29134f1216b2851e6c14d4a20fc67249b7",
+        "id": "ev-people",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 61,
+            "start": 55
+          },
+          "path": "accounts/views.py",
+          "symbol": "people"
+        },
+        "summary": "people searches users by handle, excluding the searcher."
+      },
+      {
+        "contentDigest": "sha256:7dfc71bc99ad1656f4247fe6dd9f5f9ac9b2fe4e282202ec2f7ee28bf09d387b",
+        "id": "ev-profile",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 37,
+            "start": 23
+          },
+          "path": "accounts/views.py",
+          "symbol": "profile"
+        },
+        "summary": "A profile page shows a person's public payments and whether the viewer follows them."
+      },
+      {
+        "contentDigest": "sha256:0567c09e7764f2fc8590cf371e1cc75094f0aa72e1bf37382ff866d912acfff5",
+        "id": "ev-follow",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 52,
+            "start": 40
+          },
+          "path": "accounts/views.py",
+          "symbol": "follow"
+        },
+        "summary": "follow and unfollow create and delete the Follow row that decides who sees FRIENDS-visibility payments."
+      },
+      {
+        "contentDigest": "sha256:7c285e8bbb5ebae9624896b46beb50f52c5a3ef18166546b611eec2579d529f6",
+        "id": "ev-inbox",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 11,
+            "start": 7
+          },
+          "path": "notifications/views.py",
+          "symbol": "inbox"
+        },
+        "summary": "The inbox lists the user's notifications and marks the unread ones read."
+      },
+      {
+        "contentDigest": "sha256:430e9a756a9ff4bd76bf8a40f275462f8420291d4db3ae83d42e70cbfd363036",
+        "id": "ev-settle-cmd",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 11,
+            "start": 6
+          },
+          "path": "rails/management/commands/settle_rails.py",
+          "symbol": "Command"
+        },
+        "summary": "The settle_rails management command lands every deposit and withdrawal whose settlement date has arrived."
+      },
+      {
+        "contentDigest": "sha256:2b1cea74da42d90cd0ee87dacaa9243dbf1ebfaae20e8cf78fa3be3c7a129609",
+        "id": "ev-expire-cmd",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 16,
+            "start": 7
+          },
+          "path": "payments/management/commands/expire_requests.py",
+          "symbol": "Command"
+        },
+        "summary": "The expire_requests management command closes pending money requests past their expiry."
+      },
+      {
+        "contentDigest": "sha256:a88009d815547926c743f5635cf35c3b752155b3953a69c031b964f5a507bb1e",
+        "id": "ev-housekeeping",
+        "kind": "documentation",
+        "locator": {
+          "lineRange": {
+            "end": 35,
+            "start": 26
+          },
+          "path": "README.md",
+          "symbol": "settle_rails"
+        },
+        "summary": "The README lists settle_rails, expire_requests and seed_demo as housekeeping commands run outside the web interface."
+      },
+      {
+        "contentDigest": "sha256:773866853b9c85c177652cf60070d9433c03bc6494fb267a3244ee52bd9e4808",
+        "id": "ev-admin-reg",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 7,
+            "start": 1
+          },
+          "path": "accounts/admin.py",
+          "symbol": "admin.site.register"
+        },
+        "summary": "User and Follow are registered with the Django admin site."
+      }
+    ],
+    "generatedBy": "graphpilot-materializer",
+    "intent": "kitepay-actors-and-goals",
+    "notation": "uml",
+    "originalType": "use_case_diagram",
+    "requests": [
+      {
+        "at": "2026-08-04T20:32:26.155094+00:00",
+        "text": "Who uses this system, and what they use it for."
+      }
+    ],
+    "source": "mcp",
+    "updatedAt": "2026-08-04T20:32:26.155094+00:00"
+  },
+  "name": "kitepay-actors-and-goals",
+  "nodes": [
+    {
+      "data": {
+        "label": "kitepay",
+        "semanticType": "subject"
+      },
+      "height": 2534.0,
+      "id": "kitepay",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-roots"
+        ],
+        "rationale": "Established by cited evidence: ev-roots.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 728.0,
+        "y": 0.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 664.0
+    },
+    {
+      "data": {
+        "label": "Visitor",
+        "semanticType": "actor"
+      },
+      "height": 120.0,
+      "id": "visitor",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-register",
+          "ev-login"
+        ],
+        "rationale": "Established by cited evidence: ev-register, ev-login.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 479.0,
+        "y": 1023.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 90.0
+    },
+    {
+      "data": {
+        "label": "Member",
+        "semanticType": "actor"
+      },
+      "height": 120.0,
+      "id": "member",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-loginurl",
+          "ev-wallet-view"
+        ],
+        "rationale": "Established by cited evidence: ev-loginurl, ev-wallet-view.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 479.0,
+        "y": 1207.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 90.0
+    },
+    {
+      "data": {
+        "label": "Operator (scheduled job)",
+        "semanticType": "actor"
+      },
+      "height": 120.0,
+      "id": "operator",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-housekeeping",
+          "ev-settle-cmd",
+          "ev-expire-cmd"
+        ],
+        "rationale": "Established by cited evidence: ev-housekeeping, ev-settle-cmd, ev-expire-cmd.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 416.0,
+        "y": 1391.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 216.0
+    },
+    {
+      "data": {
+        "label": "Administrator",
+        "semanticType": "actor"
+      },
+      "height": 120.0,
+      "id": "administrator",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-roots",
+          "ev-admin-reg"
+        ],
+        "rationale": "Established by cited evidence: ev-roots, ev-admin-reg.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 457.25,
+        "y": 1575.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 133.5
+    },
+    {
+      "data": {
+        "label": "Register and get a wallet",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "uc-register",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-register"
+        ],
+        "rationale": "Established by cited evidence: ev-register.",
+        "schemaRules": []
+      },
+      "parentId": "kitepay",
+      "position": {
+        "x": 72.25,
+        "y": 2440.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 223.5
+    },
+    {
+      "data": {
+        "label": "Sign in and out",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "uc-signin",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-login"
+        ],
+        "rationale": "Established by cited evidence: ev-login.",
+        "schemaRules": []
+      },
+      "parentId": "kitepay",
+      "position": {
+        "x": 84.0,
+        "y": 2306.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 200.0
+    },
+    {
+      "data": {
+        "label": "Send money to someone",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "uc-send-money",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-pay"
+        ],
+        "rationale": "Established by cited evidence: ev-pay.",
+        "schemaRules": []
+      },
+      "parentId": "kitepay",
+      "position": {
+        "x": 440.0,
+        "y": 2172.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 200.0
+    },
+    {
+      "data": {
+        "label": "Ask someone for money",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "uc-ask-money",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-request-money"
+        ],
+        "rationale": "Established by cited evidence: ev-request-money.",
+        "schemaRules": []
+      },
+      "parentId": "kitepay",
+      "position": {
+        "x": 84.0,
+        "y": 2038.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 200.0
+    },
+    {
+      "data": {
+        "label": "Review money requests",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "uc-review-requests",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-requests-list"
+        ],
+        "rationale": "Established by cited evidence: ev-requests-list.",
+        "schemaRules": []
+      },
+      "parentId": "kitepay",
+      "position": {
+        "x": 84.0,
+        "y": 1904.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 200.0
+    },
+    {
+      "data": {
+        "label": "Pay a money request",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "uc-pay-request",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-accept"
+        ],
+        "rationale": "Established by cited evidence: ev-accept.",
+        "schemaRules": []
+      },
+      "parentId": "kitepay",
+      "position": {
+        "x": 84.0,
+        "y": 2172.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 200.0
+    },
+    {
+      "data": {
+        "label": "Decline a money request",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "uc-decline-request",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-decline"
+        ],
+        "rationale": "Established by cited evidence: ev-decline.",
+        "schemaRules": []
+      },
+      "parentId": "kitepay",
+      "position": {
+        "x": 79.75,
+        "y": 1770.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 208.5
+    },
+    {
+      "data": {
+        "label": "Cancel a request I raised",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "uc-cancel-request",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-cancel"
+        ],
+        "rationale": "Established by cited evidence: ev-cancel.",
+        "schemaRules": []
+      },
+      "parentId": "kitepay",
+      "position": {
+        "x": 72.25,
+        "y": 1636.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 223.5
+    },
+    {
+      "data": {
+        "label": "Check balance and statement",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "uc-check-wallet",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-wallet-view"
+        ],
+        "rationale": "Established by cited evidence: ev-wallet-view.",
+        "schemaRules": []
+      },
+      "parentId": "kitepay",
+      "position": {
+        "x": 64.75,
+        "y": 1502.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 238.5
+    },
+    {
+      "data": {
+        "label": "Top up from a card or bank",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "uc-top-up",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-deposit-view"
+        ],
+        "rationale": "Established by cited evidence: ev-deposit-view.",
+        "schemaRules": []
+      },
+      "parentId": "kitepay",
+      "position": {
+        "x": 68.5,
+        "y": 1368.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 231.0
+    },
+    {
+      "data": {
+        "label": "Cash out to a card or bank",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "uc-cash-out",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-withdraw-view"
+        ],
+        "rationale": "Established by cited evidence: ev-withdraw-view.",
+        "schemaRules": []
+      },
+      "parentId": "kitepay",
+      "position": {
+        "x": 68.5,
+        "y": 1234.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 231.0
+    },
+    {
+      "data": {
+        "label": "Manage linked accounts",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "uc-manage-linked",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-linked-view"
+        ],
+        "rationale": "Established by cited evidence: ev-linked-view.",
+        "schemaRules": []
+      },
+      "parentId": "kitepay",
+      "position": {
+        "x": 83.5,
+        "y": 1100.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 201.0
+    },
+    {
+      "data": {
+        "label": "Browse the payment feed",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "uc-browse-feed",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-feed-view"
+        ],
+        "rationale": "Established by cited evidence: ev-feed-view.",
+        "schemaRules": []
+      },
+      "parentId": "kitepay",
+      "position": {
+        "x": 79.75,
+        "y": 966.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 208.5
+    },
+    {
+      "data": {
+        "label": "Find people by handle",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "uc-find-people",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-people"
+        ],
+        "rationale": "Established by cited evidence: ev-people.",
+        "schemaRules": []
+      },
+      "parentId": "kitepay",
+      "position": {
+        "x": 84.0,
+        "y": 832.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 200.0
+    },
+    {
+      "data": {
+        "label": "View someone's profile",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "uc-view-profile",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-profile"
+        ],
+        "rationale": "Established by cited evidence: ev-profile.",
+        "schemaRules": []
+      },
+      "parentId": "kitepay",
+      "position": {
+        "x": 83.5,
+        "y": 698.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 201.0
+    },
+    {
+      "data": {
+        "label": "Follow or unfollow someone",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "uc-follow",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-follow"
+        ],
+        "rationale": "Established by cited evidence: ev-follow.",
+        "schemaRules": []
+      },
+      "parentId": "kitepay",
+      "position": {
+        "x": 68.5,
+        "y": 564.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 231.0
+    },
+    {
+      "data": {
+        "label": "Read my notifications",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "uc-notifications",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-inbox"
+        ],
+        "rationale": "Established by cited evidence: ev-inbox.",
+        "schemaRules": []
+      },
+      "parentId": "kitepay",
+      "position": {
+        "x": 84.0,
+        "y": 430.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 200.0
+    },
+    {
+      "data": {
+        "label": "Settle deposits and withdrawals that are due",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "uc-settle-rails",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-settle-cmd"
+        ],
+        "rationale": "Established by cited evidence: ev-settle-cmd.",
+        "schemaRules": []
+      },
+      "parentId": "kitepay",
+      "position": {
+        "x": 24.0,
+        "y": 296.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "label": "Expire unanswered money requests",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "uc-expire-requests",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-expire-cmd"
+        ],
+        "rationale": "Established by cited evidence: ev-expire-cmd.",
+        "schemaRules": []
+      },
+      "parentId": "kitepay",
+      "position": {
+        "x": 46.0,
+        "y": 162.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 276.0
+    },
+    {
+      "data": {
+        "label": "Administer records in the Django admin",
+        "semanticType": "useCase"
+      },
+      "height": 70.0,
+      "id": "uc-admin",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-roots",
+          "ev-admin-reg"
+        ],
+        "rationale": "Established by cited evidence: ev-roots, ev-admin-reg.",
+        "schemaRules": []
+      },
+      "parentId": "kitepay",
+      "position": {
+        "x": 24.0,
+        "y": 28.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "label": "Every goal except registering and signing in sits behind @login_required.",
+        "semanticType": "note"
+      },
+      "height": 80.0,
+      "id": "note-login",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-loginurl"
+        ],
+        "rationale": "Established by cited evidence: ev-loginurl.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 111.0,
+        "y": 1207.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    }
+  ],
+  "schemaVersion": "graphpilot.diagram.v1",
+  "viewport": {
+    "x": 0,
+    "y": 0,
+    "zoom": 1
+  }
+}

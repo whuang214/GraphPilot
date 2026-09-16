@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "university-portal",
+  "diagramType": "use_case_diagram",
+  "authority": "conceptual",
+  "requests": [
+    "In a university portal students enroll in courses, professors post grades and manage the catalog, and a teaching assistant is a kind of student."
+  ],
+  "evidence": [],
+  "elements": [
+    {
+      "id": "student",
+      "semanticType": "actor",
+      "label": "Student",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "prof",
+      "semanticType": "actor",
+      "label": "Professor",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "ta",
+      "semanticType": "actor",
+      "label": "Teaching Assistant",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "sys",
+      "semanticType": "subject",
+      "label": "University Portal",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "enroll",
+      "semanticType": "useCase",
+      "label": "Enroll in Course",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    },
+    {
+      "id": "grades",
+      "semanticType": "useCase",
+      "label": "Post Grades",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    },
+    {
+      "id": "catalog",
+      "semanticType": "useCase",
+      "label": "Manage Catalog",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "edge-1-student-enroll",
+      "semanticType": "association",
+      "source": "student",
+      "target": "enroll",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-2-prof-grades",
+      "semanticType": "association",
+      "source": "prof",
+      "target": "grades",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-3-prof-catalog",
+      "semanticType": "association",
+      "source": "prof",
+      "target": "catalog",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-4-ta-student",
+      "semanticType": "generalization",
+      "source": "ta",
+      "target": "student",
+      "assurance": "conceptual"
+    }
+  ],
+  "assumptions": []
+}

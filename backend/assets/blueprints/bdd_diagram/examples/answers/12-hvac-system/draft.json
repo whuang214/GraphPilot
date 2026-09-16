@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "hvac-system",
+  "diagramType": "bdd_diagram",
+  "authority": "conceptual",
+  "requests": [
+    "An HVAC system is composed of a compressor and a thermostat and has a target temperature and a power draw; it references a fan mode (auto, on, circulate), the thermostat references a system state (heat, cool, off), and the system must meet an efficiency of SEER >= 14."
+  ],
+  "evidence": [],
+  "elements": [
+    {
+      "id": "hvac",
+      "semanticType": "block",
+      "label": "HVAC System",
+      "assurance": "conceptual",
+      "features": {
+        "properties": [
+          {
+            "kind": "value",
+            "name": "targetTemp",
+            "type": "C",
+            "multiplicity": {
+              "lower": 1,
+              "upper": 1
+            }
+          },
+          {
+            "kind": "value",
+            "name": "powerDraw",
+            "type": "W",
+            "multiplicity": {
+              "lower": 1,
+              "upper": 1
+            }
+          }
+        ],
+        "operations": [
+          {
+            "name": "start"
+          },
+          {
+            "name": "stop"
+          }
+        ]
+      }
+    },
+    {
+      "id": "compressor",
+      "semanticType": "block",
+      "label": "Compressor",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "thermostat",
+      "semanticType": "block",
+      "label": "Thermostat",
+      "assurance": "conceptual",
+      "features": {
+        "properties": [
+          {
+            "kind": "value",
+            "name": "setpoint",
+            "type": "C",
+            "multiplicity": {
+              "lower": 1,
+              "upper": 1
+            }
+          }
+        ],
+        "operations": [
+          {
+            "name": "readTemp"
+          }
+        ]
+      }
+    },
+    {
+      "id": "targettemp",
+      "semanticType": "block",
+      "label": "Target Temp",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "powerdraw",
+      "semanticType": "block",
+      "label": "Power Draw",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "efficiency",
+      "semanticType": "block",
+      "label": "SEER >= 14",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "fanmode",
+      "semanticType": "block",
+      "label": "Fan Mode",
+      "assurance": "conceptual",
+      "features": {
+        "literals": [
+          "AUTO",
+          "ON",
+          "CIRCULATE"
+        ]
+      }
+    },
+    {
+      "id": "state",
+      "semanticType": "block",
+      "label": "System State",
+      "assurance": "conceptual",
+      "features": {
+        "literals": [
+          "HEAT",
+          "COOL",
+          "OFF"
+        ]
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "edge-1-compressor-hvac",
+      "semanticType": "composition",
+      "source": "compressor",
+      "target": "hvac",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-2-thermostat-hvac",
+      "semanticType": "composition",
+      "source": "thermostat",
+      "target": "hvac",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-3-targettemp-hvac",
+      "semanticType": "composition",
+      "source": "targettemp",
+      "target": "hvac",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-4-powerdraw-hvac",
+      "semanticType": "composition",
+      "source": "powerdraw",
+      "target": "hvac",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-5-hvac-fanmode",
+      "semanticType": "association",
+      "source": "hvac",
+      "target": "fanmode",
+      "assurance": "conceptual",
+      "targetNavigable": true
+    },
+    {
+      "id": "edge-6-thermostat-state",
+      "semanticType": "association",
+      "source": "thermostat",
+      "target": "state",
+      "assurance": "conceptual",
+      "targetNavigable": true
+    },
+    {
+      "id": "edge-7-efficiency-hvac",
+      "semanticType": "association",
+      "source": "efficiency",
+      "target": "hvac",
+      "assurance": "conceptual",
+      "targetNavigable": true
+    }
+  ],
+  "assumptions": []
+}

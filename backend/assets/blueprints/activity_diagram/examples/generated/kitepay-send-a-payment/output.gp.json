@@ -1,0 +1,1444 @@
+{
+  "diagramType": "activity_diagram",
+  "edges": [
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f-start-key",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-view-pay"
+        ],
+        "rationale": "Established by cited evidence: ev-view-pay.",
+        "schemaRules": []
+      },
+      "source": "start",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "a-key",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f-key-validate",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-view-pay"
+        ],
+        "rationale": "Established by cited evidence: ev-view-pay.",
+        "schemaRules": []
+      },
+      "source": "a-key",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "a-validate",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f-validate-d",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-form"
+        ],
+        "rationale": "Established by cited evidence: ev-form.",
+        "schemaRules": []
+      },
+      "source": "a-validate",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "d-valid",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "no",
+        "semanticType": "controlFlow"
+      },
+      "id": "f-invalid",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-view-pay",
+          "ev-form"
+        ],
+        "rationale": "Established by cited evidence: ev-view-pay, ev-form.",
+        "schemaRules": []
+      },
+      "source": "d-valid",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "m-refused",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "yes",
+        "semanticType": "controlFlow"
+      },
+      "id": "f-valid",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-view-pay"
+        ],
+        "rationale": "Established by cited evidence: ev-view-pay.",
+        "schemaRules": []
+      },
+      "source": "d-valid",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "d-seen",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "yes",
+        "semanticType": "controlFlow"
+      },
+      "id": "f-seen-yes",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-view-pay",
+          "ev-idem-module"
+        ],
+        "rationale": "Established by cited evidence: ev-view-pay, ev-idem-module.",
+        "schemaRules": []
+      },
+      "source": "d-seen",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "a-replay",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "no",
+        "semanticType": "controlFlow"
+      },
+      "id": "f-seen-no",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-view-pay"
+        ],
+        "rationale": "Established by cited evidence: ev-view-pay.",
+        "schemaRules": []
+      },
+      "source": "d-seen",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "a-open-txn",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f-replay-final",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-test-idem"
+        ],
+        "rationale": "Established by cited evidence: ev-test-idem.",
+        "schemaRules": []
+      },
+      "source": "a-replay",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "final-replay",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f-txn-funds",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-service"
+        ],
+        "rationale": "Established by cited evidence: ev-service.",
+        "schemaRules": []
+      },
+      "source": "a-open-txn",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "d-funds",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "no",
+        "semanticType": "controlFlow"
+      },
+      "id": "f-funds-no",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-service",
+          "ev-balance"
+        ],
+        "rationale": "Established by cited evidence: ev-service, ev-balance.",
+        "schemaRules": []
+      },
+      "source": "d-funds",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "a-rollback",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "yes",
+        "semanticType": "controlFlow"
+      },
+      "id": "f-funds-yes",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-service"
+        ],
+        "rationale": "Established by cited evidence: ev-service.",
+        "schemaRules": []
+      },
+      "source": "d-funds",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "a-create-payment",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f-create-notify",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-signals"
+        ],
+        "rationale": "Established by cited evidence: ev-signals.",
+        "schemaRules": []
+      },
+      "source": "a-create-payment",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "a-notify",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f-notify-feed",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-signals"
+        ],
+        "rationale": "Established by cited evidence: ev-signals.",
+        "schemaRules": []
+      },
+      "source": "a-notify",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "a-feeditem",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f-feed-ledger",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-service"
+        ],
+        "rationale": "Established by cited evidence: ev-service.",
+        "schemaRules": []
+      },
+      "source": "a-feeditem",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "a-post-ledger",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f-ledger-commit",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-service"
+        ],
+        "rationale": "Established by cited evidence: ev-service.",
+        "schemaRules": []
+      },
+      "source": "a-post-ledger",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "a-commit",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f-commit-remember",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-view-pay"
+        ],
+        "rationale": "Established by cited evidence: ev-view-pay.",
+        "schemaRules": []
+      },
+      "source": "a-commit",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "a-remember",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f-remember-redirect",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-view-pay"
+        ],
+        "rationale": "Established by cited evidence: ev-view-pay.",
+        "schemaRules": []
+      },
+      "source": "a-remember",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "a-redirect",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f-redirect-final",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-view-pay"
+        ],
+        "rationale": "Established by cited evidence: ev-view-pay.",
+        "schemaRules": []
+      },
+      "source": "a-redirect",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "final-sent",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f-rollback-refused",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-view-pay"
+        ],
+        "rationale": "Established by cited evidence: ev-view-pay.",
+        "schemaRules": []
+      },
+      "source": "a-rollback",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "m-refused",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f-refused-error",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-view-pay"
+        ],
+        "rationale": "Established by cited evidence: ev-view-pay.",
+        "schemaRules": []
+      },
+      "source": "m-refused",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "a-show-error",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f-error-final",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-test-funds"
+        ],
+        "rationale": "Established by cited evidence: ev-test-funds.",
+        "schemaRules": []
+      },
+      "source": "a-show-error",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "final-refused",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "commentLink"
+      },
+      "id": "l-signal-order",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-signals"
+        ],
+        "rationale": "Established by cited evidence: ev-signals.",
+        "schemaRules": []
+      },
+      "source": "note-signal-order",
+      "style": {
+        "stroke": "#333333",
+        "strokeDasharray": "6 4",
+        "strokeWidth": 2
+      },
+      "target": "a-create-payment",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "commentLink"
+      },
+      "id": "l-double-check",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-form",
+          "ev-service"
+        ],
+        "rationale": "Established by cited evidence: ev-form, ev-service.",
+        "schemaRules": []
+      },
+      "source": "note-double-check",
+      "style": {
+        "stroke": "#333333",
+        "strokeDasharray": "6 4",
+        "strokeWidth": 2
+      },
+      "target": "d-funds",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "commentLink"
+      },
+      "id": "l-other-entry",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-accept"
+        ],
+        "rationale": "Established by cited evidence: ev-accept.",
+        "schemaRules": []
+      },
+      "source": "note-other-entry",
+      "style": {
+        "stroke": "#333333",
+        "strokeDasharray": "6 4",
+        "strokeWidth": 2
+      },
+      "target": "a-open-txn",
+      "type": "default"
+    }
+  ],
+  "id": "diagram_kitepay_send_a_payment",
+  "kind": "diagram",
+  "metadata": {
+    "authoring": "generated",
+    "authority": "as_implemented",
+    "createdAt": "2026-08-04T20:32:26.171587+00:00",
+    "evidence": [
+      {
+        "contentDigest": "sha256:5fb41e98b4d8f849b393d33ff44e48b8b93053146543b36b114dddb142782d67",
+        "id": "ev-view-pay",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 45,
+            "start": 18
+          },
+          "path": "payments/views.py",
+          "symbol": "pay"
+        },
+        "summary": "The /pay/ view: build PayForm, take or mint an idempotency key, short-circuit a replayed key, call send_payment, catch InsufficientFunds and ValueError onto the form, otherwise remember the key and redirect to the feed."
+      },
+      {
+        "contentDigest": "sha256:93842128ee8586e1cce52d63690fcf4bd98405edb176d76ddbbd09c9e586b0ac",
+        "id": "ev-idem-module",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 28,
+            "start": 15
+          },
+          "path": "core/idempotency.py",
+          "symbol": "remember"
+        },
+        "summary": "mint, seen, remember and recall keep a 15-minute cache entry so a resubmitted form replays the first result instead of moving money again."
+      },
+      {
+        "contentDigest": "sha256:e400600262743eb59470f1bd47f6b5906ee75cd8fa18c91dfb1ab41d4211c36d",
+        "id": "ev-form",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 39,
+            "start": 8
+          },
+          "path": "payments/forms.py",
+          "symbol": "PayForm"
+        },
+        "summary": "PayForm resolves the @handle to a User, rejects paying yourself, parses the amount into minor units, and rejects an amount above the sender's available balance."
+      },
+      {
+        "contentDigest": "sha256:ecb6bd34ca410ff49ca388b90c5b2ae8ce0c4d6378feb999a76b45c359704c3a",
+        "id": "ev-service",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 32,
+            "start": 10
+          },
+          "path": "payments/services.py",
+          "symbol": "send_payment"
+        },
+        "summary": "send_payment is atomic: it refuses a self-payment, refuses an amount above available balance, creates the Payment row, then posts the ledger pair."
+      },
+      {
+        "contentDigest": "sha256:dfae1b15ecbe276f6b336e42c01b8ed30456e6644c54465fbd6c2905876a32c4",
+        "id": "ev-post",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 41,
+            "start": 26
+          },
+          "path": "ledger/services.py",
+          "symbol": "post"
+        },
+        "summary": "post writes two LedgerEntry rows as a balanced pair, negative on the debit account and positive on the credit account, both linked to the causing payment."
+      },
+      {
+        "contentDigest": "sha256:791a6c1a7dc9580d8a113c1c4d5b0652aa2a739c34fb5d580cef1293d9b3df9f",
+        "id": "ev-balance",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 19,
+            "start": 8
+          },
+          "path": "wallets/utils.py",
+          "symbol": "available_balance"
+        },
+        "summary": "available_balance sums only settled ledger entries, so money from an uncleared deposit cannot be spent."
+      },
+      {
+        "contentDigest": "sha256:8a736c70a17bf23b2d07ecb4d73dffeb20b6e66e11d1ea3b97290074ca007f01",
+        "id": "ev-signals",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 24,
+            "start": 9
+          },
+          "path": "payments/signals.py",
+          "symbol": "notify_recipient"
+        },
+        "summary": "Two post_save receivers on Payment fire only on creation: one writes a Notification for the recipient, the other writes the FeedItem with the sender as actor."
+      },
+      {
+        "contentDigest": "sha256:01af9b6584b781e1726a9aededc078ba686132dbbddeb344d48881e628f12964",
+        "id": "ev-accept",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 94,
+            "start": 73
+          },
+          "path": "payments/views.py",
+          "symbol": "accept_request"
+        },
+        "summary": "Paying a money request reaches the same send_payment service, as a PRIVATE payment, then marks the request accepted."
+      },
+      {
+        "contentDigest": "sha256:ae21ad765a228ade709a279bc8c78e140f5111ae2153080d4dc1cbae6317353c",
+        "id": "ev-test-idem",
+        "kind": "test",
+        "locator": {
+          "lineRange": {
+            "end": 99,
+            "start": 80
+          },
+          "path": "payments/test_journeys.py",
+          "symbol": "test_submitting_the_same_payment_twice_only_sends_it_once"
+        },
+        "summary": "Posting the pay form twice with the same idempotency key leaves exactly one Payment and debits the sender once."
+      },
+      {
+        "contentDigest": "sha256:9905bf8f380de19aa4660120e18b5aca4587d6c5300b80df0fe8c877f041d1c7",
+        "id": "ev-test-funds",
+        "kind": "test",
+        "locator": {
+          "lineRange": {
+            "end": 62,
+            "start": 49
+          },
+          "path": "payments/test_journeys.py",
+          "symbol": "test_money_that_has_not_cleared_cannot_be_spent"
+        },
+        "summary": "A payment funded by an uncleared deposit is rejected with 'more than your available balance' and creates no Payment."
+      }
+    ],
+    "generatedBy": "graphpilot-materializer",
+    "intent": "kitepay-send-a-payment",
+    "notation": "uml",
+    "originalType": "activity_diagram",
+    "requests": [
+      {
+        "at": "2026-08-04T20:32:26.171587+00:00",
+        "text": "What happens when one person sends another a payment."
+      }
+    ],
+    "source": "mcp",
+    "updatedAt": "2026-08-04T20:32:26.171587+00:00"
+  },
+  "name": "kitepay-send-a-payment",
+  "nodes": [
+    {
+      "data": {
+        "label": "Member posts the pay form",
+        "semanticType": "initialNode"
+      },
+      "height": 60.0,
+      "id": "start",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-view-pay"
+        ],
+        "rationale": "Established by cited evidence: ev-view-pay.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 752.25,
+        "y": 0.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 223.5
+    },
+    {
+      "data": {
+        "label": "Take the posted idempotency key, or mint a new one",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "a-key",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-view-pay",
+          "ev-idem-module"
+        ],
+        "rationale": "Established by cited evidence: ev-view-pay, ev-idem-module.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 704.0,
+        "y": 132.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "label": "Validate the form: resolve the @handle, parse the amount, check the balance",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "a-validate",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-form"
+        ],
+        "rationale": "Established by cited evidence: ev-form.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 704.0,
+        "y": 264.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "label": "Form valid?",
+        "semanticType": "decisionNode"
+      },
+      "height": 90.0,
+      "id": "d-valid",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-view-pay",
+          "ev-form"
+        ],
+        "rationale": "Established by cited evidence: ev-view-pay, ev-form.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 789.0,
+        "y": 396.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 150.0
+    },
+    {
+      "data": {
+        "label": "Key already used?",
+        "semanticType": "decisionNode"
+      },
+      "height": 90.0,
+      "id": "d-seen",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-view-pay",
+          "ev-idem-module"
+        ],
+        "rationale": "Established by cited evidence: ev-view-pay, ev-idem-module.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 309.25,
+        "y": 558.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 163.5
+    },
+    {
+      "data": {
+        "label": "Say it was already sent and redirect to the feed",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "a-replay",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-view-pay"
+        ],
+        "rationale": "Established by cited evidence: ev-view-pay.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 0.0,
+        "y": 730.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "label": "Replayed: no second payment",
+        "semanticType": "activityFinalNode"
+      },
+      "height": 60.0,
+      "id": "final-replay",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-test-idem"
+        ],
+        "rationale": "Established by cited evidence: ev-test-idem.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 40.75,
+        "y": 887.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 238.5
+    },
+    {
+      "data": {
+        "label": "Enter send_payment inside an atomic transaction",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "a-open-txn",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-service"
+        ],
+        "rationale": "Established by cited evidence: ev-service.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 384.0,
+        "y": 730.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "label": "Balance covers it?",
+        "semanticType": "decisionNode"
+      },
+      "height": 90.0,
+      "id": "d-funds",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-service",
+          "ev-balance"
+        ],
+        "rationale": "Established by cited evidence: ev-service, ev-balance.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 805.5,
+        "y": 872.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 171.0
+    },
+    {
+      "data": {
+        "label": "Create the Payment row with sender, recipient, amount, note and visibility",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "a-create-payment",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-service"
+        ],
+        "rationale": "Established by cited evidence: ev-service.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 384.0,
+        "y": 1034.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "label": "post_save: write a Notification for the recipient",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "a-notify",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-signals"
+        ],
+        "rationale": "Established by cited evidence: ev-signals.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 384.0,
+        "y": 1166.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "label": "post_save: write the FeedItem with the sender as actor",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "a-feeditem",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-signals"
+        ],
+        "rationale": "Established by cited evidence: ev-signals.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 384.0,
+        "y": 1298.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "label": "Post the balanced pair: debit the sender's account, credit the recipient's",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "a-post-ledger",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-service",
+          "ev-post"
+        ],
+        "rationale": "Established by cited evidence: ev-service, ev-post.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 384.0,
+        "y": 1430.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "label": "Commit the transaction",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "a-commit",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-service"
+        ],
+        "rationale": "Established by cited evidence: ev-service.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 443.5,
+        "y": 1562.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 201.0
+    },
+    {
+      "data": {
+        "label": "Remember the idempotency key against the new payment id",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "a-remember",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-view-pay",
+          "ev-idem-module"
+        ],
+        "rationale": "Established by cited evidence: ev-view-pay, ev-idem-module.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 384.0,
+        "y": 1694.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "label": "Confirm to the sender and redirect to the feed",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "a-redirect",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-view-pay"
+        ],
+        "rationale": "Established by cited evidence: ev-view-pay.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 384.0,
+        "y": 1826.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "label": "Money moved",
+        "semanticType": "activityFinalNode"
+      },
+      "height": 60.0,
+      "id": "final-sent",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-service"
+        ],
+        "rationale": "Established by cited evidence: ev-service.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 484.75,
+        "y": 1958.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 118.5
+    },
+    {
+      "data": {
+        "label": "Roll the transaction back: no Payment and no ledger entries survive",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "a-rollback",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-service"
+        ],
+        "rationale": "Established by cited evidence: ev-service.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 768.0,
+        "y": 1034.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "label": "Nothing was written",
+        "semanticType": "mergeNode"
+      },
+      "height": 50.0,
+      "id": "m-refused",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-view-pay"
+        ],
+        "rationale": "Established by cited evidence: ev-view-pay.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 966.75,
+        "y": 1171.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 178.5
+    },
+    {
+      "data": {
+        "label": "Re-render the pay page with the error on the form",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "a-show-error",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-view-pay"
+        ],
+        "rationale": "Established by cited evidence: ev-view-pay.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 896.0,
+        "y": 1298.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "label": "No money moved",
+        "semanticType": "activityFinalNode"
+      },
+      "height": 60.0,
+      "id": "final-refused",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-test-funds"
+        ],
+        "rationale": "Established by cited evidence: ev-test-funds.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 985.5,
+        "y": 1430.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 141.0
+    },
+    {
+      "data": {
+        "label": "Both receivers run inside Payment.objects.create(), so the notification and feed item precede the ledger pair.",
+        "semanticType": "note"
+      },
+      "height": 80.0,
+      "id": "note-signal-order",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-signals",
+          "ev-service"
+        ],
+        "rationale": "Established by cited evidence: ev-signals, ev-service.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 16.0,
+        "y": 1034.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "label": "PayForm rejects paying yourself and an over-balance amount; send_payment checks both again for any caller.",
+        "semanticType": "note"
+      },
+      "height": 80.0,
+      "id": "note-double-check",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-form",
+          "ev-service"
+        ],
+        "rationale": "Established by cited evidence: ev-form, ev-service.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 437.5,
+        "y": 872.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "label": "Accepting a money request enters the same service, as a PRIVATE payment, without an idempotency key.",
+        "semanticType": "note"
+      },
+      "height": 80.0,
+      "id": "note-other-entry",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-accept"
+        ],
+        "rationale": "Established by cited evidence: ev-accept.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 752.0,
+        "y": 730.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    }
+  ],
+  "schemaVersion": "graphpilot.diagram.v1",
+  "viewport": {
+    "x": 0,
+    "y": 0,
+    "zoom": 1
+  }
+}

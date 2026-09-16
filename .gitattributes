@@ -1,0 +1,15 @@
+# Normalize line endings: store text as LF in the repo and check it out as LF
+# on every platform. This avoids CRLF/LF churn from mixed contributor settings.
+* text=auto eol=lf
+
+# Treat known binary assets as binary (never apply EOL conversion).
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.pdf binary
+*.docx binary
+*.woff binary
+*.woff2 binary

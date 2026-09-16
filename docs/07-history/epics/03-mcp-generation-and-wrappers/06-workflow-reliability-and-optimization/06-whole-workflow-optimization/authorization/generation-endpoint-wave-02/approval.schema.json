@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "graphpilot.delivery.generation-endpoint-wave-approval.v1",
+  "title": "GraphPilot Block 6 Generation Endpoint Wave Approval v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "kind", "approvalId", "packageId", "anchorDigest", "decision", "reviewer", "reviewedAt", "sections", "attestations", "overallNotes", "digest"],
+  "properties": {
+    "schemaVersion": {"const": "graphpilot.delivery.generation-endpoint-wave-approval.v1"},
+    "kind": {"const": "generationEndpointWaveApproval"},
+    "approvalId": {"const": "approval-live-anchor-b6-generation-20260729-02"},
+    "packageId": {"const": "package-live-anchor-b6-generation-cold-room-20260729-02"},
+    "anchorDigest": {"const": "sha256:7e482e579499d61b8ad85070dcea86b64856f756ea5eaa33987408c2095a2987"},
+    "decision": {"const": "approve"},
+    "reviewer": {"type": "object", "additionalProperties": false, "required": ["kind", "id", "attestation"], "properties": {"kind": {"const": "product_owner"}, "id": {"const": "product-owner-user"}, "attestation": {"const": "I am the human product owner making this decision; no agent made it for me."}}},
+    "reviewedAt": {"type": "string", "format": "date-time", "pattern": "Z$", "maxLength": 32},
+    "sections": {"type": "object", "additionalProperties": false, "required": ["identity", "readiness", "requiredMeaning", "forbiddenMeaning", "delivery", "liveSchedule", "scope"], "properties": {"identity": {"$ref": "#/$defs/section"}, "readiness": {"$ref": "#/$defs/section"}, "requiredMeaning": {"$ref": "#/$defs/section"}, "forbiddenMeaning": {"$ref": "#/$defs/section"}, "delivery": {"$ref": "#/$defs/section"}, "liveSchedule": {"$ref": "#/$defs/section"}, "scope": {"$ref": "#/$defs/section"}}},
+    "attestations": {"type": "object", "additionalProperties": false, "required": ["humanReview", "agentReviewExcluded", "notCalibrationOrCertification", "checklistExcludedFromProvider", "singleCandidateOnly", "aggregateBudgetAccepted", "s06CommitBound", "b0PathGateBound"], "properties": {"humanReview": {"const": true}, "agentReviewExcluded": {"const": true}, "notCalibrationOrCertification": {"const": true}, "checklistExcludedFromProvider": {"const": true}, "singleCandidateOnly": {"const": true}, "aggregateBudgetAccepted": {"const": true}, "s06CommitBound": {"const": true}, "b0PathGateBound": {"const": true}}},
+    "overallNotes": {"type": "string", "maxLength": 4000},
+    "digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+  },
+  "$defs": {"section": {"type": "object", "additionalProperties": false, "required": ["decision", "notes"], "properties": {"decision": {"const": "approve"}, "notes": {"type": "string", "maxLength": 2000}}}}
+}

@@ -1,0 +1,220 @@
+{
+  "schemaVersion": "graphpilot.delivery.semantic-review-retry-root-decision.v1",
+  "kind": "semanticReviewRetryRootDecision",
+  "decisionId": "decision-semantic-review-retry-block6-s09-20260731-01",
+  "sourceCommit": "c3409b86a61c62f61ac4a59627da6b3a70db0bd9",
+  "recommendation": "focused_current_v1_implementation_correction",
+  "owner": "semantic_review_prompt_projection_schema_validator_contract",
+  "rootClass": "provider_visible_finding_contract_incomplete_current_v1",
+  "confidence": "high_owner_bounded_original_variant",
+  "evidence": {
+    "providerFreeProof": "provider-free-proof.json",
+    "providerFreeProofDigest": "sha256:af89f1f24b25457f4b5e031b431e12ead552f8108512eb0e2af127d7833033ab",
+    "historicalS01Proof": "../semantic-review-diagnosis/provider-free-proof.json",
+    "historicalS01Root": "../semantic-review-diagnosis/root-decision.json",
+    "safeBaselineRunId": "run-live-workflow-anchor-block5-cold-room-20260728-03",
+    "safeFailure": {
+      "code": "finding_invalid",
+      "path": "$"
+    },
+    "historicalResponseRepairWallMs": 37787.58720000042,
+    "g2RunId": "run-live-workflow-anchor-g",
+    "g2SemanticReviewFirstResponseValid": true,
+    "g2SemanticReviewResponseRepairCalls": 0,
+    "currentRepairCallSavingBaseline": false,
+    "providerCalls": 0
+  },
+  "threshold": {
+    "historicalSafeSignatureBound": true,
+    "currentProviderProjectionWitnesses": 3,
+    "currentSixModeTypeCellsReproduced": 6,
+    "completeResponseSchemasAcceptWitnesses": true,
+    "currentBackendRuntimeReproducesSignature": true,
+    "responseRepairPacketBound": true,
+    "smallestCorrectedWitnessValidWithoutRepair": true,
+    "currentPromptInputSchemaValidatorTraceComplete": true,
+    "singleContractOwner": true,
+    "g2UnchangedSemanticControlBound": true,
+    "rawHistoricalResponseVariantKnown": false
+  },
+  "rootEvidence": [
+    "Current direct/context V1 initial prompts say allowlisted findings but do not expose the per-facet code map or state containing-facet equality and applicable-below-minimum ownership.",
+    "Current V1 response-repair prompts preserve the attempted assessment but do not state those same three finding rules.",
+    "Current V1 review inputs carry facet IDs, minimumRating, applicability, and reference allowlists but no findingCodesByFacet projection from FACET_FINDING_CODES.",
+    "Current complete response schemas and Azure projections expose one global 15-code enum, not the input-dependent facet/code map; the provider projection also removes response conditionals.",
+    "Current backend assembly independently enforces containing-facet equality, FACET_FINDING_CODES membership, and below-minimum ownership.",
+    "Three bounded current provider-projection/full-schema-valid shapes reproduce finding_invalid @ $, and the facet/code shape reproduces in all six direct/context by diagram-type cells.",
+    "The captured fake response-repair packet carries the rejected response digest, identical semantic review input, finding_invalid @ $, repair attempt 1, and current V1 prompt/schema identities.",
+    "A goalFidelity rating-1 goal_mismatch witness passes provider/full schema and backend assembly as blocked with one fake call and no response repair.",
+    "Retained g2 used unchanged semantic V1 and produced one valid first response, which proves current code can accept a conforming sample but does not eliminate provider-visible invalid shapes."
+  ],
+  "g2Interpretation": {
+    "observation": "g2 completed readiness, generation, and semantic_review only; semantic review was first-response valid with zero semantic response-repair and zero semantic candidate-repair calls under unchanged semantic V1.",
+    "doesNotDisproveContractGap": true,
+    "reason": "The mismatch proof is existential, not a claim that every response fails. A single conforming provider draw cannot disprove that the current provider-visible contract permits other shapes that backend policy rejects.",
+    "performanceConsequence": "There is no current semantic response-repair call in g2 to remove, so 37,787.5872 ms remains historical motivation only and cannot be credited as the retry's incremental baseline saving.",
+    "retentionConsequence": "Contract correctness can justify S10 implementation, but speed retention still requires one authorized S11 candidate to show incremental benefit over g2 beyond noise/risk/complexity while all guards pass. Otherwise S12 reverts S10."
+  },
+  "s10": {
+    "implementable": true,
+    "contractVersionPolicy": "Update the current private V1 semantic-review input and four V1 prompt assets in place. Keep every current V1 schema/prompt identity, add no V2 asset or identity, add no compatibility branch, and do not modify generation trace/public/result authority for an unpromoted version layer.",
+    "primaryCorrection": [
+      "Derive findingCodesByFacet in composed rubric order from the existing FACET_FINDING_CODES registry and include it in both direct and context review-input allowlists.",
+      "Require findingCodesByFacet in both current V1 review-input schemas, define its bounded facet/code shape from existing V1 enums, and update the four current input/repair schema examples so all examples remain valid.",
+      "Update all four current V1 initial/response-repair prompt files in place: a finding facet equals its containing rubric facet id, its code comes from that facet's projected allowlist, and findings exist only for applicable ratings below minimumRating; otherwise findings is empty.",
+      "Preserve the current global response schemas, backend finding validation, score/status/severity authority, exact response-repair fallback, semantic candidate repair, and current V1 identities.",
+      "Do not change the generic strict-schema projector: input-dependent facet/code rules remain explicit provider input plus prompt guidance and fail-closed backend validation."
+    ],
+    "affectedFiles": {
+      "production": [
+        "backend/services/generation/semantic_review_service.py"
+      ],
+      "promptsInPlace": [
+        "backend/graphpilot/prompts/direct-semantic-review-v1.md",
+        "backend/graphpilot/prompts/context-semantic-review-v1.md",
+        "backend/graphpilot/prompts/direct-semantic-review-response-repair-v1.md",
+        "backend/graphpilot/prompts/context-semantic-review-response-repair-v1.md"
+      ],
+      "schemasInPlace": [
+        "backend/graphpilot/schemas/direct-semantic-review-input.json",
+        "backend/graphpilot/schemas/context-semantic-review-input.json",
+        "backend/graphpilot/schemas/direct-semantic-review-repair-input.json",
+        "backend/graphpilot/schemas/context-semantic-review-repair-input.json"
+      ],
+      "tests": [
+        "backend/tests/generation/test_semantic_review_service.py",
+        "backend/tests/llm/test_prompt_service.py",
+        "backend/tests/generation/test_generation_foundation.py"
+      ],
+      "runtimeDocs": [
+        "backend/README.md",
+        "backend/services/README.md"
+      ],
+      "canonicalDesign": [
+        "docs/01-architecture/01-backend-architecture.md",
+        "docs/02-design-and-features/04-generation-design.md",
+        "docs/02-design-and-features/08-context-backed-generation/05-generation-and-provenance.md"
+      ],
+      "sliceOutcome": "10-semantic-review-retry-correction.md"
+    },
+    "explicitlyUnchangedFiles": [
+      "backend/services/contracts/generation_contracts.py",
+      "backend/services/generation/semantic_review_rubric.py",
+      "backend/services/llm/llm_client.py",
+      "backend/graphpilot/schemas/direct-semantic-review-response.json",
+      "backend/graphpilot/schemas/context-semantic-review-response.json",
+      "backend/graphpilot/schemas/direct-semantic-review-result.json",
+      "backend/graphpilot/schemas/context-semantic-review-result.json",
+      "backend/graphpilot/schemas/generation-trace.json",
+      "backend/services/generation/diagram_generation_service.py"
+    ],
+    "forbiddenVersionArtifacts": [
+      "backend/graphpilot/prompts/direct-semantic-review-v2.md",
+      "backend/graphpilot/prompts/context-semantic-review-v2.md",
+      "backend/graphpilot/prompts/direct-semantic-review-response-repair-v2.md",
+      "backend/graphpilot/prompts/context-semantic-review-response-repair-v2.md",
+      "any graphpilot.*.semantic-review*-prompt.v2 identity",
+      "any V1/V2 compatibility branch"
+    ],
+    "failingBeforeRegressions": [
+      "test_review_input_exposes_finding_codes_for_every_rubric_facet",
+      "test_current_v1_review_input_schema_requires_finding_codes_by_facet_in_both_modes",
+      "test_facet_code_contract_is_consistent_for_all_six_cells",
+      "test_review_prompt_exposes_finding_conditional_contract",
+      "test_review_prompt_requires_below_minimum_rating_for_findings",
+      "test_review_repair_prompt_exposes_finding_conditional_contract",
+      "test_review_repair_prompt_requires_below_minimum_rating_for_findings",
+      "test_invalid_private_response_repair_reuses_current_v1_finding_contract"
+    ],
+    "characterizationAndPreservingRegressions": [
+      "test_three_finding_contract_witnesses_trigger_exact_response_repair",
+      "test_corrected_finding_contract_witness_is_first_response_valid",
+      "test_current_v1_semantic_review_contract_has_no_v2_assets_or_identities",
+      "test_clean_review_for_all_six_cells",
+      "test_finding_facet_and_context_resolution_refs_are_fail_closed",
+      "test_wrong_order_and_unallowlisted_refs_fail_response_contract",
+      "test_semantic_candidate_repair_reruns_deterministic_checks_and_review"
+    ],
+    "focusedProof": [
+      "Record exact failures for the eight failing-before regressions against c3409b8 before implementation.",
+      "After correction, pass the three finding-invalid characterizations, six-cell projection map, corrected witness, response-repair binding, current-V1/no-V2 identity guard, and all existing semantic-review tests provider-free.",
+      "Pass schema registry/meta/projection, prompt, generation, direct/context, diagnostics/trace, live-harness fake, readiness, frozen-history, full backend/frontend, diff, and secret-scope gates.",
+      "Run an implementation audit with no unresolved critical, high, or medium finding before any S11 package exists."
+    ],
+    "nonGoals": [
+      "Do not infer or reconstruct the raw Block 5 response.",
+      "Do not weaken FACET_FINDING_CODES, containing-facet, below-minimum, reference/action, score/status/severity, or response-repair policy.",
+      "Do not change generation, readiness, B0, Lane A, host, MCP, packet/cache, local/browser behavior, provenance, persistence, layout, provider configuration, or public result contracts.",
+      "Do not add V2 assets/identities or historical compatibility branches.",
+      "Do not claim current repair-call savings or live performance benefit from provider-free contract proof."
+    ],
+    "liveProof": "S09 authorizes no provider call. After separately audited/committed S10, S11 still needs a new short B0-safe authorization/package and one immutable candidate. Generation and semantic review must both be first-response valid with no repair roles; all meaning/provenance/quality/persistence/diagnostics/browser/compatibility/recovery gates must pass. Incremental retention compares to g2, whose semantic-review repair count is already zero.",
+    "rollback": "Revert only the S10 current-V1 prompt/input-schema/service/test/runtime-doc/design correction commit; retain S09 and all immutable Block 5/g2/S11 evidence."
+  },
+  "alternatives": [
+    {
+      "kind": "facet_specific_response_schema_branches",
+      "status": "strongest_alternative_deferred",
+      "reason": "It duplicates the facet catalog across two response schemas and still cannot bind dynamic input reference allowlists or every backend condition under the provider subset; projecting the existing map into private input is narrower."
+    },
+    {
+      "kind": "new_v2_prompt_or_input_layer",
+      "status": "forbidden_for_retry",
+      "reason": "The prior V2 was unpromoted and reverted. Current authority explicitly requires the private current V1 correction in place with no compatibility branch."
+    },
+    {
+      "kind": "retain_current_contract_because_g2_passed",
+      "status": "rejected_for_contract_correctness",
+      "reason": "g2 is one conforming response. Current executable witnesses still prove provider-visible accepted shapes that backend policy rejects."
+    },
+    {
+      "kind": "weaken_or_suppress_backend_validation_or_response_repair",
+      "status": "forbidden",
+      "reason": "It would admit misclassified/unsupported findings or hide a contract failure instead of making the provider-visible contract coherent."
+    },
+    {
+      "kind": "additional_provider_evidence_before_s10",
+      "status": "not_required_for_owner_selection",
+      "reason": "Another draw cannot recover the absent Block 5 response and g2 already demonstrates stochastic validity. Current provider-free witnesses, repair binding, and corrected control identify the owner."
+    }
+  ],
+  "audit": {
+    "state": "pass_historical_and_current_independent",
+    "historicalIndependentReviewer": "independent-read-only-subagent-737c03f1",
+    "historicalRemainingCritical": 0,
+    "historicalRemainingHigh": 0,
+    "historicalRemainingMedium": 0,
+    "currentMechanicalAudit": "audit.md",
+    "currentIndependentReviewer": "independent-read-only-subagent-55cb6249",
+    "currentRootChangedFromHistorical": "version policy changed to explicit current-V1 in-place/no-V2; owner, finding rules, validator authority, and no-weakening boundary are unchanged",
+    "remainingCritical": 0,
+    "remainingHigh": 0,
+    "remainingMedium": 0
+  },
+  "accounting": {
+    "controlled": {
+      "used": 13,
+      "ceiling": 1000,
+      "remaining": 987
+    },
+    "externalHostCompleted": 1,
+    "aggregate": {
+      "used": 14,
+      "ceiling": 1000,
+      "remaining": 986
+    }
+  },
+  "scope": {
+    "productionChanged": false,
+    "testSourceChanged": false,
+    "promptChanged": false,
+    "schemaChanged": false,
+    "sharedDocsChanged": false,
+    "providerCalls": 0,
+    "calibration": false,
+    "certification": false,
+    "promotion": false,
+    "deployment": false
+  },
+  "digest": "sha256:5d1c483a8323062b941dbf063bdf9176b9c3f0eb4d8cd685446f96aed8a4b93d"
+}

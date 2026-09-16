@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "graphpilot.delivery.live-anchor-review.v1",
+  "kind": "liveAnchorReviewPackage",
+  "packageId": "package-live-anchor-cold-room-climate-controller-20260728-01",
+  "anchorId": "anchor-cold-room-climate-controller-20260728-01",
+  "visibility": "visible",
+  "purpose": "Block 5 human review of one leakage-disjoint genuinely ready request and exact bounded live schedule.",
+  "createdFromCommit": "752ff6a13f384f27f3285fe988f0d113a583489a",
+  "source": {
+    "root": "backend/graphpilot/evaluation/live-anchor/cold-room-climate-controller/",
+    "fingerprint": {
+      "digest": "sha256:3dafce9ab4e99d6c4367b592ea424ffd46a584d454395e753fbff3e1586db7b7",
+      "fileCount": 1,
+      "algorithm": "ContextPersistenceService.fingerprint_source over workspace-relative path and file content"
+    },
+    "documents": [
+      {"role": "repositorySpecification", "path": "backend/graphpilot/evaluation/live-anchor/cold-room-climate-controller/cold-room-climate-controller.md", "rawDigest": "sha256:0384478ef560fa10c5bd6f321854f1348f2666a4458cf2f35aa3d1f287f1b804"},
+      {"role": "evidenceManifest", "path": "backend/graphpilot/evaluation/live-anchor/cold-room-climate-controller/evidence.gp-evidence.json", "rawDigest": "sha256:f5ed4dd3a858067f6fd81e6ea867fc79b57159875a4207c5653c741d240e6b5a", "canonicalDigest": "sha256:d98a9463078c120cf68b1dadbc244d86c46a2608da415e98d3a8d27369dca998"},
+      {"role": "diagramRequest", "path": "backend/graphpilot/evaluation/live-anchor/cold-room-climate-controller/request.gp-request.json", "rawDigest": "sha256:8d74d11be5cddadf2e1a2dd01bec6eceb202a4faa7ce4bd4256ee479d9b8b4ac", "canonicalDigest": "sha256:4d757a0fe63c61d527dfc9b7a4443cb28300306028050c9a65c1005ba41fc7bb"}
+    ]
+  },
+  "request": {
+    "requestId": "request-cold-room-climate-controller",
+    "diagramName": "cold-room-climate-controller",
+    "diagramType": "bdd_diagram",
+    "original": "Create a block definition diagram of the documented Cold Room Climate Controller, its owned Temperature Probes and Cooling Relays, the sampling interval, and the probe-relay association.",
+    "goal": "Show the documented controller, probe, and relay definitions; exact owned-part multiplicities and roles; the typed sampling interval with default value; and the probe-relay association ends.",
+    "audience": "Cold-room controls engineers",
+    "assumptionCount": 0,
+    "uncertaintyCount": 0,
+    "selectedClaimCount": 7
+  },
+  "readinessExpectation": {
+    "allowedStatus": "ready",
+    "blockerCodes": [],
+    "warningCodes": [],
+    "reason": "All requested definitions, relationships, multiplicities, property type/value, scope exclusions, and provenance authorities are explicit with no assumption or unresolved uncertainty."
+  },
+  "requiredMeaning": [
+    {"id": "required-controller", "evidenceRefs": ["evidence-cold-room-definitions"], "claimRefs": ["claim-cold-room-controller-definition@1"], "expectedFamily": "block", "requirement": "One Cold Room Climate Controller Block is present as the structural whole."},
+    {"id": "required-probe", "evidenceRefs": ["evidence-cold-room-definitions"], "claimRefs": ["claim-cold-room-probe-definition@1"], "expectedFamily": "block", "requirement": "One Temperature Probe Block is present."},
+    {"id": "required-relay", "evidenceRefs": ["evidence-cold-room-definitions"], "claimRefs": ["claim-cold-room-relay-definition@1"], "expectedFamily": "block", "requirement": "One Cooling Relay Block is present."},
+    {"id": "required-probe-composition", "evidenceRefs": ["evidence-cold-room-composition"], "claimRefs": ["claim-cold-room-owns-probes@1"], "expectedFamily": "composition", "requirement": "Temperature Probe is the part/source and controller the whole/target; role probes; multiplicity 2..8."},
+    {"id": "required-relay-composition", "evidenceRefs": ["evidence-cold-room-composition"], "claimRefs": ["claim-cold-room-owns-relays@1"], "expectedFamily": "composition", "requirement": "Cooling Relay is the part/source and controller the whole/target; role coolingRelays; multiplicity 1..4."},
+    {"id": "required-sample-property", "evidenceRefs": ["evidence-cold-room-sample-interval"], "claimRefs": ["claim-cold-room-sample-interval@1"], "expectedFamily": "block.valueFeature", "requirement": "Controller exposes sampleIntervalSeconds as Integer, multiplicity 1, default value 30."},
+    {"id": "required-probe-relay-association", "evidenceRefs": ["evidence-cold-room-probe-relay"], "claimRefs": ["claim-cold-room-probe-relay-link@1"], "expectedFamily": "association", "requirement": "Probe-relay association preserves relay end 1 and probe end 1..* with existing Block endpoints."},
+    {"id": "required-provenance", "evidenceRefs": ["evidence-cold-room-definitions", "evidence-cold-room-composition", "evidence-cold-room-sample-interval", "evidence-cold-room-probe-relay"], "claimRefs": ["claim-cold-room-controller-definition@1", "claim-cold-room-probe-definition@1", "claim-cold-room-relay-definition@1", "claim-cold-room-owns-probes@1", "claim-cold-room-owns-relays@1", "claim-cold-room-sample-interval@1", "claim-cold-room-probe-relay-link@1"], "expectedFamily": "origin", "requirement": "Every generated node, feature, and relationship has smallest-sufficient exact claim provenance."}
+  ],
+  "forbiddenMeaning": [
+    {"id": "forbidden-cloud-network", "evidenceRefs": ["evidence-cold-room-exclusions"], "forbidden": "No cloud service, network protocol, remote API, or message broker."},
+    {"id": "forbidden-heating-alarm", "evidenceRefs": ["evidence-cold-room-exclusions"], "forbidden": "No heating equipment or alarm workflow."},
+    {"id": "forbidden-deployment-runtime", "evidenceRefs": ["evidence-cold-room-exclusions"], "forbidden": "No deployment node, runtime sequence, state machine, or invented control behavior."},
+    {"id": "forbidden-extra-structure", "evidenceRefs": ["evidence-cold-room-exclusions"], "forbidden": "No unsupported Block, part, property, association, multiplicity, or stereotype."}
+  ],
+  "deliveryChecks": [
+    {"id": "delivery-schema", "requirement": "Canonical diagram and MCP result validate under current strict schemas."},
+    {"id": "delivery-quality", "requirement": "Reviewed semantic quality and mandatory final review pass without hidden fallback."},
+    {"id": "delivery-persistence", "requirement": "Exact request owns atomically persisted canonical JSON and SVG or typed non-fatal render warning."},
+    {"id": "delivery-editor", "requirement": "Backend-built editor link loads the exact diagram visibly with no material console/network error."},
+    {"id": "delivery-evidence", "requirement": "Complete host/provider/MCP/local/browser evidence is safe, bounded, terminal, and no-rerun."}
+  ],
+  "leakage": {
+    "providerReceivesChecklist": false,
+    "providerReceivesApproval": false,
+    "registeredTrainingFixture": false,
+    "trainingBlueprintInventoryDigest": "sha256:9ee549904a1f85912e144dfdf22ef0de9d31357c4e5011b2b667551371d2e809",
+    "identityOverlapCount": 0,
+    "rawDigestOverlapCount": 0,
+    "s15IdentityReuse": false,
+    "hiddenGoldReuse": false
+  },
+  "liveSchedule": {
+    "reasoningEffort": "medium",
+    "cumulativeCeiling": 1000,
+    "usedBefore": 5,
+    "anchorMaximum": 9,
+    "worstCaseUsedAfter": 14,
+    "roleCeilings": {
+      "readiness": 1,
+      "readiness_response_repair": 1,
+      "generation": 1,
+      "generation_repair": 1,
+      "semantic_review": 2,
+      "semantic_review_response_repair": 2,
+      "semantic_repair": 1
+    },
+    "policy": "Calls occur only when naturally reached; no call 10, unchanged reroll, favorable retry, parallel provider schedule, or terminal identity rerun."
+  },
+  "scope": {
+    "anchorApprovalOnly": true,
+    "calibration": false,
+    "certification": false,
+    "promotion": false,
+    "representativeClaim": false,
+    "deployment": false
+  },
+  "humanReview": {
+    "requiredReviewerKind": "product_owner",
+    "requiredReviewers": 1,
+    "agentReviewCounts": false,
+    "requiredSections": ["identity", "readiness", "requiredMeaning", "forbiddenMeaning", "delivery", "liveSchedule", "scope"],
+    "approvalRequiredBeforeLiveManifest": true
+  },
+  "digest": "sha256:12a4528c6d717bba44d7408a78bb7f1723d0c53a55261984a252eba6f553b51b"
+}

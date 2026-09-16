@@ -1,0 +1,120 @@
+{
+  "schemaVersion": "graphpilot.delivery.semantic-review-retry-live-result.v1",
+  "kind": "semanticReviewRetryLiveResult",
+  "status": "failed",
+  "retentionGate": "fail_revert_s10",
+  "sourceCommit": "d80aa16ff5cfb1da02e98ab1c4be46e09cdffb9d",
+  "correctionCommit": "b5ef42258cb9459db5d508e7e665a31712196b7e",
+  "candidate": {
+    "packageId": "s1",
+    "runId": "run-live-workflow-anchor-s",
+    "observationId": "observation-live-workflow-anchor-s",
+    "diagnosticsRunId": "run-s",
+    "manifestDigest": "sha256:0eefb46bd94553b3b4902ce68bf51ab7f3352670b739bce9d982ea32c4086a05",
+    "compatibilityKey": "sha256:498056fb3dc39d7a969143fc30dad26c97eb11ac8e0f52a38b81c43b64b13613",
+    "resultDigest": "sha256:4637d5c86764e5c14acc754f0dc6927d46d965a8138de696168e488c6002f46c",
+    "observationDigest": "sha256:6cae88a7b30b9dbe00dcc0448e634c1c1aad0883992dd3c8046f6ee96a9c9592",
+    "terminalDigest": "sha256:51e513ef9627a04129d4aded474d5e4ea1425a1e9d7d646b7a801a8c707dada7",
+    "eventLedgerDigest": "sha256:91076eaa150cc962f75c64f1ff2b73c7f1f7e7a45c3c2b89f8c4707ee6d4a2e",
+    "errorCode": "semantic_repair_failed",
+    "retryable": false,
+    "browserEvidence": null,
+    "synthesis": null
+  },
+  "provider": {
+    "completed": 5,
+    "failed": 0,
+    "uncertain": 0,
+    "roles": ["readiness", "generation", "semantic_review", "semantic_repair", "semantic_review"],
+    "readinessFirstResponseValid": true,
+    "generationFirstResponseValid": true,
+    "generationRepairCalls": 0,
+    "semanticReviewContractValidResponses": 2,
+    "semanticReviewResponseRepairCalls": 0,
+    "semanticRepairCalls": 1,
+    "inputTokens": 35635,
+    "outputTokens": 25755,
+    "reasoningTokens": 14833,
+    "cachedInputTokens": 2560,
+    "requestBytes": 176715,
+    "responseBytes": 46073
+  },
+  "callDurationsMs": {
+    "readiness": 30812.400600058027,
+    "generation": 36813.07859998196,
+    "semanticReviewInitial": 70810.30719995033,
+    "semanticRepair": 37427.01950005721,
+    "semanticReviewFinal": 78945.72969991714
+  },
+  "quality": {
+    "readiness": "ready",
+    "readinessScore": 91,
+    "initialSemanticReviewContract": "pass",
+    "semanticCandidateRepair": "reached",
+    "finalSemanticReview": "fail",
+    "canonical": "not_reached",
+    "provenance": "not_reached",
+    "persistence": "not_reached",
+    "svg": "not_reached",
+    "trace": "not_reached",
+    "browser": "not_reached"
+  },
+  "diagnostics": {
+    "captureComplete": true,
+    "captureFailureCodes": [],
+    "files": 23,
+    "bytes": 22807,
+    "independentInventoryDigest": "sha256:36db1b05be3e97f0583d701f35f51b862005f6003b98261401256f2555a4c6c1",
+    "safeResultBindsDiagnostics": false
+  },
+  "accounting": {
+    "totalPreBrowserMs": 267553.0795000959,
+    "hostMs": 861.4896000362933,
+    "azureMs": 254808.53559996467,
+    "mcpMs": 2229.9397999886423,
+    "localMs": 9044.394400087185,
+    "browserMs": null,
+    "residualMs": 608.7201000191271,
+    "controlledUsedAfter": 18,
+    "aggregateUsedAfter": 19,
+    "ceiling": 1000
+  },
+  "g2Comparison": {
+    "baselineRunId": "run-live-workflow-anchor-g",
+    "baselineCompleteMs": 140007.6106999563,
+    "baselinePreBrowserMs": 139960.6106999563,
+    "candidateMinusBaselinePreBrowserMs": 127592.46880013961,
+    "candidatePreBrowserMinusBaselineCompleteMs": 127545.46880013961,
+    "callDelta": 2,
+    "requestByteDelta": 56816,
+    "responseByteDelta": 20895,
+    "inputTokenDelta": 11602,
+    "outputTokenDelta": 12229,
+    "reasoningTokenDelta": 7329,
+    "cachedInputTokenDelta": 2560
+  },
+  "causalBoundary": {
+    "allowed": "S10 made the current V1 provider-visible finding contract coherent; this candidate traversed both semantic-review responses without response-contract repair.",
+    "notAllowed": [
+      "Do not claim S10 caused the semantic candidate defects or semantic_repair_failed result.",
+      "Do not credit the historical Block 5 response-repair duration because g2 already used zero response repair.",
+      "Do not attribute single-draw wall, token, byte, cache, or provider-quality variation causally to S10."
+    ]
+  },
+  "audit": {
+    "state": "evidence_pass_retention_fail",
+    "reviewer": "independent-local-filesystem-agent-bd3c5860",
+    "remainingCritical": 0,
+    "remainingHigh": 0,
+    "remainingMedium": 0
+  },
+  "decision": {
+    "retainCorrection": false,
+    "revertCorrection": true,
+    "retryAllowed": false,
+    "candidateIdentityReusable": false,
+    "preserveEvidence": true,
+    "preserveGenerationCommit": "a17bc4095cf79a30089aff39b10aa9fe73426b8d"
+  },
+  "digest": "sha256:ed441b6895f12b09ac5c201b194064b4e72a16299d25bf1208c58e677127e84e"
+}

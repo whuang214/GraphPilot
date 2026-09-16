@@ -1,0 +1,1151 @@
+{
+  "diagramType": "activity_diagram",
+  "edges": [
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f-start",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-desk-entry"
+        ],
+        "rationale": "Established by cited evidence: ev-desk-entry.",
+        "schemaRules": []
+      },
+      "source": "start",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "is-librarian",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "a librarian",
+        "semanticType": "controlFlow"
+      },
+      "id": "f-librarian-yes",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-librarian-gate",
+          "ev-desk-entry"
+        ],
+        "rationale": "Established by cited evidence: ev-librarian-gate, ev-desk-entry.",
+        "schemaRules": []
+      },
+      "source": "is-librarian",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "resolve-inputs",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "not a librarian",
+        "semanticType": "controlFlow"
+      },
+      "id": "f-librarian-no",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-librarian-gate",
+          "ev-not-librarian-test"
+        ],
+        "rationale": "Established by cited evidence: ev-librarian-gate, ev-not-librarian-test.",
+        "schemaRules": []
+      },
+      "source": "is-librarian",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "turned-away",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f-to-validation",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-form-clean"
+        ],
+        "rationale": "Established by cited evidence: ev-form-clean.",
+        "schemaRules": []
+      },
+      "source": "resolve-inputs",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "form-valid",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "member and copy both found, nothing overdue",
+        "semanticType": "controlFlow"
+      },
+      "id": "f-form-ok",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-desk-entry",
+          "ev-checkout-service"
+        ],
+        "rationale": "Established by cited evidence: ev-desk-entry, ev-checkout-service.",
+        "schemaRules": []
+      },
+      "source": "form-valid",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "may-borrow",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "unknown member or barcode, or overdue account",
+        "semanticType": "controlFlow"
+      },
+      "id": "f-form-bad",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-form-clean",
+          "ev-unknown-barcode-test",
+          "ev-overdue-refused-test"
+        ],
+        "rationale": "Established by cited evidence: ev-form-clean, ev-unknown-barcode-test, ev-overdue-refused-test.",
+        "schemaRules": []
+      },
+      "source": "form-valid",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "refused",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "not locked, under ten items",
+        "semanticType": "controlFlow"
+      },
+      "id": "f-borrow-ok",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-can-borrow",
+          "ev-checkout-service"
+        ],
+        "rationale": "Established by cited evidence: ev-can-borrow, ev-checkout-service.",
+        "schemaRules": []
+      },
+      "source": "may-borrow",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "copy-on-shelf",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "locked, or ten items already out",
+        "semanticType": "controlFlow"
+      },
+      "id": "f-borrow-no",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-can-borrow",
+          "ev-account-locked",
+          "ev-checkout-service"
+        ],
+        "rationale": "Established by cited evidence: ev-can-borrow, ev-account-locked, ev-checkout-service.",
+        "schemaRules": []
+      },
+      "source": "may-borrow",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "refused",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "on the shelf",
+        "semanticType": "controlFlow"
+      },
+      "id": "f-shelf-ok",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-on-shelf",
+          "ev-checkout-service"
+        ],
+        "rationale": "Established by cited evidence: ev-on-shelf, ev-checkout-service.",
+        "schemaRules": []
+      },
+      "source": "copy-on-shelf",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "create-loan",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "already out",
+        "semanticType": "controlFlow"
+      },
+      "id": "f-shelf-no",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-checkout-service"
+        ],
+        "rationale": "Established by cited evidence: ev-checkout-service.",
+        "schemaRules": []
+      },
+      "source": "copy-on-shelf",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "refused",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f-loan-created",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-desk-outcome"
+        ],
+        "rationale": "Established by cited evidence: ev-desk-outcome.",
+        "schemaRules": []
+      },
+      "source": "create-loan",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "confirm",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f-issued",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-desk-outcome",
+          "ev-issue-test"
+        ],
+        "rationale": "Established by cited evidence: ev-desk-outcome, ev-issue-test.",
+        "schemaRules": []
+      },
+      "source": "confirm",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "issued",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f-refused-shown",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-desk-outcome"
+        ],
+        "rationale": "Established by cited evidence: ev-desk-outcome.",
+        "schemaRules": []
+      },
+      "source": "refused",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "show-reason",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f-nothing-issued",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-desk-outcome",
+          "ev-overdue-refused-test"
+        ],
+        "rationale": "Established by cited evidence: ev-desk-outcome, ev-overdue-refused-test.",
+        "schemaRules": []
+      },
+      "source": "show-reason",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "nothing-issued",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "commentLink"
+      },
+      "id": "link-form-checks",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-form-clean"
+        ],
+        "rationale": "Established by cited evidence: ev-form-clean.",
+        "schemaRules": []
+      },
+      "source": "note-form-checks",
+      "style": {
+        "stroke": "#333333",
+        "strokeDasharray": "6 4",
+        "strokeWidth": 2
+      },
+      "target": "form-valid",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "commentLink"
+      },
+      "id": "link-twice",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-form-clean",
+          "ev-can-borrow"
+        ],
+        "rationale": "Established by cited evidence: ev-form-clean, ev-can-borrow.",
+        "schemaRules": []
+      },
+      "source": "note-checked-twice",
+      "style": {
+        "stroke": "#333333",
+        "strokeDasharray": "6 4",
+        "strokeWidth": 2
+      },
+      "target": "may-borrow",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "commentLink"
+      },
+      "id": "link-due-date",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-due-date"
+        ],
+        "rationale": "Established by cited evidence: ev-due-date.",
+        "schemaRules": []
+      },
+      "source": "note-due-date",
+      "style": {
+        "stroke": "#333333",
+        "strokeDasharray": "6 4",
+        "strokeWidth": 2
+      },
+      "target": "create-loan",
+      "type": "default"
+    }
+  ],
+  "id": "diagram_shelfmark_issue_a_copy",
+  "kind": "diagram",
+  "metadata": {
+    "authoring": "generated",
+    "authority": "as_implemented",
+    "createdAt": "2026-08-05T19:29:58.869740+00:00",
+    "evidence": [
+      {
+        "contentDigest": "sha256:d795e3cbae8f3fb85736749608309d286c74206e1e2d25b088edf3a9e0826948",
+        "id": "ev-desk-form",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 7,
+            "start": 3
+          },
+          "path": "templates/desk/desk.html",
+          "symbol": "Check out"
+        },
+        "summary": "The desk page's Check out card posts the checkout form's membership number and barcode fields to the desk URL under an Issue button."
+      },
+      {
+        "contentDigest": "sha256:00b9c4f458b62eafbcbc5c739627dcdeef396960c4d8e0c4d3852f345d1ee584",
+        "id": "ev-desk-url",
+        "kind": "configuration",
+        "locator": {
+          "lineRange": {
+            "end": 6,
+            "start": 6
+          },
+          "path": "desk/urls.py",
+          "symbol": "desk"
+        },
+        "summary": "The desk view is mounted at the root of /desk/ under the route name desk."
+      },
+      {
+        "contentDigest": "sha256:e93588be50cea2f5b1d06ced2ad5718c8b810d18518632443d3b7a301ab8efbb",
+        "id": "ev-librarian-gate",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 10,
+            "start": 10
+          },
+          "path": "desk/views.py",
+          "symbol": "librarian_only"
+        },
+        "summary": "librarian_only is a user_passes_test that admits only an authenticated user whose is_librarian is true."
+      },
+      {
+        "contentDigest": "sha256:912ffcd84b4a40e5d5b04c7afd260115c5ba2107773d00102b954b3c1c463803",
+        "id": "ev-desk-entry",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 18,
+            "start": 13
+          },
+          "path": "desk/views.py",
+          "symbol": "desk"
+        },
+        "summary": "The desk view is wrapped in login_required and librarian_only, binds CheckoutForm with the out prefix, and only proceeds when the request is a POST carrying out-barcode and the form validates."
+      },
+      {
+        "contentDigest": "sha256:cdf5b666dce97d1afc58b264cd65da1bdc9156e07e2d7cfc720ffee3043ac505",
+        "id": "ev-desk-outcome",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 30,
+            "start": 18
+          },
+          "path": "desk/views.py",
+          "symbol": "check_out"
+        },
+        "summary": "On a valid POST the view calls check_out, turns a NotAllowed into an error message, and on success reports the title, the member and the due date before redirecting back to the desk; anything that falls through re-renders the desk page."
+      },
+      {
+        "contentDigest": "sha256:cd22afac04830fa296381c5874a0c4de472b5a5eb79c1f76917fb36e93e44f42",
+        "id": "ev-form-clean",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 32,
+            "start": 7
+          },
+          "path": "desk/forms.py",
+          "symbol": "CheckoutForm"
+        },
+        "summary": "CheckoutForm resolves the membership number to a Member and the barcode to a BookCopy, erroring when either is unknown, and rejects the account outright if it has any open loan that is overdue."
+      },
+      {
+        "contentDigest": "sha256:355832cdf0f2e9db177f48035e0abe1824fb777631911f4faff7d7552d793238",
+        "id": "ev-checkout-service",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 22,
+            "start": 13
+          },
+          "path": "circulation/services.py",
+          "symbol": "check_out"
+        },
+        "summary": "check_out is a single atomic transaction: it refuses when can_borrow says no, refuses when the copy is not on the shelf, and otherwise creates the Loan with a due date from due_date_for."
+      },
+      {
+        "contentDigest": "sha256:c00afda2e004cff1f96b31cec3d15d778bda33ac12bab90e5b7db515dda91bee",
+        "id": "ev-can-borrow",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 26,
+            "start": 19
+          },
+          "path": "circulation/eligibility.py",
+          "symbol": "can_borrow"
+        },
+        "summary": "can_borrow refuses a locked account with its reason, then refuses when the member already has MAX_CONCURRENT_LOANS items out."
+      },
+      {
+        "contentDigest": "sha256:7dc952baed5ddad1d7ca2a833c75f42817536834fd4e8b7c8923f661e7245908",
+        "id": "ev-account-locked",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 16,
+            "start": 8
+          },
+          "path": "circulation/eligibility.py",
+          "symbol": "account_is_locked"
+        },
+        "summary": "An account is locked by any open loan that is overdue, and otherwise by owing more than LOCK_BALANCE_PENCE."
+      },
+      {
+        "contentDigest": "sha256:c1639e52034cf8182a4bdad6c56e8ece361efd3cb66dea57b5e493d75c0631e8",
+        "id": "ev-on-shelf",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 47,
+            "start": 45
+          },
+          "path": "catalog/models.py",
+          "symbol": "is_on_shelf"
+        },
+        "summary": "A copy is on the shelf exactly when it has no loan whose returned_at is still null."
+      },
+      {
+        "contentDigest": "sha256:60c97d374f8e15e06aee471528d0da0d239e3349f1f8119a3f746af30f945ce4",
+        "id": "ev-due-date",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 13,
+            "start": 8
+          },
+          "path": "catalog/utils.py",
+          "symbol": "due_date_for"
+        },
+        "summary": "The due date is the borrow date plus the title's loan period, which is HIGH_DEMAND_LOAN_DAYS for a high-demand book and LOAN_DAYS otherwise."
+      },
+      {
+        "contentDigest": "sha256:8926b2eb2863cbaaf4f1af16b4bc67a4ca9a7bc59fb7eddcd6790a8dd58b8fea",
+        "id": "ev-lending-rules",
+        "kind": "configuration",
+        "locator": {
+          "lineRange": {
+            "end": 80,
+            "start": 74
+          },
+          "path": "shelfmark/settings.py",
+          "symbol": "LOAN_DAYS"
+        },
+        "summary": "The lending rules: LOAN_DAYS 21, HIGH_DEMAND_LOAN_DAYS 7, LOCK_BALANCE_PENCE 1000 and MAX_CONCURRENT_LOANS 10."
+      },
+      {
+        "contentDigest": "sha256:b5e77f3ef0a7f48f306375a5e56e6084ec8ad1e92383cf7bcf70dcfa9207234d",
+        "id": "ev-issue-test",
+        "kind": "test",
+        "locator": {
+          "lineRange": {
+            "end": 50,
+            "start": 42
+          },
+          "path": "desk/tests.py",
+          "symbol": "test_a_librarian_can_issue_a_copy"
+        },
+        "summary": "Posting the desk form as a signed-in librarian creates one Loan for the reader, due twenty-one days from today."
+      },
+      {
+        "contentDigest": "sha256:417e87e226cff4695d340abe13c9a45d94bccbb4e098fb5c9546549493f6bb85",
+        "id": "ev-not-librarian-test",
+        "kind": "test",
+        "locator": {
+          "lineRange": {
+            "end": 57,
+            "start": 52
+          },
+          "path": "desk/tests.py",
+          "symbol": "test_a_member_cannot_reach_the_desk"
+        },
+        "summary": "A signed-in member who is not a librarian does not get a 200 from /desk/."
+      },
+      {
+        "contentDigest": "sha256:cfa39556443de110f7b1a6235d4b8f8a98f5387e796826e2736363a973f1b619",
+        "id": "ev-overdue-refused-test",
+        "kind": "test",
+        "locator": {
+          "lineRange": {
+            "end": 71,
+            "start": 59
+          },
+          "path": "desk/tests.py",
+          "symbol": "test_issuing_to_an_account_with_an_overdue_item_is_refused"
+        },
+        "summary": "Issuing to an account holding an overdue item comes back saying overdue, and no loan is created for the copy."
+      },
+      {
+        "contentDigest": "sha256:5b7434bd1aa24d6017e814bc6f5e6d4b543a5b4d62590f4369b2a0b0300c9903",
+        "id": "ev-unknown-barcode-test",
+        "kind": "test",
+        "locator": {
+          "lineRange": {
+            "end": 103,
+            "start": 98
+          },
+          "path": "desk/tests.py",
+          "symbol": "test_an_unknown_barcode_is_rejected"
+        },
+        "summary": "An unknown barcode is answered with No copy with that barcode."
+      }
+    ],
+    "generatedBy": "graphpilot-materializer",
+    "intent": "shelfmark-issue-a-copy",
+    "notation": "uml",
+    "originalType": "activity_diagram",
+    "requests": [
+      {
+        "at": "2026-08-05T19:29:58.869740+00:00",
+        "text": "What happens when a librarian issues a copy to a member."
+      }
+    ],
+    "source": "mcp",
+    "updatedAt": "2026-08-05T19:29:58.869740+00:00"
+  },
+  "name": "shelfmark-issue-a-copy",
+  "nodes": [
+    {
+      "data": {
+        "label": "Librarian submits the issue form",
+        "semanticType": "initialNode"
+      },
+      "height": 60.0,
+      "id": "start",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-desk-form",
+          "ev-desk-url"
+        ],
+        "rationale": "Established by cited evidence: ev-desk-form, ev-desk-url.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 337.0,
+        "y": 0.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 276.0
+    },
+    {
+      "data": {
+        "label": "Signed in as a librarian?",
+        "semanticType": "decisionNode"
+      },
+      "height": 90.0,
+      "id": "is-librarian",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-librarian-gate",
+          "ev-desk-entry"
+        ],
+        "rationale": "Established by cited evidence: ev-librarian-gate, ev-desk-entry.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 363.25,
+        "y": 132.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 223.5
+    },
+    {
+      "data": {
+        "label": "Turned away from the desk",
+        "semanticType": "activityFinalNode"
+      },
+      "height": 60.0,
+      "id": "turned-away",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-librarian-gate",
+          "ev-not-librarian-test"
+        ],
+        "rationale": "Established by cited evidence: ev-librarian-gate, ev-not-librarian-test.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 195.25,
+        "y": 304.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 223.5
+    },
+    {
+      "data": {
+        "label": "Resolve the membership number and the barcode",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "resolve-inputs",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-form-clean",
+          "ev-desk-entry"
+        ],
+        "rationale": "Established by cited evidence: ev-form-clean, ev-desk-entry.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 483.0,
+        "y": 304.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "label": "Does the form validate?",
+        "semanticType": "decisionNode"
+      },
+      "height": 90.0,
+      "id": "form-valid",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-form-clean",
+          "ev-desk-entry"
+        ],
+        "rationale": "Established by cited evidence: ev-form-clean, ev-desk-entry.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 730.75,
+        "y": 446.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 208.5
+    },
+    {
+      "data": {
+        "label": "May this member borrow?",
+        "semanticType": "decisionNode"
+      },
+      "height": 90.0,
+      "id": "may-borrow",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-checkout-service",
+          "ev-can-borrow",
+          "ev-account-locked"
+        ],
+        "rationale": "Established by cited evidence: ev-checkout-service, ev-can-borrow, ev-account-locked.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 465.75,
+        "y": 608.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 208.5
+    },
+    {
+      "data": {
+        "label": "Is the copy on the shelf?",
+        "semanticType": "decisionNode"
+      },
+      "height": 90.0,
+      "id": "copy-on-shelf",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-checkout-service",
+          "ev-on-shelf"
+        ],
+        "rationale": "Established by cited evidence: ev-checkout-service, ev-on-shelf.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 384.25,
+        "y": 770.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 223.5
+    },
+    {
+      "data": {
+        "label": "Create the loan and set its due date",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "create-loan",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-checkout-service",
+          "ev-due-date"
+        ],
+        "rationale": "Established by cited evidence: ev-checkout-service, ev-due-date.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 89.0,
+        "y": 932.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 306.0
+    },
+    {
+      "data": {
+        "label": "Confirm the title, the member and the due date, then reload the desk",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "confirm",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-desk-outcome"
+        ],
+        "rationale": "Established by cited evidence: ev-desk-outcome.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 82.0,
+        "y": 1064.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "label": "Copy issued to the member",
+        "semanticType": "activityFinalNode"
+      },
+      "height": 60.0,
+      "id": "issued",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-desk-outcome",
+          "ev-issue-test"
+        ],
+        "rationale": "Established by cited evidence: ev-desk-outcome, ev-issue-test.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 130.25,
+        "y": 1196.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 223.5
+    },
+    {
+      "data": {
+        "label": "Refused",
+        "semanticType": "mergeNode"
+      },
+      "height": 50.0,
+      "id": "refused",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-desk-outcome"
+        ],
+        "rationale": "Established by cited evidence: ev-desk-outcome.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 645.0,
+        "y": 937.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 120.0
+    },
+    {
+      "data": {
+        "label": "Re-render the desk showing the reason",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "show-reason",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-desk-outcome"
+        ],
+        "rationale": "Established by cited evidence: ev-desk-outcome.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 548.25,
+        "y": 1064.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 313.5
+    },
+    {
+      "data": {
+        "label": "Nothing issued",
+        "semanticType": "activityFinalNode"
+      },
+      "height": 60.0,
+      "id": "nothing-issued",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-overdue-refused-test",
+          "ev-unknown-barcode-test"
+        ],
+        "rationale": "Established by cited evidence: ev-overdue-refused-test, ev-unknown-barcode-test.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 634.5,
+        "y": 1196.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 141.0
+    },
+    {
+      "data": {
+        "label": "An unknown membership number, an unknown barcode, or any overdue item on the account all fail here.",
+        "semanticType": "note"
+      },
+      "height": 80.0,
+      "id": "note-form-checks",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-form-clean"
+        ],
+        "rationale": "Established by cited evidence: ev-form-clean.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 362.75,
+        "y": 446.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "label": "The overdue rule runs twice: the form rejects the account, and can_borrow checks it again inside the service.",
+        "semanticType": "note"
+      },
+      "height": 80.0,
+      "id": "note-checked-twice",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-form-clean",
+          "ev-account-locked",
+          "ev-can-borrow"
+        ],
+        "rationale": "Established by cited evidence: ev-form-clean, ev-account-locked, ev-can-borrow.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 97.75,
+        "y": 608.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "label": "Due in 21 days, or 7 for a high-demand title. The whole check-out runs in one transaction.",
+        "semanticType": "note"
+      },
+      "height": 80.0,
+      "id": "note-due-date",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-due-date",
+          "ev-lending-rules",
+          "ev-checkout-service"
+        ],
+        "rationale": "Established by cited evidence: ev-due-date, ev-lending-rules, ev-checkout-service.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": -279.0,
+        "y": 932.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    }
+  ],
+  "schemaVersion": "graphpilot.diagram.v1",
+  "viewport": {
+    "x": 0,
+    "y": 0,
+    "zoom": 1
+  }
+}

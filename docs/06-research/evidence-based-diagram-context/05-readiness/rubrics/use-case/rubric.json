@@ -1,0 +1,134 @@
+{
+  "schemaVersion": "graphpilot.readiness-rubric.v1",
+  "kind": "contextReadinessRubric",
+  "rubricVersion": "graphpilot.readiness.use_case.v1",
+  "diagramType": "use_case_diagram",
+  "ratingScaleVersion": "graphpilot.readiness-rating.v1",
+  "facets": [
+    {
+      "id": "subjectBoundary",
+      "description": "Whether the context identifies the modeled subject and establishes the semantic inside/outside boundary needed to classify in-scope use cases and external actors without requiring a visible subject box.",
+      "requirement": "required",
+      "weight": 3,
+      "minimumRating": 3,
+      "applicabilityRule": {
+        "kind": "always"
+      },
+      "ratingAnchors": {
+        "0": "No selected claim or accepted assumption identifies the modeled subject or any usable inside/outside boundary.",
+        "1": "A selected input names a possible system, subsystem, or domain, but its modeled level or boundary cannot be determined reliably.",
+        "2": "The subject is identifiable, but its level, included responsibilities, exclusions, or the classification of one or more in-scope use cases or external actors is absent or ambiguous.",
+        "3": "The modeled system, subsystem, or domain and its semantic inside/outside boundary are established well enough to classify every confirmed in-scope use case as subject behavior and every participating actor as external; a visible subject box is not required.",
+        "4": "Rating 3 is met without assumptions, and the subject level, included responsibilities, exclusions, and external responsibilities are explicit, complete, precise, and unambiguous."
+      },
+      "gapPolicy": {
+        "severity": "blocking",
+        "overrideable": false
+      }
+    },
+    {
+      "id": "actors",
+      "description": "Whether the context identifies the external human roles and external systems that participate in the subject's confirmed in-scope goals and distinguishes them from internal components.",
+      "requirement": "required",
+      "weight": 4,
+      "minimumRating": 3,
+      "applicabilityRule": {
+        "kind": "always"
+      },
+      "ratingAnchors": {
+        "0": "No selected claim or accepted assumption identifies an external human role or external system that participates in an in-scope goal.",
+        "1": "A selected input names a possible participant, but its external status, role, or participation in the subject cannot be determined reliably.",
+        "2": "At least one external role or system is established, but one or more participants required by the confirmed in-scope goals is absent or ambiguous, roles are conflated, or an internal component may be misclassified as external.",
+        "3": "Every external human role and external system required by the confirmed in-scope goals is identified, roles are distinct where their goals or participation differ, and internal controllers, repositories, and other implementation components are excluded.",
+        "4": "Rating 3 is met without assumptions, and every role boundary, external-system status, and distinct participant responsibility is explicit, complete, precise, and unambiguous."
+      },
+      "gapPolicy": {
+        "severity": "blocking",
+        "overrideable": false
+      }
+    },
+    {
+      "id": "actorGoals",
+      "description": "Whether the context identifies the user-visible outcomes or capabilities sought from the subject for every confirmed in-scope actor intent at the requested abstraction level.",
+      "requirement": "required",
+      "weight": 4,
+      "minimumRating": 3,
+      "applicabilityRule": {
+        "kind": "always"
+      },
+      "ratingAnchors": {
+        "0": "No selected claim or accepted assumption establishes a user-visible outcome or capability sought from the subject.",
+        "1": "A selected input hints at an actor intent or subject capability, but no reliable user-visible goal can be stated.",
+        "2": "At least one user-visible goal is established, but one or more confirmed in-scope actor intents lacks an outcome, has an ambiguous boundary, is expressed only as an implementation step or incidental UI action, or is at the wrong abstraction level.",
+        "3": "Every confirmed in-scope actor intent is expressed as a bounded user-visible outcome or capability at the requested abstraction level, with implementation steps and incidental UI actions excluded as substitute goals.",
+        "4": "Rating 3 is met without assumptions, and every in-scope goal boundary, outcome, distinction, and abstraction level is explicit, complete, precise, and unambiguous."
+      },
+      "gapPolicy": {
+        "severity": "blocking",
+        "overrideable": false
+      }
+    },
+    {
+      "id": "actorGoalAssociations",
+      "description": "Whether the context explicitly establishes which external actors participate in which confirmed in-scope goals rather than inferring participation from actor and goal existence.",
+      "requirement": "required",
+      "weight": 4,
+      "minimumRating": 3,
+      "applicabilityRule": {
+        "kind": "always"
+      },
+      "ratingAnchors": {
+        "0": "No selected claim or accepted assumption establishes a usable participation connection between an external actor and an in-scope goal.",
+        "1": "A selected input suggests that an actor and goal are related, but the participant, goal, or participation proposition cannot be determined reliably.",
+        "2": "At least one actor-goal participation connection is established, but one or more confirmed in-scope goals is orphaned, a required participant is absent or ambiguous, or a connection relies only on separate actor and goal existence.",
+        "3": "Every confirmed in-scope goal is connected to each participating external actor established by the selected context, no in-scope goal is orphaned, and every connection identifies both its actor and goal endpoints.",
+        "4": "Rating 3 is met without assumptions, and participation is explicit, complete, precise, and unambiguous for every supported in-scope actor-goal combination."
+      },
+      "gapPolicy": {
+        "severity": "blocking",
+        "overrideable": false
+      }
+    },
+    {
+      "id": "useCaseRelationships",
+      "description": "Whether the context establishes requested or in-scope include, extend, actor generalization, use-case generalization, and named extension-point meaning, including a standalone request for named extension points, with the participants, direction, conditions, locations, names, and ownership required by each included concept.",
+      "requirement": "conditional",
+      "weight": 2,
+      "minimumRating": 3,
+      "applicabilityRule": {
+        "kind": "conditional",
+        "appliesWhenAny": [
+          "The confirmed request explicitly asks to depict an include relationship between identified use cases.",
+          "The confirmed request explicitly asks to depict an extend relationship between identified use cases.",
+          "The confirmed request explicitly asks to depict generalization between identified actors or between identified use cases.",
+          "The confirmed request explicitly asks for one or more named extension points on an identified use case, including a standalone extension-point request that does not ask for an extend relationship.",
+          "An included-scope decision, selected claim, or accepted assumption asserts one of those relationships or assigns a named extension point to an identified use case.",
+          "A relevant active-index claim asserts one of those relationships or assigns a named extension point to an identified use case within the requested subject and scope.",
+          "An open uncertainty states that one of those relationships or a named extension point is in confirmed scope but leaves required relationship or extension-point details unresolved."
+        ],
+        "notApplicableWhenAll": [
+          "The confirmed request does not ask to depict include, extend, actor generalization, use-case generalization, or a named extension point.",
+          "No included-scope decision, selected claim, or accepted assumption asserts any of those relationships or assigns a named extension point to an identified use case.",
+          "No relevant active-index claim asserts any of those relationships or assigns a named extension point to an identified use case within the requested subject and scope.",
+          "No open uncertainty states that one of those relationships or a named extension point is or may be in the confirmed scope.",
+          "Every explicit scope exclusion of those concepts is coherent with the confirmed goal and relevant indexed claims."
+        ],
+        "uncertainWhen": [
+          "A request phrase, selected input, relevant active-index claim, or open uncertainty indicates that one of the listed concepts may belong in the diagram but does not establish whether the confirmed scope includes or excludes it.",
+          "The confirmed request or an explicit scope exclusion conflicts with selected or indexed context about whether one of the listed concepts belongs in scope."
+        ]
+      },
+      "ratingAnchors": {
+        "0": "The facet is applicable, but no selected claim or accepted assumption establishes any usable include, extend, actor generalization, use-case generalization, or named extension-point meaning.",
+        "1": "A selected input hints at one of the applicable concepts, but its relationship kind, participants, endpoint roles, direction, condition, location, extension-point name, or owning use case cannot be determined reliably.",
+        "2": "At least one applicable concept is established in part, but an in-scope item lacks one or more details required to model it: include endpoints or direction; extend endpoints, direction, condition, or extension location; generalization child, parent, or direction; or a named extension point's exact name or owning use case.",
+        "3": "Every in-scope item is modelable: include identifies the including and included use cases and direction; extend identifies the extending and base use cases, direction, condition, and extension location; generalization identifies the specialized and parent actor or use case and direction; and each named extension point identifies its exact name and owning use case. Only clauses for concepts present in scope apply, and a standalone named extension-point request does not require an extend relationship.",
+        "4": "Rating 3 is met without assumptions, and every in-scope relationship kind, endpoint role, direction, extend condition and location, generalization child/parent distinction, and named extension-point name and ownership is explicit, complete, precise, and unambiguous."
+      },
+      "gapPolicy": {
+        "severity": "blocking",
+        "overrideable": true
+      }
+    }
+  ]
+}

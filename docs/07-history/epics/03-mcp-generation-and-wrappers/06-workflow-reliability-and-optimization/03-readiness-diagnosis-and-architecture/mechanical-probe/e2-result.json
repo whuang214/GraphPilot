@@ -1,0 +1,159 @@
+{
+  "schemaVersion": "graphpilot.delivery.readiness-diagnosis-live-result.v1",
+  "kind": "readinessDiagnosisLiveResult",
+  "resultId": "result-readiness-diagnosis-block3-e2-medium-20260728-01",
+  "sourceCommit": "6c33e3c5fd7f157c84a26eb96012b77673a1d39f",
+  "manifest": {
+    "packageId": "package-readiness-diagnostic-block3-e2-medium-20260728-01",
+    "digest": "sha256:26f826a5824974ef17a724e9be1f93baa998ba8a4cec5424fd7eb47b2801a51b",
+    "runId": "run-readiness-diagnostic-block3-e2-medium-20260728-01",
+    "observationId": "observation-readiness-diagnostic-block3-e2-medium-20260728-01",
+    "hypothesisId": "hypothesis-reasoning-effort-affects-validation-trigger",
+    "reasoningEffort": "medium",
+    "callMaximum": 2
+  },
+  "observation": {
+    "digest": "sha256:523fe3aa0b4d5dbcb28c7678cde34a1d263ae921d5350070ad2e76a3cf8ba549",
+    "eventLedgerDigest": "sha256:e93f713c1f9cde66651744e0bfba62e8d6c7c1cca26ac4935a72d7bccd02eab3",
+    "status": "error",
+    "providerStartState": "started",
+    "errorCode": "readiness_reviewer_validation",
+    "captureComplete": true,
+    "captureFailureCodes": [],
+    "startedAt": "2026-07-28T17:40:55.994368Z",
+    "completedAt": "2026-07-28T17:42:40.011000Z"
+  },
+  "calls": [
+    {
+      "sequence": 1,
+      "role": "readiness",
+      "state": "completed",
+      "durationMs": 46883.136600023136,
+      "requestBytes": 32727,
+      "responseBytes": 5452,
+      "inputTokens": 6280,
+      "outputTokens": 4030,
+      "reasoningTokens": 2833,
+      "cachedInputTokens": 0,
+      "providerRequestId": "bae0389d-ceac-4326-92fb-4975e4eeafea",
+      "serviceTier": "default",
+      "requestedControl": "medium",
+      "effectiveControl": "medium",
+      "firstResponseValid": false,
+      "validationIssues": [
+        {"code": "invalid_coverage_combination", "path": "$.coverage[3]"},
+        {"code": "invalid_coverage_combination", "path": "$.coverage[6]"},
+        {"code": "invalid_coverage_combination", "path": "$.coverage[7]"}
+      ]
+    },
+    {
+      "sequence": 2,
+      "role": "readiness_response_repair",
+      "state": "completed",
+      "durationMs": 57038.09099999489,
+      "requestBytes": 32649,
+      "responseBytes": 6218,
+      "inputTokens": 6264,
+      "outputTokens": 3983,
+      "reasoningTokens": 2680,
+      "cachedInputTokens": 0,
+      "providerRequestId": "964c577c-d294-467d-8cb4-cad785f46ac0",
+      "serviceTier": "default",
+      "requestedControl": "medium",
+      "effectiveControl": "medium",
+      "firstResponseValid": false,
+      "validationIssues": [
+        {"code": "action_not_permitted", "path": "$.holisticFindings[0].recommendedAction.kind"},
+        {"code": "invalid_recommendation_ref", "path": "$.recommendedSelections[0].claimRef"},
+        {"code": "invalid_recommendation_ref", "path": "$.recommendedSelections[1].claimRef"},
+        {"code": "invalid_recommendation_ref", "path": "$.recommendedSelections[2].claimRef"},
+        {"code": "invalid_recommendation_ref", "path": "$.recommendedSelections[3].claimRef"}
+      ]
+    }
+  ],
+  "totals": {
+    "callsStarted": 2,
+    "callsCompleted": 2,
+    "callsFailed": 0,
+    "callsUncertain": 0,
+    "durationMs": 103921.22760001803,
+    "requestBytes": 65376,
+    "responseBytes": 11670,
+    "inputTokens": 12544,
+    "outputTokens": 8013,
+    "reasoningTokens": 5513,
+    "cachedInputTokens": 0,
+    "budgetUsedAfter": 4,
+    "budgetRemaining": 996
+  },
+  "comparisonToE1High": {
+    "e1ResultDigest": "sha256:c8059f5d1d5fa1c604dc41340480e759899f364623c233c49b228c209bb83a56",
+    "sameCase": true,
+    "sameAssets": true,
+    "sameFirstValidationIssues": true,
+    "sharedRepairIssues": [
+      {"code": "invalid_recommendation_ref", "path": "$.recommendedSelections[0].claimRef"},
+      {"code": "invalid_recommendation_ref", "path": "$.recommendedSelections[1].claimRef"},
+      {"code": "invalid_recommendation_ref", "path": "$.recommendedSelections[2].claimRef"},
+      {"code": "invalid_recommendation_ref", "path": "$.recommendedSelections[3].claimRef"}
+    ],
+    "changedMaterialFactor": "reasoningEffort",
+    "from": "high",
+    "to": "medium",
+    "durationDeltaMs": -99630.92189998133,
+    "durationDeltaPercent": -48.946140900360106,
+    "firstDurationDeltaMs": -39647.34679996036,
+    "firstDurationDeltaPercent": -45.81893598894182,
+    "repairDurationDeltaMs": -59983.57510002097,
+    "repairDurationDeltaPercent": -51.258520835581265,
+    "outputTokenDelta": -9589,
+    "outputTokenDeltaPercent": -54.47676400409044,
+    "reasoningTokenDelta": -9519,
+    "reasoningTokenDeltaPercent": -63.32490686535391,
+    "inputTokenDelta": 0,
+    "requestByteDelta": 0,
+    "responseByteDelta": 173
+  },
+  "causalAssessment": {
+    "supported": [
+      "The same deterministic first-response trigger recurred at identical paths under high and medium effort.",
+      "Reasoning effort materially affects latency and reasoning/output usage but is not the first-response invalidity root for this case.",
+      "Both repairs repeated four invalid recommendation refs where the projection had zero unselected indexed claims.",
+      "The local prompt/projection/validator contract is the narrowest identified invalidity boundary.",
+      "Complete-input generic repair is a separate cost/reliability amplifier."
+    ],
+    "disconfirmed": [
+      "High reasoning effort uniquely causes the first-response validation failure.",
+      "Local deterministic wall time explains the historical latency.",
+      "Response byte limit or structural provider-schema rejection caused either first failure."
+    ],
+    "strongestAlternative": "readiness_component_redesign",
+    "alternativeReason": "Generic complete-input repair is expensive and introduced new invalid output at both controls, but a focused prompt/projection correction is the smaller first remedy for the repeated exact trigger.",
+    "candidateRoot": "focused_implementation_correction",
+    "candidateOwner": "readiness_prompt_projection_validator_contract",
+    "rootSelected": null
+  },
+  "proposedBlock4Boundary": {
+    "primaryCorrection": [
+      "Make non-applicable/uncertain coverage requirements explicit, including null rating and empty support arrays.",
+      "Expose an explicit unselected indexed-claim allowlist or state that it is empty instead of requiring implicit set subtraction.",
+      "Make repair instructions prohibit recommendations when the unselected allowlist is empty and preserve deterministic action policies."
+    ],
+    "proof": [
+      "Provider-free exact-witness regressions for both E1/E2 trigger classes.",
+      "Prompt/projection packet assertions that expose every validator-owned rule and allowlist directly.",
+      "Fake first/repair/failure/interruption/no-rerun/security/compatibility tests.",
+      "One newly audited same-case live proof only if offline proof passes; no E1/E2 identity rerun."
+    ],
+    "deferredOptimization": "Evaluate medium as a latency/default candidate only after correctness is restored; evaluate targeted repair separately if repair remains necessary."
+  },
+  "nextAction": "independent_block3_root_audit",
+  "scope": {
+    "diagnosticOnly": true,
+    "mechanicalProviderPerformanceOnly": true,
+    "calibration": false,
+    "certification": false,
+    "promotion": false
+  },
+  "digest": "sha256:32ff890695b635e7ed40337a88031758a793a4f809db6bd4957dbbd226394733"
+}

@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "network-topology",
+  "diagramType": "bdd_diagram",
+  "authority": "conceptual",
+  "requests": [
+    "A router references a switch and a firewall; the switch references a server, which references a database. A rack is associated with several servers."
+  ],
+  "evidence": [],
+  "elements": [
+    {
+      "id": "router",
+      "semanticType": "block",
+      "label": "Router",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "switch",
+      "semanticType": "block",
+      "label": "Switch",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "fw",
+      "semanticType": "block",
+      "label": "Firewall",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "server",
+      "semanticType": "block",
+      "label": "Server",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "db",
+      "semanticType": "block",
+      "label": "Database",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "rack",
+      "semanticType": "block",
+      "label": "Rack",
+      "assurance": "conceptual"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "edge-1-router-switch",
+      "semanticType": "association",
+      "source": "router",
+      "target": "switch",
+      "assurance": "conceptual",
+      "targetNavigable": true
+    },
+    {
+      "id": "edge-2-router-fw",
+      "semanticType": "association",
+      "source": "router",
+      "target": "fw",
+      "assurance": "conceptual",
+      "targetNavigable": true
+    },
+    {
+      "id": "edge-3-switch-server",
+      "semanticType": "association",
+      "source": "switch",
+      "target": "server",
+      "assurance": "conceptual",
+      "targetNavigable": true
+    },
+    {
+      "id": "edge-4-server-db",
+      "semanticType": "association",
+      "source": "server",
+      "target": "db",
+      "assurance": "conceptual",
+      "targetNavigable": true
+    },
+    {
+      "id": "edge-5-rack-server",
+      "semanticType": "association",
+      "source": "rack",
+      "target": "server",
+      "assurance": "conceptual"
+    }
+  ],
+  "assumptions": []
+}

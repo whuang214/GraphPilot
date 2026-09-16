@@ -1,0 +1,127 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "social-network",
+  "diagramType": "use_case_diagram",
+  "authority": "conceptual",
+  "requests": [
+    "A user posts, comments, likes, and follows others; reporting content extends posting. A moderator reviews reports and bans users."
+  ],
+  "evidence": [],
+  "elements": [
+    {
+      "id": "user",
+      "semanticType": "actor",
+      "label": "User",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "mod",
+      "semanticType": "actor",
+      "label": "Moderator",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "post",
+      "semanticType": "useCase",
+      "label": "Create Post",
+      "assurance": "conceptual",
+      "extensionPoints": [
+        "extensionPoint"
+      ]
+    },
+    {
+      "id": "comment",
+      "semanticType": "useCase",
+      "label": "Comment",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "like",
+      "semanticType": "useCase",
+      "label": "Like",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "follow",
+      "semanticType": "useCase",
+      "label": "Follow User",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "report",
+      "semanticType": "useCase",
+      "label": "Report Content",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "review",
+      "semanticType": "useCase",
+      "label": "Review Reports",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "ban",
+      "semanticType": "useCase",
+      "label": "Ban User",
+      "assurance": "conceptual"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "edge-1-user-post",
+      "semanticType": "association",
+      "source": "user",
+      "target": "post",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-2-user-comment",
+      "semanticType": "association",
+      "source": "user",
+      "target": "comment",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-3-user-like",
+      "semanticType": "association",
+      "source": "user",
+      "target": "like",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-4-user-follow",
+      "semanticType": "association",
+      "source": "user",
+      "target": "follow",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-5-mod-review",
+      "semanticType": "association",
+      "source": "mod",
+      "target": "review",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-6-mod-ban",
+      "semanticType": "association",
+      "source": "mod",
+      "target": "ban",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-7-report-post",
+      "semanticType": "extend",
+      "source": "report",
+      "target": "post",
+      "assurance": "conceptual",
+      "condition": "optional",
+      "extensionLocations": [
+        "extensionPoint"
+      ],
+      "label": "«extend»"
+    }
+  ],
+  "assumptions": []
+}

@@ -1,0 +1,620 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "kitepay-send-a-payment",
+  "diagramType": "activity_diagram",
+  "authority": "as_implemented",
+  "requests": [
+    "What happens when one person sends another a payment."
+  ],
+  "evidence": [
+    {
+      "id": "ev-view-pay",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 45,
+          "start": 18
+        },
+        "path": "payments/views.py",
+        "symbol": "pay"
+      },
+      "summary": "The /pay/ view: build PayForm, take or mint an idempotency key, short-circuit a replayed key, call send_payment, catch InsufficientFunds and ValueError onto the form, otherwise remember the key and redirect to the feed."
+    },
+    {
+      "id": "ev-idem-module",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 28,
+          "start": 15
+        },
+        "path": "core/idempotency.py",
+        "symbol": "remember"
+      },
+      "summary": "mint, seen, remember and recall keep a 15-minute cache entry so a resubmitted form replays the first result instead of moving money again."
+    },
+    {
+      "id": "ev-form",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 39,
+          "start": 8
+        },
+        "path": "payments/forms.py",
+        "symbol": "PayForm"
+      },
+      "summary": "PayForm resolves the @handle to a User, rejects paying yourself, parses the amount into minor units, and rejects an amount above the sender's available balance."
+    },
+    {
+      "id": "ev-service",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 32,
+          "start": 10
+        },
+        "path": "payments/services.py",
+        "symbol": "send_payment"
+      },
+      "summary": "send_payment is atomic: it refuses a self-payment, refuses an amount above available balance, creates the Payment row, then posts the ledger pair."
+    },
+    {
+      "id": "ev-post",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 41,
+          "start": 26
+        },
+        "path": "ledger/services.py",
+        "symbol": "post"
+      },
+      "summary": "post writes two LedgerEntry rows as a balanced pair, negative on the debit account and positive on the credit account, both linked to the causing payment."
+    },
+    {
+      "id": "ev-balance",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 19,
+          "start": 8
+        },
+        "path": "wallets/utils.py",
+        "symbol": "available_balance"
+      },
+      "summary": "available_balance sums only settled ledger entries, so money from an uncleared deposit cannot be spent."
+    },
+    {
+      "id": "ev-signals",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 24,
+          "start": 9
+        },
+        "path": "payments/signals.py",
+        "symbol": "notify_recipient"
+      },
+      "summary": "Two post_save receivers on Payment fire only on creation: one writes a Notification for the recipient, the other writes the FeedItem with the sender as actor."
+    },
+    {
+      "id": "ev-accept",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 94,
+          "start": 73
+        },
+        "path": "payments/views.py",
+        "symbol": "accept_request"
+      },
+      "summary": "Paying a money request reaches the same send_payment service, as a PRIVATE payment, then marks the request accepted."
+    },
+    {
+      "id": "ev-test-idem",
+      "kind": "test",
+      "locator": {
+        "lineRange": {
+          "end": 99,
+          "start": 80
+        },
+        "path": "payments/test_journeys.py",
+        "symbol": "test_submitting_the_same_payment_twice_only_sends_it_once"
+      },
+      "summary": "Posting the pay form twice with the same idempotency key leaves exactly one Payment and debits the sender once."
+    },
+    {
+      "id": "ev-test-funds",
+      "kind": "test",
+      "locator": {
+        "lineRange": {
+          "end": 62,
+          "start": 49
+        },
+        "path": "payments/test_journeys.py",
+        "symbol": "test_money_that_has_not_cleared_cannot_be_spent"
+      },
+      "summary": "A payment funded by an uncleared deposit is rejected with 'more than your available balance' and creates no Payment."
+    }
+  ],
+  "elements": [
+    {
+      "id": "start",
+      "semanticType": "initialNode",
+      "label": "Member posts the pay form",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-view-pay"
+      ]
+    },
+    {
+      "id": "a-key",
+      "semanticType": "opaqueAction",
+      "label": "Take the posted idempotency key, or mint a new one",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-view-pay",
+        "ev-idem-module"
+      ]
+    },
+    {
+      "id": "a-validate",
+      "semanticType": "opaqueAction",
+      "label": "Validate the form: resolve the @handle, parse the amount, check the balance",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-form"
+      ]
+    },
+    {
+      "id": "d-valid",
+      "semanticType": "decisionNode",
+      "label": "Form valid?",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-view-pay",
+        "ev-form"
+      ]
+    },
+    {
+      "id": "d-seen",
+      "semanticType": "decisionNode",
+      "label": "Key already used?",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-view-pay",
+        "ev-idem-module"
+      ]
+    },
+    {
+      "id": "a-replay",
+      "semanticType": "opaqueAction",
+      "label": "Say it was already sent and redirect to the feed",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-view-pay"
+      ]
+    },
+    {
+      "id": "final-replay",
+      "semanticType": "activityFinalNode",
+      "label": "Replayed: no second payment",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-test-idem"
+      ]
+    },
+    {
+      "id": "a-open-txn",
+      "semanticType": "opaqueAction",
+      "label": "Enter send_payment inside an atomic transaction",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-service"
+      ]
+    },
+    {
+      "id": "d-funds",
+      "semanticType": "decisionNode",
+      "label": "Balance covers it?",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-service",
+        "ev-balance"
+      ]
+    },
+    {
+      "id": "a-create-payment",
+      "semanticType": "opaqueAction",
+      "label": "Create the Payment row with sender, recipient, amount, note and visibility",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-service"
+      ]
+    },
+    {
+      "id": "a-notify",
+      "semanticType": "opaqueAction",
+      "label": "post_save: write a Notification for the recipient",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-signals"
+      ]
+    },
+    {
+      "id": "a-feeditem",
+      "semanticType": "opaqueAction",
+      "label": "post_save: write the FeedItem with the sender as actor",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-signals"
+      ]
+    },
+    {
+      "id": "a-post-ledger",
+      "semanticType": "opaqueAction",
+      "label": "Post the balanced pair: debit the sender's account, credit the recipient's",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-service",
+        "ev-post"
+      ]
+    },
+    {
+      "id": "a-commit",
+      "semanticType": "opaqueAction",
+      "label": "Commit the transaction",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-service"
+      ]
+    },
+    {
+      "id": "a-remember",
+      "semanticType": "opaqueAction",
+      "label": "Remember the idempotency key against the new payment id",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-view-pay",
+        "ev-idem-module"
+      ]
+    },
+    {
+      "id": "a-redirect",
+      "semanticType": "opaqueAction",
+      "label": "Confirm to the sender and redirect to the feed",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-view-pay"
+      ]
+    },
+    {
+      "id": "final-sent",
+      "semanticType": "activityFinalNode",
+      "label": "Money moved",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-service"
+      ]
+    },
+    {
+      "id": "a-rollback",
+      "semanticType": "opaqueAction",
+      "label": "Roll the transaction back: no Payment and no ledger entries survive",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-service"
+      ]
+    },
+    {
+      "id": "m-refused",
+      "semanticType": "mergeNode",
+      "label": "Nothing was written",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-view-pay"
+      ]
+    },
+    {
+      "id": "a-show-error",
+      "semanticType": "opaqueAction",
+      "label": "Re-render the pay page with the error on the form",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-view-pay"
+      ]
+    },
+    {
+      "id": "final-refused",
+      "semanticType": "activityFinalNode",
+      "label": "No money moved",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-test-funds"
+      ]
+    },
+    {
+      "id": "note-signal-order",
+      "semanticType": "note",
+      "label": "Both receivers run inside Payment.objects.create(), so the notification and feed item precede the ledger pair.",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-signals",
+        "ev-service"
+      ]
+    },
+    {
+      "id": "note-double-check",
+      "semanticType": "note",
+      "label": "PayForm rejects paying yourself and an over-balance amount; send_payment checks both again for any caller.",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-form",
+        "ev-service"
+      ]
+    },
+    {
+      "id": "note-other-entry",
+      "semanticType": "note",
+      "label": "Accepting a money request enters the same service, as a PRIVATE payment, without an idempotency key.",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-accept"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "f-start-key",
+      "semanticType": "controlFlow",
+      "source": "start",
+      "target": "a-key",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-view-pay"
+      ]
+    },
+    {
+      "id": "f-key-validate",
+      "semanticType": "controlFlow",
+      "source": "a-key",
+      "target": "a-validate",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-view-pay"
+      ]
+    },
+    {
+      "id": "f-validate-d",
+      "semanticType": "controlFlow",
+      "source": "a-validate",
+      "target": "d-valid",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-form"
+      ]
+    },
+    {
+      "id": "f-invalid",
+      "semanticType": "controlFlow",
+      "source": "d-valid",
+      "target": "m-refused",
+      "guard": "no",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-view-pay",
+        "ev-form"
+      ]
+    },
+    {
+      "id": "f-valid",
+      "semanticType": "controlFlow",
+      "source": "d-valid",
+      "target": "d-seen",
+      "guard": "yes",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-view-pay"
+      ]
+    },
+    {
+      "id": "f-seen-yes",
+      "semanticType": "controlFlow",
+      "source": "d-seen",
+      "target": "a-replay",
+      "guard": "yes",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-view-pay",
+        "ev-idem-module"
+      ]
+    },
+    {
+      "id": "f-seen-no",
+      "semanticType": "controlFlow",
+      "source": "d-seen",
+      "target": "a-open-txn",
+      "guard": "no",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-view-pay"
+      ]
+    },
+    {
+      "id": "f-replay-final",
+      "semanticType": "controlFlow",
+      "source": "a-replay",
+      "target": "final-replay",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-test-idem"
+      ]
+    },
+    {
+      "id": "f-txn-funds",
+      "semanticType": "controlFlow",
+      "source": "a-open-txn",
+      "target": "d-funds",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-service"
+      ]
+    },
+    {
+      "id": "f-funds-no",
+      "semanticType": "controlFlow",
+      "source": "d-funds",
+      "target": "a-rollback",
+      "guard": "no",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-service",
+        "ev-balance"
+      ]
+    },
+    {
+      "id": "f-funds-yes",
+      "semanticType": "controlFlow",
+      "source": "d-funds",
+      "target": "a-create-payment",
+      "guard": "yes",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-service"
+      ]
+    },
+    {
+      "id": "f-create-notify",
+      "semanticType": "controlFlow",
+      "source": "a-create-payment",
+      "target": "a-notify",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-signals"
+      ]
+    },
+    {
+      "id": "f-notify-feed",
+      "semanticType": "controlFlow",
+      "source": "a-notify",
+      "target": "a-feeditem",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-signals"
+      ]
+    },
+    {
+      "id": "f-feed-ledger",
+      "semanticType": "controlFlow",
+      "source": "a-feeditem",
+      "target": "a-post-ledger",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-service"
+      ]
+    },
+    {
+      "id": "f-ledger-commit",
+      "semanticType": "controlFlow",
+      "source": "a-post-ledger",
+      "target": "a-commit",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-service"
+      ]
+    },
+    {
+      "id": "f-commit-remember",
+      "semanticType": "controlFlow",
+      "source": "a-commit",
+      "target": "a-remember",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-view-pay"
+      ]
+    },
+    {
+      "id": "f-remember-redirect",
+      "semanticType": "controlFlow",
+      "source": "a-remember",
+      "target": "a-redirect",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-view-pay"
+      ]
+    },
+    {
+      "id": "f-redirect-final",
+      "semanticType": "controlFlow",
+      "source": "a-redirect",
+      "target": "final-sent",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-view-pay"
+      ]
+    },
+    {
+      "id": "f-rollback-refused",
+      "semanticType": "controlFlow",
+      "source": "a-rollback",
+      "target": "m-refused",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-view-pay"
+      ]
+    },
+    {
+      "id": "f-refused-error",
+      "semanticType": "controlFlow",
+      "source": "m-refused",
+      "target": "a-show-error",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-view-pay"
+      ]
+    },
+    {
+      "id": "f-error-final",
+      "semanticType": "controlFlow",
+      "source": "a-show-error",
+      "target": "final-refused",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-test-funds"
+      ]
+    },
+    {
+      "id": "l-signal-order",
+      "semanticType": "commentLink",
+      "source": "note-signal-order",
+      "target": "a-create-payment",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-signals"
+      ]
+    },
+    {
+      "id": "l-double-check",
+      "semanticType": "commentLink",
+      "source": "note-double-check",
+      "target": "d-funds",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-form",
+        "ev-service"
+      ]
+    },
+    {
+      "id": "l-other-entry",
+      "semanticType": "commentLink",
+      "source": "note-other-entry",
+      "target": "a-open-txn",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-accept"
+      ]
+    }
+  ]
+}

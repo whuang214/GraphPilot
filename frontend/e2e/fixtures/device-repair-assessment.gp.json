@@ -1,0 +1,392 @@
+{
+  "diagramType": "activity_diagram",
+  "edges": [
+    {
+      "data": {
+        "semanticType": "controlFlow",
+        "weight": 1.0
+      },
+      "id": "edge_1_start_receive-device",
+      "source": "start",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "receive-device",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow",
+        "weight": 1.0
+      },
+      "id": "edge_2_receive-device_assessment-fork",
+      "source": "receive-device",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "assessment-fork",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow",
+        "weight": 1.0
+      },
+      "id": "edge_3_assessment-fork_hardware-diagnostics",
+      "source": "assessment-fork",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "hardware-diagnostics",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow",
+        "weight": 1.0
+      },
+      "id": "edge_4_assessment-fork_check-warranty",
+      "source": "assessment-fork",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "check-warranty",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow",
+        "weight": 1.0
+      },
+      "id": "edge_5_hardware-diagnostics_assessment-join",
+      "source": "hardware-diagnostics",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "assessment-join",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow",
+        "weight": 1.0
+      },
+      "id": "edge_6_check-warranty_assessment-join",
+      "source": "check-warranty",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "assessment-join",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow",
+        "weight": 1.0
+      },
+      "id": "edge_7_assessment-join_covered",
+      "source": "assessment-join",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "covered",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "covered",
+        "semanticType": "controlFlow",
+        "weight": 1.0
+      },
+      "id": "edge_8_covered_schedule-repair",
+      "source": "covered",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "schedule-repair",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "not covered",
+        "semanticType": "controlFlow",
+        "weight": 1.0
+      },
+      "id": "edge_9_covered_prepare-quotation",
+      "source": "covered",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "prepare-quotation",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow",
+        "weight": 1.0
+      },
+      "id": "edge_10_schedule-repair_assessment-complete",
+      "source": "schedule-repair",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "assessment-complete",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow",
+        "weight": 1.0
+      },
+      "id": "edge_11_prepare-quotation_assessment-complete",
+      "source": "prepare-quotation",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "assessment-complete",
+      "type": "default"
+    }
+  ],
+  "id": "diagram_device_repair_assessment",
+  "kind": "diagram",
+  "metadata": {
+    "authoring": "generated",
+    "createdAt": "2026-07-20T00:00:00Z",
+    "generatedBy": "fixture-derivation",
+    "intent": "device-repair-assessment",
+    "notation": "uml",
+    "originalType": "activity_diagram",
+    "source": "mcp",
+    "updatedAt": "2026-07-20T00:00:00Z"
+  },
+  "name": "device-repair-assessment",
+  "nodes": [
+    {
+      "data": {
+        "label": "Start",
+        "semanticType": "initialNode"
+      },
+      "height": 60.0,
+      "id": "start",
+      "position": {
+        "x": 189.0,
+        "y": 0.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 90.0
+    },
+    {
+      "data": {
+        "label": "Receive Device",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "receive-device",
+      "position": {
+        "x": 154.0,
+        "y": 132.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 160.0
+    },
+    {
+      "data": {
+        "label": "Fork",
+        "semanticType": "forkNode"
+      },
+      "height": 30.0,
+      "id": "assessment-fork",
+      "position": {
+        "x": 174.0,
+        "y": 264.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 120.0
+    },
+    {
+      "data": {
+        "label": "Run Hardware Diagnostics",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "hardware-diagnostics",
+      "position": {
+        "x": 0.0,
+        "y": 366.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 216.0
+    },
+    {
+      "data": {
+        "label": "Check Warranty",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "check-warranty",
+      "position": {
+        "x": 280.0,
+        "y": 366.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 160.0
+    },
+    {
+      "data": {
+        "label": "Join",
+        "semanticType": "joinNode"
+      },
+      "height": 30.0,
+      "id": "assessment-join",
+      "position": {
+        "x": 174.0,
+        "y": 498.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 120.0
+    },
+    {
+      "data": {
+        "label": "Covered Repair?",
+        "semanticType": "decisionNode"
+      },
+      "height": 90.0,
+      "id": "covered",
+      "position": {
+        "x": 159.0,
+        "y": 600.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 150.0
+    },
+    {
+      "data": {
+        "label": "Schedule Repair",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "schedule-repair",
+      "position": {
+        "x": 41.0,
+        "y": 762.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 160.0
+    },
+    {
+      "data": {
+        "label": "Prepare Quotation",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "prepare-quotation",
+      "position": {
+        "x": 265.25,
+        "y": 762.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 163.5
+    },
+    {
+      "data": {
+        "label": "Assessment Complete",
+        "semanticType": "activityFinalNode"
+      },
+      "height": 60.0,
+      "id": "assessment-complete",
+      "position": {
+        "x": 144.75,
+        "y": 894.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 178.5
+    }
+  ],
+  "schemaVersion": "graphpilot.diagram.v1",
+  "viewport": {
+    "x": 0,
+    "y": 0,
+    "zoom": 1
+  }
+}

@@ -1,0 +1,198 @@
+{
+  "schemaVersion": "graphpilot.delivery.generation-endpoint-correction-proof.v1",
+  "kind": "generationEndpointCorrectionProof",
+  "proofId": "proof-generation-endpoint-correction-block6-s06-01",
+  "baselineCommit": "ef2361d3ffcab4be31e174742b4ad3c603e8811b",
+  "status": "pass",
+  "rootDecision": {
+    "path": "../generation-endpoint-diagnosis/root-decision.json",
+    "decisionId": "decision-generation-endpoint-contract-block6-s05-20260730-01",
+    "digest": "sha256:b702ff83d6cf1e94c36813e8744744db579625e527cfdd401f72a2f9f5667e36",
+    "owner": "generation_prompt_projection_schema_validator_contract",
+    "rootClass": "semantic_blind_bdd_structural_endpoint_scope"
+  },
+  "scope": {
+    "providerFree": true,
+    "providerCalls": 0,
+    "liveIdentityCreated": false,
+    "promptAssetChanged": false,
+    "logicalSchemaChanged": false,
+    "publicContractChanged": false,
+    "semanticReviewChanged": false,
+    "readinessChanged": false,
+    "hostOrMcpChanged": false,
+    "environmentChanged": false,
+    "commitState": "committed_with_containing_s06_implementation"
+  },
+  "testFirst": {
+    "productionState": "unchanged from baseline while the regressions ran",
+    "command": "$env:AZURE_OPENAI_ENDPOINT=\"\"; $env:AZURE_OPENAI_API_KEY=\"\"; $env:AZURE_OPENAI_DEPLOYMENT=\"\"; cd \"C:\\Users\\w105098\\GP-LB\\backend\"; uv run --with-requirements \"..\\requirements.txt\" python manage.py test --settings graphpilot.live_anchor_settings tests.generation.test_generation_packet_builder.GenerationPacketBuilderTests.test_bdd_generation_packets_expose_structural_endpoint_and_note_attachment_rules_in_both_modes tests.generation.test_pre_layout_generation_service.PreLayoutGenerationServiceTests.test_bdd_note_comment_link_is_excluded_from_structural_block_endpoint_rule_in_both_directions_and_modes tests.generation.test_pre_layout_generation_service.PreLayoutGenerationServiceTests.test_bdd_endpoint_scope_repair_packet_repeats_provider_visible_rules tests.generation.test_pre_layout_generation_service.PreLayoutGenerationServiceTests.test_bdd_note_comment_link_reaches_pre_layout_acceptance_without_generation_repair_in_both_modes",
+    "exitCode": 1,
+    "testsFound": 4,
+    "durationSeconds": 4.534,
+    "summary": "FAILED (failures=7, errors=2)",
+    "expectedFailures": [
+      {
+        "test": "test_bdd_generation_packets_expose_structural_endpoint_and_note_attachment_rules_in_both_modes",
+        "observed": "direct packet structuralRules retained the incomplete four-rule BDD projection"
+      },
+      {
+        "test": "test_bdd_note_comment_link_is_excluded_from_structural_block_endpoint_rule_in_both_directions_and_modes",
+        "observed": "four direct/context and note-to-block/block-to-note cells emitted bdd_relationship_endpoints_invalid at $.edges[3]"
+      },
+      {
+        "test": "test_bdd_endpoint_scope_repair_packet_repeats_provider_visible_rules",
+        "observed": "direct and context repair authority repeated the incomplete projection and lacked the explicit endpoint rule"
+      },
+      {
+        "test": "test_bdd_note_comment_link_reaches_pre_layout_acceptance_without_generation_repair_in_both_modes",
+        "observed": "direct and context candidates exhausted a repeated fake repair and raised DeterministicGenerationFailure"
+      }
+    ],
+    "preservingBaseline": {
+      "command": "$env:AZURE_OPENAI_ENDPOINT=\"\"; $env:AZURE_OPENAI_API_KEY=\"\"; $env:AZURE_OPENAI_DEPLOYMENT=\"\"; cd \"C:\\Users\\w105098\\GP-LB\\backend\"; uv run --with-requirements \"..\\requirements.txt\" python manage.py test --settings graphpilot.live_anchor_settings tests.generation.test_pre_layout_generation_service.PreLayoutGenerationServiceTests.test_bdd_structural_relationship_note_endpoints_remain_rejected_for_all_four_semantics_and_both_modes tests.generation.test_pre_layout_generation_service.PreLayoutGenerationServiceTests.test_bdd_block_to_block_comment_link_remains_a_compatibility_shape_in_both_modes tests.generation.test_pre_layout_generation_service.PreLayoutGenerationServiceTests.test_bdd_structural_endpoint_witnesses_pass_provider_projection_and_full_schema_before_deterministic_rejection tests.generation.test_pre_layout_generation_service.PreLayoutGenerationServiceTests.test_block5_repaired_candidate_and_all_twelve_training_fixtures_remain_accepted tests.generation.test_pre_layout_generation_service.PreLayoutGenerationServiceTests.test_generation_repair_retains_exact_issue_and_candidate_authority",
+      "exitCode": 0,
+      "testsFound": 5,
+      "durationSeconds": 6.391,
+      "summary": "OK"
+    }
+  },
+  "correction": {
+    "contractVersionPolicy": "private current V1 changed in place",
+    "providerVisibleStructuralRules": [
+      "Include at least one block definition.",
+      "`association`, `composition`, `generalization`, and `dependency` each require two existing Block endpoints.",
+      "`generalization` connects a child source Block to a parent target Block.",
+      "`composition` connects a part source Block to a whole target Block.",
+      "`dependency` connects a dependent source Block to a supplier target Block.",
+      "`association` represents plain/reference structure between Blocks.",
+      "Note attachments use `commentLink`; `commentLink` is excluded from structural Block-endpoint and connectivity rules."
+    ],
+    "deterministicEndpointPredicate": {
+      "appliesTo": [
+        "association",
+        "composition",
+        "generalization",
+        "dependency"
+      ],
+      "requires": "both resolved endpoints have semanticType block",
+      "excluded": "commentLink",
+      "converseCommentLinkPolicyAdded": false
+    },
+    "stableIssue": {
+      "code": "bdd_relationship_endpoints_invalid",
+      "message": "BDD relationships require block endpoints.",
+      "repairBucket": "validationIssues",
+      "repairStillEnabled": true
+    }
+  },
+  "regressions": {
+    "failingBeforeAndPassingAfter": [
+      "test_bdd_generation_packets_expose_structural_endpoint_and_note_attachment_rules_in_both_modes",
+      "test_bdd_note_comment_link_is_excluded_from_structural_block_endpoint_rule_in_both_directions_and_modes",
+      "test_bdd_endpoint_scope_repair_packet_repeats_provider_visible_rules",
+      "test_bdd_note_comment_link_reaches_pre_layout_acceptance_without_generation_repair_in_both_modes"
+    ],
+    "preserving": [
+      "test_bdd_structural_relationship_note_endpoints_remain_rejected_for_all_four_semantics_and_both_modes",
+      "test_bdd_block_to_block_comment_link_remains_a_compatibility_shape_in_both_modes",
+      "test_bdd_structural_endpoint_witnesses_pass_provider_projection_and_full_schema_before_deterministic_rejection",
+      "test_block5_repaired_candidate_and_all_twelve_training_fixtures_remain_accepted",
+      "test_generation_repair_retains_exact_issue_and_candidate_authority"
+    ],
+    "coverage": {
+      "structuralNoteEndpointCellsRejected": 8,
+      "commentLinkDirectionModeCellsAccepted": 4,
+      "blockToBlockCommentLinkCompatibilityCellsAccepted": 2,
+      "providerProjectionAndFullSchemaStructuralWitnessCellsAcceptedBeforeBackendRejection": 8,
+      "trainingFixturesAccepted": 12,
+      "safeBlock5ShapeControl": "four nodes, three structural Block-to-Block edges, and no reconstruction of private provider content"
+    }
+  },
+  "verification": [
+    {
+      "name": "four corrected regressions",
+      "command": "$env:AZURE_OPENAI_ENDPOINT=\"\"; $env:AZURE_OPENAI_API_KEY=\"\"; $env:AZURE_OPENAI_DEPLOYMENT=\"\"; cd \"C:\\Users\\w105098\\GP-LB\\backend\"; uv run --with-requirements \"..\\requirements.txt\" python manage.py test --settings graphpilot.live_anchor_settings tests.generation.test_generation_packet_builder.GenerationPacketBuilderTests.test_bdd_generation_packets_expose_structural_endpoint_and_note_attachment_rules_in_both_modes tests.generation.test_pre_layout_generation_service.PreLayoutGenerationServiceTests.test_bdd_note_comment_link_is_excluded_from_structural_block_endpoint_rule_in_both_directions_and_modes tests.generation.test_pre_layout_generation_service.PreLayoutGenerationServiceTests.test_bdd_endpoint_scope_repair_packet_repeats_provider_visible_rules tests.generation.test_pre_layout_generation_service.PreLayoutGenerationServiceTests.test_bdd_note_comment_link_reaches_pre_layout_acceptance_without_generation_repair_in_both_modes",
+      "result": "4 passed in 3.745s",
+      "exitCode": 0
+    },
+    {
+      "name": "preserving regressions",
+      "command": "$env:AZURE_OPENAI_ENDPOINT=\"\"; $env:AZURE_OPENAI_API_KEY=\"\"; $env:AZURE_OPENAI_DEPLOYMENT=\"\"; cd \"C:\\Users\\w105098\\GP-LB\\backend\"; uv run --with-requirements \"..\\requirements.txt\" python manage.py test --settings graphpilot.live_anchor_settings tests.generation.test_pre_layout_generation_service.PreLayoutGenerationServiceTests.test_bdd_structural_relationship_note_endpoints_remain_rejected_for_all_four_semantics_and_both_modes tests.generation.test_pre_layout_generation_service.PreLayoutGenerationServiceTests.test_bdd_block_to_block_comment_link_remains_a_compatibility_shape_in_both_modes tests.generation.test_pre_layout_generation_service.PreLayoutGenerationServiceTests.test_bdd_structural_endpoint_witnesses_pass_provider_projection_and_full_schema_before_deterministic_rejection tests.generation.test_pre_layout_generation_service.PreLayoutGenerationServiceTests.test_block5_repaired_candidate_and_all_twelve_training_fixtures_remain_accepted tests.generation.test_pre_layout_generation_service.PreLayoutGenerationServiceTests.test_generation_repair_retains_exact_issue_and_candidate_authority",
+      "result": "5 passed in 6.036s",
+      "exitCode": 0
+    },
+    {
+      "name": "changed test modules",
+      "command": "$env:AZURE_OPENAI_ENDPOINT=\"\"; $env:AZURE_OPENAI_API_KEY=\"\"; $env:AZURE_OPENAI_DEPLOYMENT=\"\"; cd \"C:\\Users\\w105098\\GP-LB\\backend\"; uv run --with-requirements \"..\\requirements.txt\" python manage.py test --settings graphpilot.live_anchor_settings tests.generation.test_generation_packet_builder tests.generation.test_pre_layout_generation_service",
+      "result": "37 passed in 17.983s",
+      "exitCode": 0
+    },
+    {
+      "name": "S05 focused provider-free guard set",
+      "command": "$env:AZURE_OPENAI_ENDPOINT=\"\"; $env:AZURE_OPENAI_API_KEY=\"\"; $env:AZURE_OPENAI_DEPLOYMENT=\"\"; cd \"C:\\Users\\w105098\\GP-LB\\backend\"; uv run --with-requirements \"..\\requirements.txt\" python manage.py test --settings graphpilot.live_anchor_settings tests.llm.test_llm_client.ProviderStrictSchemaTests tests.generation.test_generation_packet_builder tests.generation.test_pre_layout_generation_service tests.generation.test_semantic_review_service tests.generation.test_diagram_generation_service tests.generation.test_diagram_generation_context_service tests.evaluation.workflow_audit.test_client tests.evaluation.workflow_audit.test_live_anchor_service",
+      "result": "105 passed in 144.850s",
+      "exitCode": 0
+    },
+    {
+      "name": "broader provider-free generation suite",
+      "command": "$env:AZURE_OPENAI_ENDPOINT=\"\"; $env:AZURE_OPENAI_API_KEY=\"\"; $env:AZURE_OPENAI_DEPLOYMENT=\"\"; cd \"C:\\Users\\w105098\\GP-LB\\backend\"; uv run --with-requirements \"..\\requirements.txt\" python manage.py test --settings graphpilot.live_anchor_settings tests.generation",
+      "result": "202 passed in 164.897s",
+      "exitCode": 0
+    },
+    {
+      "name": "readiness and frozen-history guards",
+      "command": "$env:AZURE_OPENAI_ENDPOINT=\"\"; $env:AZURE_OPENAI_API_KEY=\"\"; $env:AZURE_OPENAI_DEPLOYMENT=\"\"; cd \"C:\\Users\\w105098\\GP-LB\\backend\"; uv run --with-requirements \"..\\requirements.txt\" python manage.py test --settings graphpilot.live_anchor_settings tests.readiness tests.evaluation.historical.full_effort",
+      "result": "110 tests run, 1 skipped in 304.843s",
+      "exitCode": 0
+    },
+    {
+      "name": "full backend",
+      "command": "cd backend; uv run --active python manage.py test",
+      "result": "1069 tests passed, 5 skipped in 600.715s",
+      "exitCode": 0
+    },
+    {
+      "name": "frontend lint build unit",
+      "command": "cd frontend; npm run lint; npm run build; npm run test",
+      "result": "lint 0 warnings/errors; build pass; 419 tests pass",
+      "exitCode": 0
+    },
+    {
+      "name": "frontend e2e",
+      "command": "$env:CI=\"1\"; prepend existing project venv Scripts to PATH; cd frontend; npm run e2e",
+      "result": "43 passed in 2.0m",
+      "exitCode": 0
+    }
+  ],
+  "changedFiles": [
+    "backend/services/core/structural_constraints.py",
+    "backend/services/generation/pre_layout_generation_service.py",
+    "backend/tests/generation/test_generation_packet_builder.py",
+    "backend/tests/generation/test_pre_layout_generation_service.py",
+    "docs/02-design-and-features/04-generation-design.md",
+    "docs/03-development-and-delivery/epics/03-mcp-generation-and-wrappers/06-workflow-reliability-and-optimization/06-whole-workflow-optimization/06-generation-endpoint-correction.md",
+    "docs/03-development-and-delivery/epics/03-mcp-generation-and-wrappers/06-workflow-reliability-and-optimization/06-whole-workflow-optimization/evidence/generation-endpoint-wave/provider-free-correction.json",
+    "docs/03-development-and-delivery/epics/03-mcp-generation-and-wrappers/06-workflow-reliability-and-optimization/06-whole-workflow-optimization/evidence/generation-endpoint-wave/provider-free-correction.md",
+    "docs/03-development-and-delivery/epics/03-mcp-generation-and-wrappers/06-workflow-reliability-and-optimization/06-whole-workflow-optimization/evidence/generation-endpoint-wave/implementation-audit.md"
+  ],
+  "implementationAudit": {
+    "state": "pass",
+    "reviewer": "independent-read-only-agent-9e1ba350",
+    "remainingCritical": 0,
+    "remainingHigh": 0,
+    "remainingMedium": 0,
+    "informationalFutureTests": [
+      "cross-type commentLink characterization",
+      "note-to-note commentLink characterization",
+      "mixed structural and annotation multi-edge characterization",
+      "repair exhaustion characterization"
+    ]
+  },
+  "deviations": [
+    "No live S07 proof, identity, browser, port, or provider call was created during S06.",
+    "The raw Block 5 repaired provider candidate was intentionally not retained and was not reconstructed; preservation uses its immutable prior pass plus a synthetic four-node/three-edge structural-class control and all twelve checked-in training fixtures.",
+    "The first isolated frontend verify reached lint, build, and 419 unit passes but its E2E server could not find the worktree-local .venv; rerunning E2E with the existing project interpreter on PATH passed all 43 tests without tracked changes."
+  ],
+  "digest": "sha256:bd00b7a6993e197e8be2261bf1bac78030dd4e0e2d63aeb2a3c4f21453f80a35"
+}

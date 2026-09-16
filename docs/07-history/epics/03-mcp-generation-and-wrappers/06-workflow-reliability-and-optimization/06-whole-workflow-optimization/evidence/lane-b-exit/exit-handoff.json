@@ -1,0 +1,136 @@
+{
+  "schemaVersion": "graphpilot.delivery.lane-b-exit-handoff.v1",
+  "kind": "laneBExitHandoff",
+  "status": "blocked_on_lane_a_checkpoint",
+  "laneB": {
+    "worktree": "C:/Users/w105098/GP-LB",
+    "branch": "lane-b-optimization",
+    "sourceCommit": "03eb8efee55424d650504142de016acce0894e94",
+    "mergeBase": "4bd7ba4dcb278a251fe0bb87e4112ce39f42cdf9",
+    "commitsAfterMergeBase": 15,
+    "trackedClean": true,
+    "pushed": false,
+    "merged": false
+  },
+  "laneA": {
+    "worktree": "C:/Users/w105098/Desktop/Projects/GraphPilot",
+    "branch": "master",
+    "observedCommit": "89d66b3d158ab424f9a6958ba2135197ee7574b3",
+    "commitsAfterMergeBase": 9,
+    "trackedClean": true,
+    "a03Implementation": "complete_verified",
+    "a03IndependentColdHostRetest": "outstanding",
+    "a04": "blocked_on_a03_retest",
+    "a07": "blocked_on_a05_a06",
+    "a09": "blocked_on_a08",
+    "integrationCheckpointReady": false
+  },
+  "retained": {
+    "windowsPathSafety": "4f02b0a866c3eb7a08efe64d7f983952b85d6ab4",
+    "generationDiagnosis": "ef2361d3ffcab4be31e174742b4ad3c603e8811b",
+    "generationCorrection": "a17bc4095cf79a30089aff39b10aa9fe73426b8d",
+    "generationDecision": "ea54964dc8c0ef90e0393266d24e748c86008e75",
+    "semanticDiagnosis": "5ec80b7ed4cd5eb24fbced0532079cb737ad58c4",
+    "semanticProviderFreeEvidence": true,
+    "semanticLiveEvidence": true
+  },
+  "reverted": {
+    "semanticCorrection": "b5ef42258cb9459db5d508e7e665a31712196b7e",
+    "revertCommit": "a6e7ad0779e36c636efb17394d8161d5ea3f338e",
+    "behaviorMatchesPreCorrectionCommit": "5ec80b7ed4cd5eb24fbced0532079cb737ad58c4",
+    "evidencePreserved": true
+  },
+  "liveResults": {
+    "generation": {
+      "runId": "run-live-workflow-anchor-g",
+      "status": "pass",
+      "calls": 3,
+      "completeMs": 140007.6106999563,
+      "decision": "retain",
+      "causalBenefit": "generation repair removed; 26052.517600008287 ms"
+    },
+    "semanticRetry": {
+      "runId": "run-live-workflow-anchor-s",
+      "status": "failed",
+      "errorCode": "semantic_repair_failed",
+      "calls": 5,
+      "preBrowserMs": 267553.0795000959,
+      "decision": "revert",
+      "retryAllowed": false
+    }
+  },
+  "accounting": {
+    "controlledCompleted": 18,
+    "externalHostCompleted": 1,
+    "aggregateCompleted": 19,
+    "failedProviderCalls": 0,
+    "uncertainProviderCalls": 0,
+    "ceiling": 1000,
+    "aggregateRemaining": 981
+  },
+  "finalGuard": {
+    "runId": "run-workflow-audit-b6s1-guard-01",
+    "status": "pass",
+    "manifestDigest": "sha256:fd5e2ffb21e1dc8c3c571bb226d13a444884b24970b886be2eef868ef9913fc3",
+    "reportDigest": "sha256:487bb355ede9dc0e45d5289564ff74a4d51cbeb27cfd812d3e45c8b85675f4cf",
+    "browserDigest": "sha256:b958a4ad1287d0bee321c3f6f559bd50e5e9b7cf0acc83b5571e82d8f2c801c9",
+    "ledgerDigest": "sha256:b1fc9b876a4cfda4cc9a9ac68272c1dd5f483d8fe6918287970e30c95554eeb0",
+    "compatibilityKey": "sha256:d77f21f801006fe95a436171697ac1d38869bde834c619b802971fde5529ebd1",
+    "observations": 19,
+    "generated": 16,
+    "blocked": 1,
+    "expectedErrors": 2,
+    "fakeCalls": 56,
+    "azureCalls": 0,
+    "browser": "pass"
+  },
+  "blockedOptimization": {
+    "completeRebaseline": "blocked_until_lane_a_a09_checkpoint_is_integrated",
+    "providerPacketCache": "not_started_no_integrated_baseline",
+    "readinessVariable": "not_started_no_integrated_baseline",
+    "localOwner": "not_started_no_integrated_attribution",
+    "mcpBrowser": "not_reassessed_after_integrated_baseline",
+    "reason": "Running these waves before Lane A completes and is integrated would use stale baseline/domain attribution and violate the fixed dependency order."
+  },
+  "rollbackMap": [
+    {"owner": "generation_endpoint_correction", "commit": "a17bc4095cf79a30089aff39b10aa9fe73426b8d", "action": "Retain. If a future integrated rebaseline fails generation compatibility or quality, revert this commit only after preserving all g2 evidence; B0 and diagnosis remain."},
+    {"owner": "windows_path_safety", "commit": "4f02b0a866c3eb7a08efe64d7f983952b85d6ab4", "action": "Retain independently. Do not revert while Windows live packages depend on preflight safety."},
+    {"owner": "semantic_review_retry", "commit": "b5ef42258cb9459db5d508e7e665a31712196b7e", "action": "Already reverted by a6e7ad0; no further behavior rollback. Preserve S09/S10/S11/S12 evidence and never rerun s1."}
+  ],
+  "integrationCaptain": {
+    "nextAction": "Complete Lane A's independent A03 cold-host retest and dependency chain through A09. Then create a dedicated integration worktree at the approved Lane A checkpoint, integrate Lane B after Lane A, resolve canonical-owner docs in favor of coherent final behavior, and run a complete provider-free rebaseline before any new optimization wave.",
+    "doNot": [
+      "Do not merge or modify Lane A from this Lane B worktree.",
+      "Do not rerun g2 or s1 identities.",
+      "Do not start packet/cache/readiness/local/MCP/browser optimization on the pre-integration baseline.",
+      "Do not update shared current-state, backlog, ledger, decision, or captain files until integration ownership is active."
+    ]
+  },
+  "resources": {
+    "reservedPortsFree": true,
+    "managedBrowsers": 0,
+    "providerWorkers": 0,
+    "ignoredVenv": {
+      "path": "C:/Users/w105098/GP-LB/.venv",
+      "kind": "guard_materialized_ordinary_directory",
+      "filesRemoved": 9107,
+      "bytesRemoved": 104838501,
+      "cleanup": "completed_with_explicit_user_confirmation",
+      "externalProjectVenvPreserved": true
+    }
+  },
+  "immutableLocalArtifacts": [
+    ".graphpilot/evaluation/live-workflow-anchor/packages/g2/",
+    ".graphpilot/evaluation/live-workflow-anchor/packages/s1/",
+    ".graphpilot/evaluation/live-workflow-anchor/runs/run-live-workflow-anchor-g/",
+    ".graphpilot/evaluation/live-workflow-anchor/runs/run-live-workflow-anchor-s/",
+    ".graphpilot/evaluation/live-workflow-anchor/workspaces/run-live-workflow-anchor-g/",
+    ".graphpilot/evaluation/live-workflow-anchor/workspaces/run-live-workflow-anchor-s/",
+    ".graphpilot/evaluation/workflow-audit/runs/run-workflow-audit-b6g1-guard-01/",
+    ".graphpilot/evaluation/workflow-audit/runs/run-workflow-audit-b6s1-guard-01/"
+  ],
+  "cumulativeLocalArtifacts": [
+    {"path": ".graphpilot/evaluation/workflow-audit/baseline-ledger.json", "digest": "sha256:b1fc9b876a4cfda4cc9a9ac68272c1dd5f483d8fe6918287970e30c95554eeb0", "policy": "Preserve/copy byte-for-byte at this checkpoint; later accepted rebaselines may append through the production ledger service, never overwrite historical entries."}
+  ],
+  "digest": "sha256:880c6fce1f68a9e64fd3390a884d6920db51ccbdff42344e077a24dbb9c7958f"
+}

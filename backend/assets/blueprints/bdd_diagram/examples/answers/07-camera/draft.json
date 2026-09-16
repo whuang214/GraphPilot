@@ -1,0 +1,113 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "camera",
+  "diagramType": "bdd_diagram",
+  "authority": "conceptual",
+  "requests": [
+    "A camera is composed of a lens, a body, and a sensor and records its resolution; the lens contains an aperture and lists its focal length, and the body contains a shutter."
+  ],
+  "evidence": [],
+  "elements": [
+    {
+      "id": "camera",
+      "semanticType": "block",
+      "label": "Camera",
+      "assurance": "conceptual",
+      "features": {
+        "properties": [
+          {
+            "kind": "value",
+            "name": "resolution",
+            "type": "24 MP",
+            "multiplicity": {
+              "lower": 1,
+              "upper": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "lens",
+      "semanticType": "block",
+      "label": "Lens",
+      "assurance": "conceptual",
+      "features": {
+        "properties": [
+          {
+            "kind": "value",
+            "name": "focalLength",
+            "type": "50 mm",
+            "multiplicity": {
+              "lower": 1,
+              "upper": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "body",
+      "semanticType": "block",
+      "label": "Body",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "sensor",
+      "semanticType": "block",
+      "label": "Sensor",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "aperture",
+      "semanticType": "block",
+      "label": "Aperture",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "shutter",
+      "semanticType": "block",
+      "label": "Shutter",
+      "assurance": "conceptual"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "edge-1-lens-camera",
+      "semanticType": "composition",
+      "source": "lens",
+      "target": "camera",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-2-body-camera",
+      "semanticType": "composition",
+      "source": "body",
+      "target": "camera",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-3-sensor-camera",
+      "semanticType": "composition",
+      "source": "sensor",
+      "target": "camera",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-4-aperture-lens",
+      "semanticType": "composition",
+      "source": "aperture",
+      "target": "lens",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-5-shutter-body",
+      "semanticType": "composition",
+      "source": "shutter",
+      "target": "body",
+      "assurance": "conceptual"
+    }
+  ],
+  "assumptions": []
+}

@@ -1,0 +1,385 @@
+{
+  "schemaVersion": "graphpilot.delivery.generation-endpoint-diagnosis-proof.v1",
+  "kind": "generationEndpointDiagnosisProof",
+  "proofId": "proof-generation-endpoint-contract-block6-s05-20260730-01",
+  "sourceCommit": "4bd7ba4dcb278a251fe0bb87e4112ce39f42cdf9",
+  "status": "pass",
+  "scope": {
+    "owner": "generation_prompt_projection_schema_validator_contract",
+    "providerFree": true,
+    "productionChanged": false,
+    "testsChanged": false,
+    "promptsChanged": false,
+    "schemasChanged": false,
+    "rawProviderResponseAccessed": false,
+    "hiddenReasoningAccessed": false,
+    "semanticReviewChanged": false,
+    "hostBehaviorChanged": false
+  },
+  "safeBaseline": {
+    "runId": "run-live-workflow-anchor-block5-cold-room-20260728-03",
+    "observationId": "observation-live-workflow-anchor-block5-cold-room-20260728-03",
+    "manifestDigest": "sha256:e82c9732234517b879ab26f5915ec9578fcfb1aa32ecb16179dcec12702a86ed",
+    "observationDigest": "sha256:d7b0a1b3e8386484145c4542330393bf941dfb07e96c6d78f222107c2b2036db",
+    "eventLedgerDigest": "sha256:9caa14d19ab4c5bcc47e286eecff036f9ad519ea6517f639af214e6fc1ed43ab",
+    "generation": {
+      "state": "completed",
+      "durationMs": 44694.05439996626,
+      "requestBytes": 47594,
+      "responseBytes": 5342,
+      "inputTokens": 9682,
+      "outputTokens": 4631,
+      "reasoningTokens": 3289,
+      "cachedInputTokens": 0,
+      "firstResponseValid": false,
+      "validation": {
+        "code": "bdd_relationship_endpoints_invalid",
+        "path": "$.edges[3]"
+      }
+    },
+    "generationRepair": {
+      "state": "completed",
+      "durationMs": 26052.517600008287,
+      "requestBytes": 24808,
+      "responseBytes": 4895,
+      "inputTokens": 5127,
+      "outputTokens": 2850,
+      "reasoningTokens": 1628,
+      "cachedInputTokens": 0,
+      "firstResponseValid": true,
+      "validationIssues": []
+    },
+    "candidateTransition": {
+      "initial": {
+        "digest": "sha256:9344a771bd9ef4b03e98984bac1807210388cfa0f347dd01069ed40ace461b7b",
+        "nodeCount": 4,
+        "edgeCount": 4,
+        "repairRound": 0,
+        "issueCodes": [
+          "bdd_relationship_endpoints_invalid"
+        ]
+      },
+      "repair1": {
+        "digest": "sha256:603d533194c40fa8e985613d3560b1eb9810db6ca4c04ed8a9b9194023fbcb58",
+        "nodeCount": 4,
+        "edgeCount": 3,
+        "repairRound": 1,
+        "issueCodes": []
+      }
+    },
+    "rawResponseRetained": false,
+    "rawEdgeKnowable": false
+  },
+  "contractTrace": {
+    "contextGenerationPrompt": {
+      "asset": "backend/graphpilot/prompts/context-generation-v1.md",
+      "version": "graphpilot.context.generation-prompt.v1",
+      "requiresSuppliedDiagramModel": true,
+      "explicitBddEndpointMatrix": false
+    },
+    "providerInputProjection": {
+      "builder": "backend/services/generation/generation_packet_builder.py::_diagram_model",
+      "nodeVocabulary": [
+        "block",
+        "note"
+      ],
+      "edgeVocabulary": [
+        "association",
+        "commentLink",
+        "composition",
+        "dependency",
+        "generalization"
+      ],
+      "commentLinkDescription": "A dashed attachment from a comment to the element it annotates.",
+      "structuralRules": [
+        "Include at least one block definition.",
+        "`generalization` connects child and parent Blocks.",
+        "`composition` connects a part source Block to a whole target Block.",
+        "`association` represents plain/reference structure."
+      ],
+      "explicitStructuralRelationshipBlockEndpoints": false,
+      "explicitCommentLinkNoteAttachmentEndpoints": false,
+      "sharedByModes": [
+        "direct",
+        "context"
+      ],
+      "includedInRepairAuthority": true
+    },
+    "providerStrictSchemaProjection": {
+      "function": "backend/services/llm/llm_client.py::project_strict_output_schema",
+      "directSchema": "graphpilot.direct.logical-diagram.bdd.v1",
+      "contextSchema": "graphpilot.context.logical-diagram.bdd.v1",
+      "nodeSemanticTypeEnum": [
+        "block",
+        "note"
+      ],
+      "edgeSemanticTypeEnum": [
+        "association",
+        "composition",
+        "generalization",
+        "dependency",
+        "commentLink"
+      ],
+      "endpointReferenceMembershipExpressed": false,
+      "endpointNodeTypeMatrixExpressed": false
+    },
+    "fullLogicalSchemas": {
+      "direct": "backend/graphpilot/schemas/direct-logical-diagram-bdd.json",
+      "context": "backend/graphpilot/schemas/context-logical-diagram-bdd.json",
+      "independentNodeAndEdgeEnums": true,
+      "endpointReferenceMembershipExpressed": false,
+      "endpointNodeTypeMatrixExpressed": false,
+      "delegatesCrossItemTopologyToDeterministicValidation": true
+    },
+    "backendValidator": {
+      "file": "backend/services/generation/pre_layout_generation_service.py",
+      "method": "LogicalCandidateValidator._bdd",
+      "requiresBothEndpointIdsToResolveBeforeCodeCanEmit": true,
+      "currentPredicate": "source.semanticType == block and target.semanticType == block for every BDD edge semanticType",
+      "semanticTypeBranchBeforeEndpointPredicate": false,
+      "sharedConnectivityAlreadyExcludesCommentLink": true,
+      "logicalConformanceAlreadyMapsNoteIncidenceToCommentLink": true,
+      "rejectsNoteAttachedCommentLinkUnderStructuralBlockRule": true,
+      "acceptsBlockToBlockCommentLinkCompatibilityShape": true,
+      "failureTransport": {
+        "code": "bdd_relationship_endpoints_invalid",
+        "path": "$.edges[index]"
+      }
+    },
+    "repairPacket": {
+      "file": "backend/services/generation/pre_layout_generation_service.py",
+      "prompt": "backend/graphpilot/prompts/context-generation-repair-v1.md",
+      "schema": "backend/graphpilot/schemas/context-generation-repair-input.json",
+      "receivesRejectedLogicalDiagram": true,
+      "receivesValidationIssue": {
+        "code": "bdd_relationship_endpoints_invalid",
+        "path": "$.edges[3]"
+      },
+      "issueBucket": "validationIssues",
+      "receivesSameDiagramModelRules": true,
+      "examplesIncluded": false,
+      "responseSchemaUnchanged": "graphpilot.context.logical-diagram.bdd.v1"
+    },
+    "acceptedAssembly": {
+      "preLayoutAcceptance": "PreLayoutGenerationService.generate",
+      "semanticConsumer": "SemanticReviewService.review",
+      "logicalCompaction": "DiagramGenerationService._assembly_logical",
+      "canonicalAssembly": "generation_pipeline.assemble_canonical",
+      "canonicalValidation": "DiagramValidationService.validate",
+      "acceptedCandidateIsNotSilentlyRetargeted": true
+    }
+  },
+  "failingShapeClass": {
+    "name": "resolved_note_endpoint_on_fourth_bdd_edge",
+    "deduction": [
+      "Both fourth-edge endpoint IDs resolve to nodes; otherwise LogicalCandidateValidator._bdd skips this code.",
+      "At least one resolved endpoint node has semanticType note; block and note are the only full-schema-valid BDD node semantic types.",
+      "The exact edge semanticType, endpoint orientation, IDs, labels, relationship ends, and whether one or both endpoints were notes are not recoverable from safe evidence."
+    ],
+    "rawEdgeClaimed": false,
+    "possibleFullSchemaEdgeSemanticTypes": [
+      "association",
+      "composition",
+      "generalization",
+      "dependency",
+      "commentLink"
+    ]
+  },
+  "witnessMethod": {
+    "executableProof": "verify_provider_free.py",
+    "executableProofDigest": "sha256:dedc152d391d45fb1cef2a03c99db57b90c1c88bd18067f163dfeaa35274c1ea",
+    "baseFixture": "backend/graphpilot/blueprints/bdd_diagram/context-examples/training/irrigation-controller/expected.logical.json",
+    "baseShape": {
+      "nodes": 3,
+      "edges": 3,
+      "allBaseNodes": "block",
+      "baseValid": true
+    },
+    "mutation": "Append one complete synthetic note and one fourth edge from that note to an existing block; vary only the fourth edge semanticType. Direct cells remove origins and select the direct identity; context cells retain allowlisted fixture origins.",
+    "providerValidation": "project_strict_output_schema plus Draft202012Validator",
+    "fullSchemaValidation": "Draft202012Validator with the production SchemaRegistry reference registry",
+    "runtimeValidation": "LogicalCandidateValidator.validate",
+    "repairRuntime": "PreLayoutGenerationService.generate through FakeLLMClient",
+    "acceptedAssemblyRuntime": "standard no-review-call handoff plus PyGraphviz in-memory assembly and DiagramValidationService",
+    "filesCreatedByProofCommand": 0,
+    "providerCalls": 0
+  },
+  "boundedWitnessMatrix": [
+    {
+      "mode": "direct",
+      "semanticType": "association",
+      "digest": "sha256:aa486c799c9d337a12c607df8543c0b4d041c01df5f490e4f8d42150971bb432",
+      "providerProjection": "pass",
+      "fullSchema": "pass",
+      "backendRuntime": "bdd_relationship_endpoints_invalid @ $.edges[3]"
+    },
+    {
+      "mode": "direct",
+      "semanticType": "composition",
+      "digest": "sha256:929ac2d4bbd3400659abaac6da48ce5cf5062610fb7ee868643e4268358b4ad6",
+      "providerProjection": "pass",
+      "fullSchema": "pass",
+      "backendRuntime": "bdd_relationship_endpoints_invalid @ $.edges[3]"
+    },
+    {
+      "mode": "direct",
+      "semanticType": "generalization",
+      "digest": "sha256:fcb1187339f810702df30afb8fafcf169d5d333e29fa518dfe50b59c18677056",
+      "providerProjection": "pass",
+      "fullSchema": "pass",
+      "backendRuntime": "bdd_relationship_endpoints_invalid @ $.edges[3]"
+    },
+    {
+      "mode": "direct",
+      "semanticType": "dependency",
+      "digest": "sha256:3fe1e150ba4ce62b32d5e23ce72d28e1adf58411370833581bf5dd60a7300995",
+      "providerProjection": "pass",
+      "fullSchema": "pass",
+      "backendRuntime": "bdd_relationship_endpoints_invalid @ $.edges[3]"
+    },
+    {
+      "mode": "direct",
+      "semanticType": "commentLink",
+      "digest": "sha256:6d05c1b1da3cbcd7aeebf07162ee81b7674d06c37e2eb52024bd29c9acf6b5b3",
+      "providerProjection": "pass",
+      "fullSchema": "pass",
+      "backendRuntime": "bdd_relationship_endpoints_invalid @ $.edges[3]"
+    },
+    {
+      "mode": "context",
+      "semanticType": "association",
+      "digest": "sha256:65094c3c808aeb3b3e9446e4dfdd7e3108a0ac8f4f614db423cef53681cbc286",
+      "providerProjection": "pass",
+      "fullSchema": "pass",
+      "backendRuntime": "bdd_relationship_endpoints_invalid @ $.edges[3]"
+    },
+    {
+      "mode": "context",
+      "semanticType": "composition",
+      "digest": "sha256:d897fbfc13e333fd9b6b5107a986bb5f43278b78acd38643ff9d5df276559c63",
+      "providerProjection": "pass",
+      "fullSchema": "pass",
+      "backendRuntime": "bdd_relationship_endpoints_invalid @ $.edges[3]"
+    },
+    {
+      "mode": "context",
+      "semanticType": "generalization",
+      "digest": "sha256:b9856ede233e175a6070945846603b7c001472b5a6ca17e73e43d5b7b7ae3a91",
+      "providerProjection": "pass",
+      "fullSchema": "pass",
+      "backendRuntime": "bdd_relationship_endpoints_invalid @ $.edges[3]"
+    },
+    {
+      "mode": "context",
+      "semanticType": "dependency",
+      "digest": "sha256:39f3c5d680f50b295121855157105a2d1f209dde9154e1524d2a702fb088cee7",
+      "providerProjection": "pass",
+      "fullSchema": "pass",
+      "backendRuntime": "bdd_relationship_endpoints_invalid @ $.edges[3]"
+    },
+    {
+      "mode": "context",
+      "semanticType": "commentLink",
+      "digest": "sha256:1cf69cc1290d0e69a119787f2591dd756fec3d89195d41a2c60737a9c9b7aac8",
+      "providerProjection": "pass",
+      "fullSchema": "pass",
+      "backendRuntime": "bdd_relationship_endpoints_invalid @ $.edges[3]"
+    }
+  ],
+  "blockCommentLinkCompatibilityControls": [
+    {
+      "mode": "direct",
+      "shape": "commentLink with two block endpoints",
+      "digest": "sha256:9fce48ee2e91145e51d137aad59aab60a1e6706c99a6857f234b0427a414d5ae",
+      "providerProjection": "pass",
+      "fullSchema": "pass",
+      "backendRuntime": "pass"
+    },
+    {
+      "mode": "context",
+      "shape": "commentLink with two block endpoints",
+      "digest": "sha256:9d51166104646c19036cd76d0a72c2919f6fba5bfd21755716428f37e0922356",
+      "providerProjection": "pass",
+      "fullSchema": "pass",
+      "backendRuntime": "pass"
+    }
+  ],
+  "correctedWitnesses": [
+    {
+      "mode": "direct",
+      "correction": "Remove only the synthetic fourth edge; retain the synthetic note.",
+      "digest": "sha256:646ea5f59cde71d971d93f55ceca99f0f8b2ef7913c1429c51ff9760980ea874",
+      "providerProjection": "pass",
+      "fullSchema": "pass",
+      "backendRuntime": "pass"
+    },
+    {
+      "mode": "context",
+      "correction": "Remove only the synthetic fourth edge; retain the synthetic note and origins.",
+      "digest": "sha256:a620f4aff0bb430dc8ca6c63bfe19129e6762baca610ce11450420fedd7bcc68",
+      "providerProjection": "pass",
+      "fullSchema": "pass",
+      "backendRuntime": "pass"
+    }
+  ],
+  "repairAndAssemblyWitness": {
+    "mode": "context",
+    "initialDigest": "sha256:1cf69cc1290d0e69a119787f2591dd756fec3d89195d41a2c60737a9c9b7aac8",
+    "fakeCalls": 2,
+    "repairInputKind": "contextGenerationRepairInput",
+    "repairPreviousDigestMatchesInitial": true,
+    "repairValidationIssues": [
+      {
+        "code": "bdd_relationship_endpoints_invalid",
+        "path": "$.edges[3]"
+      }
+    ],
+    "repairStructuralIssues": [],
+    "repairProvenanceIssues": [],
+    "acceptedDigest": "sha256:a620f4aff0bb430dc8ca6c63bfe19129e6762baca610ce11450420fedd7bcc68",
+    "repairRoundsUsed": 1,
+    "standardSemanticHandoffPreservedCandidate": true,
+    "assemblyEngine": "pygraphviz-dot",
+    "canonicalNodeCount": 4,
+    "canonicalEdgeCount": 3,
+    "originsPreserved": true,
+    "canonicalValid": true,
+    "canonicalWarnings": [
+      {
+        "code": "disconnected_node",
+        "path": "$.nodes[3].id"
+      }
+    ]
+  },
+  "rootConclusion": {
+    "owner": "generation_prompt_projection_schema_validator_contract",
+    "class": "semantic_blind_bdd_structural_endpoint_scope",
+    "rawVariantClaimed": false,
+    "whyUniqueOwner": "Both BDD modes and every full-schema edge semantic reproduce the safe signature after passing provider projection and full schema. The provider-visible diagramModel omits the exact structural-versus-annotation endpoint scope, while the backend applies the structural block/block predicate to every edge including commentLink. Repair and accepted assembly behave correctly once given a validator-valid candidate.",
+    "semanticReviewControlUnchanged": "finding_invalid @ $",
+    "hostControlUnchanged": true
+  },
+  "limitations": [
+    "The raw Block 5 generation response was intentionally not retained and was not accessed; no synthetic witness is claimed to be its actual fourth edge.",
+    "The safe code/path identifies the resolved-note endpoint class but cannot distinguish edge semanticType, direction, endpoint IDs, relationship-end data, or one-note versus two-note incidence.",
+    "The synthetic remove-edge correction mirrors only the safe 4-edge to 3-edge count transition; it does not claim the actual repair edit.",
+    "This proof establishes a contract owner and implementable correction boundary, not provider improvement, live repair removal, semantic quality, representative stability, calibration, certification, or promotion."
+  ],
+  "verification": {
+    "witnessCommand": "$env:AZURE_OPENAI_ENDPOINT=\"\"; $env:AZURE_OPENAI_API_KEY=\"\"; $env:AZURE_OPENAI_DEPLOYMENT=\"\"; $env:PYTHONPATH=\".\"; cd backend; uv run --with-requirements ..\\requirements.txt python ..\\docs\\03-development-and-delivery\\epics\\03-mcp-generation-and-wrappers\\06-workflow-reliability-and-optimization\\06-whole-workflow-optimization\\evidence\\generation-endpoint-diagnosis\\verify_provider_free.py",
+    "witnessResult": {"status": "pass", "providerCalls": 0, "fakeCalls": 2, "witnessCells": 10, "controls": 4, "repairRoundsUsed": 1, "canonicalValid": true},
+    "focusedCommand": "$env:AZURE_OPENAI_ENDPOINT=\"\"; $env:AZURE_OPENAI_API_KEY=\"\"; $env:AZURE_OPENAI_DEPLOYMENT=\"\"; cd backend; uv run --with-requirements ..\\requirements.txt python manage.py test --settings graphpilot.live_anchor_settings tests.llm.test_llm_client.ProviderStrictSchemaTests tests.generation.test_generation_packet_builder tests.generation.test_pre_layout_generation_service tests.generation.test_semantic_review_service tests.generation.test_diagram_generation_service tests.generation.test_diagram_generation_context_service tests.evaluation.workflow_audit.test_client tests.evaluation.workflow_audit.test_live_anchor_service",
+    "testsRun": 85,
+    "result": "pass",
+    "providerCalls": 0
+  },
+  "accounting": {
+    "controlledCallsBefore": 10,
+    "controlledCallsAfter": 10,
+    "externalHostCallsBefore": 1,
+    "externalHostCallsAfter": 1,
+    "aggregateCallsAfter": 11,
+    "ceiling": 1000
+  },
+  "digest": "sha256:67769c64bb1683cfe7acc5d7293e3ab54c78d0c848cf1e5895093718b2dc34de"
+}

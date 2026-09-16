@@ -1,0 +1,41 @@
+{
+  "shows": "Rewiring one edge. Automatic approval used to be paid like any other refund and now goes straight to Done, so that one edge is re-routed and nothing else in the picture moves — not the branches above it, not the edge beside it. The two flows into 'Pay the customer' are drawn straight because the boxes overlap and the natural anchors already line up; fan-out used to bend them anyway, which is the defect this example was rebuilt around.",
+  "create": {
+    "schemaVersion": "graphpilot.draft.v1",
+    "kind": "diagramDraft",
+    "diagramName": "refund-rewired",
+    "diagramType": "activity_diagram",
+    "authority": "conceptual",
+    "requests": ["How a refund is approved."],
+    "elements": [
+      { "id": "start", "semanticType": "initialNode", "label": "Start", "assurance": "conceptual" },
+      { "id": "raise", "semanticType": "opaqueAction", "label": "Raise the refund", "assurance": "conceptual" },
+      { "id": "check", "semanticType": "decisionNode", "label": "Over £100?", "assurance": "conceptual" },
+      { "id": "manager", "semanticType": "opaqueAction", "label": "Manager approves", "assurance": "conceptual" },
+      { "id": "auto", "semanticType": "opaqueAction", "label": "Approve automatically", "assurance": "conceptual" },
+      { "id": "pay", "semanticType": "opaqueAction", "label": "Pay the customer", "assurance": "conceptual" },
+      { "id": "done", "semanticType": "activityFinalNode", "label": "Done", "assurance": "conceptual" }
+    ],
+    "relationships": [
+      { "id": "e1", "semanticType": "controlFlow", "source": "start", "target": "raise", "assurance": "conceptual" },
+      { "id": "e2", "semanticType": "controlFlow", "source": "raise", "target": "check", "assurance": "conceptual" },
+      { "id": "e3", "semanticType": "controlFlow", "source": "check", "target": "manager", "guard": "yes", "assurance": "conceptual" },
+      { "id": "e4", "semanticType": "controlFlow", "source": "check", "target": "auto", "guard": "no", "assurance": "conceptual" },
+      { "id": "e5", "semanticType": "controlFlow", "source": "manager", "target": "pay", "assurance": "conceptual" },
+      { "id": "e6", "semanticType": "controlFlow", "source": "auto", "target": "pay", "assurance": "conceptual" },
+      { "id": "e7", "semanticType": "controlFlow", "source": "pay", "target": "done", "assurance": "conceptual" }
+    ]
+  },
+  "arrange": {
+    "edges": {
+      "e5": { "route": { "mode": "orthogonal" } },
+      "e6": { "route": { "mode": "orthogonal" } }
+    }
+  },
+  "edit": {
+    "request": "An automatic approval should go straight to Done — it does not need paying separately.",
+    "change": {
+      "e6": { "target": "done" }
+    }
+  }
+}

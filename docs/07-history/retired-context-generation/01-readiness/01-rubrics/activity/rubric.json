@@ -1,0 +1,247 @@
+{
+  "schemaVersion": "graphpilot.readiness-rubric.v1",
+  "kind": "contextReadinessRubric",
+  "rubricVersion": "graphpilot.readiness.activity.v1",
+  "diagramType": "activity_diagram",
+  "ratingScaleVersion": "graphpilot.readiness-rating.v1",
+  "facets": [
+    {
+      "id": "trigger",
+      "description": "Whether the supported context establishes the bounded behavior's initiating event or condition, or an intentionally bounded first action, together with any initiator or input that the confirmed scope requires at entry.",
+      "requirement": "required",
+      "weight": 3,
+      "minimumRating": 3,
+      "applicabilityRule": {
+        "kind": "always"
+      },
+      "ratingAnchors": {
+        "0": "No selected claim or accepted assumption establishes an initiating event, condition, or bounded first action.",
+        "1": "An initiator, input, event, or early action is mentioned, but the entry point into the behavior cannot be identified reliably.",
+        "2": "A probable start or first action is present, but its initiating relation, required precondition or input, or required first responsibility is absent or ambiguous.",
+        "3": "An initiating event or condition, or an intentionally bounded first action, establishes the exact entry into the core flow; every initiator, input, or first responsibility requested by the confirmed scope is also established.",
+        "4": "The start boundary, preconditions and inputs, initiating party, and first action and responsibility are explicit, complete, unambiguous, and supported without assumptions."
+      },
+      "gapPolicy": {
+        "severity": "blocking",
+        "overrideable": false
+      }
+    },
+    {
+      "id": "behaviorSequence",
+      "description": "Whether the supported context establishes the in-scope actions and outcomes as a connected behavior with enough ordering and transition meaning to generate the principal flow and any requested structured sub-behavior.",
+      "requirement": "required",
+      "weight": 4,
+      "minimumRating": 3,
+      "applicabilityRule": {
+        "kind": "always"
+      },
+      "ratingAnchors": {
+        "0": "No selected claim or accepted assumption establishes a usable action or behavioral outcome.",
+        "1": "One or more actions or outcomes are named, but they remain isolated or their ordering cannot be modeled reliably.",
+        "2": "The principal actions are present, but at least one required connection, transition, ordering fact, or contained sub-behavior is absent or ambiguous.",
+        "3": "The principal actions and outcomes form a connected flow, and every ordering fact or transition needed to follow the confirmed in-scope behavior is established with no essential gap.",
+        "4": "Every in-scope step, transition, ordering constraint, and requested structured sub-behavior is explicit, complete, unambiguous, and supported without assumptions."
+      },
+      "gapPolicy": {
+        "severity": "blocking",
+        "overrideable": false
+      }
+    },
+    {
+      "id": "completionOutcomes",
+      "description": "Whether the supported context establishes at least one terminal result and the final core-path step, including which requested outcomes end one flow versus the whole bounded behavior.",
+      "requirement": "required",
+      "weight": 3,
+      "minimumRating": 3,
+      "applicabilityRule": {
+        "kind": "always"
+      },
+      "ratingAnchors": {
+        "0": "No selected claim or accepted assumption establishes a terminal result or end of the bounded behavior.",
+        "1": "A completion or result is hinted at, but neither a reliable terminal outcome nor its connection to the preceding behavior can be identified.",
+        "2": "A terminal result or final core-path step is present, but their connection, an in-scope terminal alternative, or required flow-versus-behavior termination meaning is absent or ambiguous.",
+        "3": "At least one supported terminal result and the final core-path step are established; every additional terminal outcome included by the confirmed scope has enough meaning to determine whether it ends one flow or the whole behavior.",
+        "4": "Every in-scope terminal outcome, its preceding step, and its flow-versus-behavior termination effect are explicit, complete, unambiguous, and supported without assumptions."
+      },
+      "gapPolicy": {
+        "severity": "blocking",
+        "overrideable": false
+      }
+    },
+    {
+      "id": "responsibility",
+      "description": "Whether the supported context assigns the actions and handoffs that the confirmed scope distinguishes to responsible actors, roles, or components and establishes requested partition or cross-boundary responsibility.",
+      "requirement": "conditional",
+      "weight": 2,
+      "minimumRating": 3,
+      "applicabilityRule": {
+        "kind": "conditional",
+        "appliesWhenAny": [
+          "The confirmed request asks who performs one or more actions or asks to show a handoff, partition, swimlane, or cross-boundary responsibility.",
+          "A selected claim, accepted assumption, or relevant active claim assigns in-scope actions to different actors, roles, or components, or states that responsibility transfers between them.",
+          "A resolved uncertainty disposition establishes an in-scope owner, handoff, partition, or responsibility boundary."
+        ],
+        "notApplicableWhenAll": [
+          "The confirmed request either limits the flow to one undifferentiated responsibility or explicitly excludes ownership, handoffs, partitions, swimlanes, and cross-boundary distinctions.",
+          "Selected claims, accepted assumptions, relevant active claims, and resolved uncertainty dispositions establish no change of responsible party within the included scope.",
+          "No open uncertainty or unresolved request term could introduce an in-scope owner, handoff, partition, swimlane, or responsibility boundary."
+        ],
+        "uncertainWhen": [
+          "The projection mentions multiple parties or a boundary crossing but does not establish whether they perform in-scope actions or are contextual only.",
+          "An open uncertainty could assign an in-scope action to a different responsible party, and the confirmed request does not decide whether that distinction belongs in the diagram."
+        ]
+      },
+      "ratingAnchors": {
+        "0": "No selected claim or accepted assumption establishes any required action owner, handoff endpoint, partition, or responsibility boundary.",
+        "1": "An actor, role, component, or handoff is mentioned, but it cannot be assigned to a specific in-scope action or connected to reliable handoff endpoints.",
+        "2": "Some responsibilities are established, but at least one action owner, handoff endpoint, partition assignment, or cross-boundary transfer requested by the confirmed scope is absent or ambiguous.",
+        "3": "Every action and handoff that the confirmed scope asks to distinguish has enough actor, role, or component ownership and source-to-receiver meaning to model the requested responsibility boundaries.",
+        "4": "All in-scope assignments, handoffs, partitions, and cross-boundary responsibilities are explicit, consistently scoped, unambiguous, and supported without assumptions."
+      },
+      "gapPolicy": {
+        "severity": "blocking",
+        "overrideable": true
+      }
+    },
+    {
+      "id": "controlConditions",
+      "description": "Whether the supported context establishes the conditions, alternatives, loop tests, continuation and exit behavior, destinations, and rejoins needed for every in-scope conditional or iterative flow.",
+      "requirement": "conditional",
+      "weight": 3,
+      "minimumRating": 3,
+      "applicabilityRule": {
+        "kind": "conditional",
+        "appliesWhenAny": [
+          "The confirmed request asks to show an alternative outcome, decision guard, approval/rejection path, retry or repetition, loop test or exit, conditional region, or rejoin.",
+          "A selected claim, accepted assumption, or relevant active claim states that an in-scope action's next step depends on a condition or that one or more in-scope actions repeat while or until a condition holds.",
+          "A resolved uncertainty disposition includes an in-scope branch, alternative, loop, conditional region, approval/rejection path, or guarded continuation."
+        ],
+        "notApplicableWhenAll": [
+          "The confirmed request positively defines a single unconditional pass through the bounded behavior or explicitly excludes alternatives, approvals/rejections, retries, repetition, loops, and conditional regions.",
+          "Selected claims, accepted assumptions, relevant active claims, and resolved uncertainty dispositions establish one unconditional continuation after each in-scope action and no repeated action set.",
+          "No open uncertainty or unresolved request term could introduce an in-scope condition-dependent destination, alternative, retry, loop, exit, or rejoin."
+        ],
+        "uncertainWhen": [
+          "The projection suggests more than one possible continuation but does not establish whether the alternatives belong to the confirmed scope.",
+          "The projection suggests repetition or retry behavior but does not establish whether it is an in-scope loop or contextual implementation detail."
+        ]
+      },
+      "ratingAnchors": {
+        "0": "No selected claim or accepted assumption establishes a usable branch condition, loop condition, or condition-dependent continuation.",
+        "1": "An alternative, approval, retry, or loop is mentioned, but no condition-to-destination or condition-to-continuation meaning can be modeled reliably.",
+        "2": "A branch or loop and some control meaning are present, but at least one required condition, alternative destination, rejoin, continuation, or exit is absent or ambiguous.",
+        "3": "Every in-scope alternative or loop has supported conditions and enough destination, rejoin, continuation, and exit meaning to generate its control flow.",
+        "4": "All in-scope conditions, alternatives, loop tests, continuations, exits, and rejoins are explicit, complete, unambiguous, and supported without assumptions."
+      },
+      "gapPolicy": {
+        "severity": "blocking",
+        "overrideable": true
+      }
+    },
+    {
+      "id": "dataMovement",
+      "description": "Whether the supported context establishes the identity, source, target, and requested transfer, input/output, storage, buffering, transformation, or collection-expansion meaning of in-scope objects or data.",
+      "requirement": "conditional",
+      "weight": 2,
+      "minimumRating": 3,
+      "applicabilityRule": {
+        "kind": "conditional",
+        "appliesWhenAny": [
+          "The confirmed request asks to show an object or data input, output, transfer, store, buffer, transformation, collection input/output, or collection expansion.",
+          "A selected claim, accepted assumption, or relevant active claim states that an in-scope action consumes, produces, transfers, stores, buffers, transforms, or expands a named object, data item, or collection.",
+          "A resolved uncertainty disposition places an object, data item, or collection on an in-scope action or flow."
+        ],
+        "notApplicableWhenAll": [
+          "The confirmed request explicitly excludes object/data detail or positively limits the diagram to action and control flow without named inputs, outputs, stores, buffers, transformations, or collections.",
+          "Selected claims, accepted assumptions, relevant active claims, and resolved uncertainty dispositions establish no object, data item, or collection whose movement or state belongs in the included scope.",
+          "No open uncertainty or unresolved request term could introduce an in-scope object/data input, output, transfer, storage, buffering, transformation, or collection expansion."
+        ],
+        "uncertainWhen": [
+          "The projection mentions data or an object but does not establish whether it is an in-scope flow participant or contextual detail.",
+          "The projection suggests collection processing but does not establish whether collection input/output or expansion behavior belongs in the requested diagram."
+        ]
+      },
+      "ratingAnchors": {
+        "0": "No selected claim or accepted assumption establishes a usable in-scope object, data item, collection, or data movement.",
+        "1": "An object, data item, or collection is named, but its connection to an in-scope action or its source-to-target movement cannot be modeled reliably.",
+        "2": "The object or data identity and part of its movement are present, but at least one required source, target, direction, transformation, storage/buffering effect, or collection boundary is absent or ambiguous.",
+        "3": "Every object, data item, or collection requested in scope has established identity and source/target meaning, plus enough transformation, storage, buffering, or expansion meaning wherever that behavior occurs.",
+        "4": "All in-scope object/data types or states, endpoints, directions, transformations, stores, buffers, and collection boundaries are explicit, complete, unambiguous, and supported without assumptions."
+      },
+      "gapPolicy": {
+        "severity": "blocking",
+        "overrideable": true
+      }
+    },
+    {
+      "id": "concurrency",
+      "description": "Whether the supported context establishes the participating parallel or asynchronous branches, their start, and their synchronization criteria or explicit independence before continuation.",
+      "requirement": "conditional",
+      "weight": 2,
+      "minimumRating": 3,
+      "applicabilityRule": {
+        "kind": "conditional",
+        "appliesWhenAny": [
+          "The confirmed request asks to show parallel, concurrent, or asynchronous work, a fork/join, synchronization, or independent branches.",
+          "A selected claim, accepted assumption, or relevant active claim states that two or more in-scope actions can overlap, proceed independently, or must synchronize before continuation.",
+          "A selected claim, accepted assumption, relevant active claim, or resolved uncertainty disposition establishes parallel expansion over an in-scope collection."
+        ],
+        "notApplicableWhenAll": [
+          "The confirmed request positively defines serial execution or explicitly excludes parallel, concurrent, asynchronous, fork/join, synchronization, and parallel-expansion behavior.",
+          "Selected claims, accepted assumptions, relevant active claims, and resolved uncertainty dispositions establish an ordering between every in-scope action pair that might otherwise overlap and establish no synchronization point.",
+          "No open uncertainty or unresolved request term could introduce in-scope overlap, independent branches, synchronization, or parallel expansion."
+        ],
+        "uncertainWhen": [
+          "Two or more in-scope actions lack an established order, but the projection does not establish whether they execute concurrently or merely have unspecified serial order.",
+          "Collection expansion is in scope, but whether its items execute serially, iteratively, or in parallel is unresolved."
+        ]
+      },
+      "ratingAnchors": {
+        "0": "No selected claim or accepted assumption establishes a usable parallel branch, asynchronous branch, or synchronization point.",
+        "1": "Possible concurrent work is mentioned, but the participating branches or their concurrency relation cannot be modeled reliably.",
+        "2": "The parallel or asynchronous branches are partly identified, but at least one required branch boundary, start, synchronization criterion, independence statement, or continuation is absent or ambiguous.",
+        "3": "All in-scope parallel or asynchronous branches and their start are established, together with the synchronization needed before continuation or an explicit statement that the branches proceed independently.",
+        "4": "Every in-scope branch, branch outcome, synchronization criterion, independence relation, and continuation is explicit, complete, unambiguous, and supported without assumptions."
+      },
+      "gapPolicy": {
+        "severity": "blocking",
+        "overrideable": true
+      }
+    },
+    {
+      "id": "exceptionPaths",
+      "description": "Whether the supported context establishes each in-scope exception or failure trigger, handling order and responsibility, recovery or failure outcome, and rejoin or termination behavior.",
+      "requirement": "conditional",
+      "weight": 2,
+      "minimumRating": 3,
+      "applicabilityRule": {
+        "kind": "conditional",
+        "appliesWhenAny": [
+          "The confirmed request includes or asks to show an exception, failure, error, timeout, cancellation, interrupt, recovery, or failure termination path.",
+          "A selected claim, accepted assumption, or relevant active claim states that an in-scope action can fail and identifies handling, recovery, rejoin, or error termination that belongs in the bounded behavior.",
+          "A resolved uncertainty disposition includes an exception/failure trigger or handling path in the confirmed scope."
+        ],
+        "notApplicableWhenAll": [
+          "The confirmed request positively restricts the diagram to normal/success behavior or explicitly excludes exception, failure, error, timeout, cancellation, interrupt, recovery, and failure-termination paths.",
+          "Selected claims, accepted assumptions, relevant active claims, and resolved uncertainty dispositions include no exception/failure handling in scope, and every known failure path is explicitly outside the bounded behavior.",
+          "No open uncertainty or unresolved request term could introduce an in-scope exception/failure trigger, handler, recovery path, rejoin, or failure termination."
+        ],
+        "uncertainWhen": [
+          "A possible exception or failure is identified, but the projection does not establish whether its handling belongs inside the bounded behavior.",
+          "A failure is known, but it is unresolved whether the confirmed request includes recovery or failure termination or intentionally depicts only the normal path."
+        ]
+      },
+      "ratingAnchors": {
+        "0": "No selected claim or accepted assumption establishes a usable in-scope exception/failure trigger, handler, recovery, or failure outcome.",
+        "1": "An exception or failure is mentioned, but its trigger-to-handler or trigger-to-outcome path cannot be modeled reliably.",
+        "2": "An exception/failure path is partly established, but at least one required trigger or cause, handling step, responsibility, recovery outcome, rejoin, or termination is absent or ambiguous.",
+        "3": "Every in-scope exception/failure has an established trigger or cause, handling or outcome, and enough rejoin or termination meaning to generate the path.",
+        "4": "All in-scope triggers, handling order, responsibilities, recovery behavior, outcomes, rejoins, and terminations are explicit, complete, unambiguous, and supported without assumptions."
+      },
+      "gapPolicy": {
+        "severity": "blocking",
+        "overrideable": true
+      }
+    }
+  ]
+}

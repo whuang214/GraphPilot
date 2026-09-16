@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "graphpilot.evaluation.readiness-diagnosis-case.v1",
+  "kind": "readinessDiagnosisCase",
+  "caseId": "case-readiness-diagnostic-block3-mechanical-return-authorization-01",
+  "visibility": "visible",
+  "purpose": "mechanical_observability",
+  "source": {
+    "scenarioId": "scenario-workflow-audit-activity-basic",
+    "fixturePath": "backend/graphpilot/blueprints/activity_diagram/context-examples/training/return-authorization",
+    "diagramType": "activity_diagram",
+    "scenarioSetDigest": "sha256:f31a02716885dd2b7a51e4a17c016bf0bcda1d5274dc374659f172d7807484c2",
+    "evidenceDigest": "sha256:ebf789e449a50c24ee2688101c80d7d29fdc47b6a93a19a0fe3b4d86ec5d6da2",
+    "requestDigest": "sha256:629632f0855575187e8305a650705a54eef192f8106560f72b6dc458ae32b867"
+  },
+  "provider": {
+    "callCeiling": 2,
+    "allowedRoles": [
+      "readiness",
+      "readiness_response_repair"
+    ]
+  },
+  "scope": {
+    "diagnosticOnly": true,
+    "certification": false,
+    "promotion": false,
+    "semanticClaim": "mechanical_provider_performance_only"
+  },
+  "digest": "sha256:d6b55c8e0ce9e91629ff8191bd8c5c6366a93bb5754a68226014a8efe2db5010"
+}

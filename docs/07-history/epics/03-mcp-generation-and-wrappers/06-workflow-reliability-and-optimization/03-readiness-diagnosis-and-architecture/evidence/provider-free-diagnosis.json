@@ -1,0 +1,197 @@
+{
+  "schemaVersion": "graphpilot.delivery.readiness-diagnosis-evidence.v1",
+  "kind": "readinessDiagnosisEvidence",
+  "diagnosisId": "diagnosis-readiness-block3-provider-free-20260724-01",
+  "generatedAt": "2026-07-24T18:58:09.665901Z",
+  "sourceBaseCommit": "643de67f96dc64ed772d85eb7c946998134ccdc7",
+  "sourceBaseCommitRole": "audited_block3_plan_commit",
+  "sourceBaseCommitVerification": "git cat-file -e 643de67f96dc64ed772d85eb7c946998134ccdc7^{commit}",
+  "evidenceMode": "provider_free",
+  "azureCalls": 0,
+  "expectedBehavior": "A valid reviewed response should pass on the first call; an invalid response may receive one bounded repair; every started or uncertain call must become durable terminal evidence and must never rerun.",
+  "observedBehavior": "S13 high required a costly repair, S14 medium was first-response valid on the same BDD request with different semantics, and S15 high plus medium Activity-ready attempts both entered repair but lost exact validation diagnostics. Current fake paths prove mechanics, not the real provider trigger.",
+  "assets": {
+    "scenarioSet": {
+      "version": "graphpilot.evaluation.workflow-audit-scenarios.v1",
+      "digest": "sha256:f31a02716885dd2b7a51e4a17c016bf0bcda1d5274dc374659f172d7807484c2"
+    },
+    "sourceFixture": {
+      "scenarioId": "scenario-workflow-audit-activity-basic",
+      "path": "backend/graphpilot/blueprints/activity_diagram/context-examples/training/return-authorization",
+      "metadataDocumentCanonicalDigest": "sha256:4b891a91424c6b015859e621f269f06554a8c0fe92479df9d840b8f038d36f52",
+      "runtimeInputDigestFromMetadata": "sha256:f353f287d15425db674dcae1f558be923a62b2b30243f8fc0b2f64bc52656592",
+      "evidenceDigest": "sha256:ebf789e449a50c24ee2688101c80d7d29fdc47b6a93a19a0fe3b4d86ec5d6da2",
+      "requestDigest": "sha256:629632f0855575187e8305a650705a54eef192f8106560f72b6dc458ae32b867",
+      "expectedLogicalDigest": "sha256:56d06e3b2ad4ba389ce4ac27b6311925c7beef60b672c8617ff59cce1779b1eb"
+    },
+    "readiness": {
+      "promptVersion": "graphpilot.context.readiness-prompt.v1",
+      "reviewPromptUtf8Sha256": "sha256:73991173f7a538dd52be110d382ff1b32ec764207b5685b453a776f4bde91535",
+      "repairPromptUtf8Sha256": "sha256:7ba75c91d0d3882c074a4568077424c549a81718316f4a506a8850507d01e638",
+      "reviewSchemaCanonicalDigest": "sha256:383c53097d5e7a285649175e111e9fc2166decfe199de1a6be6c01ac2a2b89bb",
+      "activityRubricVersion": "graphpilot.context.readiness-rubric.activity.v1",
+      "activityRubricDigest": "sha256:b1449d229f156dab9dee0742576371f9c47b173c1e990c7aa22a5790b9fb437b"
+    },
+    "bridgeProjection": {
+      "digest": "sha256:80eefe74df7ce2c10b3b804a0e701982c48b7fd1faf4902d7f663d0f52d9c9e8",
+      "bytes": 22911,
+      "wireDigest": "sha256:021c0cb93fae7d8e94ae03f5b1deff70ab83d0be32f90fa600f0be7fdae34fa8",
+      "wireBytes": 32727,
+      "digestMethod": "canonical compact UTF-8 JSON SHA-256",
+      "computedFrom": ["bound return-authorization evidence/request", "activity readiness rubric", "readiness-review prompt", "projected strict review schema"]
+    },
+    "diagnosisContracts": {
+      "caseSchemaCanonicalDigest": "sha256:84d0bc9c26ee6f0952390009850591a96d7b65cfa5472e8c39addb2aa198532a",
+      "manifestSchemaCanonicalDigest": "sha256:3776aab4af62476c6160b76f7d1aff8c8793b3c10612cc4cd9cb8f18b666c7f2",
+      "observationSchemaCanonicalDigest": "sha256:6bb74a18d34a7fa3e72bcad5236f2f3c5a487787799ad746b87b81b32062ce6a",
+      "serviceFileRawSha256": "sha256:cc13b53742a0af056d712c657730efe1655464657b9b4a4dd474858702904260",
+      "testFileRawSha256": "sha256:1f674351bbc7e53547b6013d262c502100db78819c2923a7fa6873ed773f9f3c"
+    }
+  },
+  "evidenceSources": [
+    "docs/03-development-and-delivery/epics/03-mcp-generation-and-wrappers/04-context-backed-generation/13-context-performance-and-recovery.md#outcome",
+    "docs/03-development-and-delivery/epics/03-mcp-generation-and-wrappers/04-context-backed-generation/14-readiness-effort-evaluation.md#outcome",
+    "docs/03-development-and-delivery/epics/03-mcp-generation-and-wrappers/04-context-backed-generation/15-full-effort-evaluation.md#outcome",
+    "docs/03-development-and-delivery/epics/03-mcp-generation-and-wrappers/06-workflow-reliability-and-optimization/02-repository-architecture-and-enablement/04-integration-parity.md#outcome",
+    "backend/services/readiness/context_readiness_service.py",
+    "backend/services/readiness/readiness_review_validator.py"
+  ],
+  "historicalObservations": [
+    {
+      "id": "s13-high-bdd",
+      "providerCalls": 2,
+      "firstCallDurationMs": 112631.031,
+      "repairDurationMs": 349535.31,
+      "inputTokens": 30244,
+      "outputTokens": 22803,
+      "firstResponseValid": false,
+      "validationIssues": "not_preserved",
+      "result": "needs_context_score_81"
+    },
+    {
+      "id": "s14-medium-same-bdd",
+      "providerCalls": 1,
+      "firstCallDurationMs": 77941.939,
+      "repairDurationMs": null,
+      "inputTokens": 15130,
+      "outputTokens": 6698,
+      "reasoningTokens": 4608,
+      "cachedInputTokens": 0,
+      "firstResponseValid": true,
+      "result": "needs_context_score_61_with_three_additional_conservative_blockers"
+    },
+    {
+      "id": "s15-activity-ready-pair",
+      "providerCalls": 4,
+      "roles": ["high_readiness", "high_repair", "medium_readiness", "medium_repair"],
+      "validationIssues": "lost_by_historical_terminal_observation_defect",
+      "result": "stopped_without_evaluable_pair"
+    },
+    {
+      "id": "block2-provider-free-parity",
+      "observations": 19,
+      "generated": 16,
+      "blocked": 1,
+      "errors": 2,
+      "fakeCalls": 56,
+      "azureCalls": 0,
+      "qualityFailures": 0,
+      "recoveryFailures": 0
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "local_contract_mismatch",
+      "level": "local_defect",
+      "statement": "A prompt, projected strict schema, or deterministic validator mismatch causes some real first responses to fail.",
+      "supportingEvidence": ["s13-high-bdd repair", "s15-activity-ready-pair repair under both efforts"],
+      "disconfirmingEvidence": ["s14 medium used the same prompt/schema/validator and was first-response valid", "provider-free valid responses pass the same validator"],
+      "confidence": "low",
+      "rootSupported": false,
+      "smallestProof": "Capture repeated exact validation code/path events and reproduce the dominant event provider-free without changing accepted meaning."
+    },
+    {
+      "id": "full_projection_repair_amplifier",
+      "level": "readiness_component_design",
+      "statement": "Repair resends the complete projection and makes any first-response defect expensive.",
+      "supportingEvidence": ["S13 repair repeated 15114 input tokens and cost 349535.310 ms", "current service embeds the complete projection plus diagnostics in repair input"],
+      "disconfirmingEvidence": ["This explains cost after repair entry, not why the first response was invalid."],
+      "confidence": "high_cost_amplifier_only",
+      "rootSupported": false,
+      "smallestProof": "Identify the trigger first; compare full versus targeted repair only after exact repeated diagnostics exist."
+    },
+    {
+      "id": "high_effort_first_response_invalidity",
+      "level": "provider_control",
+      "statement": "High reasoning effort increases first-response invalidity or latency for some readiness inputs.",
+      "supportingEvidence": ["S13 high repaired while S14 medium was valid on the same BDD input"],
+      "disconfirmingEvidence": ["Only one same-input pair exists", "S15 Activity-ready high and medium both entered repair", "semantic outputs differed under medium"],
+      "confidence": "low",
+      "rootSupported": false,
+      "smallestProof": "Run the same frozen human-reviewed case under one selected control first; only a later separately audited comparison may attribute control effects."
+    },
+    {
+      "id": "workflow_responsibility_mismatch",
+      "level": "broader_workflow",
+      "statement": "Host evidence/request authoring leaves responsibilities that readiness cannot resolve reliably.",
+      "supportingEvidence": ["Readiness owns omission and selection-quality review after host authors JSON 1 and JSON 2"],
+      "disconfirmingEvidence": ["The observed failure is response validation before policy, not a proven authority gap", "S14 returned coherent blockers"],
+      "confidence": "low",
+      "rootSupported": false,
+      "smallestProof": "Show the same validation failure persists after a reviewed complete request or trace it to missing host authority."
+    },
+    {
+      "id": "historical_evidence_durability_defect",
+      "level": "local_defect",
+      "statement": "The old S15 runner failed to persist completed-invalid/provider-failure observations and validation diagnostics.",
+      "supportingEvidence": ["S15 stopped after four calls with only checkpoint role/state counts", "offline regression fix now terminalizes those paths"],
+      "disconfirmingEvidence": ["The runner defect is fixed and does not explain provider response invalidity."],
+      "confidence": "confirmed_historical_not_current_trigger",
+      "rootSupported": false,
+      "smallestProof": "Use the new fake-proven diagnosis lifecycle for any new identity; never resume S15."
+    },
+    {
+      "id": "insufficient_decisive_evidence",
+      "level": "insufficient_evidence",
+      "statement": "No current evidence uniquely identifies the first-response validation trigger or safely selects a correction level.",
+      "supportingEvidence": ["S13/S15 exact validation diagnostics are absent", "no human-reviewed readiness diagnosis case exists", "several hypotheses remain compatible with observations"],
+      "disconfirmingEvidence": [],
+      "confidence": "high",
+      "rootSupported": true,
+      "smallestProof": "Obtain two genuine reviews plus adjudication for the visible bridge case, then freeze/audit one new readiness-only maximum-two-call package with durable diagnostics."
+    }
+  ],
+  "humanAuthority": {
+    "calibrationBundleCases": 0,
+    "s15Attestation": "independent_non_human_review_no_human_claim",
+    "bridgeCaseState": "pending_two_human_reviews_and_adjudication",
+    "agentReviewCountsAsHuman": false,
+    "liveEligible": false
+  },
+  "providerFreeLifecycleProof": {
+    "newTestsIncluded": 8,
+    "focusedTestsTotal": 77,
+    "paths": [
+      "first_response_valid",
+      "repaired_valid",
+      "completed_invalid_repair",
+      "provider_failure",
+      "checkpoint_write_failure_before_dispatch",
+      "checkpointed_resume_uncertain",
+      "terminal_resume_no_rerun",
+      "identity_conflict"
+    ],
+    "azureClientConstructed": false,
+    "managementCommandAdded": false,
+    "generationOrReviewReachable": false
+  },
+  "recommendation": {
+    "kind": "additional_evidence",
+    "owner": "block3_readiness_diagnosis",
+    "confidence": "high",
+    "reason": "The decisive real validation trigger and genuine human-reviewed case authority are both absent.",
+    "strongestAlternative": "readiness_component_redesign_for_targeted_repair",
+    "decisiveTradeoff": "Targeted repair could reduce the proven cost amplifier but may optimize the wrong defect or hide semantic invalidity before the trigger is known.",
+    "block4Authorized": false
+  }
+}

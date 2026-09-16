@@ -1,0 +1,139 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "erp-domain",
+  "diagramType": "bdd_diagram",
+  "authority": "conceptual",
+  "requests": [
+    "An invoice references an order, a customer, and line items; an order references a product and has a status of new, paid, or shipped; a product references its supplier and category. Records sync nightly."
+  ],
+  "evidence": [],
+  "elements": [
+    {
+      "id": "invoice",
+      "semanticType": "block",
+      "label": "Invoice",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "order",
+      "semanticType": "block",
+      "label": "Order",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "customer",
+      "semanticType": "block",
+      "label": "Customer",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "lineitem",
+      "semanticType": "block",
+      "label": "Line Item",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "product",
+      "semanticType": "block",
+      "label": "Product",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "supplier",
+      "semanticType": "block",
+      "label": "Supplier",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "category",
+      "semanticType": "block",
+      "label": "Category",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "status",
+      "semanticType": "block",
+      "label": "OrderStatus",
+      "assurance": "conceptual",
+      "features": {
+        "literals": [
+          "NEW",
+          "PAID",
+          "SHIPPED"
+        ]
+      }
+    },
+    {
+      "id": "note",
+      "semanticType": "note",
+      "label": "Nightly sync to warehouse",
+      "assurance": "conceptual"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "edge-1-invoice-order",
+      "semanticType": "association",
+      "source": "invoice",
+      "target": "order",
+      "assurance": "conceptual",
+      "targetNavigable": true
+    },
+    {
+      "id": "edge-2-invoice-customer",
+      "semanticType": "association",
+      "source": "invoice",
+      "target": "customer",
+      "assurance": "conceptual",
+      "targetNavigable": true
+    },
+    {
+      "id": "edge-3-invoice-lineitem",
+      "semanticType": "association",
+      "source": "invoice",
+      "target": "lineitem",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-4-order-product",
+      "semanticType": "association",
+      "source": "order",
+      "target": "product",
+      "assurance": "conceptual",
+      "targetNavigable": true
+    },
+    {
+      "id": "edge-5-order-status",
+      "semanticType": "association",
+      "source": "order",
+      "target": "status",
+      "assurance": "conceptual",
+      "targetNavigable": true
+    },
+    {
+      "id": "edge-6-product-supplier",
+      "semanticType": "association",
+      "source": "product",
+      "target": "supplier",
+      "assurance": "conceptual",
+      "targetNavigable": true
+    },
+    {
+      "id": "edge-7-product-category",
+      "semanticType": "association",
+      "source": "product",
+      "target": "category",
+      "assurance": "conceptual",
+      "targetNavigable": true
+    },
+    {
+      "id": "edge-8-note-order",
+      "semanticType": "commentLink",
+      "source": "note",
+      "target": "order",
+      "assurance": "conceptual"
+    }
+  ],
+  "assumptions": []
+}

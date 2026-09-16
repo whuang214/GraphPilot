@@ -1,0 +1,160 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "trade-settlement",
+  "diagramType": "activity_diagram",
+  "authority": "conceptual",
+  "requests": [
+    "Once a trade is captured, the system validates it, enriches it with reference data, runs a risk check, and runs a compliance check all at the same time; when all four finish, the trade is settled."
+  ],
+  "evidence": [],
+  "elements": [
+    {
+      "id": "start",
+      "semanticType": "initialNode",
+      "label": "Initial",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "capture",
+      "semanticType": "opaqueAction",
+      "label": "Capture Trade",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "f",
+      "semanticType": "forkNode",
+      "label": "Fork",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "validate",
+      "semanticType": "opaqueAction",
+      "label": "Validate",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "enrich",
+      "semanticType": "opaqueAction",
+      "label": "Enrich",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "risk",
+      "semanticType": "opaqueAction",
+      "label": "Risk Check",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "compliance",
+      "semanticType": "opaqueAction",
+      "label": "Compliance Check",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "j",
+      "semanticType": "joinNode",
+      "label": "Join",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "settle",
+      "semanticType": "opaqueAction",
+      "label": "Settle",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "end",
+      "semanticType": "activityFinalNode",
+      "label": "Activity Final",
+      "assurance": "conceptual"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "edge-1-start-capture",
+      "semanticType": "controlFlow",
+      "source": "start",
+      "target": "capture",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-2-capture-f",
+      "semanticType": "controlFlow",
+      "source": "capture",
+      "target": "f",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-3-f-validate",
+      "semanticType": "controlFlow",
+      "source": "f",
+      "target": "validate",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-4-f-enrich",
+      "semanticType": "controlFlow",
+      "source": "f",
+      "target": "enrich",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-5-f-risk",
+      "semanticType": "controlFlow",
+      "source": "f",
+      "target": "risk",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-6-f-compliance",
+      "semanticType": "controlFlow",
+      "source": "f",
+      "target": "compliance",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-7-validate-j",
+      "semanticType": "controlFlow",
+      "source": "validate",
+      "target": "j",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-8-enrich-j",
+      "semanticType": "controlFlow",
+      "source": "enrich",
+      "target": "j",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-9-risk-j",
+      "semanticType": "controlFlow",
+      "source": "risk",
+      "target": "j",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-10-compliance-j",
+      "semanticType": "controlFlow",
+      "source": "compliance",
+      "target": "j",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-11-j-settle",
+      "semanticType": "controlFlow",
+      "source": "j",
+      "target": "settle",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-12-settle-end",
+      "semanticType": "controlFlow",
+      "source": "settle",
+      "target": "end",
+      "assurance": "conceptual"
+    }
+  ],
+  "assumptions": []
+}

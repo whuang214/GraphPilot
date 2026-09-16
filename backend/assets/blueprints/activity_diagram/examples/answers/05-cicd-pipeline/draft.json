@@ -1,0 +1,207 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "ci-cd-pipeline",
+  "diagramType": "activity_diagram",
+  "authority": "conceptual",
+  "requests": [
+    "On every push the pipeline checks out and builds the code, then runs unit tests, linting, and a security scan in parallel; if all pass it deploys, otherwise it notifies the team."
+  ],
+  "evidence": [],
+  "elements": [
+    {
+      "id": "start",
+      "semanticType": "initialNode",
+      "label": "Initial",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "checkout",
+      "semanticType": "opaqueAction",
+      "label": "Checkout Code",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "build",
+      "semanticType": "opaqueAction",
+      "label": "Build",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "note",
+      "semanticType": "note",
+      "label": "Runs on every push",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "f",
+      "semanticType": "forkNode",
+      "label": "Fork",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "unit",
+      "semanticType": "opaqueAction",
+      "label": "Run Unit Tests",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "lint",
+      "semanticType": "opaqueAction",
+      "label": "Run Lint",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "scan",
+      "semanticType": "opaqueAction",
+      "label": "Security Scan",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "j",
+      "semanticType": "joinNode",
+      "label": "Join",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "d",
+      "semanticType": "decisionNode",
+      "label": "All Passed?",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "deploy",
+      "semanticType": "opaqueAction",
+      "label": "Deploy",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "end-ok",
+      "semanticType": "activityFinalNode",
+      "label": "End (Deployed)",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "notify",
+      "semanticType": "opaqueAction",
+      "label": "Notify Team",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "end-fail",
+      "semanticType": "activityFinalNode",
+      "label": "End (Failed)",
+      "assurance": "conceptual"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "edge-1-start-checkout",
+      "semanticType": "controlFlow",
+      "source": "start",
+      "target": "checkout",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-2-checkout-build",
+      "semanticType": "controlFlow",
+      "source": "checkout",
+      "target": "build",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-3-build-note",
+      "semanticType": "commentLink",
+      "source": "build",
+      "target": "note",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-4-build-f",
+      "semanticType": "controlFlow",
+      "source": "build",
+      "target": "f",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-5-f-unit",
+      "semanticType": "controlFlow",
+      "source": "f",
+      "target": "unit",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-6-f-lint",
+      "semanticType": "controlFlow",
+      "source": "f",
+      "target": "lint",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-7-f-scan",
+      "semanticType": "controlFlow",
+      "source": "f",
+      "target": "scan",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-8-unit-j",
+      "semanticType": "controlFlow",
+      "source": "unit",
+      "target": "j",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-9-lint-j",
+      "semanticType": "controlFlow",
+      "source": "lint",
+      "target": "j",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-10-scan-j",
+      "semanticType": "controlFlow",
+      "source": "scan",
+      "target": "j",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-11-j-d",
+      "semanticType": "controlFlow",
+      "source": "j",
+      "target": "d",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-12-d-deploy",
+      "semanticType": "controlFlow",
+      "source": "d",
+      "target": "deploy",
+      "assurance": "conceptual",
+      "guard": "Yes"
+    },
+    {
+      "id": "edge-13-deploy-end-ok",
+      "semanticType": "controlFlow",
+      "source": "deploy",
+      "target": "end-ok",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-14-d-notify",
+      "semanticType": "controlFlow",
+      "source": "d",
+      "target": "notify",
+      "assurance": "conceptual",
+      "guard": "No"
+    },
+    {
+      "id": "edge-15-notify-end-fail",
+      "semanticType": "controlFlow",
+      "source": "notify",
+      "target": "end-fail",
+      "assurance": "conceptual"
+    }
+  ],
+  "assumptions": []
+}

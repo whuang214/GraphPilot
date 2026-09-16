@@ -1,0 +1,93 @@
+{
+  "authority": "conceptual",
+  "basis": {
+    "diagram": "sha256:c701257f39ee9ba9610c52a3f9341d091cb2e5f8d8740878cb7f0f731469fb84",
+    "readAt": "2026-08-05T22:45:40.136279+00:00"
+  },
+  "diagramName": "portal-export",
+  "diagramType": "use_case_diagram",
+  "elements": [
+    {
+      "assurance": "conceptual",
+      "id": "portal",
+      "label": "Reporting Portal",
+      "semanticType": "subject"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "analyst",
+      "label": "Analyst",
+      "semanticType": "actor"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "admin",
+      "label": "Administrator",
+      "semanticType": "actor"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "build",
+      "label": "Build a report",
+      "parentId": "portal",
+      "semanticType": "useCase"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "share",
+      "label": "Share a report",
+      "parentId": "portal",
+      "semanticType": "useCase"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "manage",
+      "label": "Manage accounts",
+      "parentId": "portal",
+      "semanticType": "useCase"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "export",
+      "label": "Export a report",
+      "parentId": "portal",
+      "semanticType": "useCase"
+    }
+  ],
+  "kind": "diagramDraft",
+  "relationships": [
+    {
+      "assurance": "conceptual",
+      "id": "analyst-build",
+      "semanticType": "association",
+      "source": "analyst",
+      "target": "build"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "analyst-share",
+      "semanticType": "association",
+      "source": "analyst",
+      "target": "share"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "admin-manage",
+      "semanticType": "association",
+      "source": "admin",
+      "target": "manage"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "analyst-export",
+      "semanticType": "association",
+      "source": "analyst",
+      "target": "export"
+    }
+  ],
+  "requests": [
+    "Who uses the reporting portal, and what for.",
+    "Analysts need to export a report as well."
+  ],
+  "schemaVersion": "graphpilot.draft.v1"
+}

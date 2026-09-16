@@ -1,0 +1,655 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "shelfmark-domain-structure",
+  "diagramType": "bdd_diagram",
+  "authority": "as_implemented",
+  "requests": [
+    "The structure of what this system stores, and how those things relate."
+  ],
+  "evidence": [
+    {
+      "id": "ev-member",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 15,
+          "start": 1
+        },
+        "path": "members/models.py",
+        "symbol": "Member"
+      },
+      "summary": "Member is declared as a subclass of Django's AbstractUser and adds membership_number, is_librarian and joined_on; display derives a name."
+    },
+    {
+      "id": "ev-auth-user-model",
+      "kind": "configuration",
+      "locator": {
+        "lineRange": {
+          "end": 56,
+          "start": 56
+        },
+        "path": "shelfmark/settings.py",
+        "symbol": "AUTH_USER_MODEL"
+      },
+      "summary": "AUTH_USER_MODEL is members.Member, so every settings.AUTH_USER_MODEL foreign key in the project points at Member."
+    },
+    {
+      "id": "ev-book",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 22,
+          "start": 4
+        },
+        "path": "catalog/models.py",
+        "symbol": "Book"
+      },
+      "summary": "Book stores title, author, a unique isbn, published_year, replacement_cost_minor and high_demand; copies_available is computed from its copies."
+    },
+    {
+      "id": "ev-copy",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 51,
+          "start": 25
+        },
+        "path": "catalog/models.py",
+        "symbol": "BookCopy"
+      },
+      "summary": "BookCopy stores a unique barcode, acquired_on and condition, and holds a CASCADE foreign key to Book with related_name copies; is_on_shelf and current_loan are computed from its loans."
+    },
+    {
+      "id": "ev-loan",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 46,
+          "start": 8
+        },
+        "path": "circulation/models.py",
+        "symbol": "Loan"
+      },
+      "summary": "Loan stores a PROTECT foreign key to BookCopy, a CASCADE foreign key to the member, borrowed_at, due_on, a nullable returned_at and a renewals counter."
+    },
+    {
+      "id": "ev-hold",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 59,
+          "start": 49
+        },
+        "path": "circulation/models.py",
+        "symbol": "Hold"
+      },
+      "summary": "Hold stores CASCADE foreign keys to Book and to the member, placed_at and a nullable cancelled_at, and is ordered by placed_at."
+    },
+    {
+      "id": "ev-hold-queue",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 71,
+          "start": 62
+        },
+        "path": "circulation/models.py",
+        "symbol": "HoldQueue"
+      },
+      "summary": "HoldQueue is a plain class, not a model: next_for reads the oldest uncancelled Hold for a book, so queue position is computed rather than stored."
+    },
+    {
+      "id": "ev-payment",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 24,
+          "start": 5
+        },
+        "path": "fines/models.py",
+        "symbol": "FinePayment"
+      },
+      "summary": "FinePayment stores amount_minor and paid_at, a CASCADE foreign key to the member, a nullable SET_NULL foreign key to the Loan, and a nullable SET_NULL taken_by member."
+    },
+    {
+      "id": "ev-fines-derived",
+      "kind": "documentation",
+      "locator": {
+        "lineRange": {
+          "end": 4,
+          "start": 1
+        },
+        "path": "fines/assessment.py"
+      },
+      "summary": "The assessment module's docstring states that nothing here is stored: a fine is a fact about a loan and a date, not a row."
+    },
+    {
+      "id": "ev-loan-state-test",
+      "kind": "test",
+      "locator": {
+        "lineRange": {
+          "end": 46,
+          "start": 45
+        },
+        "path": "circulation/tests.py",
+        "symbol": "LoanStateTests"
+      },
+      "summary": "The loan-state test class states that a Loan has no status column and that everything follows from its two date fields."
+    },
+    {
+      "id": "ev-cascade-copies-test",
+      "kind": "test",
+      "locator": {
+        "lineRange": {
+          "end": 276,
+          "start": 271
+        },
+        "path": "circulation/tests.py",
+        "symbol": "test_deleting_a_book_takes_its_copies"
+      },
+      "summary": "Deleting a Book deletes its BookCopy rows, so the book owns the lifecycle of its copies."
+    },
+    {
+      "id": "ev-protect-test",
+      "kind": "test",
+      "locator": {
+        "lineRange": {
+          "end": 269,
+          "start": 261
+        },
+        "path": "circulation/tests.py",
+        "symbol": "test_a_copy_that_is_out_cannot_be_deleted"
+      },
+      "summary": "Deleting a BookCopy that is on loan raises ProtectedError, so a Loan references a copy it does not own."
+    },
+    {
+      "id": "ev-payment-survives-test",
+      "kind": "test",
+      "locator": {
+        "lineRange": {
+          "end": 292,
+          "start": 278
+        },
+        "path": "circulation/tests.py",
+        "symbol": "test_a_paid_fine_survives_its_loan_being_deleted"
+      },
+      "summary": "Deleting a Loan leaves its FinePayment in place with loan set to None, so the payment outlives the loan it was taken against."
+    }
+  ],
+  "elements": [
+    {
+      "id": "member",
+      "semanticType": "block",
+      "label": "Member",
+      "features": {
+        "operations": [
+          {
+            "name": "display",
+            "returnType": "str"
+          }
+        ],
+        "properties": [
+          {
+            "kind": "value",
+            "name": "membership_number",
+            "type": "CharField(12), unique"
+          },
+          {
+            "default": false,
+            "kind": "value",
+            "name": "is_librarian",
+            "type": "BooleanField"
+          },
+          {
+            "kind": "value",
+            "name": "joined_on",
+            "type": "DateField, auto_now_add"
+          }
+        ]
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-member",
+        "ev-auth-user-model"
+      ]
+    },
+    {
+      "id": "abstract-user",
+      "semanticType": "block",
+      "label": "AbstractUser",
+      "stereotype": "django",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-member"
+      ]
+    },
+    {
+      "id": "book",
+      "semanticType": "block",
+      "label": "Book",
+      "features": {
+        "operations": [
+          {
+            "name": "copies_available",
+            "returnType": "int"
+          }
+        ],
+        "properties": [
+          {
+            "kind": "value",
+            "name": "title",
+            "type": "CharField(200)"
+          },
+          {
+            "kind": "value",
+            "name": "author",
+            "type": "CharField(120)"
+          },
+          {
+            "kind": "value",
+            "name": "isbn",
+            "type": "CharField(17), unique"
+          },
+          {
+            "kind": "value",
+            "multiplicity": {
+              "lower": 0,
+              "upper": 1
+            },
+            "name": "published_year",
+            "type": "PositiveIntegerField"
+          },
+          {
+            "default": 1500,
+            "kind": "value",
+            "name": "replacement_cost_minor",
+            "type": "PositiveIntegerField"
+          },
+          {
+            "default": false,
+            "kind": "value",
+            "name": "high_demand",
+            "type": "BooleanField"
+          }
+        ]
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-book"
+      ]
+    },
+    {
+      "id": "book-copy",
+      "semanticType": "block",
+      "label": "BookCopy",
+      "features": {
+        "operations": [
+          {
+            "name": "is_on_shelf",
+            "returnType": "bool"
+          },
+          {
+            "name": "current_loan",
+            "returnType": "Loan"
+          }
+        ],
+        "properties": [
+          {
+            "kind": "value",
+            "name": "barcode",
+            "type": "CharField(20), unique"
+          },
+          {
+            "kind": "value",
+            "name": "acquired_on",
+            "type": "DateField"
+          },
+          {
+            "default": "GOOD",
+            "kind": "value",
+            "name": "condition",
+            "type": "GOOD | WORN | DAMAGED"
+          }
+        ]
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-copy"
+      ]
+    },
+    {
+      "id": "loan",
+      "semanticType": "block",
+      "label": "Loan",
+      "features": {
+        "operations": [
+          {
+            "name": "is_open",
+            "returnType": "bool"
+          },
+          {
+            "name": "is_overdue",
+            "returnType": "bool"
+          },
+          {
+            "name": "days_late",
+            "returnType": "int"
+          },
+          {
+            "name": "can_renew",
+            "returnType": "(bool, str)"
+          }
+        ],
+        "properties": [
+          {
+            "kind": "value",
+            "name": "borrowed_at",
+            "type": "DateTimeField, auto_now_add"
+          },
+          {
+            "kind": "value",
+            "name": "due_on",
+            "type": "DateField"
+          },
+          {
+            "kind": "value",
+            "multiplicity": {
+              "lower": 0,
+              "upper": 1
+            },
+            "name": "returned_at",
+            "type": "DateTimeField"
+          },
+          {
+            "default": 0,
+            "kind": "value",
+            "name": "renewals",
+            "type": "PositiveSmallIntegerField"
+          }
+        ]
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-loan"
+      ]
+    },
+    {
+      "id": "hold",
+      "semanticType": "block",
+      "label": "Hold",
+      "features": {
+        "properties": [
+          {
+            "kind": "value",
+            "name": "placed_at",
+            "type": "DateTimeField, auto_now_add"
+          },
+          {
+            "kind": "value",
+            "multiplicity": {
+              "lower": 0,
+              "upper": 1
+            },
+            "name": "cancelled_at",
+            "type": "DateTimeField"
+          }
+        ]
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-hold"
+      ]
+    },
+    {
+      "id": "fine-payment",
+      "semanticType": "block",
+      "label": "FinePayment",
+      "features": {
+        "properties": [
+          {
+            "kind": "value",
+            "name": "amount_minor",
+            "type": "PositiveIntegerField"
+          },
+          {
+            "kind": "value",
+            "name": "paid_at",
+            "type": "DateTimeField, auto_now_add"
+          }
+        ]
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-payment"
+      ]
+    },
+    {
+      "id": "note-fines",
+      "semanticType": "note",
+      "label": "A fine is never stored. Only payments are rows; what is owed is recomputed from the loan and today's date.",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-fines-derived"
+      ]
+    },
+    {
+      "id": "note-loan-state",
+      "semanticType": "note",
+      "label": "No status column: open, overdue and days late are all derived from due_on and returned_at.",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-loan-state-test"
+      ]
+    },
+    {
+      "id": "note-hold-order",
+      "semanticType": "note",
+      "label": "No queue position column: the next in line is the oldest hold with cancelled_at still null.",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-hold-queue"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "member-is-a-user",
+      "semanticType": "generalization",
+      "source": "member",
+      "target": "abstract-user",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-member"
+      ]
+    },
+    {
+      "id": "copies-of-book",
+      "semanticType": "composition",
+      "source": "book-copy",
+      "target": "book",
+      "sourceRole": "copies",
+      "sourceMultiplicity": {
+        "lower": 0,
+        "upper": "*"
+      },
+      "targetMultiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-copy",
+        "ev-cascade-copies-test"
+      ]
+    },
+    {
+      "id": "loans-of-member",
+      "semanticType": "composition",
+      "source": "loan",
+      "target": "member",
+      "sourceRole": "loans",
+      "sourceMultiplicity": {
+        "lower": 0,
+        "upper": "*"
+      },
+      "targetMultiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-loan",
+        "ev-auth-user-model"
+      ]
+    },
+    {
+      "id": "loan-of-copy",
+      "semanticType": "association",
+      "source": "loan",
+      "target": "book-copy",
+      "sourceRole": "loans",
+      "targetRole": "copy",
+      "sourceMultiplicity": {
+        "lower": 0,
+        "upper": "*"
+      },
+      "targetMultiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "targetNavigable": true,
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-loan",
+        "ev-protect-test"
+      ]
+    },
+    {
+      "id": "holds-of-member",
+      "semanticType": "composition",
+      "source": "hold",
+      "target": "member",
+      "sourceRole": "holds",
+      "sourceMultiplicity": {
+        "lower": 0,
+        "upper": "*"
+      },
+      "targetMultiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-hold",
+        "ev-auth-user-model"
+      ]
+    },
+    {
+      "id": "holds-on-book",
+      "semanticType": "composition",
+      "source": "hold",
+      "target": "book",
+      "sourceRole": "holds",
+      "sourceMultiplicity": {
+        "lower": 0,
+        "upper": "*"
+      },
+      "targetMultiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-hold"
+      ]
+    },
+    {
+      "id": "payments-of-member",
+      "semanticType": "composition",
+      "source": "fine-payment",
+      "target": "member",
+      "sourceRole": "fine_payments",
+      "sourceMultiplicity": {
+        "lower": 0,
+        "upper": "*"
+      },
+      "targetMultiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-payment"
+      ]
+    },
+    {
+      "id": "payment-against-loan",
+      "semanticType": "association",
+      "source": "fine-payment",
+      "target": "loan",
+      "sourceRole": "payments",
+      "targetRole": "loan",
+      "sourceMultiplicity": {
+        "lower": 0,
+        "upper": "*"
+      },
+      "targetMultiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "targetNavigable": true,
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-payment",
+        "ev-payment-survives-test"
+      ]
+    },
+    {
+      "id": "payment-taken-by",
+      "semanticType": "association",
+      "source": "fine-payment",
+      "target": "member",
+      "targetRole": "taken_by",
+      "targetMultiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "targetNavigable": true,
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-payment"
+      ]
+    },
+    {
+      "id": "note-fines-link",
+      "semanticType": "commentLink",
+      "source": "note-fines",
+      "target": "fine-payment",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-fines-derived"
+      ]
+    },
+    {
+      "id": "note-loan-state-link",
+      "semanticType": "commentLink",
+      "source": "note-loan-state",
+      "target": "loan",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-loan-state-test"
+      ]
+    },
+    {
+      "id": "note-hold-order-link",
+      "semanticType": "commentLink",
+      "source": "note-hold-order",
+      "target": "hold",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-hold-queue"
+      ]
+    }
+  ]
+}

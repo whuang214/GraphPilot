@@ -1,0 +1,182 @@
+{
+  "schemaVersion": "graphpilot.delivery.generation-endpoint-root-decision.v1",
+  "kind": "generationEndpointRootDecision",
+  "decisionId": "decision-generation-endpoint-contract-block6-s05-20260730-01",
+  "sourceCommit": "4bd7ba4dcb278a251fe0bb87e4112ce39f42cdf9",
+  "recommendation": "focused_implementation_correction",
+  "owner": "generation_prompt_projection_schema_validator_contract",
+  "rootClass": "semantic_blind_bdd_structural_endpoint_scope",
+  "confidence": "high_owner_bounded_raw_variant",
+  "evidence": {
+    "providerFreeProof": "provider-free-proof.json",
+    "providerFreeProofDigest": "sha256:67769c64bb1683cfe7acc5d7293e3ab54c78d0c848cf1e5895093718b2dc34de",
+    "safeBaselineRunId": "run-live-workflow-anchor-block5-cold-room-20260728-03",
+    "safeFailure": {
+      "code": "bdd_relationship_endpoints_invalid",
+      "path": "$.edges[3]"
+    },
+    "generationWallMs": 44694.05439996626,
+    "generationRepairWallMs": 26052.517600008287,
+    "providerCalls": 0
+  },
+  "threshold": {
+    "safeBaselineSignatureBound": true,
+    "resolvedNoteEndpointClassProvedFromValidator": true,
+    "providerProjectionWitnesses": 10,
+    "directContextCellsReproduced": 2,
+    "allBddEdgeSemanticsReproduced": 5,
+    "fullBackendSchemasAcceptWitnesses": true,
+    "backendRuntimeReproducesSignature": true,
+    "correctedWitnessesValid": true,
+    "blockCommentLinkCompatibilityControlsAccepted": true,
+    "repairPacketReproduced": true,
+    "acceptedAssemblyProved": true,
+    "singleContractOwner": true,
+    "rawEdgeKnown": false
+  },
+  "rootEvidence": [
+    "The safe code/path can emit only after both fourth-edge IDs resolve, and the BDD full schema permits only block or note nodes; therefore at least one resolved endpoint is a note.",
+    "The context generation prompt delegates to diagramModel and contains no explicit BDD endpoint matrix.",
+    "The direct/context provider input projection lists block/note and all five BDD edges, but its structuralRules omit the exact structural-edge block/block rule and the commentLink note-attachment rule.",
+    "The provider strict-schema projection and complete logical schemas accept node and edge enums independently and cannot express endpoint-reference node types.",
+    "LogicalCandidateValidator._bdd applies the structural block/block rule to every edge semanticType, so it rejects note-attached commentLink instead of excluding annotations from that rule.",
+    "The same pre-layout validator already excludes commentLink from graph connectivity, and generation conformance already maps any note-incidence edge to commentLink; the BDD endpoint predicate is the inconsistent structural scope.",
+    "Ten bounded direct/context by edge-semantic witnesses pass provider projection/full schema and reproduce bdd_relationship_endpoints_invalid @ $.edges[3].",
+    "Removing only the synthetic fourth edge yields valid direct/context witnesses; the context fake repair receives the exact issue and reaches valid accepted assembly in one round."
+  ],
+  "rawShapeLimitation": {
+    "known": "The fourth BDD edge had two resolvable endpoint IDs and at least one resolved note endpoint.",
+    "unknown": [
+      "edge semanticType",
+      "source/target orientation",
+      "endpoint IDs",
+      "whether one or both endpoints were notes",
+      "label",
+      "sourceEnd/targetEnd values",
+      "origin contents"
+    ],
+    "actualRawEdgeClaimed": false,
+    "effectOnDecision": "The correction must expose structural-versus-annotation endpoint scope and apply the block-only rule only to structural semantics, rather than guess a commentLink or structural-edge private variant."
+  },
+  "s06": {
+    "implementable": true,
+    "contractVersionPolicy": "Change the private current-V1 provider input projection and deterministic endpoint policy in place; no persisted/public schema boundary or prompt-text change is required.",
+    "primaryCorrection": [
+      "Make the BDD diagramModel structuralRules explicit for both initial and repair packets: association, composition, generalization, and dependency require existing block/block endpoints; note attachments use commentLink and do not establish structure.",
+      "Scope the validator's existing block/block predicate to the four structural semantics and exclude commentLink from that structural rule. Keep bdd_relationship_endpoints_invalid as the stable fail-closed code for structural endpoint violations.",
+      "Do not add a new commentLink endpoint-cardinality policy in S06; current canonical/editor contracts require note incidence to become commentLink but do not establish the converse or forbid the existing block/block compatibility shape.",
+      "Do not change the strict logical response schemas or generic strict-schema projector: cross-item endpoint node types remain deterministic by design.",
+      "Do not change context/direct generation prompt assets or identities; their existing instruction to use diagramModel becomes complete once the projection is corrected.",
+      "Keep repair enabled and authoritative; both initial and repair calls receive the corrected diagramModel, and every repaired candidate reruns the same validator.",
+      "Treat this as semantic scoping, not validator weakening: block-only validation remains unchanged for every structural relationship, while commentLink is no longer misclassified as structural."
+    ],
+    "affectedFiles": {
+      "production": [
+        "backend/services/core/structural_constraints.py",
+        "backend/services/generation/pre_layout_generation_service.py"
+      ],
+      "tests": [
+        "backend/tests/generation/test_generation_packet_builder.py",
+        "backend/tests/generation/test_pre_layout_generation_service.py"
+      ],
+      "design": [
+        "docs/02-design-and-features/04-generation-design.md"
+      ],
+      "alreadyCorrectDesignControls": [
+        "docs/02-design-and-features/00-diagram-json-schema.md",
+        "docs/02-design-and-features/diagram-schemas/bdd-diagram-blueprints.md"
+      ],
+      "sliceOutcome": "06-generation-endpoint-correction.md"
+    },
+    "failingBeforeRegressions": [
+      "test_bdd_generation_packets_expose_structural_endpoint_and_note_attachment_rules_in_both_modes",
+      "test_bdd_note_comment_link_is_excluded_from_structural_block_endpoint_rule_in_both_directions_and_modes",
+      "test_bdd_endpoint_scope_repair_packet_repeats_provider_visible_rules",
+      "test_bdd_note_comment_link_reaches_pre_layout_acceptance_without_generation_repair_in_both_modes"
+    ],
+    "preservingRegressions": [
+      "test_bdd_structural_relationship_note_endpoints_remain_rejected_for_all_four_semantics_and_both_modes",
+      "test_bdd_block_to_block_comment_link_remains_a_compatibility_shape_in_both_modes",
+      "test_bdd_structural_endpoint_witnesses_pass_provider_projection_and_full_schema_before_deterministic_rejection",
+      "test_block5_repaired_candidate_and_all_twelve_training_fixtures_remain_accepted",
+      "test_generation_repair_retains_exact_issue_and_candidate_authority"
+    ],
+    "focusedProof": [
+      "Run the four failing-before regressions against source 4bd7ba4 and retain their exact failures.",
+      "After correction, pass direct/context note-comment structural-rule exemption, block-comment compatibility, and all structural-edge note rejection cells.",
+      "Pass existing strict-schema projection, generation packet, pre-layout/repair, semantic review, direct/context generation, live-harness fake-client, readiness, and frozen-history guards provider-free.",
+      "Run the complete backend and frontend gates plus an independent implementation audit with no unresolved critical, high, or medium finding."
+    ],
+    "nonGoals": [
+      "Do not infer or reconstruct the raw Block 5 fourth edge.",
+      "Do not weaken structural relationship endpoint validation or suppress generation repair.",
+      "Do not change logical schema IDs, public result contracts, provenance, semantic review, readiness, host, MCP, local/browser behavior, persistence, layout, or provider cache policy.",
+      "Do not claim live repair removal or performance improvement before one newly authorized terminal S07 candidate passes every retention gate."
+    ],
+    "liveProof": "S05 authorizes no provider call. After committed/audited S06 and the path-length prerequisite, S07 still requires a new explicit user authorization and fresh short identities. Retention requires first generation response validity with no generation_repair role and all existing meaning, provenance, semantic-review, compatibility, recovery, and browser gates.",
+    "rollback": "Revert only the S06 provider-input-rule/validator/test/design correction commit; retain S05 and all immutable Block 5/S07 evidence."
+  },
+  "alternatives": [
+    {
+      "kind": "validator_only_semantic_branch",
+      "status": "strongest_alternative_rejected",
+      "reason": "It would exclude commentLink from the structural block-only rule but leave the provider-visible structural-edge endpoint scope incomplete. Because the raw semanticType is unknowable, it would not close the whole live failure class or prevent a non-commentLink note edge from consuming repair."
+    },
+    {
+      "kind": "strict_comment_link_endpoint_matrix",
+      "status": "strongest_policy_alternative_deferred",
+      "reason": "Requiring exactly one note and one block and rejecting block/block or note/note commentLink would be stricter, but current canonical/editor contracts establish note-incidence coercion rather than the converse. That new authoring/validation policy is unnecessary for the diagnosed structural-scope correction."
+    },
+    {
+      "kind": "schema_or_prompt_only_tightening",
+      "status": "rejected",
+      "reason": "Azure strict schema and the complete logical schema cannot resolve source/target IDs to node types, and guidance alone would leave the backend rejecting designed note attachments under the structural rule."
+    },
+    {
+      "kind": "forbid_all_bdd_note_edges",
+      "status": "forbidden",
+      "reason": "It contradicts the canonical catalog, BDD notation owner, and editor rule that note incidence creates commentLink."
+    },
+    {
+      "kind": "remove_or_suppress_endpoint_validation",
+      "status": "forbidden",
+      "reason": "It would admit structural relationships to notes and violate deterministic fail-closed generation acceptance."
+    },
+    {
+      "kind": "additional_provider_evidence_before_s06",
+      "status": "not_required_for_owner_selection",
+      "reason": "Another call cannot recover the absent raw edge. The safe class, ten witnesses, compatibility controls, repair trace, and corrected assembly identify the owner and whole-class correction provider-free."
+    }
+  ],
+  "audit": {
+    "state": "pass",
+    "selfMechanicalChecks": "pass",
+    "reviewer": "independent-read-only-agent-fe804acb",
+    "remainingCritical": 0,
+    "remainingHigh": 0,
+    "remainingMedium": 0
+  },
+  "accounting": {
+    "controlled": {
+      "used": 10,
+      "ceiling": 1000,
+      "remaining": 990
+    },
+    "externalHostCompleted": 1,
+    "aggregate": {
+      "used": 11,
+      "ceiling": 1000,
+      "remaining": 989
+    }
+  },
+  "scope": {
+    "productionChanged": false,
+    "testSourceChanged": false,
+    "providerCalls": 0,
+    "calibration": false,
+    "certification": false,
+    "promotion": false,
+    "deployment": false
+  },
+  "digest": "sha256:b702ff83d6cf1e94c36813e8744744db579625e527cfdd401f72a2f9f5667e36"
+}

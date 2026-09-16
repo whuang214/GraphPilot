@@ -1,0 +1,150 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "insurance-claim",
+  "diagramType": "activity_diagram",
+  "authority": "conceptual",
+  "requests": [
+    "A filed claim on an inactive policy is rejected; otherwise it is reviewed, and while documents are missing they are requested and the claim is reviewed again, then the payout is approved."
+  ],
+  "evidence": [],
+  "elements": [
+    {
+      "id": "start",
+      "semanticType": "initialNode",
+      "label": "Initial",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "file",
+      "semanticType": "opaqueAction",
+      "label": "File Claim",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "d1",
+      "semanticType": "decisionNode",
+      "label": "Policy Active?",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "reject",
+      "semanticType": "opaqueAction",
+      "label": "Reject Claim",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "end-rej",
+      "semanticType": "activityFinalNode",
+      "label": "End (Rejected)",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "review",
+      "semanticType": "opaqueAction",
+      "label": "Review Claim",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "d2",
+      "semanticType": "decisionNode",
+      "label": "Documents Complete?",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "docs",
+      "semanticType": "opaqueAction",
+      "label": "Request Documents",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "approve",
+      "semanticType": "opaqueAction",
+      "label": "Approve Payout",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "end-paid",
+      "semanticType": "activityFinalNode",
+      "label": "End (Paid)",
+      "assurance": "conceptual"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "edge-1-start-file",
+      "semanticType": "controlFlow",
+      "source": "start",
+      "target": "file",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-2-file-d1",
+      "semanticType": "controlFlow",
+      "source": "file",
+      "target": "d1",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-3-d1-reject",
+      "semanticType": "controlFlow",
+      "source": "d1",
+      "target": "reject",
+      "assurance": "conceptual",
+      "guard": "No"
+    },
+    {
+      "id": "edge-4-reject-end-rej",
+      "semanticType": "controlFlow",
+      "source": "reject",
+      "target": "end-rej",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-5-d1-review",
+      "semanticType": "controlFlow",
+      "source": "d1",
+      "target": "review",
+      "assurance": "conceptual",
+      "guard": "Yes"
+    },
+    {
+      "id": "edge-6-review-d2",
+      "semanticType": "controlFlow",
+      "source": "review",
+      "target": "d2",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-7-d2-docs",
+      "semanticType": "controlFlow",
+      "source": "d2",
+      "target": "docs",
+      "assurance": "conceptual",
+      "guard": "No"
+    },
+    {
+      "id": "edge-8-docs-review",
+      "semanticType": "controlFlow",
+      "source": "docs",
+      "target": "review",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-9-d2-approve",
+      "semanticType": "controlFlow",
+      "source": "d2",
+      "target": "approve",
+      "assurance": "conceptual",
+      "guard": "Yes"
+    },
+    {
+      "id": "edge-10-approve-end-paid",
+      "semanticType": "controlFlow",
+      "source": "approve",
+      "target": "end-paid",
+      "assurance": "conceptual"
+    }
+  ],
+  "assumptions": []
+}

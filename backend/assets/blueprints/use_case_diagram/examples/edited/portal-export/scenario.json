@@ -1,0 +1,114 @@
+{
+  "shows": "A new use case whose only connection is an actor outside the boundary. Containment outranks proximity, so it lands inside the subject rather than being dragged out to sit next to the actor — the case the first version of the placement rule got wrong.",
+  "create": {
+    "schemaVersion": "graphpilot.draft.v1",
+    "kind": "diagramDraft",
+    "diagramName": "portal-export",
+    "diagramType": "use_case_diagram",
+    "authority": "conceptual",
+    "requests": [
+      "Who uses the reporting portal, and what for."
+    ],
+    "elements": [
+      {
+        "id": "portal",
+        "semanticType": "subject",
+        "label": "Reporting Portal",
+        "assurance": "conceptual"
+      },
+      {
+        "id": "analyst",
+        "semanticType": "actor",
+        "label": "Analyst",
+        "assurance": "conceptual"
+      },
+      {
+        "id": "admin",
+        "semanticType": "actor",
+        "label": "Administrator",
+        "assurance": "conceptual"
+      },
+      {
+        "id": "build",
+        "semanticType": "useCase",
+        "label": "Build a report",
+        "parentId": "portal",
+        "assurance": "conceptual"
+      },
+      {
+        "id": "share",
+        "semanticType": "useCase",
+        "label": "Share a report",
+        "parentId": "portal",
+        "assurance": "conceptual"
+      },
+      {
+        "id": "manage",
+        "semanticType": "useCase",
+        "label": "Manage accounts",
+        "parentId": "portal",
+        "assurance": "conceptual"
+      }
+    ],
+    "relationships": [
+      {
+        "id": "analyst-build",
+        "semanticType": "association",
+        "source": "analyst",
+        "target": "build",
+        "assurance": "conceptual"
+      },
+      {
+        "id": "analyst-share",
+        "semanticType": "association",
+        "source": "analyst",
+        "target": "share",
+        "assurance": "conceptual"
+      },
+      {
+        "id": "admin-manage",
+        "semanticType": "association",
+        "source": "admin",
+        "target": "manage",
+        "assurance": "conceptual"
+      }
+    ]
+  },
+  "arrange": {
+    "nodes": {
+      "analyst": {
+        "position": {
+          "x": -520,
+          "y": 120
+        }
+      },
+      "admin": {
+        "position": {
+          "x": -520,
+          "y": 420
+        }
+      }
+    }
+  },
+  "edit": {
+    "request": "Analysts need to export a report as well.",
+    "addElements": [
+      {
+        "id": "export",
+        "semanticType": "useCase",
+        "label": "Export a report",
+        "parentId": "portal",
+        "assurance": "conceptual"
+      }
+    ],
+    "addRelationships": [
+      {
+        "id": "analyst-export",
+        "semanticType": "association",
+        "source": "analyst",
+        "target": "export",
+        "assurance": "conceptual"
+      }
+    ]
+  }
+}

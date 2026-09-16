@@ -1,0 +1,27 @@
+# Exact pins throughout: a local-first tool that a person installs once should not
+# resolve differently on two machines a week apart.
+
+Django==6.0.6
+djangorestframework==3.17.1
+django-cors-headers==4.9.0
+jsonschema==4.26.0
+mcp==1.28.1
+python-dotenv==1.2.2
+drawsvg==2.4.0
+resvg-py==0.3.3
+pygraphviz==2.0
+
+# Imported directly, and previously present only because something else happened to
+# require them: `pydantic` came in under `mcp` and `referencing` under `jsonschema`.
+# `mcp_server/server.py` does `from pydantic import Field` and `schema_registry.py`
+# does `from referencing import Registry, Resource`, so either parent dropping or
+# majoring its own dependency would break this repository with nothing here to explain
+# why. A directly imported package belongs in the manifest that installs it.
+pydantic==2.13.4
+referencing==0.37.0
+
+# Test-runner only. Django's parallel runner imports it opportunistically; without it
+# `manage.py test --parallel` still runs but discards worker tracebacks and reports the
+# `PicklingError` that AGENTS.md warns hides the real cause. Kept in this file because
+# there is no dev manifest to move it to.
+tblib==3.2.2

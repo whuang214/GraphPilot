@@ -1,0 +1,740 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "tickbox-actors-and-goals",
+  "diagramType": "use_case_diagram",
+  "authority": "as_implemented",
+  "requests": [
+    "Who uses this system, and what they use it for."
+  ],
+  "evidence": [
+    {
+      "id": "ev-roles",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 21,
+          "start": 18
+        },
+        "path": "backend/app/models.py",
+        "symbol": "Role"
+      },
+      "summary": "A membership carries one of three roles: owner, editor, viewer."
+    },
+    {
+      "id": "ev-tiers",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 43,
+          "start": 9
+        },
+        "path": "backend/app/permissions.py",
+        "symbol": "require_writer"
+      },
+      "summary": "Three permission tiers: require_member accepts any role, require_writer accepts only owner or editor (WRITERS), require_owner accepts only owner."
+    },
+    {
+      "id": "ev-register",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 21,
+          "start": 14
+        },
+        "path": "backend/app/routers/auth.py",
+        "symbol": "register"
+      },
+      "summary": "Anyone unauthenticated can register an email, name and password and receive a token."
+    },
+    {
+      "id": "ev-login",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 29,
+          "start": 24
+        },
+        "path": "backend/app/routers/auth.py",
+        "symbol": "login"
+      },
+      "summary": "Login exchanges an email and password for a bearer token; no token is needed to call it."
+    },
+    {
+      "id": "ev-list-workspaces",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 20,
+          "start": 14
+        },
+        "path": "backend/app/routers/workspaces.py",
+        "symbol": "list_workspaces"
+      },
+      "summary": "A signed-in user lists the workspaces they hold a membership in."
+    },
+    {
+      "id": "ev-list-members",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 31,
+          "start": 23
+        },
+        "path": "backend/app/routers/workspaces.py",
+        "symbol": "list_members"
+      },
+      "summary": "Any member of a workspace can list its members and their roles."
+    },
+    {
+      "id": "ev-set-role",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 51,
+          "start": 34
+        },
+        "path": "backend/app/routers/workspaces.py",
+        "symbol": "set_role"
+      },
+      "summary": "Changing a member's role calls require_owner, so only an owner may do it."
+    },
+    {
+      "id": "ev-list-projects",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 25,
+          "start": 14
+        },
+        "path": "backend/app/routers/projects.py",
+        "symbol": "list_projects"
+      },
+      "summary": "Any member can list a workspace's unarchived projects."
+    },
+    {
+      "id": "ev-create-project",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 39,
+          "start": 28
+        },
+        "path": "backend/app/routers/projects.py",
+        "symbol": "create_project"
+      },
+      "summary": "Creating a project calls require_writer, so an owner or editor may do it and a viewer may not."
+    },
+    {
+      "id": "ev-list-tasks",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 23,
+          "start": 17
+        },
+        "path": "backend/app/routers/tasks.py",
+        "symbol": "list_tasks"
+      },
+      "summary": "Any member can read a project's tasks in board order."
+    },
+    {
+      "id": "ev-create-task",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 47,
+          "start": 26
+        },
+        "path": "backend/app/routers/tasks.py",
+        "symbol": "create_task"
+      },
+      "summary": "Adding a task calls require_writer and records a 'created' activity event."
+    },
+    {
+      "id": "ev-update-task",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 79,
+          "start": 57
+        },
+        "path": "backend/app/routers/tasks.py",
+        "symbol": "update_task"
+      },
+      "summary": "Patching a task calls require_writer; sending 'state' moves it between the board's columns."
+    },
+    {
+      "id": "ev-add-subtask",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 93,
+          "start": 82
+        },
+        "path": "backend/app/routers/tasks.py",
+        "symbol": "add_subtask"
+      },
+      "summary": "Adding a subtask calls require_writer and appends it at the end of the task's list."
+    },
+    {
+      "id": "ev-toggle-subtask",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 107,
+          "start": 96
+        },
+        "path": "backend/app/routers/tasks.py",
+        "symbol": "toggle_subtask"
+      },
+      "summary": "Ticking or unticking a subtask calls require_writer on the workspace that owns its task."
+    },
+    {
+      "id": "ev-list-comments",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 122,
+          "start": 110
+        },
+        "path": "backend/app/routers/tasks.py",
+        "symbol": "list_comments"
+      },
+      "summary": "Any member can read a task's comments with their authors."
+    },
+    {
+      "id": "ev-add-comment",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 138,
+          "start": 125
+        },
+        "path": "backend/app/routers/tasks.py",
+        "symbol": "add_comment"
+      },
+      "summary": "Posting a comment calls require_writer, so a viewer cannot comment."
+    },
+    {
+      "id": "ev-legacy-doc",
+      "kind": "documentation",
+      "locator": {
+        "lineRange": {
+          "end": 5,
+          "start": 1
+        },
+        "path": "backend/app/routers/legacy.py"
+      },
+      "summary": "The module docstring: the web client stopped calling the v1 endpoints, but two integrations still post to them, so they stay."
+    },
+    {
+      "id": "ev-legacy-list",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 30,
+          "start": 19
+        },
+        "path": "backend/app/routers/legacy.py",
+        "symbol": "all_todos"
+      },
+      "summary": "GET /api/v1/todos returns every not-done task in any workspace the caller is a member of, as a flat list."
+    },
+    {
+      "id": "ev-legacy-add",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 39,
+          "start": 33
+        },
+        "path": "backend/app/routers/legacy.py",
+        "symbol": "add_todo"
+      },
+      "summary": "POST /api/v1/todos calls require_writer and creates a task from a project id and a line of text."
+    },
+    {
+      "id": "ev-legacy-complete",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 51,
+          "start": 42
+        },
+        "path": "backend/app/routers/legacy.py",
+        "symbol": "complete_todo"
+      },
+      "summary": "POST /api/v1/todos/{id}/complete calls require_member, not require_writer, and sets the task to done."
+    },
+    {
+      "id": "ev-can-comment",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 20,
+          "start": 18
+        },
+        "path": "frontend/src/lib/can.ts",
+        "symbol": "canComment"
+      },
+      "summary": "The client shows the comment box to anyone with any role, including a viewer."
+    }
+  ],
+  "elements": [
+    {
+      "id": "tickbox",
+      "semanticType": "subject",
+      "label": "tickbox",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-tiers"
+      ]
+    },
+    {
+      "id": "visitor",
+      "semanticType": "actor",
+      "label": "Visitor",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-register",
+        "ev-login"
+      ]
+    },
+    {
+      "id": "viewer",
+      "semanticType": "actor",
+      "label": "Viewer",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-roles",
+        "ev-tiers"
+      ]
+    },
+    {
+      "id": "editor",
+      "semanticType": "actor",
+      "label": "Editor",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-roles",
+        "ev-tiers"
+      ]
+    },
+    {
+      "id": "owner",
+      "semanticType": "actor",
+      "label": "Owner",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-roles",
+        "ev-tiers"
+      ]
+    },
+    {
+      "id": "integration",
+      "semanticType": "actor",
+      "label": "v1 integration",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-legacy-doc"
+      ]
+    },
+    {
+      "id": "uc-register",
+      "semanticType": "useCase",
+      "label": "Register an account",
+      "parentId": "tickbox",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-register"
+      ]
+    },
+    {
+      "id": "uc-sign-in",
+      "semanticType": "useCase",
+      "label": "Sign in",
+      "parentId": "tickbox",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-login"
+      ]
+    },
+    {
+      "id": "uc-my-workspaces",
+      "semanticType": "useCase",
+      "label": "See my workspaces",
+      "parentId": "tickbox",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-list-workspaces"
+      ]
+    },
+    {
+      "id": "uc-browse-board",
+      "semanticType": "useCase",
+      "label": "Browse a project board",
+      "parentId": "tickbox",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-list-projects",
+        "ev-list-tasks"
+      ]
+    },
+    {
+      "id": "uc-read-comments",
+      "semanticType": "useCase",
+      "label": "Read a task's comments",
+      "parentId": "tickbox",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-list-comments"
+      ]
+    },
+    {
+      "id": "uc-see-members",
+      "semanticType": "useCase",
+      "label": "See who else is here",
+      "parentId": "tickbox",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-list-members"
+      ]
+    },
+    {
+      "id": "uc-start-project",
+      "semanticType": "useCase",
+      "label": "Start a project",
+      "parentId": "tickbox",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-create-project"
+      ]
+    },
+    {
+      "id": "uc-add-task",
+      "semanticType": "useCase",
+      "label": "Add a task",
+      "parentId": "tickbox",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-create-task"
+      ]
+    },
+    {
+      "id": "uc-move-task",
+      "semanticType": "useCase",
+      "label": "Move a task to another column",
+      "parentId": "tickbox",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-update-task"
+      ]
+    },
+    {
+      "id": "uc-add-subtask",
+      "semanticType": "useCase",
+      "label": "Break a task into subtasks",
+      "parentId": "tickbox",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-add-subtask"
+      ]
+    },
+    {
+      "id": "uc-tick-subtask",
+      "semanticType": "useCase",
+      "label": "Tick a subtask off",
+      "parentId": "tickbox",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-toggle-subtask"
+      ]
+    },
+    {
+      "id": "uc-comment",
+      "semanticType": "useCase",
+      "label": "Comment on a task",
+      "parentId": "tickbox",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-add-comment"
+      ]
+    },
+    {
+      "id": "uc-set-role",
+      "semanticType": "useCase",
+      "label": "Change a member's role",
+      "parentId": "tickbox",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-set-role"
+      ]
+    },
+    {
+      "id": "uc-v1-list",
+      "semanticType": "useCase",
+      "label": "List open todos (v1)",
+      "parentId": "tickbox",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-legacy-list"
+      ]
+    },
+    {
+      "id": "uc-v1-add",
+      "semanticType": "useCase",
+      "label": "Post a todo (v1)",
+      "parentId": "tickbox",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-legacy-add"
+      ]
+    },
+    {
+      "id": "uc-v1-complete",
+      "semanticType": "useCase",
+      "label": "Complete a todo (v1)",
+      "parentId": "tickbox",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-legacy-complete"
+      ]
+    },
+    {
+      "id": "note-v1-complete",
+      "semanticType": "note",
+      "label": "This one checks membership only, not write access, so a viewer can finish a task through the old API.",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-legacy-complete"
+      ]
+    },
+    {
+      "id": "note-comment-ui",
+      "semanticType": "note",
+      "label": "The client offers the comment box to a viewer too; the server refuses it with 403.",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-can-comment",
+        "ev-add-comment"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "visitor-registers",
+      "semanticType": "association",
+      "source": "visitor",
+      "target": "uc-register",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-register"
+      ]
+    },
+    {
+      "id": "visitor-signs-in",
+      "semanticType": "association",
+      "source": "visitor",
+      "target": "uc-sign-in",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-login"
+      ]
+    },
+    {
+      "id": "viewer-sees-workspaces",
+      "semanticType": "association",
+      "source": "viewer",
+      "target": "uc-my-workspaces",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-list-workspaces"
+      ]
+    },
+    {
+      "id": "viewer-browses",
+      "semanticType": "association",
+      "source": "viewer",
+      "target": "uc-browse-board",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-list-projects",
+        "ev-list-tasks"
+      ]
+    },
+    {
+      "id": "viewer-reads-comments",
+      "semanticType": "association",
+      "source": "viewer",
+      "target": "uc-read-comments",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-list-comments"
+      ]
+    },
+    {
+      "id": "viewer-sees-members",
+      "semanticType": "association",
+      "source": "viewer",
+      "target": "uc-see-members",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-list-members"
+      ]
+    },
+    {
+      "id": "viewer-completes-v1",
+      "semanticType": "association",
+      "source": "viewer",
+      "target": "uc-v1-complete",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-legacy-complete"
+      ]
+    },
+    {
+      "id": "editor-starts-project",
+      "semanticType": "association",
+      "source": "editor",
+      "target": "uc-start-project",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-create-project"
+      ]
+    },
+    {
+      "id": "editor-adds-task",
+      "semanticType": "association",
+      "source": "editor",
+      "target": "uc-add-task",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-create-task"
+      ]
+    },
+    {
+      "id": "editor-moves-task",
+      "semanticType": "association",
+      "source": "editor",
+      "target": "uc-move-task",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-update-task"
+      ]
+    },
+    {
+      "id": "editor-adds-subtask",
+      "semanticType": "association",
+      "source": "editor",
+      "target": "uc-add-subtask",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-add-subtask"
+      ]
+    },
+    {
+      "id": "editor-ticks-subtask",
+      "semanticType": "association",
+      "source": "editor",
+      "target": "uc-tick-subtask",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-toggle-subtask"
+      ]
+    },
+    {
+      "id": "editor-comments",
+      "semanticType": "association",
+      "source": "editor",
+      "target": "uc-comment",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-add-comment"
+      ]
+    },
+    {
+      "id": "owner-sets-role",
+      "semanticType": "association",
+      "source": "owner",
+      "target": "uc-set-role",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-set-role"
+      ]
+    },
+    {
+      "id": "integration-lists",
+      "semanticType": "association",
+      "source": "integration",
+      "target": "uc-v1-list",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-legacy-list",
+        "ev-legacy-doc"
+      ]
+    },
+    {
+      "id": "integration-posts",
+      "semanticType": "association",
+      "source": "integration",
+      "target": "uc-v1-add",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-legacy-add",
+        "ev-legacy-doc"
+      ]
+    },
+    {
+      "id": "integration-completes",
+      "semanticType": "association",
+      "source": "integration",
+      "target": "uc-v1-complete",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-legacy-complete",
+        "ev-legacy-doc"
+      ]
+    },
+    {
+      "id": "editor-is-a-viewer",
+      "semanticType": "generalization",
+      "source": "editor",
+      "target": "viewer",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-tiers"
+      ]
+    },
+    {
+      "id": "owner-is-an-editor",
+      "semanticType": "generalization",
+      "source": "owner",
+      "target": "editor",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-tiers"
+      ]
+    },
+    {
+      "id": "note-v1-link",
+      "semanticType": "commentLink",
+      "source": "note-v1-complete",
+      "target": "uc-v1-complete",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-legacy-complete"
+      ]
+    },
+    {
+      "id": "note-comment-link",
+      "semanticType": "commentLink",
+      "source": "note-comment-ui",
+      "target": "uc-comment",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-can-comment"
+      ]
+    }
+  ]
+}

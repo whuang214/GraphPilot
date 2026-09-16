@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "smart-parking",
+  "diagramType": "use_case_diagram",
+  "authority": "conceptual",
+  "requests": [
+    "A driver finds and reserves a parking spot (reserving always processes payment) and can extend the time, in a sensor-driven parking system."
+  ],
+  "evidence": [],
+  "elements": [
+    {
+      "id": "driver",
+      "semanticType": "actor",
+      "label": "Driver",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "sys",
+      "semanticType": "subject",
+      "label": "Parking System",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "note",
+      "semanticType": "note",
+      "label": "Driven by real-time sensors",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "find",
+      "semanticType": "useCase",
+      "label": "Find Spot",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    },
+    {
+      "id": "reserve",
+      "semanticType": "useCase",
+      "label": "Reserve Spot",
+      "assurance": "conceptual",
+      "parentId": "sys",
+      "extensionPoints": [
+        "extensionPoint"
+      ]
+    },
+    {
+      "id": "pay",
+      "semanticType": "useCase",
+      "label": "Process Payment",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    },
+    {
+      "id": "extend-time",
+      "semanticType": "useCase",
+      "label": "Extend Time",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "edge-1-driver-find",
+      "semanticType": "association",
+      "source": "driver",
+      "target": "find",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-2-driver-reserve",
+      "semanticType": "association",
+      "source": "driver",
+      "target": "reserve",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-3-reserve-pay",
+      "semanticType": "include",
+      "source": "reserve",
+      "target": "pay",
+      "assurance": "conceptual",
+      "label": "«include»"
+    },
+    {
+      "id": "edge-4-extend-time-reserve",
+      "semanticType": "extend",
+      "source": "extend-time",
+      "target": "reserve",
+      "assurance": "conceptual",
+      "condition": "optional",
+      "extensionLocations": [
+        "extensionPoint"
+      ],
+      "label": "«extend»"
+    },
+    {
+      "id": "edge-5-note-find",
+      "semanticType": "commentLink",
+      "source": "note",
+      "target": "find",
+      "assurance": "conceptual"
+    }
+  ],
+  "assumptions": []
+}

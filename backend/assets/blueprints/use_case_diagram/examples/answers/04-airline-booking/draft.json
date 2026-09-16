@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "airline-booking",
+  "diagramType": "use_case_diagram",
+  "authority": "conceptual",
+  "requests": [
+    "A passenger searches flights, books a flight, and checks in; selecting a seat optionally extends booking, and an agent can also book a flight."
+  ],
+  "evidence": [],
+  "elements": [
+    {
+      "id": "pax",
+      "semanticType": "actor",
+      "label": "Passenger",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "agent",
+      "semanticType": "actor",
+      "label": "Agent",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "sys",
+      "semanticType": "subject",
+      "label": "Airline System",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "search",
+      "semanticType": "useCase",
+      "label": "Search Flights",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    },
+    {
+      "id": "book",
+      "semanticType": "useCase",
+      "label": "Book Flight",
+      "assurance": "conceptual",
+      "parentId": "sys",
+      "extensionPoints": [
+        "extensionPoint"
+      ]
+    },
+    {
+      "id": "seat",
+      "semanticType": "useCase",
+      "label": "Select Seat",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    },
+    {
+      "id": "checkin",
+      "semanticType": "useCase",
+      "label": "Check In",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "edge-1-pax-search",
+      "semanticType": "association",
+      "source": "pax",
+      "target": "search",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-2-pax-book",
+      "semanticType": "association",
+      "source": "pax",
+      "target": "book",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-3-pax-checkin",
+      "semanticType": "association",
+      "source": "pax",
+      "target": "checkin",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-4-agent-book",
+      "semanticType": "association",
+      "source": "agent",
+      "target": "book",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-5-seat-book",
+      "semanticType": "extend",
+      "source": "seat",
+      "target": "book",
+      "assurance": "conceptual",
+      "condition": "optional",
+      "extensionLocations": [
+        "extensionPoint"
+      ],
+      "label": "«extend»"
+    }
+  ],
+  "assumptions": []
+}

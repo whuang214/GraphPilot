@@ -1,0 +1,80 @@
+{
+  "authority": "conceptual",
+  "basis": {
+    "diagram": "sha256:0ef4c389883adacb4587619a77d371303d34be889cd8dfce0ff93c16bbb149d6",
+    "readAt": "2026-08-05T22:45:40.164183+00:00"
+  },
+  "diagramName": "catalogue-ends",
+  "diagramType": "bdd_diagram",
+  "elements": [
+    {
+      "assurance": "conceptual",
+      "id": "catalogue",
+      "label": "Catalogue",
+      "semanticType": "block"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "product",
+      "label": "Product",
+      "semanticType": "block"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "variant",
+      "label": "Variant",
+      "semanticType": "block"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "supplier",
+      "label": "Supplier",
+      "semanticType": "block"
+    }
+  ],
+  "kind": "diagramDraft",
+  "relationships": [
+    {
+      "assurance": "conceptual",
+      "id": "products-in-catalogue",
+      "semanticType": "composition",
+      "source": "product",
+      "sourceMultiplicity": {
+        "lower": 0,
+        "upper": "*"
+      },
+      "sourceRole": "products",
+      "target": "catalogue"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "variants-of-product",
+      "semanticType": "composition",
+      "source": "variant",
+      "sourceMultiplicity": {
+        "lower": 1,
+        "upper": "*"
+      },
+      "sourceRole": "variants",
+      "target": "product"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "product-supplier",
+      "semanticType": "association",
+      "source": "product",
+      "target": "supplier",
+      "targetMultiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "targetNavigable": true,
+      "targetRole": "suppliedBy"
+    }
+  ],
+  "requests": [
+    "Draw how the product catalogue hangs together.",
+    "A product has at least one variant, and every product names exactly one supplier."
+  ],
+  "schemaVersion": "graphpilot.draft.v1"
+}

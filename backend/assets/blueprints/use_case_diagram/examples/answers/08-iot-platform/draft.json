@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "iot-platform",
+  "diagramType": "use_case_diagram",
+  "authority": "conceptual",
+  "requests": [
+    "A device sends telemetry; an operator views the dashboard, an admin configures devices, and an auditor reviews audit logs on an IoT platform."
+  ],
+  "evidence": [],
+  "elements": [
+    {
+      "id": "device",
+      "semanticType": "actor",
+      "label": "Device",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "operator",
+      "semanticType": "actor",
+      "label": "Operator",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "admin",
+      "semanticType": "actor",
+      "label": "Admin",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "auditor",
+      "semanticType": "actor",
+      "label": "Auditor",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "sys",
+      "semanticType": "subject",
+      "label": "IoT Platform",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "telemetry",
+      "semanticType": "useCase",
+      "label": "Send Telemetry",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    },
+    {
+      "id": "dashboard",
+      "semanticType": "useCase",
+      "label": "View Dashboard",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    },
+    {
+      "id": "configure",
+      "semanticType": "useCase",
+      "label": "Configure Device",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    },
+    {
+      "id": "audit",
+      "semanticType": "useCase",
+      "label": "Audit Logs",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "edge-1-device-telemetry",
+      "semanticType": "association",
+      "source": "device",
+      "target": "telemetry",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-2-operator-dashboard",
+      "semanticType": "association",
+      "source": "operator",
+      "target": "dashboard",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-3-admin-configure",
+      "semanticType": "association",
+      "source": "admin",
+      "target": "configure",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-4-auditor-audit",
+      "semanticType": "association",
+      "source": "auditor",
+      "target": "audit",
+      "assurance": "conceptual"
+    }
+  ],
+  "assumptions": []
+}

@@ -1,0 +1,1514 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema#",
+  "$id": "graphpilot.draft.v1",
+  "title": "GraphPilot Diagram Draft",
+  "description": "One host-authored diagram: what was asked for, which elements and relationships should appear, and what in the repository supports each of them. The canonical diagram it produces carries its own evidence and its own request log.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "kind",
+    "diagramName",
+    "diagramType",
+    "authority",
+    "requests",
+    "elements",
+    "relationships"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "graphpilot.draft.v1"
+    },
+    "kind": {
+      "type": "string",
+      "const": "diagramDraft"
+    },
+    "diagramName": {
+      "type": "string",
+      "description": "Validated filename stem. Names .graphpilot/diagrams/<diagramName>.gp.json and its siblings.",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "diagramType": {
+      "type": "string",
+      "description": "bdd_diagram is a SysML Block Definition Diagram, not behaviour-driven development.",
+      "enum": [
+        "activity_diagram",
+        "use_case_diagram",
+        "bdd_diagram"
+      ]
+    },
+    "authority": {
+      "type": "string",
+      "description": "as_implemented cites evidence and is freshness-checked; conceptual cites nothing.",
+      "enum": [
+        "as_implemented",
+        "conceptual"
+      ]
+    },
+    "requests": {
+      "type": "array",
+      "description": "Every ask made of this diagram, verbatim and oldest first. Creating one takes exactly one entry. Editing one takes the list you were given with exactly one entry appended: earlier entries must come back unchanged, because the saved diagram keeps them and nothing else records why it looks the way it does.",
+      "minItems": 1,
+      "maxItems": 64,
+      "items": {
+        "$ref": "#/$defs/nonBlankText"
+      }
+    },
+    "basis": {
+      "$ref": "#/$defs/basis"
+    },
+    "evidence": {
+      "type": "array",
+      "description": "Cited source regions. Required when authority is as_implemented; forbidden when conceptual.",
+      "maxItems": 128,
+      "items": {
+        "$ref": "#/$defs/evidence"
+      }
+    },
+    "elements": {
+      "type": "array",
+      "description": "What should appear as a node. At least one is required.",
+      "minItems": 1,
+      "maxItems": 256,
+      "items": {
+        "$ref": "#/$defs/element"
+      }
+    },
+    "relationships": {
+      "type": "array",
+      "description": "What connects to what. May be empty for a single-element diagram.",
+      "maxItems": 512,
+      "items": {
+        "$ref": "#/$defs/relationship"
+      }
+    },
+    "assumptions": {
+      "type": "array",
+      "maxItems": 64,
+      "items": {
+        "$ref": "#/$defs/assumption"
+      }
+    }
+  },
+  "$defs": {
+    "nonBlankText": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000,
+      "pattern": "\\S"
+    },
+    "shortText": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "\\S"
+    },
+    "slug": {
+      "type": "string",
+      "description": "Identifier for one element or relationship. It becomes the canonical node or edge ID unchanged, so it is also the key an edit is merged on. **Author a lowercase hyphenated slug** — `order-line`, not `OrderLine_2`. Underscores and mixed case are accepted only because the editor mints ids like `edge_order_line_<uuid>` when a person draws a relationship, and a draft projected from a diagram they have edited has to be able to carry those back.",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$"
+    },
+    "evidenceId": {
+      "type": "string",
+      "minLength": 4,
+      "maxLength": 128,
+      "pattern": "^ev-[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "assumptionId": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 128,
+      "pattern": "^asm-[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "assurance": {
+      "type": "string",
+      "description": "grounded requires evidenceRefs; assumed requires an assumptionRef; conceptual requires authority conceptual. `user` means a person drew this in the editor: you may carry one back unchanged when editing, and you may never author one.",
+      "enum": [
+        "grounded",
+        "assumed",
+        "conceptual",
+        "user"
+      ]
+    },
+    "lineRange": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "start",
+        "end"
+      ],
+      "properties": {
+        "start": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "end": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "locator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "lineRange"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Workspace-relative POSIX path to a readable file.",
+          "minLength": 1,
+          "maxLength": 1024,
+          "pattern": "^[^/\\\\][^\\\\]*$"
+        },
+        "symbol": {
+          "$ref": "#/$defs/shortText"
+        },
+        "lineRange": {
+          "$ref": "#/$defs/lineRange"
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "locator",
+        "summary"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/evidenceId"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "code",
+            "test",
+            "documentation",
+            "configuration"
+          ],
+          "description": "What sort of source this is. `code` is the default choice; `test` for a test that demonstrates behaviour; `documentation` for a README or comment block; `configuration` for settings, routes or manifests."
+        },
+        "locator": {
+          "$ref": "#/$defs/locator"
+        },
+        "summary": {
+          "description": "What those exact lines establish. One or two sentences.",
+          "$ref": "#/$defs/nonBlankText"
+        }
+      }
+    },
+    "multiplicity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "lower",
+        "upper"
+      ],
+      "properties": {
+        "lower": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Lowest permitted count. 0 means optional."
+        },
+        "upper": {
+          "description": "Nonnegative finite upper bound, or the exact string * for unbounded.",
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "string",
+              "const": "*"
+            }
+          ]
+        }
+      }
+    },
+    "property": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "SysML property kind. These are property kinds inside features, never element semantic types.",
+          "enum": [
+            "part",
+            "reference",
+            "value",
+            "constraint",
+            "flow"
+          ]
+        },
+        "name": {
+          "$ref": "#/$defs/shortText"
+        },
+        "type": {
+          "$ref": "#/$defs/shortText"
+        },
+        "multiplicity": {
+          "$ref": "#/$defs/multiplicity"
+        },
+        "default": {
+          "type": [
+            "string",
+            "number",
+            "boolean",
+            "null"
+          ],
+          "maxLength": 256
+        }
+      }
+    },
+    "operation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/shortText"
+        },
+        "parameters": {
+          "type": "array",
+          "maxItems": 16,
+          "items": {
+            "$ref": "#/$defs/shortText"
+          }
+        },
+        "returnType": {
+          "$ref": "#/$defs/shortText"
+        }
+      }
+    },
+    "constraint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "expression"
+      ],
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/shortText"
+        },
+        "expression": {
+          "$ref": "#/$defs/nonBlankText"
+        }
+      }
+    },
+    "features": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "properties": {
+          "type": "array",
+          "maxItems": 64,
+          "items": {
+            "$ref": "#/$defs/property"
+          },
+          "description": "The block's parts, references and values."
+        },
+        "operations": {
+          "type": "array",
+          "maxItems": 64,
+          "items": {
+            "$ref": "#/$defs/operation"
+          },
+          "description": "What the block can do."
+        },
+        "constraints": {
+          "type": "array",
+          "maxItems": 64,
+          "items": {
+            "$ref": "#/$defs/constraint"
+          },
+          "description": "Rules the block must satisfy."
+        },
+        "literals": {
+          "type": "array",
+          "maxItems": 64,
+          "items": {
+            "$ref": "#/$defs/shortText"
+          },
+          "description": "Enumeration values, as plain strings — unlike `properties`, `operations` and `constraints`, which are arrays of objects."
+        }
+      }
+    },
+    "element": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "semanticType",
+        "label",
+        "assurance"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/slug",
+          "description": "Unique within this draft. Relationships refer to elements by this id."
+        },
+        "semanticType": {
+          "type": "string",
+          "description": "Must belong to the requested diagram type's vocabulary; the draft validator reports the exact permitted set.",
+          "enum": [
+            "block",
+            "note",
+            "opaqueAction",
+            "initialNode",
+            "activityFinalNode",
+            "decisionNode",
+            "mergeNode",
+            "forkNode",
+            "joinNode",
+            "useCase",
+            "actor",
+            "subject"
+          ]
+        },
+        "label": {
+          "$ref": "#/$defs/shortText",
+          "description": "What the reader sees on the node."
+        },
+        "stereotype": {
+          "description": "BDD block only. Free text — there is no fixed vocabulary, so write the word your source uses (service, repository, value type). It replaces the heading a block would otherwise get from its semanticType. Write the bare word: GraphPilot draws the guillemets, so 'service' renders as «service» and '«service»' renders as ««service»».",
+          "$ref": "#/$defs/shortText"
+        },
+        "features": {
+          "$ref": "#/$defs/features"
+        },
+        "parentId": {
+          "description": "Another element in this draft that visually contains this one.",
+          "$ref": "#/$defs/slug"
+        },
+        "extensionPoints": {
+          "description": "Use case only. Named points at which an extending use case may attach, drawn in the use case's own compartment. An `extend` relationship names one in `extensionLocations`.",
+          "type": "array",
+          "maxItems": 16,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/shortText"
+          }
+        },
+        "assurance": {
+          "$ref": "#/$defs/assurance"
+        },
+        "evidenceRefs": {
+          "type": "array",
+          "maxItems": 16,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/evidenceId"
+          },
+          "description": "Ids from `evidence[]` establishing this element. Required when assurance is `grounded`; up to 16."
+        },
+        "assumptionRef": {
+          "$ref": "#/$defs/assumptionId",
+          "description": "The assumption this element rests on. Required when assurance is `assumed`, and the id must appear in `assumptions[]` or the draft is refused."
+        }
+      }
+    },
+    "relationship": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "semanticType",
+        "source",
+        "target",
+        "assurance"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/slug"
+        },
+        "semanticType": {
+          "type": "string",
+          "description": "Must belong to the requested diagram type's vocabulary; the draft validator reports the exact permitted set.",
+          "enum": [
+            "association",
+            "composition",
+            "generalization",
+            "dependency",
+            "controlFlow",
+            "include",
+            "extend",
+            "commentLink"
+          ]
+        },
+        "source": {
+          "$ref": "#/$defs/slug",
+          "description": "The id of the element this starts from."
+        },
+        "target": {
+          "$ref": "#/$defs/slug",
+          "description": "The id of the element this points at."
+        },
+        "label": {
+          "$ref": "#/$defs/shortText"
+        },
+        "guard": {
+          "description": "Activity only. Required on every branch out of a decisionNode. Write the condition alone — GraphPilot draws the surrounding brackets, so \"stock ok\" renders as [stock ok] and \"[stock ok]\" renders as [[stock ok]].",
+          "$ref": "#/$defs/shortText"
+        },
+        "condition": {
+          "description": "Use case, `extend` only. When the extension applies — UML draws this as the condition on the extend. Without it an extend claims to happen always, which is rarely what the source says.",
+          "$ref": "#/$defs/shortText"
+        },
+        "extensionLocations": {
+          "description": "Use case, `extend` only. Which of the base use case's `extensionPoints` this attaches to.",
+          "type": "array",
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/shortText"
+          }
+        },
+        "sourceRole": {
+          "description": "The part or member name at the source end. For a composition this is the part's role.",
+          "$ref": "#/$defs/shortText"
+        },
+        "targetRole": {
+          "$ref": "#/$defs/shortText",
+          "description": "The member name at the target end, when naming it helps a reader."
+        },
+        "sourceMultiplicity": {
+          "$ref": "#/$defs/multiplicity"
+        },
+        "targetMultiplicity": {
+          "$ref": "#/$defs/multiplicity"
+        },
+        "targetNavigable": {
+          "description": "An open arrowhead at this end, meaning the relationship can be traversed towards it.",
+          "type": "boolean"
+        },
+        "assurance": {
+          "$ref": "#/$defs/assurance"
+        },
+        "evidenceRefs": {
+          "type": "array",
+          "maxItems": 16,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/evidenceId"
+          },
+          "description": "Ids from `evidence[]` establishing this relationship. Relationships carry evidence exactly as elements do. Required when assurance is `grounded`; up to 16."
+        },
+        "assumptionRef": {
+          "$ref": "#/$defs/assumptionId",
+          "description": "The assumption this relationship rests on. Required when assurance is `assumed`, and the id must appear in `assumptions[]` or the draft is refused."
+        }
+      }
+    },
+    "assumption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "statement",
+        "reason",
+        "acceptedBy"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/assumptionId"
+        },
+        "statement": {
+          "$ref": "#/$defs/nonBlankText",
+          "description": "What you took as true."
+        },
+        "reason": {
+          "$ref": "#/$defs/nonBlankText",
+          "description": "Why it was reasonable to take it as true."
+        },
+        "acceptedBy": {
+          "type": "string",
+          "enum": [
+            "host",
+            "user"
+          ],
+          "description": "`host` if you decided it yourself; `user` if the person asking told you."
+        }
+      }
+    },
+    "basis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "diagram",
+        "readAt"
+      ],
+      "description": "What the read was based on. Written by the read, compared by the write, and never authored or echoed by you — it rides along in the file you are editing. A mismatch means somebody saved in the browser in between, and the write refuses rather than deleting what they added.",
+      "properties": {
+        "diagram": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "readAt": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "schemaVersion": "graphpilot.draft.v1",
+      "kind": "diagramDraft",
+      "diagramName": "todo-structure",
+      "diagramType": "bdd_diagram",
+      "authority": "as_implemented",
+      "requests": [
+        "Show how the todo service is put together."
+      ],
+      "evidence": [
+        {
+          "id": "ev-list",
+          "kind": "code",
+          "locator": {
+            "path": "src/todo_api/domain/models.py",
+            "symbol": "TodoList",
+            "lineRange": {
+              "start": 73,
+              "end": 85
+            }
+          },
+          "summary": "TodoList holds a name, an owner and a member-to-role mapping."
+        },
+        {
+          "id": "ev-todo",
+          "kind": "code",
+          "locator": {
+            "path": "src/todo_api/domain/models.py",
+            "symbol": "Todo",
+            "lineRange": {
+              "start": 51,
+              "end": 69
+            }
+          },
+          "summary": "Todo names the list it belongs to and carries its own state and priority."
+        },
+        {
+          "id": "ev-state",
+          "kind": "code",
+          "locator": {
+            "path": "src/todo_api/domain/models.py",
+            "symbol": "TodoState",
+            "lineRange": {
+              "start": 23,
+              "end": 29
+            }
+          },
+          "summary": "The three states a todo can be in."
+        },
+        {
+          "id": "ev-role",
+          "kind": "code",
+          "locator": {
+            "path": "src/todo_api/domain/models.py",
+            "symbol": "Role",
+            "lineRange": {
+              "start": 32,
+              "end": 38
+            }
+          },
+          "summary": "The four membership roles."
+        },
+        {
+          "id": "ev-port",
+          "kind": "code",
+          "locator": {
+            "path": "src/todo_api/repositories/base.py",
+            "symbol": "TodoRepository",
+            "lineRange": {
+              "start": 14,
+              "end": 25
+            }
+          },
+          "summary": "The repository port: add, get, update, list_for, count_for, due_before."
+        },
+        {
+          "id": "ev-sql",
+          "kind": "code",
+          "locator": {
+            "path": "src/todo_api/repositories/sql.py",
+            "symbol": "SqlTodoRepository",
+            "lineRange": {
+              "start": 18,
+              "end": 73
+            }
+          },
+          "summary": "A SQL adapter implementing every method of the port."
+        }
+      ],
+      "elements": [
+        {
+          "id": "todo-list",
+          "semanticType": "block",
+          "label": "TodoList",
+          "features": {
+            "properties": [
+              {
+                "kind": "value",
+                "name": "name",
+                "type": "str"
+              },
+              {
+                "kind": "value",
+                "name": "ownerId",
+                "type": "str"
+              },
+              {
+                "kind": "reference",
+                "name": "members",
+                "type": "Role",
+                "multiplicity": {
+                  "lower": 0,
+                  "upper": "*"
+                }
+              },
+              {
+                "kind": "value",
+                "name": "archived",
+                "type": "bool",
+                "default": "False"
+              }
+            ],
+            "operations": [
+              {
+                "name": "role_of"
+              }
+            ]
+          },
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-list"
+          ]
+        },
+        {
+          "id": "todo",
+          "semanticType": "block",
+          "label": "Todo",
+          "features": {
+            "properties": [
+              {
+                "kind": "value",
+                "name": "title",
+                "type": "str"
+              },
+              {
+                "kind": "value",
+                "name": "state",
+                "type": "TodoState"
+              },
+              {
+                "kind": "value",
+                "name": "dueAt",
+                "type": "datetime",
+                "multiplicity": {
+                  "lower": 0,
+                  "upper": 1
+                }
+              }
+            ],
+            "operations": [
+              {
+                "name": "is_overdue"
+              }
+            ]
+          },
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-todo"
+          ]
+        },
+        {
+          "id": "todo-state",
+          "semanticType": "block",
+          "label": "TodoState",
+          "features": {
+            "literals": [
+              "OPEN",
+              "DONE",
+              "ARCHIVED"
+            ]
+          },
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-state"
+          ]
+        },
+        {
+          "id": "role",
+          "semanticType": "block",
+          "label": "Role",
+          "features": {
+            "literals": [
+              "VIEWER",
+              "COLLABORATOR",
+              "OWNER",
+              "ADMIN"
+            ]
+          },
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-role"
+          ]
+        },
+        {
+          "id": "port",
+          "semanticType": "block",
+          "label": "TodoRepository",
+          "features": {
+            "operations": [
+              {
+                "name": "add"
+              },
+              {
+                "name": "get"
+              },
+              {
+                "name": "update"
+              },
+              {
+                "name": "list_for"
+              },
+              {
+                "name": "due_before"
+              }
+            ]
+          },
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-port"
+          ]
+        },
+        {
+          "id": "sql-repo",
+          "semanticType": "block",
+          "label": "SqlTodoRepository",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-sql"
+          ]
+        },
+        {
+          "id": "note-owner",
+          "semanticType": "note",
+          "label": "role_of returns OWNER for the owner without consulting members, so the owner is never listed as a member.",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-list"
+          ]
+        }
+      ],
+      "relationships": [
+        {
+          "id": "todos-in-list",
+          "semanticType": "composition",
+          "source": "todo",
+          "target": "todo-list",
+          "sourceRole": "todos",
+          "sourceMultiplicity": {
+            "lower": 0,
+            "upper": "*"
+          },
+          "targetMultiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-todo"
+          ]
+        },
+        {
+          "id": "todo-has-state",
+          "semanticType": "association",
+          "source": "todo",
+          "target": "todo-state",
+          "targetRole": "state",
+          "targetMultiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "targetNavigable": true,
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-todo"
+          ]
+        },
+        {
+          "id": "members-have-roles",
+          "semanticType": "association",
+          "source": "todo-list",
+          "target": "role",
+          "targetRole": "members",
+          "targetMultiplicity": {
+            "lower": 0,
+            "upper": "*"
+          },
+          "targetNavigable": true,
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-list"
+          ]
+        },
+        {
+          "id": "sql-implements-port",
+          "semanticType": "generalization",
+          "source": "sql-repo",
+          "target": "port",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-sql",
+            "ev-port"
+          ]
+        },
+        {
+          "id": "port-stores-todo",
+          "semanticType": "dependency",
+          "source": "port",
+          "target": "todo",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-port"
+          ]
+        },
+        {
+          "id": "owner-note-link",
+          "semanticType": "commentLink",
+          "source": "note-owner",
+          "target": "todo-list",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-list"
+          ]
+        }
+      ],
+      "assumptions": []
+    },
+    {
+      "schemaVersion": "graphpilot.draft.v1",
+      "kind": "diagramDraft",
+      "diagramName": "todo-completion",
+      "diagramType": "activity_diagram",
+      "authority": "as_implemented",
+      "requests": [
+        "What happens when someone completes a todo?"
+      ],
+      "evidence": [
+        {
+          "id": "ev-route",
+          "kind": "code",
+          "locator": {
+            "path": "src/todo_api/api/routes_todos.py",
+            "symbol": "complete_todo",
+            "lineRange": {
+              "start": 46,
+              "end": 51
+            }
+          },
+          "summary": "The route delegates to the service and turns any exception into a status code."
+        },
+        {
+          "id": "ev-complete",
+          "kind": "code",
+          "locator": {
+            "path": "src/todo_api/services/todo_service.py",
+            "symbol": "TodoService.complete",
+            "lineRange": {
+              "start": 73,
+              "end": 89
+            }
+          },
+          "summary": "complete() loads the todo and its list, checks permission and the rules, then sets DONE, saves, and publishes."
+        },
+        {
+          "id": "ev-require",
+          "kind": "code",
+          "locator": {
+            "path": "src/todo_api/services/permissions.py",
+            "symbol": "PermissionService.require",
+            "lineRange": {
+              "start": 36,
+              "end": 41
+            }
+          },
+          "summary": "require raises PermissionDenied unless the caller's role allows the action."
+        },
+        {
+          "id": "ev-actions",
+          "kind": "code",
+          "locator": {
+            "path": "src/todo_api/services/permissions.py",
+            "symbol": "_REQUIRED",
+            "lineRange": {
+              "start": 17,
+              "end": 24
+            }
+          },
+          "summary": "complete_todo needs COLLABORATOR, OWNER or ADMIN."
+        }
+      ],
+      "elements": [
+        {
+          "id": "start",
+          "semanticType": "initialNode",
+          "label": "Request arrives",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-route"
+          ]
+        },
+        {
+          "id": "load-todo",
+          "semanticType": "opaqueAction",
+          "label": "Load the todo",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-complete"
+          ]
+        },
+        {
+          "id": "todo-found",
+          "semanticType": "decisionNode",
+          "label": "Does the todo exist?",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-complete"
+          ]
+        },
+        {
+          "id": "load-list",
+          "semanticType": "opaqueAction",
+          "label": "Load its list",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-complete"
+          ]
+        },
+        {
+          "id": "may-complete",
+          "semanticType": "decisionNode",
+          "label": "May this caller complete it?",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-require",
+            "ev-actions"
+          ]
+        },
+        {
+          "id": "check-rules",
+          "semanticType": "opaqueAction",
+          "label": "Check the list is not archived and the todo is completable",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-complete"
+          ]
+        },
+        {
+          "id": "mark-done",
+          "semanticType": "opaqueAction",
+          "label": "Set DONE and stamp completedAt",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-complete"
+          ]
+        },
+        {
+          "id": "save",
+          "semanticType": "opaqueAction",
+          "label": "Update the repository",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-complete"
+          ]
+        },
+        {
+          "id": "publish",
+          "semanticType": "opaqueAction",
+          "label": "Publish TodoCompleted",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-complete"
+          ]
+        },
+        {
+          "id": "refuse",
+          "semanticType": "opaqueAction",
+          "label": "Map the exception to a status code",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-route"
+          ]
+        },
+        {
+          "id": "done",
+          "semanticType": "activityFinalNode",
+          "label": "200 with the todo",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-route"
+          ]
+        },
+        {
+          "id": "stopped",
+          "semanticType": "activityFinalNode",
+          "label": "Error response",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-route"
+          ]
+        },
+        {
+          "id": "note-catch",
+          "semanticType": "note",
+          "label": "The route catches bare Exception, so an unexpected fault is reported as a handled error like any refusal.",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-route"
+          ]
+        }
+      ],
+      "relationships": [
+        {
+          "id": "f1",
+          "semanticType": "controlFlow",
+          "source": "start",
+          "target": "load-todo",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-route"
+          ]
+        },
+        {
+          "id": "f2",
+          "semanticType": "controlFlow",
+          "source": "load-todo",
+          "target": "todo-found",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-complete"
+          ]
+        },
+        {
+          "id": "f3",
+          "semanticType": "controlFlow",
+          "source": "todo-found",
+          "target": "load-list",
+          "guard": "it exists",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-complete"
+          ]
+        },
+        {
+          "id": "f4",
+          "semanticType": "controlFlow",
+          "source": "todo-found",
+          "target": "refuse",
+          "guard": "no such todo",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-complete"
+          ]
+        },
+        {
+          "id": "f5",
+          "semanticType": "controlFlow",
+          "source": "load-list",
+          "target": "may-complete",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-complete"
+          ]
+        },
+        {
+          "id": "f6",
+          "semanticType": "controlFlow",
+          "source": "may-complete",
+          "target": "check-rules",
+          "guard": "role allows it",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-require"
+          ]
+        },
+        {
+          "id": "f7",
+          "semanticType": "controlFlow",
+          "source": "may-complete",
+          "target": "refuse",
+          "guard": "permission denied",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-require"
+          ]
+        },
+        {
+          "id": "f8",
+          "semanticType": "controlFlow",
+          "source": "check-rules",
+          "target": "mark-done",
+          "guard": "both rules pass",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-complete"
+          ]
+        },
+        {
+          "id": "f8b",
+          "semanticType": "controlFlow",
+          "source": "check-rules",
+          "target": "refuse",
+          "guard": "archived, or already done",
+          "assurance": "assumed",
+          "assumptionRef": "asm-rules-reach-the-same-handler"
+        },
+        {
+          "id": "f9",
+          "semanticType": "controlFlow",
+          "source": "mark-done",
+          "target": "save",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-complete"
+          ]
+        },
+        {
+          "id": "f10",
+          "semanticType": "controlFlow",
+          "source": "save",
+          "target": "publish",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-complete"
+          ]
+        },
+        {
+          "id": "f11",
+          "semanticType": "controlFlow",
+          "source": "publish",
+          "target": "done",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-route"
+          ]
+        },
+        {
+          "id": "f12",
+          "semanticType": "controlFlow",
+          "source": "refuse",
+          "target": "stopped",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-route"
+          ]
+        },
+        {
+          "id": "catch-note-link",
+          "semanticType": "commentLink",
+          "source": "note-catch",
+          "target": "refuse",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-route"
+          ]
+        }
+      ],
+      "assumptions": [
+        {
+          "id": "asm-rules-reach-the-same-handler",
+          "statement": "A rules failure leaves through the same except branch as the other refusals.",
+          "reason": "The route wraps the whole call in one try, but no test covers a rules failure so the resulting status is unverified.",
+          "acceptedBy": "host"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "graphpilot.draft.v1",
+      "kind": "diagramDraft",
+      "diagramName": "todo-actors",
+      "diagramType": "use_case_diagram",
+      "authority": "as_implemented",
+      "requests": [
+        "Who can do what with the todo service?"
+      ],
+      "evidence": [
+        {
+          "id": "ev-actions",
+          "kind": "code",
+          "locator": {
+            "path": "src/todo_api/services/permissions.py",
+            "symbol": "_REQUIRED",
+            "lineRange": {
+              "start": 17,
+              "end": 24
+            }
+          },
+          "summary": "The six actions and the roles each one needs."
+        },
+        {
+          "id": "ev-roles",
+          "kind": "code",
+          "locator": {
+            "path": "src/todo_api/domain/models.py",
+            "symbol": "Role",
+            "lineRange": {
+              "start": 32,
+              "end": 38
+            }
+          },
+          "summary": "VIEWER, COLLABORATOR, OWNER and ADMIN, in ascending privilege."
+        },
+        {
+          "id": "ev-require",
+          "kind": "code",
+          "locator": {
+            "path": "src/todo_api/services/permissions.py",
+            "symbol": "PermissionService.require",
+            "lineRange": {
+              "start": 36,
+              "end": 41
+            }
+          },
+          "summary": "Every guarded action goes through one check."
+        },
+        {
+          "id": "ev-invite",
+          "kind": "code",
+          "locator": {
+            "path": "src/todo_api/api/routes_lists.py",
+            "symbol": "invite_member",
+            "lineRange": {
+              "start": 18,
+              "end": 30
+            }
+          },
+          "summary": "Inviting a member to a list."
+        },
+        {
+          "id": "ev-reminders",
+          "kind": "code",
+          "locator": {
+            "path": "src/todo_api/services/reminder_service.py",
+            "symbol": "ReminderService.run_once",
+            "lineRange": {
+              "start": 57,
+              "end": 83
+            }
+          },
+          "summary": "run_once sweeps todos due before a cutoff and notifies about them."
+        }
+      ],
+      "elements": [
+        {
+          "id": "system",
+          "semanticType": "subject",
+          "label": "Todo service",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-actions"
+          ]
+        },
+        {
+          "id": "collaborator",
+          "semanticType": "actor",
+          "label": "Collaborator",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-roles"
+          ]
+        },
+        {
+          "id": "owner",
+          "semanticType": "actor",
+          "label": "Owner",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-roles"
+          ]
+        },
+        {
+          "id": "scheduler",
+          "semanticType": "actor",
+          "label": "Scheduler",
+          "assurance": "assumed",
+          "assumptionRef": "asm-scheduler-outside"
+        },
+        {
+          "id": "create-todo",
+          "semanticType": "useCase",
+          "label": "Create a todo",
+          "parentId": "system",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-actions"
+          ]
+        },
+        {
+          "id": "complete-todo",
+          "semanticType": "useCase",
+          "label": "Complete a todo",
+          "parentId": "system",
+          "extensionPoints": [
+            "once the todo is saved"
+          ],
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-actions"
+          ]
+        },
+        {
+          "id": "check-role",
+          "semanticType": "useCase",
+          "label": "Check the caller's role",
+          "parentId": "system",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-require"
+          ]
+        },
+        {
+          "id": "invite-member",
+          "semanticType": "useCase",
+          "label": "Invite a member",
+          "parentId": "system",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-invite"
+          ]
+        },
+        {
+          "id": "archive-list",
+          "semanticType": "useCase",
+          "label": "Archive a list",
+          "parentId": "system",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-actions"
+          ]
+        },
+        {
+          "id": "send-reminders",
+          "semanticType": "useCase",
+          "label": "Send due reminders",
+          "parentId": "system",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-reminders"
+          ]
+        }
+      ],
+      "relationships": [
+        {
+          "id": "collab-creates",
+          "semanticType": "association",
+          "source": "collaborator",
+          "target": "create-todo",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-actions"
+          ]
+        },
+        {
+          "id": "collab-completes",
+          "semanticType": "association",
+          "source": "collaborator",
+          "target": "complete-todo",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-actions"
+          ]
+        },
+        {
+          "id": "owner-invites",
+          "semanticType": "association",
+          "source": "owner",
+          "target": "invite-member",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-actions"
+          ]
+        },
+        {
+          "id": "owner-archives",
+          "semanticType": "association",
+          "source": "owner",
+          "target": "archive-list",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-actions"
+          ]
+        },
+        {
+          "id": "scheduler-sends",
+          "semanticType": "association",
+          "source": "scheduler",
+          "target": "send-reminders",
+          "assurance": "assumed",
+          "assumptionRef": "asm-scheduler-outside"
+        },
+        {
+          "id": "owner-is-a-collaborator",
+          "semanticType": "generalization",
+          "source": "owner",
+          "target": "collaborator",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-actions"
+          ]
+        },
+        {
+          "id": "complete-includes-check",
+          "semanticType": "include",
+          "source": "complete-todo",
+          "target": "check-role",
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-require"
+          ]
+        },
+        {
+          "id": "reminders-extend-complete",
+          "semanticType": "extend",
+          "source": "send-reminders",
+          "target": "complete-todo",
+          "condition": "the todo was still open when its reminder fell due",
+          "extensionLocations": [
+            "once the todo is saved"
+          ],
+          "assurance": "grounded",
+          "evidenceRefs": [
+            "ev-reminders"
+          ]
+        }
+      ],
+      "assumptions": [
+        {
+          "id": "asm-scheduler-outside",
+          "statement": "Reminder runs are triggered from outside this repository.",
+          "reason": "run_once takes the cutoff as an argument and nothing here calls it, so its caller is not visible in the source.",
+          "acceptedBy": "host"
+        }
+      ]
+    }
+  ]
+}

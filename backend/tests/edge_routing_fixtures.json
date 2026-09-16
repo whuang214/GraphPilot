@@ -1,0 +1,806 @@
+{
+  "orthogonalCases": [
+    {
+      "name": "aligned-direct",
+      "source": {
+        "x": 0,
+        "y": 0,
+        "w": 100,
+        "h": 60
+      },
+      "target": {
+        "x": 300,
+        "y": 0,
+        "w": 100,
+        "h": 60
+      },
+      "geometry": {},
+      "expected": {
+        "points": [
+          {
+            "x": 100,
+            "y": 30
+          },
+          {
+            "x": 300,
+            "y": 30
+          }
+        ],
+        "mid": {
+          "x": 200,
+          "y": 30
+        },
+        "sourceAnchor": {
+          "side": "right",
+          "offset": 0.5
+        },
+        "targetAnchor": {
+          "side": "left",
+          "offset": 0.5
+        }
+      }
+    },
+    {
+      "name": "aligned-direct-wide-gap",
+      "source": {
+        "x": 0,
+        "y": 80,
+        "w": 100,
+        "h": 60
+      },
+      "target": {
+        "x": 500,
+        "y": 80,
+        "w": 100,
+        "h": 60
+      },
+      "geometry": {},
+      "expected": {
+        "points": [
+          {
+            "x": 100,
+            "y": 110
+          },
+          {
+            "x": 500,
+            "y": 110
+          }
+        ],
+        "mid": {
+          "x": 300,
+          "y": 110
+        },
+        "sourceAnchor": {
+          "side": "right",
+          "offset": 0.5
+        },
+        "targetAnchor": {
+          "side": "left",
+          "offset": 0.5
+        }
+      }
+    },
+    {
+      "name": "non-aligned-one-bend",
+      "source": {
+        "x": 0,
+        "y": 0,
+        "w": 100,
+        "h": 60
+      },
+      "target": {
+        "x": 300,
+        "y": 200,
+        "w": 100,
+        "h": 60
+      },
+      "geometry": {},
+      "expected": {
+        "points": [
+          {
+            "x": 100,
+            "y": 30
+          },
+          {
+            "x": 350,
+            "y": 30
+          },
+          {
+            "x": 350,
+            "y": 200
+          }
+        ],
+        "mid": {
+          "x": 310,
+          "y": 30
+        },
+        "sourceAnchor": {
+          "side": "right",
+          "offset": 0.5
+        },
+        "targetAnchor": {
+          "side": "top",
+          "offset": 0.5
+        }
+      }
+    },
+    {
+      "name": "manual-anchor-waypoint",
+      "source": {
+        "x": 0,
+        "y": 0,
+        "w": 100,
+        "h": 60
+      },
+      "target": {
+        "x": 300,
+        "y": 200,
+        "w": 100,
+        "h": 60
+      },
+      "geometry": {
+        "sourceAnchor": {
+          "side": "right",
+          "offset": 0.25
+        },
+        "targetAnchor": {
+          "side": "top",
+          "offset": 0.75
+        },
+        "waypoints": [
+          {
+            "x": 180,
+            "y": 40
+          }
+        ],
+        "labelOffset": {
+          "x": 8,
+          "y": -12
+        }
+      },
+      "expected": {
+        "points": [
+          {
+            "x": 100,
+            "y": 15
+          },
+          {
+            "x": 116,
+            "y": 15
+          },
+          {
+            "x": 116,
+            "y": 40
+          },
+          {
+            "x": 375,
+            "y": 40
+          },
+          {
+            "x": 375,
+            "y": 200
+          }
+        ],
+        "mid": {
+          "x": 305,
+          "y": 40
+        },
+        "sourceAnchor": {
+          "side": "right",
+          "offset": 0.25
+        },
+        "targetAnchor": {
+          "side": "top",
+          "offset": 0.75
+        }
+      }
+    }
+  ],
+  "straightCases": [
+    {
+      "name": "straight-aligned",
+      "source": {
+        "x": 0,
+        "y": 0,
+        "w": 100,
+        "h": 60
+      },
+      "target": {
+        "x": 300,
+        "y": 0,
+        "w": 100,
+        "h": 60
+      },
+      "geometry": {
+        "mode": "straight"
+      },
+      "expected": {
+        "points": [
+          {
+            "x": 100,
+            "y": 30
+          },
+          {
+            "x": 300,
+            "y": 30
+          }
+        ],
+        "mid": {
+          "x": 200,
+          "y": 30
+        },
+        "sourceAnchor": {
+          "side": "right",
+          "offset": 0.5
+        },
+        "targetAnchor": {
+          "side": "left",
+          "offset": 0.5
+        }
+      }
+    },
+    {
+      "name": "straight-diagonal",
+      "source": {
+        "x": 0,
+        "y": 0,
+        "w": 100,
+        "h": 60
+      },
+      "target": {
+        "x": 300,
+        "y": 200,
+        "w": 100,
+        "h": 60
+      },
+      "geometry": {
+        "mode": "straight"
+      },
+      "expected": {
+        "points": [
+          {
+            "x": 95,
+            "y": 60
+          },
+          {
+            "x": 305,
+            "y": 200
+          }
+        ],
+        "mid": {
+          "x": 200,
+          "y": 130
+        },
+        "sourceAnchor": {
+          "side": "bottom",
+          "offset": 0.95
+        },
+        "targetAnchor": {
+          "side": "top",
+          "offset": 0.05
+        }
+      }
+    },
+    {
+      "name": "straight-authored-anchors",
+      "source": {
+        "x": 0,
+        "y": 0,
+        "w": 100,
+        "h": 60
+      },
+      "target": {
+        "x": 300,
+        "y": 200,
+        "w": 100,
+        "h": 60
+      },
+      "geometry": {
+        "mode": "straight",
+        "sourceAnchor": {
+          "side": "right",
+          "offset": 0.25
+        },
+        "targetAnchor": {
+          "side": "top",
+          "offset": 0.75
+        }
+      },
+      "expected": {
+        "points": [
+          {
+            "x": 100,
+            "y": 15
+          },
+          {
+            "x": 375,
+            "y": 200
+          }
+        ],
+        "mid": {
+          "x": 237.5,
+          "y": 107.5
+        },
+        "sourceAnchor": {
+          "side": "right",
+          "offset": 0.25
+        },
+        "targetAnchor": {
+          "side": "top",
+          "offset": 0.75
+        }
+      }
+    }
+  ],
+  "fanOutCases": [
+    {
+      "name": "three-parts-into-one-whole",
+      "nodes": [
+        {
+          "id": "whole",
+          "type": "gpNode",
+          "position": {
+            "x": 240,
+            "y": 200
+          },
+          "width": 180,
+          "height": 60,
+          "data": {
+            "label": "whole",
+            "semanticType": "block"
+          }
+        },
+        {
+          "id": "a",
+          "type": "gpNode",
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "width": 180,
+          "height": 60,
+          "data": {
+            "label": "a",
+            "semanticType": "block"
+          }
+        },
+        {
+          "id": "b",
+          "type": "gpNode",
+          "position": {
+            "x": 240,
+            "y": 0
+          },
+          "width": 180,
+          "height": 60,
+          "data": {
+            "label": "b",
+            "semanticType": "block"
+          }
+        },
+        {
+          "id": "c",
+          "type": "gpNode",
+          "position": {
+            "x": 480,
+            "y": 0
+          },
+          "width": 180,
+          "height": 60,
+          "data": {
+            "label": "c",
+            "semanticType": "block"
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "e1",
+          "source": "a",
+          "target": "whole",
+          "data": {
+            "semanticType": "association"
+          }
+        },
+        {
+          "id": "e2",
+          "source": "b",
+          "target": "whole",
+          "data": {
+            "semanticType": "association"
+          }
+        },
+        {
+          "id": "e3",
+          "source": "c",
+          "target": "whole",
+          "data": {
+            "semanticType": "association"
+          }
+        }
+      ],
+      "expected": {
+        "0": {
+          "targetAnchor": {
+            "side": "left",
+            "offset": 0.5
+          }
+        },
+        "2": {
+          "targetAnchor": {
+            "side": "right",
+            "offset": 0.5
+          }
+        }
+      }
+    },
+    {
+      "name": "single-edge-is-left-alone",
+      "nodes": [
+        {
+          "id": "a",
+          "type": "gpNode",
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "width": 180,
+          "height": 60,
+          "data": {
+            "label": "a",
+            "semanticType": "block"
+          }
+        },
+        {
+          "id": "b",
+          "type": "gpNode",
+          "position": {
+            "x": 0,
+            "y": 200
+          },
+          "width": 180,
+          "height": 60,
+          "data": {
+            "label": "b",
+            "semanticType": "block"
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "e1",
+          "source": "a",
+          "target": "b",
+          "data": {
+            "semanticType": "association"
+          }
+        }
+      ],
+      "expected": {}
+    },
+    {
+      "name": "one-side-carries-both-an-arrival-and-a-departure",
+      "nodes": [
+        {
+          "id": "hub",
+          "type": "gpNode",
+          "position": {
+            "x": 200,
+            "y": 200
+          },
+          "width": 180,
+          "height": 60,
+          "data": {
+            "label": "hub",
+            "semanticType": "block"
+          }
+        },
+        {
+          "id": "above",
+          "type": "gpNode",
+          "position": {
+            "x": 200,
+            "y": 0
+          },
+          "width": 180,
+          "height": 60,
+          "data": {
+            "label": "above",
+            "semanticType": "block"
+          }
+        },
+        {
+          "id": "higher",
+          "type": "gpNode",
+          "position": {
+            "x": 200,
+            "y": -200
+          },
+          "width": 180,
+          "height": 60,
+          "data": {
+            "label": "higher",
+            "semanticType": "block"
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "in",
+          "source": "above",
+          "target": "hub",
+          "data": {
+            "semanticType": "association"
+          }
+        },
+        {
+          "id": "out",
+          "source": "hub",
+          "target": "higher",
+          "data": {
+            "semanticType": "association"
+          }
+        }
+      ],
+      "expected": {
+        "1": {
+          "targetAnchor": {
+            "side": "right",
+            "offset": 0.5
+          },
+          "sourceAnchor": {
+            "side": "top",
+            "offset": 0.6666666666666666
+          }
+        },
+        "0": {
+          "targetAnchor": {
+            "side": "top",
+            "offset": 0.3333333333333333
+          }
+        }
+      }
+    },
+    {
+      "name": "authored-anchor-is-never-overridden",
+      "nodes": [
+        {
+          "id": "whole",
+          "type": "gpNode",
+          "position": {
+            "x": 240,
+            "y": 200
+          },
+          "width": 180,
+          "height": 60,
+          "data": {
+            "label": "whole",
+            "semanticType": "block"
+          }
+        },
+        {
+          "id": "a",
+          "type": "gpNode",
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "width": 180,
+          "height": 60,
+          "data": {
+            "label": "a",
+            "semanticType": "block"
+          }
+        },
+        {
+          "id": "b",
+          "type": "gpNode",
+          "position": {
+            "x": 480,
+            "y": 0
+          },
+          "width": 180,
+          "height": 60,
+          "data": {
+            "label": "b",
+            "semanticType": "block"
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "authored",
+          "source": "a",
+          "target": "whole",
+          "data": {
+            "semanticType": "association"
+          },
+          "route": {
+            "sourceAnchor": {
+              "side": "right",
+              "offset": 0.25
+            }
+          }
+        },
+        {
+          "id": "automatic",
+          "source": "b",
+          "target": "whole",
+          "data": {
+            "semanticType": "association"
+          }
+        }
+      ],
+      "expected": {}
+    },
+    {
+      "name": "straight-mode-fans-out-too",
+      "nodes": [
+        {
+          "id": "whole",
+          "type": "gpNode",
+          "position": {
+            "x": 240,
+            "y": 200
+          },
+          "width": 180,
+          "height": 60,
+          "data": {
+            "label": "whole",
+            "semanticType": "block"
+          }
+        },
+        {
+          "id": "a",
+          "type": "gpNode",
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "width": 180,
+          "height": 60,
+          "data": {
+            "label": "a",
+            "semanticType": "block"
+          }
+        },
+        {
+          "id": "b",
+          "type": "gpNode",
+          "position": {
+            "x": 240,
+            "y": 0
+          },
+          "width": 180,
+          "height": 60,
+          "data": {
+            "label": "b",
+            "semanticType": "block"
+          }
+        },
+        {
+          "id": "c",
+          "type": "gpNode",
+          "position": {
+            "x": 480,
+            "y": 0
+          },
+          "width": 180,
+          "height": 60,
+          "data": {
+            "label": "c",
+            "semanticType": "block"
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "e1",
+          "source": "a",
+          "target": "whole",
+          "data": {
+            "semanticType": "association"
+          },
+          "route": {
+            "mode": "straight"
+          }
+        },
+        {
+          "id": "e2",
+          "source": "b",
+          "target": "whole",
+          "data": {
+            "semanticType": "association"
+          },
+          "route": {
+            "mode": "straight"
+          }
+        },
+        {
+          "id": "e3",
+          "source": "c",
+          "target": "whole",
+          "data": {
+            "semanticType": "association"
+          },
+          "route": {
+            "mode": "straight"
+          }
+        }
+      ],
+      "expected": {
+        "0": {
+          "targetAnchor": {
+            "side": "top",
+            "offset": 0.25
+          }
+        },
+        "1": {
+          "targetAnchor": {
+            "side": "top",
+            "offset": 0.5
+          }
+        },
+        "2": {
+          "targetAnchor": {
+            "side": "top",
+            "offset": 0.75
+          }
+        }
+      }
+    },
+    {
+      "name": "a-boundary-between-two-nodes-is-not-an-obstacle",
+      "why": "An edge crossing a system boundary is normal, so a container must never push a route onto a different face. Without this the two sides can disagree: the SVG renderer excludes containers by semanticType, and the canvas only does so when EditorPage passes containerIds.",
+      "nodes": [
+        {
+          "id": "above",
+          "position": {
+            "x": 200,
+            "y": 0
+          },
+          "width": 180,
+          "height": 60,
+          "data": {
+            "semanticType": "block",
+            "label": "Above"
+          }
+        },
+        {
+          "id": "boundary",
+          "position": {
+            "x": 100,
+            "y": 200
+          },
+          "width": 400,
+          "height": 200,
+          "data": {
+            "semanticType": "subject",
+            "label": "System"
+          }
+        },
+        {
+          "id": "below",
+          "position": {
+            "x": 200,
+            "y": 500
+          },
+          "width": 180,
+          "height": 60,
+          "data": {
+            "semanticType": "block",
+            "label": "Below"
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "e0",
+          "source": "above",
+          "target": "below"
+        }
+      ],
+      "expected": {}
+    }
+  ]
+}

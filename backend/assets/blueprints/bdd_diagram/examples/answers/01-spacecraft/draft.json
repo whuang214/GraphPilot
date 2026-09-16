@@ -1,0 +1,127 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "spacecraft",
+  "diagramType": "bdd_diagram",
+  "authority": "conceptual",
+  "requests": [
+    "A spacecraft is composed of propulsion, avionics, and a crew module; propulsion contains an engine and a fuel tank, and the engine has a thrust value. Total mass must not exceed 20 tonnes."
+  ],
+  "evidence": [],
+  "elements": [
+    {
+      "id": "craft",
+      "semanticType": "block",
+      "label": "Spacecraft",
+      "assurance": "conceptual",
+      "features": {
+        "properties": [
+          {
+            "kind": "value",
+            "name": "dryMass",
+            "type": "12 t",
+            "multiplicity": {
+              "lower": 1,
+              "upper": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "prop",
+      "semanticType": "block",
+      "label": "Propulsion",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "avionics",
+      "semanticType": "block",
+      "label": "Avionics",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "crew",
+      "semanticType": "block",
+      "label": "Crew Module",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "engine",
+      "semanticType": "block",
+      "label": "Engine",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "tank",
+      "semanticType": "block",
+      "label": "Fuel Tank",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "thrust",
+      "semanticType": "block",
+      "label": "Thrust",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "mass",
+      "semanticType": "block",
+      "label": "Total Mass ≤ 20 t",
+      "assurance": "conceptual"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "edge-1-prop-craft",
+      "semanticType": "composition",
+      "source": "prop",
+      "target": "craft",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-2-avionics-craft",
+      "semanticType": "composition",
+      "source": "avionics",
+      "target": "craft",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-3-crew-craft",
+      "semanticType": "composition",
+      "source": "crew",
+      "target": "craft",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-4-engine-prop",
+      "semanticType": "composition",
+      "source": "engine",
+      "target": "prop",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-5-tank-prop",
+      "semanticType": "composition",
+      "source": "tank",
+      "target": "prop",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-6-thrust-engine",
+      "semanticType": "composition",
+      "source": "thrust",
+      "target": "engine",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-7-mass-craft",
+      "semanticType": "association",
+      "source": "mass",
+      "target": "craft",
+      "assurance": "conceptual",
+      "targetNavigable": true
+    }
+  ],
+  "assumptions": []
+}

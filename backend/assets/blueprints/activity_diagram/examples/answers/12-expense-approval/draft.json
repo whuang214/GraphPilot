@@ -1,0 +1,209 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "expense-approval",
+  "diagramType": "activity_diagram",
+  "authority": "conceptual",
+  "requests": [
+    "An expense under $1000 is auto-approved. A larger one goes to a manager review and a finance review in parallel; if both approve it is reimbursed, otherwise it is rejected."
+  ],
+  "evidence": [],
+  "elements": [
+    {
+      "id": "start",
+      "semanticType": "initialNode",
+      "label": "Initial",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "submit",
+      "semanticType": "opaqueAction",
+      "label": "Submit Expense",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "d1",
+      "semanticType": "decisionNode",
+      "label": "Amount > $1000?",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "auto",
+      "semanticType": "opaqueAction",
+      "label": "Auto-Approve",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "m1",
+      "semanticType": "mergeNode",
+      "label": "Merge",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "f",
+      "semanticType": "forkNode",
+      "label": "Fork",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "mgr",
+      "semanticType": "opaqueAction",
+      "label": "Manager Review",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "fin",
+      "semanticType": "opaqueAction",
+      "label": "Finance Review",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "j",
+      "semanticType": "joinNode",
+      "label": "Join",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "d2",
+      "semanticType": "decisionNode",
+      "label": "Both Approved?",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "reject",
+      "semanticType": "opaqueAction",
+      "label": "Reject",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "end-rej",
+      "semanticType": "activityFinalNode",
+      "label": "End (Rejected)",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "reimburse",
+      "semanticType": "opaqueAction",
+      "label": "Reimburse",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "end-ok",
+      "semanticType": "activityFinalNode",
+      "label": "End (Reimbursed)",
+      "assurance": "conceptual"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "edge-1-start-submit",
+      "semanticType": "controlFlow",
+      "source": "start",
+      "target": "submit",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-2-submit-d1",
+      "semanticType": "controlFlow",
+      "source": "submit",
+      "target": "d1",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-3-d1-auto",
+      "semanticType": "controlFlow",
+      "source": "d1",
+      "target": "auto",
+      "assurance": "conceptual",
+      "guard": "No"
+    },
+    {
+      "id": "edge-4-auto-m1",
+      "semanticType": "controlFlow",
+      "source": "auto",
+      "target": "m1",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-5-d1-f",
+      "semanticType": "controlFlow",
+      "source": "d1",
+      "target": "f",
+      "assurance": "conceptual",
+      "guard": "Yes"
+    },
+    {
+      "id": "edge-6-f-mgr",
+      "semanticType": "controlFlow",
+      "source": "f",
+      "target": "mgr",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-7-f-fin",
+      "semanticType": "controlFlow",
+      "source": "f",
+      "target": "fin",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-8-mgr-j",
+      "semanticType": "controlFlow",
+      "source": "mgr",
+      "target": "j",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-9-fin-j",
+      "semanticType": "controlFlow",
+      "source": "fin",
+      "target": "j",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-10-j-d2",
+      "semanticType": "controlFlow",
+      "source": "j",
+      "target": "d2",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-11-d2-reject",
+      "semanticType": "controlFlow",
+      "source": "d2",
+      "target": "reject",
+      "assurance": "conceptual",
+      "guard": "No"
+    },
+    {
+      "id": "edge-12-reject-end-rej",
+      "semanticType": "controlFlow",
+      "source": "reject",
+      "target": "end-rej",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-13-d2-m1",
+      "semanticType": "controlFlow",
+      "source": "d2",
+      "target": "m1",
+      "assurance": "conceptual",
+      "guard": "Yes"
+    },
+    {
+      "id": "edge-14-m1-reimburse",
+      "semanticType": "controlFlow",
+      "source": "m1",
+      "target": "reimburse",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-15-reimburse-end-ok",
+      "semanticType": "controlFlow",
+      "source": "reimburse",
+      "target": "end-ok",
+      "assurance": "conceptual"
+    }
+  ],
+  "assumptions": []
+}

@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "graphpilot.delivery.readiness-diagnosis-e0.v1",
+  "kind": "readinessDiagnosisOfflineEvidence",
+  "evidenceId": "evidence-readiness-diagnosis-e0-20260728-01",
+  "generatedAt": "2026-07-28T17:14:43.819692Z",
+  "sourceCommit": "864ae30a8c1261234df9ed61fc413fad78ffd16a",
+  "providerMode": "provider_free",
+  "azureCalls": 0,
+  "caseId": "case-readiness-diagnostic-block3-mechanical-return-authorization-01",
+  "source": {
+    "scenarioId": "scenario-workflow-audit-activity-basic",
+    "scenarioSetDigest": "sha256:f31a02716885dd2b7a51e4a17c016bf0bcda1d5274dc374659f172d7807484c2",
+    "evidenceDigest": "sha256:ebf789e449a50c24ee2688101c80d7d29fdc47b6a93a19a0fe3b4d86ec5d6da2",
+    "requestDigest": "sha256:629632f0855575187e8305a650705a54eef192f8106560f72b6dc458ae32b867",
+    "fixturePath": "backend/graphpilot/blueprints/activity_diagram/context-examples/training/return-authorization"
+  },
+  "assets": {
+    "reviewPromptRawDigest": "sha256:73991173f7a538dd52be110d382ff1b32ec764207b5685b453a776f4bde91535",
+    "repairPromptRawDigest": "sha256:7ba75c91d0d3882c074a4568077424c549a81718316f4a506a8850507d01e638",
+    "reviewSchemaCanonicalDigest": "sha256:383c53097d5e7a285649175e111e9fc2166decfe199de1a6be6c01ac2a2b89bb",
+    "providerSchemaCanonicalDigest": "sha256:cb54a19f16ab3749e4222350f988e71c84f05671119864501acde87af90b1233",
+    "rubricCanonicalDigest": "sha256:b1449d229f156dab9dee0742576371f9c47b173c1e990c7aa22a5790b9fb437b",
+    "projectionDigest": "sha256:80eefe74df7ce2c10b3b804a0e701982c48b7fd1faf4902d7f663d0f52d9c9e8"
+  },
+  "bounds": {
+    "effectiveInputLimitBytes": 65536,
+    "projectionEstimatedTokensConservativeBytes": 22911,
+    "backendReviewMaxBytes": 1048576,
+    "providerResponseMaxBytes": 8388608
+  },
+  "sizes": {
+    "projectionBytes": 22911,
+    "providerSchemaBytes": 7519,
+    "firstSystemPromptUtf8Bytes": 1044,
+    "repairSystemPromptUtf8Bytes": 476,
+    "firstWireBytes": 32727,
+    "repairUserBytes": 23001,
+    "repairWireBytes": 32252,
+    "repeatedProjectionBytes": 22911,
+    "repeatedProviderSchemaBytes": 7519,
+    "minimumRepeatedLogicalBytes": 30430,
+    "minimumRepeatedPercentOfRepairWire": 94.35073793873248
+  },
+  "localTiming": {
+    "preflight": {"iterations": 100, "minimumMs": 0.0044, "medianMs": 0.0047, "p95Ms": 0.0052, "maximumMs": 0.0092},
+    "projectionBuild": {"iterations": 100, "minimumMs": 0.0498, "medianMs": 0.05105, "p95Ms": 0.0538, "maximumMs": 0.0603},
+    "forbiddenScan": {"iterations": 100, "minimumMs": 0.7861, "medianMs": 0.92925, "p95Ms": 1.0208, "maximumMs": 1.3908},
+    "projectionFinalize": {"iterations": 100, "minimumMs": 0.3919, "medianMs": 0.4086, "p95Ms": 0.5017, "maximumMs": 0.7223},
+    "completePreparation": {"iterations": 100, "minimumMs": 1.1442, "medianMs": 1.3004, "p95Ms": 1.49, "maximumMs": 2.4241},
+    "strictSchemaProjection": {"iterations": 100, "minimumMs": 0.1218, "medianMs": 0.1299, "p95Ms": 0.133, "maximumMs": 0.1669},
+    "backendValidationValid": {"iterations": 100, "minimumMs": 0.9086, "medianMs": 1.0134, "p95Ms": 1.1982, "maximumMs": 1.4961},
+    "resultAssembly": {"iterations": 100, "minimumMs": 0.9938, "medianMs": 1.12965, "p95Ms": 1.3491, "maximumMs": 1.5665}
+  },
+  "persistenceTimingMs": {
+    "manifestFreeze": 2.7232,
+    "checkpointWrite": 1.2762,
+    "observationWrite": 2.445,
+    "terminalWrite": 1.1817,
+    "total": 7.6261
+  },
+  "schemaParityMatrix": [
+    {"witness": "valid", "providerSchemaValid": true, "fullSchemaValid": true, "backendValid": true, "backendIssues": [], "providerErrorValidators": [], "fullSchemaErrorValidators": []},
+    {"witness": "wrong_kind", "providerSchemaValid": false, "fullSchemaValid": false, "backendValid": false, "backendIssues": [{"code": "schema_const", "path": "$.kind"}], "providerErrorValidators": ["enum"], "fullSchemaErrorValidators": ["const"]},
+    {"witness": "missing_coverage", "providerSchemaValid": false, "fullSchemaValid": false, "backendValid": false, "backendIssues": [{"code": "schema_required", "path": "$"}], "providerErrorValidators": ["required"], "fullSchemaErrorValidators": ["required"]},
+    {"witness": "extra_top_level", "providerSchemaValid": false, "fullSchemaValid": false, "backendValid": false, "backendIssues": [{"code": "schema_additionalProperties", "path": "$"}], "providerErrorValidators": ["additionalProperties"], "fullSchemaErrorValidators": ["additionalProperties"]},
+    {"witness": "rating_out_of_range", "providerSchemaValid": true, "fullSchemaValid": false, "backendValid": false, "backendIssues": [{"code": "schema_oneOf", "path": "$.coverage[0].rating"}], "providerErrorValidators": [], "fullSchemaErrorValidators": ["oneOf"]},
+    {"witness": "empty_rationale", "providerSchemaValid": true, "fullSchemaValid": false, "backendValid": false, "backendIssues": [{"code": "schema_minLength", "path": "$.coverage[0].rationale"}, {"code": "schema_pattern", "path": "$.coverage[0].rationale"}], "providerErrorValidators": [], "fullSchemaErrorValidators": ["minLength", "pattern"]},
+    {"witness": "duplicate_claim_ref", "providerSchemaValid": true, "fullSchemaValid": false, "backendValid": false, "backendIssues": [{"code": "schema_uniqueItems", "path": "$.coverage[0].supportingClaimRefs"}], "providerErrorValidators": [], "fullSchemaErrorValidators": ["uniqueItems"]},
+    {"witness": "too_many_coverage", "providerSchemaValid": true, "fullSchemaValid": false, "backendValid": false, "backendIssues": [{"code": "schema_maxItems", "path": "$.coverage"}], "providerErrorValidators": [], "fullSchemaErrorValidators": ["maxItems"]},
+    {"witness": "semantic_no_support", "providerSchemaValid": true, "fullSchemaValid": true, "backendValid": false, "backendIssues": [{"code": "invalid_strong_support", "path": "$.coverage[0]"}], "providerErrorValidators": [], "fullSchemaErrorValidators": []}
+  ],
+  "conclusions": [
+    {"id": "local_wall_not_primary", "supported": true, "statement": "Measured local preparation, schema projection, validation, assembly, and persistence are millisecond-scale and cannot explain historical provider latency; local contract or validation logic remains a plausible invalidity cause."},
+    {"id": "provider_projection_weaker_than_backend", "supported": true, "statement": "Provider strict-schema projection omits bounds, patterns, uniqueness, and array limits; bounded witnesses can pass the provider schema and fail backend validation at exact paths."},
+    {"id": "complete_projection_repeated", "supported": true, "statement": "Natural repair resends the complete projection and the same projected response schema, confirming duplicated payload as a repair cost amplifier."},
+    {"id": "actual_live_trigger_unknown", "supported": true, "statement": "Historical raw responses and exact validation events are unavailable, so E0 cannot identify which projected/backend gap caused prior live repair."}
+  ],
+  "nextDiscriminator": {
+    "kind": "live_high_effort_mechanical_probe",
+    "reason": "Use the smallest live discriminator to capture the actual first-response validation code/path under the historically repair-prone high control, distinguishing among schema projection, prompt, deterministic validation, size, and provider/control causes with one readiness call plus only naturally reached repair."
+  },
+  "scope": {
+    "diagnosticOnly": true,
+    "mechanicalProviderPerformanceOnly": true,
+    "calibration": false,
+    "certification": false,
+    "promotion": false
+  },
+  "digest": "sha256:da39b40e7caf23e3b6ebfa7e61d47c339cc4d79ad57d52c05d35f68fd1f73076"
+}

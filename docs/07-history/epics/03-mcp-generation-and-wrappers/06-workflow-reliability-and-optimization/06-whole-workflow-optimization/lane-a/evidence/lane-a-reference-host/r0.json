@@ -1,0 +1,231 @@
+{
+  "observationId": "r0",
+  "claimState": "reference_host_characterized",
+  "host": "devin_cli",
+  "interface": "current",
+  "repositoryCommit": "8627bac5169e3a8800ea7f3ddfb64e52b4fe92c7",
+  "workflowResponseBytes": 8223,
+  "mcpCalls": [
+    {
+      "tool": "diagram_generation_workflow",
+      "count": 1
+    },
+    {
+      "tool": "context_evidence_status",
+      "count": 1
+    },
+    {
+      "tool": "context_evidence_save",
+      "count": 22
+    }
+  ],
+  "totalMcpCallCount": 24,
+  "json1AuthoringAttempts": 6,
+  "json2AuthoringAttempts": 0,
+  "deterministicValidationFailures": [
+    {
+      "tool": "context_evidence_save",
+      "code": "additional_issues_omitted",
+      "path": "$"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "missing_evidence_ref",
+      "path": "$.claims[0].versions[0].support.evidenceRefs[0]"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "missing_evidence_ref",
+      "path": "$.uncertainties[0].relatedEvidenceRefs[0]"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_additionalProperties",
+      "path": "$"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_additionalProperties",
+      "path": "$.claims[0]"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_additionalProperties",
+      "path": "$.claims[0].versions[0]"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_additionalProperties",
+      "path": "$.claims[0].versions[0].payload"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_additionalProperties",
+      "path": "$.claims[8].versions[0].payload.ownerClaimRef"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_additionalProperties",
+      "path": "$.claims[16].versions[0].payload.sourceClaimRef"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_additionalProperties",
+      "path": "$.claims[14].versions[0].payload.subjectClaimRef"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_additionalProperties",
+      "path": "$.claims[16].versions[0].payload.targetClaimRef"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_additionalProperties",
+      "path": "$.claims[0].versions[0].support"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_additionalProperties",
+      "path": "$.scope"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_additionalProperties",
+      "path": "$.uncertainties[0]"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_additionalProperties",
+      "path": "$.uncertainties[0].relatedClaimRefs[0]"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_const",
+      "path": "$.kind"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_const",
+      "path": "$.scope.baseline"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_enum",
+      "path": "$.claims[0].kind"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_enum",
+      "path": "$.claims[0].versions[0].appliesToViewpoints[0]"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_enum",
+      "path": "$.claims[0].versions[0].support.basis"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_enum",
+      "path": "$.scope.includedConcerns[0]"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_enum",
+      "path": "$.uncertainties[0].kind"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_oneOf",
+      "path": "$.evidence[0]"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_pattern",
+      "path": "$.claims[15].id"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_pattern",
+      "path": "$.uncertainties[0].id"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_pattern",
+      "path": "$.uncertainties[0].relatedEvidenceRefs[0]"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_required",
+      "path": "$"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_required",
+      "path": "$.claims[0]"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_required",
+      "path": "$.claims[0].versions[0]"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_required",
+      "path": "$.claims[0].versions[0].payload"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_required",
+      "path": "$.claims[8].versions[0].payload.ownerClaimRef"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_required",
+      "path": "$.claims[16].versions[0].payload.sourceClaimRef"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_required",
+      "path": "$.claims[14].versions[0].payload.subjectClaimRef"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_required",
+      "path": "$.claims[16].versions[0].payload.targetClaimRef"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_required",
+      "path": "$.claims[0].versions[0].support"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_required",
+      "path": "$.scope"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_required",
+      "path": "$.source"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_required",
+      "path": "$.uncertainties[0]"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_required",
+      "path": "$.uncertainties[0].relatedClaimRefs[0]"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_type",
+      "path": "$.uncertainties[0].relatedClaimRefs[0]"
+    }
+  ],
+  "sourceFilesRead": 11,
+  "json1": null,
+  "json2": null,
+  "notes": "All JSON 1 substructures were learnable from returned findings except evidence[]: its oneOf collapses to 'not valid under any of the given schemas', with no required/enum/additionalProperties detail, so ~1480 probed shapes all failed. Sending evidence:[] validated the entire rest of the document, isolating the item schema as the sole blocker. Claim payload/support taught their shape precisely via conditional subschemas; evidence does not. Issue lists are also truncated silently."
+}

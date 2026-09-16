@@ -1,0 +1,296 @@
+{
+  "schemaVersion": "graphpilot.readiness-rubric.v1",
+  "kind": "contextReadinessRubric",
+  "rubricVersion": "graphpilot.readiness.bdd.v1",
+  "diagramType": "bdd_diagram",
+  "ratingScaleVersion": "graphpilot.readiness-rating.v1",
+  "facets": [
+    {
+      "id": "structuralSubject",
+      "description": "Whether the supported context establishes the system, domain, definition set, or instance set whose structure is requested, together with the structural level and inclusion/exclusion boundary needed to keep the BDD aligned with the confirmed request.",
+      "requirement": "required",
+      "weight": 3,
+      "minimumRating": 3,
+      "applicabilityRule": {
+        "kind": "always"
+      },
+      "ratingAnchors": {
+        "0": "No selected claim or accepted assumption establishes a usable structural subject or boundary.",
+        "1": "A system, domain, definition, or instance is named, but the requested structural subject or level cannot be identified reliably.",
+        "2": "A probable structural subject and level are present, but at least one requested inclusion, exclusion, boundary, or viewpoint distinction is absent or ambiguous.",
+        "3": "The structural subject, requested level, and inclusion/exclusion boundary are established well enough to select the definitions or instances that belong in the BDD without an essential scope ambiguity.",
+        "4": "The structural subject, level, viewpoint, included definitions or instances, and exclusions are explicit, complete, unambiguous, and supported without assumptions."
+      },
+      "gapPolicy": {
+        "severity": "blocking",
+        "overrideable": false
+      }
+    },
+    {
+      "id": "definitions",
+      "description": "Whether the supported context establishes each requested definition's stable identity, role or purpose, and broad conceptual kind; for an instance specification, this facet instead establishes the instance identity and classifier.",
+      "requirement": "required",
+      "weight": 4,
+      "minimumRating": 3,
+      "applicabilityRule": {
+        "kind": "always"
+      },
+      "ratingAnchors": {
+        "0": "No selected claim or accepted assumption establishes a usable definition or instance specification.",
+        "1": "A definition or instance is named, but its stable identity, role or purpose, broad conceptual kind, or instance classifier cannot be determined reliably.",
+        "2": "One or more requested definitions or instances are identifiable, but at least one included definition lacks a usable role, purpose, or broad conceptual distinction, or at least one included instance lacks its identity or classifier.",
+        "3": "Every definition included by the confirmed request has a stable identity and enough role, purpose, and broad conceptual meaning for the generator to map it; every included instance specification has an established identity and classifier. A single supported definition satisfies this anchor when it is the complete requested subject.",
+        "4": "Every included definition's identity, purpose, and requested block, value, constraint, interface, enumeration, unit, quantity, association, or local-type distinction—and every included instance's identity and classifier—are explicit, complete, unambiguous, and supported without assumptions."
+      },
+      "gapPolicy": {
+        "severity": "blocking",
+        "overrideable": false
+      }
+    },
+    {
+      "id": "structuralRelationships",
+      "description": "Whether the supported context establishes every requested structural relationship or instance link, including its endpoints and the broad relationship meaning, direction, and end roles needed by the confirmed scope.",
+      "requirement": "conditional",
+      "weight": 4,
+      "minimumRating": 3,
+      "applicabilityRule": {
+        "kind": "conditional",
+        "appliesWhenAny": [
+          "The confirmed request asks to show a relationship, link, association, containment, dependency, specialization, participant relation, or named connection between definitions or instance specifications.",
+          "A selected claim, accepted assumption, or relevant active claim explicitly connects two in-scope definitions or instances, identifies the endpoints of an in-scope structural relation, or states that two in-scope instance specifications are linked.",
+          "A resolved uncertainty disposition establishes that a connection between in-scope definitions or instances belongs in the requested BDD."
+        ],
+        "notApplicableWhenAll": [
+          "The confirmed request explicitly asks for standalone definitions or instances, or explicitly excludes relationships and links among them.",
+          "Selected claims, accepted assumptions, relevant active claims, and resolved uncertainty dispositions establish no relationship or link that the confirmed request includes.",
+          "No open uncertainty or unresolved request term could introduce an in-scope relationship or instance link."
+        ],
+        "uncertainWhen": [
+          "The projection contains multiple in-scope definitions or instances and suggests that they may be connected, but does not establish whether that connection belongs in the requested BDD.",
+          "An open uncertainty or unresolved request term could introduce a relationship or instance link, and the confirmed request does not decide whether to include it."
+        ]
+      },
+      "ratingAnchors": {
+        "0": "No selected claim or accepted assumption establishes a usable requested relationship or instance link.",
+        "1": "A relationship or link is mentioned, but its endpoints or broad structural meaning cannot be modeled reliably.",
+        "2": "One or more requested relationships or links are partly established, but at least one required endpoint, broad relationship kind, direction, or end role is absent or ambiguous.",
+        "3": "Every relationship and instance link included by the confirmed request has established endpoints and enough broad kind, direction, and end-role meaning to model the requested structure.",
+        "4": "Every included relationship and instance link, endpoint, direction, end role, and requested structural distinction is explicit, complete, unambiguous, and supported without assumptions."
+      },
+      "gapPolicy": {
+        "severity": "blocking",
+        "overrideable": true
+      }
+    },
+    {
+      "id": "ownership",
+      "description": "Whether the supported context establishes every requested whole/part, composition, shared/reference, containment, or owned-property distinction, including the owner and owned or referenced endpoint and the required lifecycle or aggregation meaning.",
+      "requirement": "conditional",
+      "weight": 3,
+      "minimumRating": 3,
+      "applicabilityRule": {
+        "kind": "conditional",
+        "appliesWhenAny": [
+          "The confirmed request asks to show a whole/part, composition, shared aggregation, reference, containment, owner, owned property, or lifecycle-dependent structural distinction.",
+          "A selected claim, accepted assumption, or relevant active claim states that one in-scope definition owns, contains, composes, aggregates, references, or has an in-scope structural property typed by another definition.",
+          "A resolved uncertainty disposition establishes an in-scope owner/part, owner/reference, containment, or aggregation distinction."
+        ],
+        "notApplicableWhenAll": [
+          "The confirmed request explicitly excludes whole/part, ownership, containment, aggregation, reference-property, and lifecycle distinctions.",
+          "Every included property is established as non-owning, and every included connection is established as neither containment nor shared/composite aggregation, or the property or connection is outside the confirmed scope.",
+          "No open uncertainty or unresolved request term could introduce an in-scope ownership, containment, aggregation, or owned-property distinction."
+        ],
+        "uncertainWhen": [
+          "The projection uses terms such as contains, has, belongs to, parent, child, or uses without establishing whether they mean ownership, containment, reference, or contextual association.",
+          "An open uncertainty could change an in-scope connection between composite, shared/reference, containment, or non-owning meaning."
+        ]
+      },
+      "ratingAnchors": {
+        "0": "No selected claim or accepted assumption establishes a usable requested owner/part, owner/reference, containment, or aggregation distinction.",
+        "1": "Possible ownership or containment is mentioned, but the owner and owned or referenced endpoint, or the composite/non-composite meaning, cannot be modeled reliably.",
+        "2": "One or more requested ownership distinctions are partly established, but at least one owner, part/reference endpoint, owning end, property role, aggregation kind, or lifecycle implication is absent or ambiguous.",
+        "3": "Every ownership distinction included by the confirmed request has established owner and part/reference endpoints plus enough composite, shared/reference, containment, property-role, and lifecycle meaning to model it correctly.",
+        "4": "Every included owner, owned or referenced endpoint, owning end, property role, aggregation kind, containment boundary, and lifecycle implication is explicit, complete, unambiguous, and supported without assumptions."
+      },
+      "gapPolicy": {
+        "severity": "blocking",
+        "overrideable": true
+      }
+    },
+    {
+      "id": "featuresAndTypes",
+      "description": "Whether the supported context establishes every requested definition feature or instance slot, including its owner, identity, broad kind, and type, plus requested values, directions, defaults, or modifiers; instance-specification slot names, values, and value types are judged here.",
+      "requirement": "conditional",
+      "weight": 3,
+      "minimumRating": 3,
+      "applicabilityRule": {
+        "kind": "conditional",
+        "appliesWhenAny": [
+          "The confirmed request asks to show a property, operation, reception, literal, value feature, flow feature, feature type, default, direction, modifier, or an instance slot, slot value, or slot value type.",
+          "A selected claim, accepted assumption, or relevant active claim assigns an in-scope feature to a definition or a slot/value to an instance specification, or states the feature or slot's type, value, direction, default, or modifier.",
+          "A resolved uncertainty disposition establishes an in-scope feature, feature type, instance slot, slot value, or slot value type."
+        ],
+        "notApplicableWhenAll": [
+          "The confirmed request explicitly limits the BDD to definition or instance identity and relationships and excludes feature, slot, value, type-detail, direction, default, and modifier content.",
+          "Selected claims, accepted assumptions, relevant active claims, and resolved uncertainty dispositions establish no feature or slot detail that the confirmed request includes.",
+          "No open uncertainty or unresolved request term could introduce an in-scope feature, type detail, instance slot, or slot value."
+        ],
+        "uncertainWhen": [
+          "The projection names data, behavior, literals, values, or flows but does not establish whether they are in-scope definition features, instance slots, separate definitions, or contextual facts.",
+          "An open uncertainty could add or change an in-scope feature owner, broad kind, type, value, direction, default, modifier, instance slot, or slot value."
+        ]
+      },
+      "ratingAnchors": {
+        "0": "No selected claim or accepted assumption establishes a usable requested feature or instance slot.",
+        "1": "A feature, type, value, or slot is mentioned, but its owner, identity, broad kind, or connection to a definition or instance cannot be modeled reliably.",
+        "2": "One or more requested features or slots are partly established, but at least one required owner, name, broad kind, type, slot value, value type, direction, default, or modifier is absent or ambiguous.",
+        "3": "Every feature and instance slot included by the confirmed request has an established owner, identity, broad kind, and type, with each requested value, value type, direction, default, and modifier established well enough to model it.",
+        "4": "Every included feature and instance slot, owner, name, kind, type, value, value type, direction, default, modifier, and local meaning is explicit, complete, unambiguous, and supported without assumptions."
+      },
+      "gapPolicy": {
+        "severity": "blocking",
+        "overrideable": true
+      }
+    },
+    {
+      "id": "multiplicity",
+      "description": "Whether the supported context establishes every cardinality that the confirmed request asks to show on a property or relationship end, including lower and upper bounds and optional or unbounded meaning.",
+      "requirement": "conditional",
+      "weight": 2,
+      "minimumRating": 3,
+      "applicabilityRule": {
+        "kind": "conditional",
+        "appliesWhenAny": [
+          "The confirmed request asks to show cardinality, multiplicity, an allowed count or range, optionality, exactly-one, one-or-more, zero-or-more, or an unbounded property or relationship end.",
+          "A selected claim, accepted assumption, or relevant active claim states an allowed lower bound, upper bound, exact count, optionality, repetition, or unbounded count for an in-scope property or relationship end.",
+          "A resolved uncertainty disposition establishes an in-scope property's or relationship end's allowed cardinality."
+        ],
+        "notApplicableWhenAll": [
+          "The confirmed request explicitly asks only for the existence of definitions, features, or connections and excludes cardinality and count ranges.",
+          "Selected claims, accepted assumptions, relevant active claims, and resolved uncertainty dispositions state no allowed count, range, optionality, or unbounded meaning that the confirmed request includes.",
+          "No open uncertainty or unresolved request term could introduce an in-scope cardinality distinction."
+        ],
+        "uncertainWhen": [
+          "The projection uses singular, plural, optional, collection, repeated, many, or similar count language without establishing an allowed lower or upper bound or whether cardinality belongs in the requested BDD.",
+          "An open uncertainty could change an in-scope property or relationship end between required, optional, singular, repeated, bounded, or unbounded cardinality."
+        ]
+      },
+      "ratingAnchors": {
+        "0": "No selected claim or accepted assumption establishes a usable requested multiplicity.",
+        "1": "A count, optionality, plurality, or range is mentioned, but it cannot be assigned reliably to a specific property or relationship end.",
+        "2": "One or more requested multiplicities are partly established, but at least one relevant property/end assignment, lower bound, upper bound, optionality, or unbounded distinction is absent or ambiguous.",
+        "3": "Every multiplicity included by the confirmed request is assigned to the relevant property or relationship end with established lower and upper bounds, including optional and unbounded cases where requested.",
+        "4": "Every included property's and relationship end's lower bound, upper bound, optionality, exact-count or range meaning, and unbounded status is explicit, complete, unambiguous, and supported without assumptions."
+      },
+      "gapPolicy": {
+        "severity": "blocking",
+        "overrideable": true
+      }
+    },
+    {
+      "id": "specializationAndDependencies",
+      "description": "Whether the supported context establishes every requested specialization or dependency, including child/parent or client/supplier endpoints, direction, and the broad inheritance or reliance meaning.",
+      "requirement": "conditional",
+      "weight": 2,
+      "minimumRating": 3,
+      "applicabilityRule": {
+        "kind": "conditional",
+        "appliesWhenAny": [
+          "The confirmed request asks to show generalization, specialization, inheritance, parent/child typing, or a client/supplier dependency, reliance, or usage dependency.",
+          "A selected claim, accepted assumption, or relevant active claim states that one in-scope definition specializes another or that an in-scope client depends on a supplier.",
+          "A resolved uncertainty disposition establishes an in-scope specialization or client/supplier dependency."
+        ],
+        "notApplicableWhenAll": [
+          "The confirmed request explicitly excludes generalization, specialization, inheritance, and dependency relationships.",
+          "Every included relationship that could be read as specialization or dependency is established as another relationship kind or outside the confirmed scope.",
+          "No open uncertainty or unresolved request term could introduce an in-scope specialization or dependency."
+        ],
+        "uncertainWhen": [
+          "The projection uses terms such as is a, kind of, implements, uses, requires, or relies on without establishing whether they denote an in-scope specialization or client/supplier dependency.",
+          "An open uncertainty could change an in-scope relationship's child/parent or client/supplier endpoints or direction."
+        ]
+      },
+      "ratingAnchors": {
+        "0": "No selected claim or accepted assumption establishes a usable requested specialization or dependency.",
+        "1": "Inheritance or reliance is mentioned, but the child/parent or client/supplier endpoints and direction cannot be modeled reliably.",
+        "2": "One or more requested specializations or dependencies are partly established, but at least one endpoint, direction, or broad inheritance/reliance distinction is absent or ambiguous.",
+        "3": "Every specialization and dependency included by the confirmed request has established child/parent or client/supplier endpoints, direction, and enough broad meaning to model the relationship.",
+        "4": "Every included specialization and dependency, endpoint role, direction, and requested inheritance or reliance distinction is explicit, complete, unambiguous, and supported without assumptions."
+      },
+      "gapPolicy": {
+        "severity": "blocking",
+        "overrideable": true
+      }
+    },
+    {
+      "id": "portsInterfaces",
+      "description": "Whether the supported context establishes every requested port and interface interaction point, including owner, identity, type, port or interface role, and provided/required, flow-direction, conjugation, or behavioral meaning.",
+      "requirement": "conditional",
+      "weight": 2,
+      "minimumRating": 3,
+      "applicabilityRule": {
+        "kind": "conditional",
+        "appliesWhenAny": [
+          "The confirmed request asks to show a port, proxy port, full port, interface block, provided or required feature, interaction point, conjugation, behavioral port, or port flow direction.",
+          "A selected claim, accepted assumption, or relevant active claim states that an in-scope definition owns a port or interface interaction point, identifies its type, or assigns provided/required, direction, conjugation, or behavioral meaning.",
+          "A resolved uncertainty disposition establishes an in-scope port, interface interaction point, or provided/required or flow-direction distinction."
+        ],
+        "notApplicableWhenAll": [
+          "The confirmed request explicitly excludes ports, interface interaction points, and provided/required or flow-direction detail.",
+          "Selected claims, accepted assumptions, relevant active claims, and resolved uncertainty dispositions establish no port or interface interaction point that the confirmed request includes.",
+          "No open uncertainty or unresolved request term could introduce an in-scope port or interface interaction point."
+        ],
+        "uncertainWhen": [
+          "The projection mentions an interface, endpoint, boundary, channel, or interaction feature without establishing whether it denotes an in-scope port/interface construct or only contextual implementation detail.",
+          "An open uncertainty could introduce or change an in-scope port owner, type, port kind, provided/required meaning, flow direction, conjugation, or behavioral status."
+        ]
+      },
+      "ratingAnchors": {
+        "0": "No selected claim or accepted assumption establishes a usable requested port or interface interaction point.",
+        "1": "A port, interface, endpoint, or interaction feature is mentioned, but its owner, identity, type, or interaction role cannot be modeled reliably.",
+        "2": "One or more requested ports or interfaces are partly established, but at least one owner, identity, type, port/interface distinction, provided/required feature, flow direction, conjugation, or behavioral meaning is absent or ambiguous.",
+        "3": "Every port and interface interaction point included by the confirmed request has an established owner, identity, type, and broad role, with each requested provided/required, flow-direction, conjugation, and behavioral distinction established well enough to model it.",
+        "4": "Every included port and interface interaction point, owner, identity, kind, type, provided/required feature, flow direction, conjugation, behavioral status, and interaction meaning is explicit, complete, unambiguous, and supported without assumptions."
+      },
+      "gapPolicy": {
+        "severity": "blocking",
+        "overrideable": true
+      }
+    },
+    {
+      "id": "constraints",
+      "description": "Whether the supported context establishes every requested structural or domain constraint, constraint-block expression, or constraint parameter, including constrained subject, usable rule, parameter identity, type, direction, unit or quantity meaning, and applicability.",
+      "requirement": "conditional",
+      "weight": 2,
+      "minimumRating": 3,
+      "applicabilityRule": {
+        "kind": "conditional",
+        "appliesWhenAny": [
+          "The confirmed request asks to show a structural or domain constraint, constraint block, reusable constraint expression, constraint parameter, parameter direction, or parameter unit/quantity meaning.",
+          "A selected claim, accepted assumption, or relevant active claim states an in-scope rule that constrains a definition, feature, value, relationship, or parameter, or supplies a constraint expression or parameter.",
+          "A resolved uncertainty disposition establishes an in-scope constraint, expression, constrained subject, or constraint parameter."
+        ],
+        "notApplicableWhenAll": [
+          "The confirmed request explicitly excludes constraints, expressions, and constraint parameters.",
+          "Selected claims, accepted assumptions, relevant active claims, and resolved uncertainty dispositions establish no structural/domain rule or constraint content that the confirmed request includes.",
+          "No open uncertainty or unresolved request term could introduce an in-scope constraint, expression, or parameter."
+        ],
+        "uncertainWhen": [
+          "The projection states a limit, formula, invariant, rule, policy, or requirement without establishing whether it constrains an in-scope structural subject or is contextual behavior outside the requested BDD.",
+          "An open uncertainty could introduce or change an in-scope constrained subject, rule/expression, parameter, type, direction, unit, quantity, or applicability condition."
+        ]
+      },
+      "ratingAnchors": {
+        "0": "No selected claim or accepted assumption establishes a usable requested constraint, expression, or parameter.",
+        "1": "A rule, formula, limit, or parameter is mentioned, but its constrained subject or usable constraint meaning cannot be modeled reliably.",
+        "2": "One or more requested constraints are partly established, but at least one constrained subject, usable rule/expression, parameter identity, type, direction, unit/quantity meaning, or applicability condition is absent or ambiguous.",
+        "3": "Every constraint included by the confirmed request has an established constrained subject and usable rule or expression, with each requested parameter's identity, type, direction, unit/quantity meaning, and applicability established well enough to model it.",
+        "4": "Every included constraint, constrained subject, expression, parameter, type, direction, unit, quantity meaning, and applicability condition is explicit, complete, unambiguous, and supported without assumptions."
+      },
+      "gapPolicy": {
+        "severity": "blocking",
+        "overrideable": true
+      }
+    }
+  ]
+}

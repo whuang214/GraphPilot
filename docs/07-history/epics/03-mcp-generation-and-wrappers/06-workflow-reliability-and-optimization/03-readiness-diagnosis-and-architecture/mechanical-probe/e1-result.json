@@ -1,0 +1,137 @@
+{
+  "schemaVersion": "graphpilot.delivery.readiness-diagnosis-live-result.v1",
+  "kind": "readinessDiagnosisLiveResult",
+  "resultId": "result-readiness-diagnosis-block3-e1-high-20260728-01",
+  "sourceCommit": "bf8836116614dc676fce80feb27d8a7ed1cb856d",
+  "manifest": {
+    "packageId": "package-readiness-diagnostic-block3-e1-high-20260728-01",
+    "digest": "sha256:2a90ccbe5a0b548c4653eb564a3378a7b661a562c23fb16249d3be2f220f837d",
+    "runId": "run-readiness-diagnostic-block3-e1-high-20260728-01",
+    "observationId": "observation-readiness-diagnostic-block3-e1-high-20260728-01",
+    "hypothesisId": "hypothesis-live-first-response-validation-trigger",
+    "reasoningEffort": "high",
+    "callMaximum": 2
+  },
+  "observation": {
+    "digest": "sha256:49f3332ca11141348d018dfc858700e13c6c6541fd73864aba3056c8f8917ef8",
+    "eventLedgerDigest": "sha256:4bc7591b76ca771585d3bf5a1d358c1014587d736874da013cbb9211c3d57888",
+    "status": "error",
+    "providerStartState": "started",
+    "errorCode": "readiness_reviewer_validation",
+    "captureComplete": true,
+    "captureFailureCodes": [],
+    "startedAt": "2026-07-28T17:27:39.435012Z",
+    "completedAt": "2026-07-28T17:31:03.081843Z"
+  },
+  "calls": [
+    {
+      "sequence": 1,
+      "role": "readiness",
+      "state": "completed",
+      "durationMs": 86530.4833999835,
+      "requestBytes": 32727,
+      "responseBytes": 5996,
+      "inputTokens": 6280,
+      "outputTokens": 7198,
+      "reasoningTokens": 5888,
+      "cachedInputTokens": 0,
+      "providerRequestId": "5b68bfd4-4f0b-4839-872a-e811811c4586",
+      "serviceTier": "default",
+      "requestedControl": "high",
+      "effectiveControl": "high",
+      "firstResponseValid": false,
+      "validationIssues": [
+        {"code": "invalid_coverage_combination", "path": "$.coverage[3]"},
+        {"code": "invalid_coverage_combination", "path": "$.coverage[6]"},
+        {"code": "invalid_coverage_combination", "path": "$.coverage[7]"}
+      ]
+    },
+    {
+      "sequence": 2,
+      "role": "readiness_response_repair",
+      "state": "completed",
+      "durationMs": 117021.66610001586,
+      "requestBytes": 32649,
+      "responseBytes": 5501,
+      "inputTokens": 6264,
+      "outputTokens": 10404,
+      "reasoningTokens": 9144,
+      "cachedInputTokens": 0,
+      "providerRequestId": "af723ba3-0a88-4143-8d27-4a6f2ca74ce2",
+      "serviceTier": "default",
+      "requestedControl": "high",
+      "effectiveControl": "high",
+      "firstResponseValid": false,
+      "validationIssues": [
+        {"code": "invalid_recommendation_ref", "path": "$.recommendedSelections[0].claimRef"},
+        {"code": "invalid_recommendation_ref", "path": "$.recommendedSelections[1].claimRef"},
+        {"code": "invalid_recommendation_ref", "path": "$.recommendedSelections[2].claimRef"},
+        {"code": "invalid_recommendation_ref", "path": "$.recommendedSelections[3].claimRef"}
+      ]
+    }
+  ],
+  "totals": {
+    "callsStarted": 2,
+    "callsCompleted": 2,
+    "callsFailed": 0,
+    "callsUncertain": 0,
+    "durationMs": 203552.14949999936,
+    "requestBytes": 65376,
+    "responseBytes": 11497,
+    "inputTokens": 12544,
+    "outputTokens": 17602,
+    "reasoningTokens": 15032,
+    "cachedInputTokens": 0,
+    "budgetUsedAfter": 2,
+    "budgetRemaining": 998
+  },
+  "firstResponse": {
+    "repairTriggered": true,
+    "facetPaths": [
+      {"index": 3, "facet": "responsibility"},
+      {"index": 6, "facet": "concurrency"},
+      {"index": 7, "facet": "exceptionPaths"}
+    ],
+    "mechanicalRule": "Non-applicable or uncertain coverage cannot carry rating, selected-claim support, or assumption support.",
+    "promptGap": "The prompt explicitly requires null rating otherwise but does not explicitly require both support arrays to be empty."
+  },
+  "repairResponse": {
+    "fixedFirstTrigger": true,
+    "newIssueCount": 4,
+    "mechanicalRule": "Recommendations require active/current unselected indexed claims.",
+    "projectionAllowlists": {
+      "selectedClaimCount": 4,
+      "indexedClaimCount": 4,
+      "selectedIndexedOverlapCount": 4,
+      "unselectedIndexedClaimCount": 0,
+      "selectedSubsetOfIndexed": true
+    },
+    "contractGap": "The prompt says indexed unselected claims, while the projection exposes indexedClaimRefs that completely overlaps selectedClaimRefs and provides no explicit unselected list."
+  },
+  "causalAssessment": {
+    "supported": [
+      "The exact first-response trigger is deterministic semantic validation, not response-size or structural-schema rejection.",
+      "The current prompt/projection contract does not state or expose both validator-owned conditions in the most direct machine-followable form.",
+      "Complete-input repair is a cost amplifier and did not produce a valid result under high effort."
+    ],
+    "notYetDisconfirmed": [
+      "Provider/control behavior may affect compliance, latency, and repair semantics.",
+      "The readiness responsibility split may be too demanding for one response and generic repair.",
+      "A prompt-only correction may not eliminate both failure classes."
+    ],
+    "rootSelected": null
+  },
+  "nextDiscriminator": {
+    "kind": "same_case_medium_effort",
+    "changedFactor": "reasoningEffort",
+    "reason": "Run the identical committed case and assets at medium effort under new identities to determine whether exact trigger classes persist across control before selecting a local correction or component redesign."
+  },
+  "scope": {
+    "diagnosticOnly": true,
+    "mechanicalProviderPerformanceOnly": true,
+    "calibration": false,
+    "certification": false,
+    "promotion": false
+  },
+  "digest": "sha256:c8059f5d1d5fa1c604dc41340480e759899f364623c233c49b228c209bb83a56"
+}

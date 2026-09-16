@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "graphpilot.delivery.semantic-review-retry-decision.v1",
+  "kind": "semanticReviewRetryDecision",
+  "decision": "revert_s10_retain_generation",
+  "implementationCommit": "b5ef42258cb9459db5d508e7e665a31712196b7e",
+  "liveEvidenceCommit": "62c404261d5c4e15248cdc7df6b51635b12ace2e",
+  "revertCommit": "a6e7ad0779e36c636efb17394d8161d5ea3f338e",
+  "retainedGenerationCommit": "a17bc4095cf79a30089aff39b10aa9fe73426b8d",
+  "reason": {
+    "terminalStatus": "failed",
+    "errorCode": "semantic_repair_failed",
+    "calls": 5,
+    "baselineCalls": 3,
+    "candidatePreBrowserMs": 267553.0795000959,
+    "baselineCompleteMs": 140007.6106999563,
+    "qualityPassed": false,
+    "browserReached": false,
+    "incrementalBenefit": false,
+    "summary": "The sole authorized candidate failed reviewed semantic quality after one candidate repair, used two more calls, and was materially slower than g2. Contract coherence alone cannot satisfy the approved retention gate because g2 already had zero semantic response repair."
+  },
+  "preservedEvidence": {
+    "diagnosisCommit": "5ec80b7ed4cd5eb24fbced0532079cb737ad58c4",
+    "providerFreeEvidenceDigest": "sha256:fa23ae51ca8999dea406a868713eb4477baee4e91054c1da4b4166488cb285ce",
+    "liveResultDigest": "sha256:ed441b6895f12b09ac5c201b194064b4e72a16299d25bf1208c58e677127e84e",
+    "manifestDigest": "sha256:0eefb46bd94553b3b4902ce68bf51ab7f3352670b739bce9d982ea32c4086a05",
+    "resultDigest": "sha256:4637d5c86764e5c14acc754f0dc6927d46d965a8138de696168e488c6002f46c",
+    "observationDigest": "sha256:6cae88a7b30b9dbe00dcc0448e634c1c1aad0883992dd3c8046f6ee96a9c9592",
+    "terminalDigest": "sha256:51e513ef9627a04129d4aded474d5e4ea1425a1e9d7d646b7a801a8c707dada7"
+  },
+  "finalBehavior": {
+    "semanticReview": "pre_s10_current_v1_baseline",
+    "semanticBehaviorMatchesCommit": "5ec80b7ed4cd5eb24fbced0532079cb737ad58c4",
+    "generationCorrectionRetained": true,
+    "generationCorrectionChangedByRevert": false,
+    "b0Retained": true,
+    "laneAChanged": false,
+    "s15OrStageCChanged": false
+  },
+  "guard": {
+    "runId": "run-workflow-audit-b6s1-guard-01",
+    "status": "pass",
+    "manifestDigest": "sha256:fd5e2ffb21e1dc8c3c571bb226d13a444884b24970b886be2eef868ef9913fc3",
+    "reportDigest": "sha256:487bb355ede9dc0e45d5289564ff74a4d51cbeb27cfd812d3e45c8b85675f4cf",
+    "browserDigest": "sha256:b958a4ad1287d0bee321c3f6f559bd50e5e9b7cf0acc83b5571e82d8f2c801c9",
+    "ledgerDigest": "sha256:b1fc9b876a4cfda4cc9a9ac68272c1dd5f483d8fe6918287970e30c95554eeb0",
+    "compatibilityKey": "sha256:d77f21f801006fe95a436171697ac1d38869bde834c619b802971fde5529ebd1",
+    "observations": 19,
+    "generated": 16,
+    "blocked": 1,
+    "errors": 2,
+    "fakeCalls": 56,
+    "azureCalls": 0,
+    "browser": "pass"
+  },
+  "accounting": {
+    "controlledCompleted": 18,
+    "externalHostCompleted": 1,
+    "aggregateCompleted": 19,
+    "failedProviderCalls": 0,
+    "uncertainProviderCalls": 0,
+    "ceiling": 1000,
+    "aggregateRemaining": 981
+  },
+  "recovery": {
+    "candidateRetryAllowed": false,
+    "candidateIdentityReusable": false,
+    "historicalRepairSavingCredited": false,
+    "nextDependency": "lane_a_integration_checkpoint_and_complete_rebaseline"
+  },
+  "errata": {
+    "source": "evidence/semantic-review-retry-wave/live-result.json eventLedgerDigest",
+    "recorded": "sha256:91076eaa150cc962f75c64f1ff2b73c7f1f7e7a45c3c2b89f8c4707ee6d4a2e",
+    "correct": "sha256:91076eaa150cc962f75c64f1ff2b73c7f1f7e7a45c3c2b89f8c4707ee6d4a2e0",
+    "authority": "immutable observation artifact and recomputed 30-event canonical ledger",
+    "impact": "summary-only; result/observation/terminal and S12 decision bindings are unaffected"
+  },
+  "resources": {
+    "reservedPortsFree": true,
+    "managedBrowsers": 0,
+    "providerWorkers": 0,
+    "temporaryVenvCleanup": "pending_explicit_confirmation_for_nonempty_ignored_directory"
+  },
+  "digest": "sha256:a3ef61b896bbbf928e45e32b8690a79723776ceb1614f0c94ba0f2bbe8e39106"
+}

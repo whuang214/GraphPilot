@@ -1,0 +1,810 @@
+{
+  "diagramType": "activity_diagram",
+  "edges": [
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f1",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-route"
+        ],
+        "rationale": "Established by cited evidence: ev-route.",
+        "schemaRules": []
+      },
+      "source": "start",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "load-todo",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f2",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-complete"
+        ],
+        "rationale": "Established by cited evidence: ev-complete.",
+        "schemaRules": []
+      },
+      "source": "load-todo",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "todo-found",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "it exists",
+        "semanticType": "controlFlow"
+      },
+      "id": "f3",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-complete"
+        ],
+        "rationale": "Established by cited evidence: ev-complete.",
+        "schemaRules": []
+      },
+      "source": "todo-found",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "load-list",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "no such todo",
+        "semanticType": "controlFlow"
+      },
+      "id": "f4",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-complete"
+        ],
+        "rationale": "Established by cited evidence: ev-complete.",
+        "schemaRules": []
+      },
+      "source": "todo-found",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "refuse",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f5",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-complete"
+        ],
+        "rationale": "Established by cited evidence: ev-complete.",
+        "schemaRules": []
+      },
+      "source": "load-list",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "may-complete",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "role allows it",
+        "semanticType": "controlFlow"
+      },
+      "id": "f6",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-require"
+        ],
+        "rationale": "Established by cited evidence: ev-require.",
+        "schemaRules": []
+      },
+      "source": "may-complete",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "check-rules",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "permission denied",
+        "semanticType": "controlFlow"
+      },
+      "id": "f7",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-require"
+        ],
+        "rationale": "Established by cited evidence: ev-require.",
+        "schemaRules": []
+      },
+      "source": "may-complete",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "refuse",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "both rules pass",
+        "semanticType": "controlFlow"
+      },
+      "id": "f8",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-complete"
+        ],
+        "rationale": "Established by cited evidence: ev-complete.",
+        "schemaRules": []
+      },
+      "source": "check-rules",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "mark-done",
+      "type": "default"
+    },
+    {
+      "data": {
+        "guard": "archived, or already done",
+        "semanticType": "controlFlow"
+      },
+      "id": "f8b",
+      "origin": {
+        "assumptionRefs": [
+          "asm-rules-reach-the-same-handler"
+        ],
+        "assurance": "assumed",
+        "evidenceRefs": [],
+        "rationale": "Accepted as an assumption: asm-rules-reach-the-same-handler.",
+        "schemaRules": []
+      },
+      "source": "check-rules",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "refuse",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f9",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-complete"
+        ],
+        "rationale": "Established by cited evidence: ev-complete.",
+        "schemaRules": []
+      },
+      "source": "mark-done",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "save",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f10",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-complete"
+        ],
+        "rationale": "Established by cited evidence: ev-complete.",
+        "schemaRules": []
+      },
+      "source": "save",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "publish",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f11",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-route"
+        ],
+        "rationale": "Established by cited evidence: ev-route.",
+        "schemaRules": []
+      },
+      "source": "publish",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "done",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "controlFlow"
+      },
+      "id": "f12",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-route"
+        ],
+        "rationale": "Established by cited evidence: ev-route.",
+        "schemaRules": []
+      },
+      "source": "refuse",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "stopped",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "commentLink"
+      },
+      "id": "catch-note-link",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-route"
+        ],
+        "rationale": "Established by cited evidence: ev-route.",
+        "schemaRules": []
+      },
+      "source": "note-catch",
+      "style": {
+        "stroke": "#333333",
+        "strokeDasharray": "6 4",
+        "strokeWidth": 2
+      },
+      "target": "refuse",
+      "type": "default"
+    }
+  ],
+  "id": "diagram_todo_completion",
+  "kind": "diagram",
+  "metadata": {
+    "assurance": {
+      "assumedElementIds": [
+        "f8b"
+      ],
+      "assumptions": [
+        {
+          "acceptedBy": "host",
+          "id": "asm-rules-reach-the-same-handler",
+          "reason": "The route wraps the whole call in one try, but no test covers a rules failure so the resulting status is unverified.",
+          "statement": "A rules failure leaves through the same except branch as the other refusals."
+        }
+      ]
+    },
+    "authoring": "generated",
+    "authority": "as_implemented",
+    "createdAt": "2026-08-03T22:45:54.132263+00:00",
+    "evidence": [
+      {
+        "contentDigest": "sha256:06eca754b4e24606617881371ed6e1dcdd66ab519465fa337d73f69a12040c82",
+        "id": "ev-route",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 51,
+            "start": 46
+          },
+          "path": "src/todo_api/api/routes_todos.py",
+          "symbol": "complete_todo"
+        },
+        "summary": "The route delegates to the service and turns any exception into a status code."
+      },
+      {
+        "contentDigest": "sha256:114144e1748ac900fbc9a157ac28478af6a21de7a44ba08138ff1ed2906115c3",
+        "id": "ev-complete",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 89,
+            "start": 73
+          },
+          "path": "src/todo_api/services/todo_service.py",
+          "symbol": "TodoService.complete"
+        },
+        "summary": "complete() loads the todo and its list, checks permission and the rules, then sets DONE, saves, and publishes."
+      },
+      {
+        "contentDigest": "sha256:c843896bb166c3ffb753f73485737e641d443e424cb15dfcb3442c028b743f2a",
+        "id": "ev-require",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 41,
+            "start": 36
+          },
+          "path": "src/todo_api/services/permissions.py",
+          "symbol": "PermissionService.require"
+        },
+        "summary": "require raises PermissionDenied unless the caller's role allows the action."
+      },
+      {
+        "contentDigest": "sha256:241768c0eec1485232065f7e157d8874a2c6c4ac6eb69ee9ab55404baa49271b",
+        "id": "ev-actions",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 24,
+            "start": 17
+          },
+          "path": "src/todo_api/services/permissions.py",
+          "symbol": "_REQUIRED"
+        },
+        "summary": "complete_todo needs COLLABORATOR, OWNER or ADMIN."
+      }
+    ],
+    "generatedBy": "graphpilot-materializer",
+    "intent": "todo-completion",
+    "notation": "uml",
+    "originalType": "activity_diagram",
+    "requests": [
+      {
+        "at": "2026-08-05T16:32:01.653705+00:00",
+        "text": "What happens when someone completes a todo?"
+      }
+    ],
+    "source": "mcp",
+    "updatedAt": "2026-08-03T22:45:54.132263+00:00"
+  },
+  "name": "todo-completion",
+  "nodes": [
+    {
+      "data": {
+        "label": "Request arrives",
+        "semanticType": "initialNode"
+      },
+      "height": 60.0,
+      "id": "start",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-route"
+        ],
+        "rationale": "Established by cited evidence: ev-route.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 362.75,
+        "y": 0.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 148.5
+    },
+    {
+      "data": {
+        "label": "Load the todo",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "load-todo",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-complete"
+        ],
+        "rationale": "Established by cited evidence: ev-complete.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 357.0,
+        "y": 132.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 160.0
+    },
+    {
+      "data": {
+        "label": "Does the todo exist?",
+        "semanticType": "decisionNode"
+      },
+      "height": 90.0,
+      "id": "todo-found",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-complete"
+        ],
+        "rationale": "Established by cited evidence: ev-complete.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 344.0,
+        "y": 264.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 186.0
+    },
+    {
+      "data": {
+        "label": "Load its list",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "load-list",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-complete"
+        ],
+        "rationale": "Established by cited evidence: ev-complete.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 269.0,
+        "y": 426.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 160.0
+    },
+    {
+      "data": {
+        "label": "May this caller complete it?",
+        "semanticType": "decisionNode"
+      },
+      "height": 90.0,
+      "id": "may-complete",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-require",
+          "ev-actions"
+        ],
+        "rationale": "Established by cited evidence: ev-require, ev-actions.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 204.0,
+        "y": 558.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 246.0
+    },
+    {
+      "data": {
+        "label": "Check the list is not archived and the todo is completable",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "check-rules",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-complete"
+        ],
+        "rationale": "Established by cited evidence: ev-complete.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 0.0,
+        "y": 730.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "label": "Set DONE and stamp completedAt",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "mark-done",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-complete"
+        ],
+        "rationale": "Established by cited evidence: ev-complete.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 29.5,
+        "y": 872.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 261.0
+    },
+    {
+      "data": {
+        "label": "Update the repository",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "save",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-complete"
+        ],
+        "rationale": "Established by cited evidence: ev-complete.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 63.25,
+        "y": 1004.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 193.5
+    },
+    {
+      "data": {
+        "label": "Publish TodoCompleted",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "publish",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-complete"
+        ],
+        "rationale": "Established by cited evidence: ev-complete.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 63.25,
+        "y": 1136.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 193.5
+    },
+    {
+      "data": {
+        "label": "Map the exception to a status code",
+        "semanticType": "opaqueAction"
+      },
+      "height": 60.0,
+      "id": "refuse",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-route"
+        ],
+        "rationale": "Established by cited evidence: ev-route.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 377.5,
+        "y": 872.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 291.0
+    },
+    {
+      "data": {
+        "label": "200 with the todo",
+        "semanticType": "activityFinalNode"
+      },
+      "height": 60.0,
+      "id": "done",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-route"
+        ],
+        "rationale": "Established by cited evidence: ev-route.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 78.25,
+        "y": 1268.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 163.5
+    },
+    {
+      "data": {
+        "label": "Error response",
+        "semanticType": "activityFinalNode"
+      },
+      "height": 60.0,
+      "id": "stopped",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-route"
+        ],
+        "rationale": "Established by cited evidence: ev-route.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 452.5,
+        "y": 1004.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 141.0
+    },
+    {
+      "data": {
+        "label": "The route catches bare Exception, so an unexpected fault is reported as a handled error like any refusal.",
+        "semanticType": "note"
+      },
+      "height": 80.0,
+      "id": "note-catch",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-route"
+        ],
+        "rationale": "Established by cited evidence: ev-route.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 716.5,
+        "y": 872.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    }
+  ],
+  "schemaVersion": "graphpilot.diagram.v1",
+  "viewport": {
+    "x": 0,
+    "y": 0,
+    "zoom": 1
+  }
+}

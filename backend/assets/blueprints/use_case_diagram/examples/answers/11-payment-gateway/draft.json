@@ -1,0 +1,112 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "payment-gateway",
+  "diagramType": "use_case_diagram",
+  "authority": "conceptual",
+  "requests": [
+    "A customer makes a payment, which can be a card payment, a wallet payment, or a bank transfer; a card payment can in turn be a credit-card or a debit-card payment."
+  ],
+  "evidence": [],
+  "elements": [
+    {
+      "id": "customer",
+      "semanticType": "actor",
+      "label": "Customer",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "sys",
+      "semanticType": "subject",
+      "label": "Payment Gateway",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "makepay",
+      "semanticType": "useCase",
+      "label": "Make Payment",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    },
+    {
+      "id": "card",
+      "semanticType": "useCase",
+      "label": "Pay by Card",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    },
+    {
+      "id": "wallet",
+      "semanticType": "useCase",
+      "label": "Pay by Wallet",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    },
+    {
+      "id": "bank",
+      "semanticType": "useCase",
+      "label": "Pay by Bank Transfer",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    },
+    {
+      "id": "credit",
+      "semanticType": "useCase",
+      "label": "Pay by Credit Card",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    },
+    {
+      "id": "debit",
+      "semanticType": "useCase",
+      "label": "Pay by Debit Card",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "edge-1-customer-makepay",
+      "semanticType": "association",
+      "source": "customer",
+      "target": "makepay",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-2-card-makepay",
+      "semanticType": "generalization",
+      "source": "card",
+      "target": "makepay",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-3-wallet-makepay",
+      "semanticType": "generalization",
+      "source": "wallet",
+      "target": "makepay",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-4-bank-makepay",
+      "semanticType": "generalization",
+      "source": "bank",
+      "target": "makepay",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-5-credit-card",
+      "semanticType": "generalization",
+      "source": "credit",
+      "target": "card",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-6-debit-card",
+      "semanticType": "generalization",
+      "source": "debit",
+      "target": "card",
+      "assurance": "conceptual"
+    }
+  ],
+  "assumptions": []
+}

@@ -1,0 +1,114 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "banking-system",
+  "diagramType": "use_case_diagram",
+  "authority": "conceptual",
+  "requests": [
+    "In a banking system a customer withdraws cash, deposits funds, and transfers money, each of which includes authentication; a teller can also process a withdrawal."
+  ],
+  "evidence": [],
+  "elements": [
+    {
+      "id": "cust",
+      "semanticType": "actor",
+      "label": "Customer",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "teller",
+      "semanticType": "actor",
+      "label": "Teller",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "sys",
+      "semanticType": "subject",
+      "label": "Banking System",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "withdraw",
+      "semanticType": "useCase",
+      "label": "Withdraw Cash",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    },
+    {
+      "id": "deposit",
+      "semanticType": "useCase",
+      "label": "Deposit Funds",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    },
+    {
+      "id": "transfer",
+      "semanticType": "useCase",
+      "label": "Transfer Money",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    },
+    {
+      "id": "auth",
+      "semanticType": "useCase",
+      "label": "Authenticate",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "edge-1-cust-withdraw",
+      "semanticType": "association",
+      "source": "cust",
+      "target": "withdraw",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-2-cust-deposit",
+      "semanticType": "association",
+      "source": "cust",
+      "target": "deposit",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-3-cust-transfer",
+      "semanticType": "association",
+      "source": "cust",
+      "target": "transfer",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-4-teller-withdraw",
+      "semanticType": "association",
+      "source": "teller",
+      "target": "withdraw",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-5-withdraw-auth",
+      "semanticType": "include",
+      "source": "withdraw",
+      "target": "auth",
+      "assurance": "conceptual",
+      "label": "«include»"
+    },
+    {
+      "id": "edge-6-deposit-auth",
+      "semanticType": "include",
+      "source": "deposit",
+      "target": "auth",
+      "assurance": "conceptual",
+      "label": "«include»"
+    },
+    {
+      "id": "edge-7-transfer-auth",
+      "semanticType": "include",
+      "source": "transfer",
+      "target": "auth",
+      "assurance": "conceptual",
+      "label": "«include»"
+    }
+  ],
+  "assumptions": []
+}

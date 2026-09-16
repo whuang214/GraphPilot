@@ -1,0 +1,111 @@
+{
+  "authority": "conceptual",
+  "basis": {
+    "diagram": "sha256:1bdb5c62546c27b348a740d954caca5aaba8c5eafad798f9f8df21335ddbbf36",
+    "readAt": "2026-08-05T22:45:40.069831+00:00"
+  },
+  "diagramName": "refund-rewired",
+  "diagramType": "activity_diagram",
+  "elements": [
+    {
+      "assurance": "conceptual",
+      "id": "start",
+      "label": "Start",
+      "semanticType": "initialNode"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "raise",
+      "label": "Raise the refund",
+      "semanticType": "opaqueAction"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "check",
+      "label": "Over £100?",
+      "semanticType": "decisionNode"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "manager",
+      "label": "Manager approves",
+      "semanticType": "opaqueAction"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "auto",
+      "label": "Approve automatically",
+      "semanticType": "opaqueAction"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "pay",
+      "label": "Pay the customer",
+      "semanticType": "opaqueAction"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "done",
+      "label": "Done",
+      "semanticType": "activityFinalNode"
+    }
+  ],
+  "kind": "diagramDraft",
+  "relationships": [
+    {
+      "assurance": "conceptual",
+      "id": "e1",
+      "semanticType": "controlFlow",
+      "source": "start",
+      "target": "raise"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "e2",
+      "semanticType": "controlFlow",
+      "source": "raise",
+      "target": "check"
+    },
+    {
+      "assurance": "conceptual",
+      "guard": "yes",
+      "id": "e3",
+      "semanticType": "controlFlow",
+      "source": "check",
+      "target": "manager"
+    },
+    {
+      "assurance": "conceptual",
+      "guard": "no",
+      "id": "e4",
+      "semanticType": "controlFlow",
+      "source": "check",
+      "target": "auto"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "e5",
+      "semanticType": "controlFlow",
+      "source": "manager",
+      "target": "pay"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "e6",
+      "semanticType": "controlFlow",
+      "source": "auto",
+      "target": "pay"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "e7",
+      "semanticType": "controlFlow",
+      "source": "pay",
+      "target": "done"
+    }
+  ],
+  "requests": [
+    "How a refund is approved."
+  ],
+  "schemaVersion": "graphpilot.draft.v1"
+}

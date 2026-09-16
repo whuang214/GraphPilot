@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "graphpilot.research.evaluation-framework-approval.v1",
+  "kind": "evaluationFrameworkApproval",
+  "documentVersion": "generation-evaluation-framework-2026-07-17",
+  "status": "approved",
+  "recordedAt": "2026-07-17T22:25:45Z",
+  "reviewer": "user",
+  "overallNote": "Approved in chat after sequential high-level review of the offline evaluation framework.",
+  "sections": [
+    {
+      "id": "boundaries-captures",
+      "title": "Evaluation boundaries and captures",
+      "decision": "approved"
+    },
+    {
+      "id": "oracle-equivalence",
+      "title": "Gold oracle and acceptable equivalence",
+      "decision": "approved"
+    },
+    {
+      "id": "matcher-metrics-attribution",
+      "title": "Deterministic matching, metrics, and failure attribution",
+      "decision": "approved"
+    },
+    {
+      "id": "conditions-repeats-live",
+      "title": "Reviewed certification, repeats, judge deployment, and explicit execution mode",
+      "decision": "approved"
+    },
+    {
+      "id": "rubric-reports-gates",
+      "title": "Evaluation LLM rubric, material facts, reports, analyst, and certification gates",
+      "decision": "approved"
+    },
+    {
+      "id": "leakage-authoring",
+      "title": "Visible calibration, sealed hidden cases, and independent authoring",
+      "decision": "approved"
+    }
+  ],
+  "amendments": [
+    {
+      "recordedAt": "2026-07-17T23:29:45Z",
+      "decision": "Use one AZURE_OPENAI_DEPLOYMENT for generation, readiness, semantic review, evaluation judging, and report analysis, plus explicit AZURE_OPENAI_EVALUATION_EMBEDDING_DEPLOYMENT. Judge independence is enforced by a separate blinded call/private rubric and recorded same-deployment caveat rather than a second chat deployment setting.",
+      "approvedBy": "user"
+    }
+  ],
+  "scope": {
+    "approvesEvaluationFrameworkDesign": true,
+    "approvesImplementation": false,
+    "approvesLiveProviderCalls": false,
+    "approvesHiddenGoldAuthoringBeforeFreeze": false,
+    "approvesProductionPromotion": false
+  }
+}

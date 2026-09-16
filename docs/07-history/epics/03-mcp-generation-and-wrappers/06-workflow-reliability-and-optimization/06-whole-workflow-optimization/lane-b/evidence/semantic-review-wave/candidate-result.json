@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "graphpilot.delivery.semantic-review-wave-candidate-result.v1",
+  "kind": "semanticReviewWaveCandidateResult",
+  "wave": "semantic_review_prompt_projection_schema_validator_contract",
+  "status": "failed_pre_dispatch",
+  "retentionGate": "fail",
+  "sourceCommit": "9232944dc3222499c6b2eba51ffa22e8510bdafe",
+  "authorizationCommit": "873413c2fa411e52ee5222689663a324d98b3eb3",
+  "candidate": {
+    "packageId": "package-live-workflow-anchor-block6-semantic-review-cold-room-20260729-03",
+    "runId": "run-live-workflow-anchor-block6-semantic-review-cold-room-20260729-03",
+    "observationId": "observation-live-workflow-anchor-block6-semantic-review-cold-room-20260729-03",
+    "diagnosticsRunId": "run-block6-semantic-review-live-anchor-20260729-03",
+    "manifestDigest": "sha256:3549135438921f8ae4fb3cbd3bdbbe8e7b17b4e4f8940d25beba279ea5fdf1c4",
+    "compatibilityKey": "sha256:3e7f094d81a09248e37cfb9b638cec1a6f094908be48cdf9cdcefa930156c7c4",
+    "packageTerminalDigest": "sha256:7d7424ed281108d17ece0ac06100aec2aebd4743dc7fafded05637d27c137bd3"
+  },
+  "lifecycle": {
+    "manifestFrozen": true,
+    "sourceStaged": true,
+    "hostSummaryPersisted": false,
+    "checkpointCreated": false,
+    "mcpDispatchStarted": false,
+    "providerStartState": "not_started",
+    "browserReached": false,
+    "strictObservationTerminalAvailable": false,
+    "packageLevelTerminalAvailable": true
+  },
+  "failure": {
+    "code": "host_evidence_path_too_long",
+    "boundary": "host_summary_event_persistence",
+    "candidateEventPathCharacters": 267,
+    "block5EventPathCharacters": 235,
+    "windowsLongPathsEnabled": false,
+    "explanation": "The immutable identity made strict observation artifact paths exceed the active Windows path boundary before checkpoint or MCP/provider dispatch."
+  },
+  "bridge": {
+    "endpointPresent": true,
+    "apiKeyPresent": true,
+    "deploymentPresent": true,
+    "apiVersionPresent": false,
+    "timeoutPresent": true,
+    "valuesDisplayed": false,
+    "valuesPersisted": false,
+    "dotenvUsedByChild": false
+  },
+  "provider": {
+    "callsCompleted": 0,
+    "callsFailed": 0,
+    "callsUncertain": 0,
+    "roles": [],
+    "semanticReviewFirstResponseValid": null,
+    "semanticReviewResponseRepairCalls": 0
+  },
+  "quality": {
+    "readiness": "not_reached",
+    "generation": "not_reached",
+    "requiredMeaning": "not_reached",
+    "forbiddenMeaning": "not_reached",
+    "provenance": "not_reached",
+    "reviewedQuality": "not_reached",
+    "persistence": "not_reached",
+    "svg": "not_reached",
+    "browser": "not_reached",
+    "compatibility": "manifest_validated"
+  },
+  "accounting": {
+    "controlledBefore": 10,
+    "controlledAfter": 10,
+    "externalHostCompleted": 1,
+    "aggregateBefore": 11,
+    "aggregateAfter": 11,
+    "ceiling": 1000
+  },
+  "staleManifestOnly": {
+    "packageId": "package-live-workflow-anchor-block6-semantic-review-cold-room-20260729-02",
+    "runId": "run-live-workflow-anchor-block6-semantic-review-cold-room-20260729-02",
+    "providerCalls": 0,
+    "dispatchAllowed": false
+  },
+  "decision": {
+    "retryAllowed": false,
+    "secondCandidateAllowed": false,
+    "s04Action": "revert_s02_behavior_commits",
+    "revertCommits": [
+      "9232944dc3222499c6b2eba51ffa22e8510bdafe",
+      "e6e4a6b63ff225fa1f0f99e4926bd012562809a2"
+    ]
+  },
+  "audit": {
+    "state": "pass",
+    "reviewer": "independent-local-filesystem-agent-f7a75fb8",
+    "remainingCritical": 0,
+    "remainingHigh": 0,
+    "remainingMedium": 0
+  },
+  "scope": {
+    "calibration": false,
+    "certification": false,
+    "promotion": false,
+    "deployment": false,
+    "s15Access": false,
+    "stageCOpened": false
+  },
+  "digest": "sha256:f6dca02cd7085639477fcb15a2d6fa08c4e77d0d1f25c188c3e1d8379f60c70b"
+}

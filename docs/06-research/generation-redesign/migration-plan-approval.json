@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "graphpilot.research.migration-plan-approval.v1",
+  "kind": "migrationPlanApproval",
+  "documentVersion": "generation-redesign-migration-plan-2026-07-17-r2",
+  "status": "approved",
+  "recordedAt": "2026-07-17T22:49:18Z",
+  "reviewer": "user",
+  "overallNote": "Approved direct-on-master execution with per-slice plan audit/commit and implementation audit/commit cadence, plus current workflow client compatibility prerequisite.",
+  "decisions": {
+    "implementationBranch": "master",
+    "dualRuntime": false,
+    "publicCutover": "single atomic prompt/tool/schema cutover after internal foundations and PyGraphviz cutover",
+    "compatibilityPrerequisite": "context-backed-generation slice 12 dual prompt/tool workflow bridge",
+    "sliceCount": 14,
+    "reviewedCertificationRepetitions": 3,
+    "hiddenGoldBeforeFreeze": false,
+    "productionPromotionBeforeCertification": false,
+    "pushAuthorized": false
+  },
+  "amendments": [
+    {
+      "recordedAt": "2026-07-17T22:49:18Z",
+      "decision": "Phase 0 must create/audit/commit the complete 13-slice delivery plan, then edit/audit/commit all active design owners before any redesign code begins.",
+      "approvedBy": "user",
+      "supersededBy": "2026-07-17T23:29:45Z amendment expanding the plan to S1-S14 and requiring both documentation commits before any implementation"
+    },
+    {
+      "recordedAt": "2026-07-17T22:49:18Z",
+      "decision": "Execute the complete current-workflow compatibility, Phase 0 promotion, generation S1-S9, and evaluation S10-S13 implementation sequence through audits, required checks, outcomes, and commits without routine approval pauses. Live provider calls, independent hidden-gold authoring, push, and production promotion remain separate gates.",
+      "approvedBy": "user"
+    },
+    {
+      "recordedAt": "2026-07-17T23:29:45Z",
+      "decision": "Before implementation, audit and commit the complete compatibility plus redesign S1-S14 planning package, then audit and commit all cold-turkey canonical design/configuration documents. Use one AZURE_OPENAI_DEPLOYMENT for all chat roles and explicit AZURE_OPENAI_EVALUATION_EMBEDDING_DEPLOYMENT. Add Slice 14 as a full backend audit/remediation gate and finish with a weekend summary. Frontend is concurrently owned by another agent, so avoid overlapping changes and never stage its work.",
+      "approvedBy": "user"
+    },
+    {
+      "recordedAt": "2026-07-17T23:29:45Z",
+      "decision": "After verified replacements/parity, remove the 12 old runtime training directories, generate.md, repair.md, evidence-manifest.json, diagram-request.json, Grandalf/subprocess layout code and dependency, and old MCP registrations/contract IDs. Never remove user diagrams, .env, or local Graphviz files.",
+      "approvedBy": "user"
+    }
+  ],
+  "scope": {
+    "approvesMigrationPlan": true,
+    "approvesDeliveryPlanningAndAuditedCommits": true,
+    "approvesImplementationAfterAuditedSlicePlans": true,
+    "approvesLiveProviderCalls": false,
+    "approvesHiddenGoldAuthoringBeforeFreeze": false,
+    "approvesProductionPromotion": false
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "schemaVersion": "graphpilot.delivery.semantic-review-root-decision.v1",
+  "kind": "semanticReviewRootDecision",
+  "decisionId": "decision-semantic-review-contract-block6-s01-20260729-01",
+  "sourceCommit": "043ff93643025ad0ccefd68f080cc34e265bd72b",
+  "recommendation": "focused_implementation_correction",
+  "owner": "semantic_review_prompt_projection_schema_validator_contract",
+  "confidence": "high_owner_bounded_trigger",
+  "evidence": {
+    "providerFreeProof": "provider-free-proof.json",
+    "safeBaselineRunId": "run-live-workflow-anchor-block5-cold-room-20260728-03",
+    "safeFailure": {"code": "finding_invalid", "path": "$"},
+    "responseRepairWallMs": 37787.58720000042,
+    "providerCalls": 0
+  },
+  "threshold": {
+    "safeBaselineSignatureBound": true,
+    "providerProjectionWitnesses": 3,
+    "sixModeTypeCellsReproduced": 6,
+    "fullBackendSchemaAcceptsWitnesses": true,
+    "backendRuntimeReproducesSignature": true,
+    "smallestCorrectedWitnessValid": true,
+    "singleContractOwner": true,
+    "rawResponseVariantKnown": false
+  },
+  "rootEvidence": [
+    "Initial and repair prompts do not expose the per-facet finding-code allowlist or the complete finding conditional rules.",
+    "The backend response schema and Azure projection expose one global finding-code enum without a facet-to-code map.",
+    "The provider-visible review input contains no per-facet finding-code allowlist.",
+    "Backend assembly enforces facet/code mapping, containing-facet equality, and below-minimum ownership.",
+    "Three bounded provider-projection/full-schema-valid shapes reproduce finding_invalid @ $, and the facet/code witness reproduces in all six cells.",
+    "A one-field corrected witness passes backend assembly without response repair."
+  ],
+  "limitation": "Because raw provider text was intentionally not retained, the exact original variant cannot be identified and is not claimed. The owner remains unique because every bounded exact-signature variant lies inside the same semantic-review finding contract.",
+  "s02": {
+    "authorizedByDiagnosis": true,
+    "primaryCorrection": [
+      "Project the exact existing per-facet finding-code allowlist into both direct and context semantic-review inputs without changing rubric thresholds or backend finding policy.",
+      "Update initial and response-repair prompts to require containing-facet equality, a code from that facet's projected allowlist, and findings only for applicable ratings below minimumRating.",
+      "Bump changed prompt identities and retain old prompt assets; use the established additive private-v1 projection policy for the ephemeral review input.",
+      "Keep response repair and backend validation fail-closed and unchanged in authority."
+    ],
+    "failingBeforeRegressions": [
+      "test_review_input_exposes_finding_codes_for_every_rubric_facet",
+      "test_review_prompt_exposes_finding_conditional_contract",
+      "test_review_prompt_requires_below_minimum_rating_for_findings",
+      "test_review_repair_prompt_exposes_finding_conditional_contract",
+      "test_review_repair_prompt_requires_below_minimum_rating_for_findings",
+      "test_provider_projection_accepts_backend_rejected_finding_contract_witness_before_correction",
+      "test_corrected_finding_contract_witness_is_first_response_valid",
+      "test_facet_code_contract_is_consistent_for_all_six_cells"
+    ],
+    "nonGoals": [
+      "Do not weaken FACET_FINDING_CODES, finding/reference/action validation, or response repair.",
+      "Do not change rubric ratings, weights, thresholds, status, score, final review, semantic repair, generation, readiness, host, MCP, local, browser, provenance, persistence, or public results.",
+      "Do not infer or reconstruct the raw Block 5 response.",
+      "Do not claim performance improvement before a new terminal live candidate passes every retention gate."
+    ],
+    "focusedProof": [
+      "Run exact failing-before prompt/projection/witness regressions.",
+      "Pass corrected provider-input and runtime first-response regressions across all six cells.",
+      "Pass existing response-repair, semantic-candidate-repair, finding/reference/action, generation, readiness, live-harness, and full backend checks.",
+      "Run independent implementation audit with no unresolved critical, high, or medium finding."
+    ],
+    "liveProof": "After S02 commits, freeze exactly one new-identity cold-room candidate under the authorized max-nine sequential schedule. Retention requires semantic-review first-response validity and no semantic-review response-repair while generation's endpoint repair remains an unchanged control and all quality/provenance/browser/compatibility gates pass.",
+    "rollback": "Revert only the S02 prompt/projection/schema/test correction commit while retaining S01 and all immutable live evidence."
+  },
+  "alternatives": [
+    {
+      "kind": "facet_specific_response_schema_branches",
+      "status": "strongest_alternative_deferred",
+      "reason": "It duplicates every facet across direct/context response contracts and still cannot express dynamic authority-reference allowlists or all backend conditions under the Azure subset; explicit input projection is narrower."
+    },
+    {
+      "kind": "retain_generic_response_repair",
+      "status": "rejected_for_wave",
+      "reason": "It preserves the measured 37,787.5872 ms avoidable call and leaves first-response validity dependent on repairing an undisclosed contract."
+    },
+    {
+      "kind": "weaken_backend_validation",
+      "status": "forbidden",
+      "reason": "It would admit semantically misclassified or unsupported findings and violate the shared success contract."
+    },
+    {
+      "kind": "additional_provider_evidence_before_s02",
+      "status": "not_required_for_owner_selection",
+      "reason": "The safe signature, three exact provider-free witness classes, six-cell reproduction, and corrected witness establish the contract owner; another live call cannot safely recover the original raw response."
+    }
+  ],
+  "audit": {
+    "state": "passed_after_one_correction_round",
+    "reviewer": "independent-read-only-subagent-737c03f1",
+    "initialFinding": "M1: make below-minimum prompt regression coverage explicit",
+    "disposition": "Added dedicated initial- and response-repair prompt regression names; focused re-audit passed.",
+    "remainingCritical": 0,
+    "remainingHigh": 0,
+    "remainingMedium": 0
+  },
+  "accounting": {
+    "controlled": {"used": 10, "ceiling": 1000, "remaining": 990},
+    "externalHostCompleted": 1,
+    "aggregate": {"used": 11, "ceiling": 1000, "remaining": 989}
+  },
+  "scope": {
+    "productionChanged": false,
+    "providerCalls": 0,
+    "calibration": false,
+    "certification": false,
+    "promotion": false,
+    "deployment": false
+  }
+}

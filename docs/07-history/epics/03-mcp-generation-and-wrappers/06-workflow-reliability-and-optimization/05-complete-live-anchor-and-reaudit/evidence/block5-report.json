@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "graphpilot.delivery.block5-report.v1",
+  "kind": "workflowOptimizationBlockReport",
+  "block": 5,
+  "status": "pass",
+  "controlledLiveAnchor": {
+    "bindingDigest": "sha256:08ad9d5a8a5cbc40efba04093fb5d0a671b586cd78d54f04d3009905ab76e25f",
+    "runId": "run-live-workflow-anchor-block5-cold-room-20260728-03",
+    "completeWallMs": 186759.67260004627,
+    "providerCalls": 5,
+    "quality": "pass",
+    "browser": "pass",
+    "domains": {"hostPreparedImportedMs": 251.62430002819747, "azureMs": 180843.12469995348, "mcpMs": 865.764299989678, "localMs": 3995.3401000238955, "browserMs": 543.8000000119209, "residualMs": 260.0192000390962},
+    "firstResponseFailures": [
+      {"owner": "generation_contract", "role": "generation", "code": "bdd_relationship_endpoints_invalid", "path": "$.edges[3]", "repairWallMs": 26052.517600008287},
+      {"owner": "semantic_review_contract", "role": "semantic_review", "code": "finding_invalid", "path": "$", "repairWallMs": 37787.58720000042}
+    ]
+  },
+  "providerFreeReaudit": {
+    "runId": "run-workflow-audit-block5-reaudit-20260728-01",
+    "sourceCommit": "505f9e9a06c3e2db90908d982191b38089545c7a",
+    "manifestDigest": "sha256:d5951358f875a64644648f99afb48c52236401ccd56dbbae01c5e4b57cd317c4",
+    "reportDigest": "sha256:2fee6d1d55e2c71ab8afed53f664e4ac4be97eafb4bb8f3b6c9fca9604c3ac58",
+    "browserEvidenceDigest": "sha256:c3bab9390d1dafc9479312f22f006db3b91d033b7ee71e738c26fd2d424e74fe",
+    "ledgerDigest": "sha256:e24be5061ad99ddc2f9d6046015978b859e2a3ad8f55bffaa25b59b7e407b645",
+    "compatibilityKey": "sha256:d77f21f801006fe95a436171697ac1d38869bde834c619b802971fde5529ebd1",
+    "baselineEligible": true,
+    "azureCalls": 0,
+    "fakeCalls": 56,
+    "observations": 19,
+    "generated": 16,
+    "blocked": 1,
+    "errors": 2,
+    "browser": "pass",
+    "completeWallMs": 23414.1357,
+    "domains": {"hostFixtureSimulatedMs": 723.9531, "azureMs": 0.0, "mcpMs": 902.1306, "localMs": 21296.5103, "browserMs": 387.0, "residualMs": 104.5417}
+  },
+  "externalHostColdObservation": {
+    "classification": "user_supplied_external_measurement",
+    "repository": "different_from_graphpilot_anchor",
+    "request": "todo_fixture_missing_json1",
+    "cacheState": "cold",
+    "totalWallMs": 470824.0,
+    "readinessProviderWallMs": 64799.3406,
+    "outsideReadinessProviderMs": 406024.6594,
+    "searches": 5,
+    "focusedReads": 10,
+    "authoringAttempts": 5,
+    "deterministicValidationFailures": 5,
+    "outcome": "blocked",
+    "knownCause": "host-authored context omitted explicit relationship closure",
+    "comparisonStatus": "not_percentage_comparable_to_controlled_anchor",
+    "missingBindings": ["repositoryCommit", "requestDigest", "hostVersion", "modelIdentity", "json1Digest", "json2Digest", "exposedTokens", "credits"]
+  },
+  "interpretation": {
+    "json1": "prepared_imported_in_controlled_anchor",
+    "json2": "prepared_imported_in_controlled_anchor",
+    "fixtureStagingIsHostAuthoring": false,
+    "realHostAuthoringGap": true,
+    "domainsSeparate": ["host", "mcp", "azure", "local", "browser"],
+    "fakeBaselineIsLiveDenominator": false,
+    "crossRepositoryPercentagesAllowed": false
+  },
+  "block6Entry": {
+    "laneA": "host_integration_preparation_speed",
+    "laneB": "graphpilot_workflow_business_logic_speed",
+    "firstSelectedWave": "semantic_review_first_response_contract",
+    "selectionReason": "Largest high-confidence avoidable controlled provider repair wall (37,787.5872 ms); external host observation is larger but lacks a comparable warm bound profile, and host claims remain pending.",
+    "hostMeasurementPrerequisiteRequired": true,
+    "generationAndSemanticReviewSeparate": true
+  },
+  "budget": {"used": 10, "ceiling": 1000, "remaining": 990},
+  "digest": "sha256:2635ae8fc1f0b78e3c442c7766cb29fd10c4543e223ecc98f195cda6ae1c6c35"
+}

@@ -1,0 +1,56 @@
+{
+  "shows": "A person drew a note on the canvas and linked it to a use case. The host then adds an unrelated actor. The note is not the host's — it comes back through the projection marked `user`, is written straight back, and keeps the position the person put it in. A host may never author that value; carrying one back is the only way it legitimately appears in a draft.",
+  "create": {
+    "schemaVersion": "graphpilot.draft.v1",
+    "kind": "diagramDraft",
+    "diagramName": "kiosk-note",
+    "diagramType": "use_case_diagram",
+    "authority": "conceptual",
+    "requests": ["What a customer can do at the ticket kiosk."],
+    "elements": [
+      { "id": "kiosk", "semanticType": "subject", "label": "Ticket Kiosk", "assurance": "conceptual" },
+      { "id": "customer", "semanticType": "actor", "label": "Customer", "assurance": "conceptual" },
+      { "id": "buy", "semanticType": "useCase", "label": "Buy a ticket", "parentId": "kiosk", "assurance": "conceptual" },
+      { "id": "collect", "semanticType": "useCase", "label": "Collect a booking", "parentId": "kiosk", "assurance": "conceptual" },
+      { "id": "pay", "semanticType": "useCase", "label": "Take payment", "parentId": "kiosk", "assurance": "conceptual" }
+    ],
+    "relationships": [
+      { "id": "customer-buy", "semanticType": "association", "source": "customer", "target": "buy", "assurance": "conceptual" },
+      { "id": "customer-collect", "semanticType": "association", "source": "customer", "target": "collect", "assurance": "conceptual" },
+      { "id": "buy-pay", "semanticType": "include", "source": "buy", "target": "pay", "label": "«include»", "assurance": "conceptual" }
+    ]
+  },
+  "arrange": {
+    "nodes": {
+      "customer": { "position": { "x": -520, "y": 200 } }
+    },
+    "drawn": [
+      {
+        "id": "note-cash",
+        "position": { "x": -520, "y": 640 },
+        "width": 260,
+        "height": 90,
+        "data": {
+          "label": "Cash was dropped in 2025. Card only — confirmed with Ade.",
+          "semanticType": "note"
+        }
+      },
+      {
+        "id": "note-cash-pay",
+        "source": "note-cash",
+        "target": "pay",
+        "data": { "semanticType": "commentLink" }
+      }
+    ]
+  },
+  "edit": {
+    "request": "Engineers can service the kiosk too.",
+    "addElements": [
+      { "id": "engineer", "semanticType": "actor", "label": "Service Engineer", "assurance": "conceptual" },
+      { "id": "service", "semanticType": "useCase", "label": "Service the kiosk", "parentId": "kiosk", "assurance": "conceptual" }
+    ],
+    "addRelationships": [
+      { "id": "engineer-service", "semanticType": "association", "source": "engineer", "target": "service", "assurance": "conceptual" }
+    ]
+  }
+}

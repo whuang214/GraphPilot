@@ -1,0 +1,268 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "todo-actors",
+  "diagramType": "use_case_diagram",
+  "authority": "as_implemented",
+  "requests": [
+    "Who can do what with the todo service?"
+  ],
+  "evidence": [
+    {
+      "id": "ev-actions",
+      "kind": "code",
+      "locator": {
+        "path": "src/todo_api/services/permissions.py",
+        "symbol": "_REQUIRED",
+        "lineRange": {
+          "start": 17,
+          "end": 24
+        }
+      },
+      "summary": "The six actions and the roles each one needs."
+    },
+    {
+      "id": "ev-roles",
+      "kind": "code",
+      "locator": {
+        "path": "src/todo_api/domain/models.py",
+        "symbol": "Role",
+        "lineRange": {
+          "start": 32,
+          "end": 38
+        }
+      },
+      "summary": "VIEWER, COLLABORATOR, OWNER and ADMIN, in ascending privilege."
+    },
+    {
+      "id": "ev-require",
+      "kind": "code",
+      "locator": {
+        "path": "src/todo_api/services/permissions.py",
+        "symbol": "PermissionService.require",
+        "lineRange": {
+          "start": 36,
+          "end": 41
+        }
+      },
+      "summary": "Every guarded action goes through one check."
+    },
+    {
+      "id": "ev-invite",
+      "kind": "code",
+      "locator": {
+        "path": "src/todo_api/api/routes_lists.py",
+        "symbol": "invite_member",
+        "lineRange": {
+          "start": 18,
+          "end": 30
+        }
+      },
+      "summary": "Inviting a member to a list."
+    },
+    {
+      "id": "ev-reminders",
+      "kind": "code",
+      "locator": {
+        "path": "src/todo_api/services/reminder_service.py",
+        "symbol": "ReminderService.run_once",
+        "lineRange": {
+          "start": 57,
+          "end": 83
+        }
+      },
+      "summary": "run_once sweeps todos due before a cutoff and notifies about them."
+    }
+  ],
+  "elements": [
+    {
+      "id": "system",
+      "semanticType": "subject",
+      "label": "Todo service",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-actions"
+      ]
+    },
+    {
+      "id": "collaborator",
+      "semanticType": "actor",
+      "label": "Collaborator",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-roles"
+      ]
+    },
+    {
+      "id": "owner",
+      "semanticType": "actor",
+      "label": "Owner",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-roles"
+      ]
+    },
+    {
+      "id": "scheduler",
+      "semanticType": "actor",
+      "label": "Scheduler",
+      "assurance": "assumed",
+      "assumptionRef": "asm-scheduler-outside"
+    },
+    {
+      "id": "create-todo",
+      "semanticType": "useCase",
+      "label": "Create a todo",
+      "parentId": "system",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-actions"
+      ]
+    },
+    {
+      "id": "complete-todo",
+      "semanticType": "useCase",
+      "label": "Complete a todo",
+      "parentId": "system",
+      "extensionPoints": [
+        "once the todo is saved"
+      ],
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-actions"
+      ]
+    },
+    {
+      "id": "check-role",
+      "semanticType": "useCase",
+      "label": "Check the caller's role",
+      "parentId": "system",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-require"
+      ]
+    },
+    {
+      "id": "invite-member",
+      "semanticType": "useCase",
+      "label": "Invite a member",
+      "parentId": "system",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-invite"
+      ]
+    },
+    {
+      "id": "archive-list",
+      "semanticType": "useCase",
+      "label": "Archive a list",
+      "parentId": "system",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-actions"
+      ]
+    },
+    {
+      "id": "send-reminders",
+      "semanticType": "useCase",
+      "label": "Send due reminders",
+      "parentId": "system",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-reminders"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "collab-creates",
+      "semanticType": "association",
+      "source": "collaborator",
+      "target": "create-todo",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-actions"
+      ]
+    },
+    {
+      "id": "collab-completes",
+      "semanticType": "association",
+      "source": "collaborator",
+      "target": "complete-todo",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-actions"
+      ]
+    },
+    {
+      "id": "owner-invites",
+      "semanticType": "association",
+      "source": "owner",
+      "target": "invite-member",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-actions"
+      ]
+    },
+    {
+      "id": "owner-archives",
+      "semanticType": "association",
+      "source": "owner",
+      "target": "archive-list",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-actions"
+      ]
+    },
+    {
+      "id": "scheduler-sends",
+      "semanticType": "association",
+      "source": "scheduler",
+      "target": "send-reminders",
+      "assurance": "assumed",
+      "assumptionRef": "asm-scheduler-outside"
+    },
+    {
+      "id": "owner-is-a-collaborator",
+      "semanticType": "generalization",
+      "source": "owner",
+      "target": "collaborator",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-actions"
+      ]
+    },
+    {
+      "id": "complete-includes-check",
+      "semanticType": "include",
+      "source": "complete-todo",
+      "target": "check-role",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-require"
+      ]
+    },
+    {
+      "id": "reminders-extend-complete",
+      "semanticType": "extend",
+      "source": "send-reminders",
+      "target": "complete-todo",
+      "condition": "the todo was still open when its reminder fell due",
+      "extensionLocations": [
+        "once the todo is saved"
+      ],
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-reminders"
+      ]
+    }
+  ],
+  "assumptions": [
+    {
+      "id": "asm-scheduler-outside",
+      "statement": "Reminder runs are triggered from outside this repository.",
+      "reason": "run_once takes the cutoff as an argument and nothing here calls it, so its caller is not visible in the source.",
+      "acceptedBy": "host"
+    }
+  ]
+}

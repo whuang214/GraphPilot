@@ -1,0 +1,1110 @@
+{
+  "diagramType": "bdd_diagram",
+  "edges": [
+    {
+      "data": {
+        "semanticType": "generalization"
+      },
+      "id": "member-is-a-user",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-member"
+        ],
+        "rationale": "Established by cited evidence: ev-member.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "member",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "abstract-user",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "composition",
+        "sourceEnd": {
+          "multiplicity": {
+            "lower": 0,
+            "upper": "*"
+          },
+          "role": "copies"
+        },
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          }
+        }
+      },
+      "id": "copies-of-book",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-copy",
+          "ev-cascade-copies-test"
+        ],
+        "rationale": "Established by cited evidence: ev-copy, ev-cascade-copies-test.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "book-copy",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "book",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "composition",
+        "sourceEnd": {
+          "multiplicity": {
+            "lower": 0,
+            "upper": "*"
+          },
+          "role": "loans"
+        },
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          }
+        }
+      },
+      "id": "loans-of-member",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-loan",
+          "ev-auth-user-model"
+        ],
+        "rationale": "Established by cited evidence: ev-loan, ev-auth-user-model.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "loan",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "member",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association",
+        "sourceEnd": {
+          "multiplicity": {
+            "lower": 0,
+            "upper": "*"
+          },
+          "role": "loans"
+        },
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "navigable": true,
+          "role": "copy"
+        }
+      },
+      "id": "loan-of-copy",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-loan",
+          "ev-protect-test"
+        ],
+        "rationale": "Established by cited evidence: ev-loan, ev-protect-test.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "loan",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "book-copy",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "composition",
+        "sourceEnd": {
+          "multiplicity": {
+            "lower": 0,
+            "upper": "*"
+          },
+          "role": "holds"
+        },
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          }
+        }
+      },
+      "id": "holds-of-member",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-hold",
+          "ev-auth-user-model"
+        ],
+        "rationale": "Established by cited evidence: ev-hold, ev-auth-user-model.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "hold",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "member",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "composition",
+        "sourceEnd": {
+          "multiplicity": {
+            "lower": 0,
+            "upper": "*"
+          },
+          "role": "holds"
+        },
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          }
+        }
+      },
+      "id": "holds-on-book",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-hold"
+        ],
+        "rationale": "Established by cited evidence: ev-hold.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "hold",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "book",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "composition",
+        "sourceEnd": {
+          "multiplicity": {
+            "lower": 0,
+            "upper": "*"
+          },
+          "role": "fine_payments"
+        },
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          }
+        }
+      },
+      "id": "payments-of-member",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-payment"
+        ],
+        "rationale": "Established by cited evidence: ev-payment.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "fine-payment",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "member",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association",
+        "sourceEnd": {
+          "multiplicity": {
+            "lower": 0,
+            "upper": "*"
+          },
+          "role": "payments"
+        },
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "navigable": true,
+          "role": "loan"
+        }
+      },
+      "id": "payment-against-loan",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-payment",
+          "ev-payment-survives-test"
+        ],
+        "rationale": "Established by cited evidence: ev-payment, ev-payment-survives-test.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "fine-payment",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "loan",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association",
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "navigable": true,
+          "role": "taken_by"
+        }
+      },
+      "id": "payment-taken-by",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-payment"
+        ],
+        "rationale": "Established by cited evidence: ev-payment.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "fine-payment",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "member",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "commentLink"
+      },
+      "id": "note-fines-link",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-fines-derived"
+        ],
+        "rationale": "Established by cited evidence: ev-fines-derived.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "note-fines",
+      "style": {
+        "stroke": "#333333",
+        "strokeDasharray": "6 4",
+        "strokeWidth": 2
+      },
+      "target": "fine-payment",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "commentLink"
+      },
+      "id": "note-loan-state-link",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-loan-state-test"
+        ],
+        "rationale": "Established by cited evidence: ev-loan-state-test.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "note-loan-state",
+      "style": {
+        "stroke": "#333333",
+        "strokeDasharray": "6 4",
+        "strokeWidth": 2
+      },
+      "target": "loan",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "commentLink"
+      },
+      "id": "note-hold-order-link",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-hold-queue"
+        ],
+        "rationale": "Established by cited evidence: ev-hold-queue.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "note-hold-order",
+      "style": {
+        "stroke": "#333333",
+        "strokeDasharray": "6 4",
+        "strokeWidth": 2
+      },
+      "target": "hold",
+      "type": "default"
+    }
+  ],
+  "id": "diagram_shelfmark_domain_structure",
+  "kind": "diagram",
+  "metadata": {
+    "authoring": "generated",
+    "authority": "as_implemented",
+    "createdAt": "2026-08-04T21:56:58.516578+00:00",
+    "evidence": [
+      {
+        "contentDigest": "sha256:02d872eb1b70866ee7b1e918fcd1d60eac1abd66e16dc78fc34c06ed9c9c8f16",
+        "id": "ev-member",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 15,
+            "start": 1
+          },
+          "path": "members/models.py",
+          "symbol": "Member"
+        },
+        "summary": "Member is declared as a subclass of Django's AbstractUser and adds membership_number, is_librarian and joined_on; display derives a name."
+      },
+      {
+        "contentDigest": "sha256:f6fd76d8d7f0994014f95a0fdaee3ce021b70741e004a99c6cc4fc11b1886b37",
+        "id": "ev-auth-user-model",
+        "kind": "configuration",
+        "locator": {
+          "lineRange": {
+            "end": 56,
+            "start": 56
+          },
+          "path": "shelfmark/settings.py",
+          "symbol": "AUTH_USER_MODEL"
+        },
+        "summary": "AUTH_USER_MODEL is members.Member, so every settings.AUTH_USER_MODEL foreign key in the project points at Member."
+      },
+      {
+        "contentDigest": "sha256:f24e90bf66420e63b66be4f9948a4c93c8c7d7fed96e3cd3aadf8a696c05d94f",
+        "id": "ev-book",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 22,
+            "start": 4
+          },
+          "path": "catalog/models.py",
+          "symbol": "Book"
+        },
+        "summary": "Book stores title, author, a unique isbn, published_year, replacement_cost_minor and high_demand; copies_available is computed from its copies."
+      },
+      {
+        "contentDigest": "sha256:b73f9735b5053749ff8cd0d5db22aa42c135eef8e37a3532d65a04d9a8c6c42f",
+        "id": "ev-copy",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 51,
+            "start": 25
+          },
+          "path": "catalog/models.py",
+          "symbol": "BookCopy"
+        },
+        "summary": "BookCopy stores a unique barcode, acquired_on and condition, and holds a CASCADE foreign key to Book with related_name copies; is_on_shelf and current_loan are computed from its loans."
+      },
+      {
+        "contentDigest": "sha256:f75380d7ad97bb61e6cef65408af2fe4385a220a2e322a6df6459d6144bfeb64",
+        "id": "ev-loan",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 46,
+            "start": 8
+          },
+          "path": "circulation/models.py",
+          "symbol": "Loan"
+        },
+        "summary": "Loan stores a PROTECT foreign key to BookCopy, a CASCADE foreign key to the member, borrowed_at, due_on, a nullable returned_at and a renewals counter."
+      },
+      {
+        "contentDigest": "sha256:ca42bdc5aaada1dac1da94fc8505f7f408073f1106fcdd2d6aa93136acf28244",
+        "id": "ev-hold",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 59,
+            "start": 49
+          },
+          "path": "circulation/models.py",
+          "symbol": "Hold"
+        },
+        "summary": "Hold stores CASCADE foreign keys to Book and to the member, placed_at and a nullable cancelled_at, and is ordered by placed_at."
+      },
+      {
+        "contentDigest": "sha256:3a32b7b1a3ded2d5cd009fa390989e929c4567f37484bb80c2743a275ea147a1",
+        "id": "ev-hold-queue",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 71,
+            "start": 62
+          },
+          "path": "circulation/models.py",
+          "symbol": "HoldQueue"
+        },
+        "summary": "HoldQueue is a plain class, not a model: next_for reads the oldest uncancelled Hold for a book, so queue position is computed rather than stored."
+      },
+      {
+        "contentDigest": "sha256:d0b1b7ccbd56d0c9f70629c28e847faa26c119542c42ada9c7c9d0e62bfe3fc6",
+        "id": "ev-payment",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 24,
+            "start": 5
+          },
+          "path": "fines/models.py",
+          "symbol": "FinePayment"
+        },
+        "summary": "FinePayment stores amount_minor and paid_at, a CASCADE foreign key to the member, a nullable SET_NULL foreign key to the Loan, and a nullable SET_NULL taken_by member."
+      },
+      {
+        "contentDigest": "sha256:0b9b9aae62824ab25943f7c4096b18be1b856ee21506b1a1061f226df6132290",
+        "id": "ev-fines-derived",
+        "kind": "documentation",
+        "locator": {
+          "lineRange": {
+            "end": 4,
+            "start": 1
+          },
+          "path": "fines/assessment.py"
+        },
+        "summary": "The assessment module's docstring states that nothing here is stored: a fine is a fact about a loan and a date, not a row."
+      },
+      {
+        "contentDigest": "sha256:1ae28d2e5c8e491843562c8c210f33a0f619a0316cab6279309c97d12fd2fc4c",
+        "id": "ev-loan-state-test",
+        "kind": "test",
+        "locator": {
+          "lineRange": {
+            "end": 46,
+            "start": 45
+          },
+          "path": "circulation/tests.py",
+          "symbol": "LoanStateTests"
+        },
+        "summary": "The loan-state test class states that a Loan has no status column and that everything follows from its two date fields."
+      },
+      {
+        "contentDigest": "sha256:8775587a63565eee711df7a7c17ff3d122c9da0bce47e1f4217b1eb9915e82ef",
+        "id": "ev-cascade-copies-test",
+        "kind": "test",
+        "locator": {
+          "lineRange": {
+            "end": 276,
+            "start": 271
+          },
+          "path": "circulation/tests.py",
+          "symbol": "test_deleting_a_book_takes_its_copies"
+        },
+        "summary": "Deleting a Book deletes its BookCopy rows, so the book owns the lifecycle of its copies."
+      },
+      {
+        "contentDigest": "sha256:6b329ec9030d48922f8e62b2b9cb7f60677b1874936926568bd7addbc5855bda",
+        "id": "ev-protect-test",
+        "kind": "test",
+        "locator": {
+          "lineRange": {
+            "end": 269,
+            "start": 261
+          },
+          "path": "circulation/tests.py",
+          "symbol": "test_a_copy_that_is_out_cannot_be_deleted"
+        },
+        "summary": "Deleting a BookCopy that is on loan raises ProtectedError, so a Loan references a copy it does not own."
+      },
+      {
+        "contentDigest": "sha256:19bf00b84a2e9edd4900045b540f485da5468473120b4ce702a5171054b34839",
+        "id": "ev-payment-survives-test",
+        "kind": "test",
+        "locator": {
+          "lineRange": {
+            "end": 292,
+            "start": 278
+          },
+          "path": "circulation/tests.py",
+          "symbol": "test_a_paid_fine_survives_its_loan_being_deleted"
+        },
+        "summary": "Deleting a Loan leaves its FinePayment in place with loan set to None, so the payment outlives the loan it was taken against."
+      }
+    ],
+    "generatedBy": "graphpilot-materializer",
+    "intent": "shelfmark-domain-structure",
+    "notation": "sysml",
+    "originalType": "bdd_diagram",
+    "requests": [
+      {
+        "at": "2026-08-04T21:56:58.516578+00:00",
+        "text": "The structure of what this system stores, and how those things relate."
+      }
+    ],
+    "source": "mcp",
+    "updatedAt": "2026-08-04T21:56:58.516578+00:00"
+  },
+  "name": "shelfmark-domain-structure",
+  "nodes": [
+    {
+      "data": {
+        "features": {
+          "operations": [
+            {
+              "name": "display",
+              "returnType": "str"
+            }
+          ],
+          "properties": [
+            {
+              "kind": "value",
+              "name": "membership_number",
+              "type": "CharField(12), unique"
+            },
+            {
+              "default": false,
+              "kind": "value",
+              "name": "is_librarian",
+              "type": "BooleanField"
+            },
+            {
+              "kind": "value",
+              "name": "joined_on",
+              "type": "DateField, auto_now_add"
+            }
+          ]
+        },
+        "label": "Member",
+        "semanticType": "block"
+      },
+      "height": 154.4,
+      "id": "member",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-member",
+          "ev-auth-user-model"
+        ],
+        "rationale": "Established by cited evidence: ev-member, ev-auth-user-model.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 14.0,
+        "y": 612.4
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "label": "AbstractUser",
+        "semanticType": "block",
+        "stereotype": "django"
+      },
+      "height": 48.0,
+      "id": "abstract-user",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-member"
+        ],
+        "rationale": "Established by cited evidence: ev-member.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 79.0,
+        "y": 928.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    },
+    {
+      "data": {
+        "features": {
+          "operations": [
+            {
+              "name": "copies_available",
+              "returnType": "int"
+            }
+          ],
+          "properties": [
+            {
+              "kind": "value",
+              "name": "title",
+              "type": "CharField(200)"
+            },
+            {
+              "kind": "value",
+              "name": "author",
+              "type": "CharField(120)"
+            },
+            {
+              "kind": "value",
+              "name": "isbn",
+              "type": "CharField(17), unique"
+            },
+            {
+              "kind": "value",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "name": "published_year",
+              "type": "PositiveIntegerField"
+            },
+            {
+              "default": 1500,
+              "kind": "value",
+              "name": "replacement_cost_minor",
+              "type": "PositiveIntegerField"
+            },
+            {
+              "default": false,
+              "kind": "value",
+              "name": "high_demand",
+              "type": "BooleanField"
+            }
+          ]
+        },
+        "label": "Book",
+        "semanticType": "block"
+      },
+      "height": 212.0,
+      "id": "book",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-book"
+        ],
+        "rationale": "Established by cited evidence: ev-book.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 521.0,
+        "y": 846.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "features": {
+          "operations": [
+            {
+              "name": "is_on_shelf",
+              "returnType": "bool"
+            },
+            {
+              "name": "current_loan",
+              "returnType": "Loan"
+            }
+          ],
+          "properties": [
+            {
+              "kind": "value",
+              "name": "barcode",
+              "type": "CharField(20), unique"
+            },
+            {
+              "kind": "value",
+              "name": "acquired_on",
+              "type": "DateField"
+            },
+            {
+              "default": "GOOD",
+              "kind": "value",
+              "name": "condition",
+              "type": "GOOD | WORN | DAMAGED"
+            }
+          ]
+        },
+        "label": "BookCopy",
+        "semanticType": "block"
+      },
+      "height": 168.8,
+      "id": "book-copy",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-copy"
+        ],
+        "rationale": "Established by cited evidence: ev-copy.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 397.0,
+        "y": 605.2
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "features": {
+          "operations": [
+            {
+              "name": "is_open",
+              "returnType": "bool"
+            },
+            {
+              "name": "is_overdue",
+              "returnType": "bool"
+            },
+            {
+              "name": "days_late",
+              "returnType": "int"
+            },
+            {
+              "name": "can_renew",
+              "returnType": "(bool, str)"
+            }
+          ],
+          "properties": [
+            {
+              "kind": "value",
+              "name": "borrowed_at",
+              "type": "DateTimeField, auto_now_add"
+            },
+            {
+              "kind": "value",
+              "name": "due_on",
+              "type": "DateField"
+            },
+            {
+              "kind": "value",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "name": "returned_at",
+              "type": "DateTimeField"
+            },
+            {
+              "default": 0,
+              "kind": "value",
+              "name": "renewals",
+              "type": "PositiveSmallIntegerField"
+            }
+          ]
+        },
+        "label": "Loan",
+        "semanticType": "block"
+      },
+      "height": 212.0,
+      "id": "loan",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-loan"
+        ],
+        "rationale": "Established by cited evidence: ev-loan.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 273.0,
+        "y": 321.2
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "features": {
+          "properties": [
+            {
+              "kind": "value",
+              "name": "placed_at",
+              "type": "DateTimeField, auto_now_add"
+            },
+            {
+              "kind": "value",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "name": "cancelled_at",
+              "type": "DateTimeField"
+            }
+          ]
+        },
+        "label": "Hold",
+        "semanticType": "block"
+      },
+      "height": 97.2,
+      "id": "hold",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-hold"
+        ],
+        "rationale": "Established by cited evidence: ev-hold.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 649.0,
+        "y": 378.6
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "features": {
+          "properties": [
+            {
+              "kind": "value",
+              "name": "amount_minor",
+              "type": "PositiveIntegerField"
+            },
+            {
+              "kind": "value",
+              "name": "paid_at",
+              "type": "DateTimeField, auto_now_add"
+            }
+          ]
+        },
+        "label": "FinePayment",
+        "semanticType": "block"
+      },
+      "height": 97.2,
+      "id": "fine-payment",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-payment"
+        ],
+        "rationale": "Established by cited evidence: ev-payment.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 7.0,
+        "y": 152.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 306.0
+    },
+    {
+      "data": {
+        "label": "A fine is never stored. Only payments are rows; what is owed is recomputed from the loan and today's date.",
+        "semanticType": "note"
+      },
+      "height": 80.0,
+      "id": "note-fines",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-fines-derived"
+        ],
+        "rationale": "Established by cited evidence: ev-fines-derived.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": -361.0,
+        "y": 152.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "label": "No status column: open, overdue and days late are all derived from due_on and returned_at.",
+        "semanticType": "note"
+      },
+      "height": 80.0,
+      "id": "note-loan-state",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-loan-state-test"
+        ],
+        "rationale": "Established by cited evidence: ev-loan-state-test.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": -95.0,
+        "y": 321.2
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "label": "No queue position column: the next in line is the oldest hold with cancelled_at still null.",
+        "semanticType": "note"
+      },
+      "height": 80.0,
+      "id": "note-hold-order",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-hold-queue"
+        ],
+        "rationale": "Established by cited evidence: ev-hold-queue.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 1017.0,
+        "y": 378.6
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    }
+  ],
+  "schemaVersion": "graphpilot.diagram.v1",
+  "viewport": {
+    "x": 0,
+    "y": 0,
+    "zoom": 1
+  }
+}

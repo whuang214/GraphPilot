@@ -1,0 +1,98 @@
+{
+  "authority": "conceptual",
+  "basis": {
+    "diagram": "sha256:39dccf0849461e041ae70a6e43fe2a8ab44cc1e130dbc82bec021175570dff4f",
+    "readAt": "2026-08-05T22:45:40.190512+00:00"
+  },
+  "diagramName": "checkout-refunds",
+  "diagramType": "bdd_diagram",
+  "elements": [
+    {
+      "assurance": "conceptual",
+      "features": {
+        "properties": [
+          {
+            "kind": "value",
+            "name": "placedAt",
+            "type": "datetime"
+          },
+          {
+            "kind": "value",
+            "name": "total",
+            "type": "Money"
+          }
+        ]
+      },
+      "id": "order",
+      "label": "Order",
+      "semanticType": "block"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "line",
+      "label": "Order Line",
+      "semanticType": "block"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "customer",
+      "label": "Customer Account",
+      "semanticType": "block"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "payment",
+      "label": "Payment",
+      "semanticType": "block"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "refund",
+      "label": "Refund",
+      "semanticType": "block"
+    }
+  ],
+  "kind": "diagramDraft",
+  "relationships": [
+    {
+      "assurance": "conceptual",
+      "id": "line-order",
+      "semanticType": "composition",
+      "source": "line",
+      "sourceMultiplicity": {
+        "lower": 1,
+        "upper": "*"
+      },
+      "sourceRole": "lines",
+      "target": "order"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "order-customer",
+      "semanticType": "association",
+      "source": "order",
+      "target": "customer",
+      "targetRole": "placedBy"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "payment-order",
+      "semanticType": "association",
+      "source": "payment",
+      "target": "order"
+    },
+    {
+      "assurance": "conceptual",
+      "id": "refund-payment",
+      "semanticType": "association",
+      "source": "refund",
+      "target": "payment",
+      "targetRole": "reverses"
+    }
+  ],
+  "requests": [
+    "Draw what the checkout stores.",
+    "Add refunds, and call the customer a Customer Account."
+  ],
+  "schemaVersion": "graphpilot.draft.v1"
+}

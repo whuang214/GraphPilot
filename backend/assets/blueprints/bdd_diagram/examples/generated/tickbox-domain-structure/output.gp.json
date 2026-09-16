@@ -1,0 +1,1327 @@
+{
+  "diagramType": "bdd_diagram",
+  "edges": [
+    {
+      "data": {
+        "semanticType": "composition",
+        "sourceEnd": {
+          "multiplicity": {
+            "lower": 0,
+            "upper": "*"
+          },
+          "role": "memberships"
+        },
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          }
+        }
+      },
+      "id": "membership-in-workspace",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-workspace",
+          "ev-membership"
+        ],
+        "rationale": "Established by cited evidence: ev-workspace, ev-membership.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "membership",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "workspace",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "composition",
+        "sourceEnd": {
+          "multiplicity": {
+            "lower": 0,
+            "upper": "*"
+          },
+          "role": "projects"
+        },
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          }
+        }
+      },
+      "id": "project-in-workspace",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-workspace",
+          "ev-project"
+        ],
+        "rationale": "Established by cited evidence: ev-workspace, ev-project.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "project",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "workspace",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "composition",
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          }
+        }
+      },
+      "id": "label-in-workspace",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-label"
+        ],
+        "rationale": "Established by cited evidence: ev-label.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "label",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "workspace",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "composition",
+        "sourceEnd": {
+          "multiplicity": {
+            "lower": 0,
+            "upper": "*"
+          },
+          "role": "tasks"
+        },
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          }
+        }
+      },
+      "id": "task-in-project",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-project",
+          "ev-task"
+        ],
+        "rationale": "Established by cited evidence: ev-project, ev-task.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "task",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "project",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "composition",
+        "sourceEnd": {
+          "multiplicity": {
+            "lower": 0,
+            "upper": "*"
+          },
+          "role": "subtasks"
+        },
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          }
+        }
+      },
+      "id": "subtask-in-task",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-task",
+          "ev-subtask"
+        ],
+        "rationale": "Established by cited evidence: ev-task, ev-subtask.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "subtask",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "task",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "composition",
+        "sourceEnd": {
+          "multiplicity": {
+            "lower": 0,
+            "upper": "*"
+          },
+          "role": "comments"
+        },
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          }
+        }
+      },
+      "id": "comment-in-task",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-task",
+          "ev-comment"
+        ],
+        "rationale": "Established by cited evidence: ev-task, ev-comment.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "comment",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "task",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "composition",
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          }
+        }
+      },
+      "id": "event-in-task",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-activity"
+        ],
+        "rationale": "Established by cited evidence: ev-activity.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "activity-event",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "task",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association",
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "navigable": true,
+          "role": "user"
+        }
+      },
+      "id": "membership-of-user",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-membership",
+          "ev-user"
+        ],
+        "rationale": "Established by cited evidence: ev-membership, ev-user.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "membership",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "user",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association",
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "navigable": true,
+          "role": "role"
+        }
+      },
+      "id": "membership-has-role",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-membership",
+          "ev-role"
+        ],
+        "rationale": "Established by cited evidence: ev-membership, ev-role.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "membership",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "role",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association",
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 1,
+            "upper": 1
+          },
+          "navigable": true,
+          "role": "status"
+        }
+      },
+      "id": "task-has-status",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-task",
+          "ev-status"
+        ],
+        "rationale": "Established by cited evidence: ev-task, ev-status.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "task",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "status",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association",
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "navigable": true,
+          "role": "assignee"
+        }
+      },
+      "id": "task-assigned-to",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-task"
+        ],
+        "rationale": "Established by cited evidence: ev-task.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "task",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "user",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association",
+        "sourceEnd": {
+          "multiplicity": {
+            "lower": 0,
+            "upper": "*"
+          }
+        },
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 0,
+            "upper": "*"
+          },
+          "navigable": true,
+          "role": "labels"
+        }
+      },
+      "id": "task-carries-labels",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-task-labels",
+          "ev-task"
+        ],
+        "rationale": "Established by cited evidence: ev-task-labels, ev-task.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "task",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "label",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association",
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "navigable": true,
+          "role": "author"
+        }
+      },
+      "id": "comment-written-by",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-comment"
+        ],
+        "rationale": "Established by cited evidence: ev-comment.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "comment",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "user",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "association",
+        "targetEnd": {
+          "multiplicity": {
+            "lower": 0,
+            "upper": 1
+          },
+          "navigable": true,
+          "role": "actor"
+        }
+      },
+      "id": "event-caused-by",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-activity"
+        ],
+        "rationale": "Established by cited evidence: ev-activity.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "activity-event",
+      "style": {
+        "stroke": "#333333",
+        "strokeWidth": 2
+      },
+      "target": "user",
+      "type": "default"
+    },
+    {
+      "data": {
+        "semanticType": "commentLink"
+      },
+      "id": "rollup-note-link",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-rollup"
+        ],
+        "rationale": "Established by cited evidence: ev-rollup.",
+        "schemaRules": []
+      },
+      "route": {
+        "mode": "straight"
+      },
+      "source": "note-rollup",
+      "style": {
+        "stroke": "#333333",
+        "strokeDasharray": "6 4",
+        "strokeWidth": 2
+      },
+      "target": "subtask",
+      "type": "default"
+    }
+  ],
+  "id": "diagram_tickbox_domain_structure",
+  "kind": "diagram",
+  "metadata": {
+    "authoring": "generated",
+    "authority": "as_implemented",
+    "createdAt": "2026-08-05T19:29:58.892028+00:00",
+    "evidence": [
+      {
+        "contentDigest": "sha256:7fe63c0e0d55b0830f49e6729d258c1febcd3bc8490980ba0583b9e9d5475a37",
+        "id": "ev-user",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 47,
+            "start": 38
+          },
+          "path": "backend/app/models.py",
+          "symbol": "User"
+        },
+        "summary": "The users table: unique email, name, password hash, created_at, and a memberships collection cascaded on delete."
+      },
+      {
+        "contentDigest": "sha256:5030a1dda60d72bf21f6816a0af377b38db182eb4fbc75cea8e4eacdd4391221",
+        "id": "ev-workspace",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 59,
+            "start": 50
+          },
+          "path": "backend/app/models.py",
+          "symbol": "Workspace"
+        },
+        "summary": "The workspaces table: name and unique slug, owning its memberships and projects with cascade all, delete-orphan."
+      },
+      {
+        "contentDigest": "sha256:e939eea5b1987984ea60b5c1e5e9566f82d300258f802e23ea7528300eb232d7",
+        "id": "ev-membership",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 73,
+            "start": 62
+          },
+          "path": "backend/app/models.py",
+          "symbol": "Membership"
+        },
+        "summary": "Membership joins one user to one workspace with a role, unique on (user_id, workspace_id) and defaulting to EDITOR."
+      },
+      {
+        "contentDigest": "sha256:15d8ddbb154d345dcecbf088b15d59e93eac3acfb19fdb9e888b854639449c59",
+        "id": "ev-role",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 21,
+            "start": 18
+          },
+          "path": "backend/app/models.py",
+          "symbol": "Role"
+        },
+        "summary": "The three membership roles: owner, editor, viewer."
+      },
+      {
+        "contentDigest": "sha256:d90b818ea153001ad51ef3d88bb7f4da4ecc41fcb4ae5bdb9c3a9f250b0b552c",
+        "id": "ev-status",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 27,
+            "start": 24
+          },
+          "path": "backend/app/models.py",
+          "symbol": "Status"
+        },
+        "summary": "The three task states: todo, doing, done."
+      },
+      {
+        "contentDigest": "sha256:b98095fe6e752fdca6c6992f9870dbb59a6b0f02a5c07ea3412f826a308375a9",
+        "id": "ev-project",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 87,
+            "start": 76
+          },
+          "path": "backend/app/models.py",
+          "symbol": "Project"
+        },
+        "summary": "Project belongs to a workspace, carries a name, colour and archived flag, and owns its tasks with cascade all, delete-orphan."
+      },
+      {
+        "contentDigest": "sha256:f7c982309ecf1c30ec78d1f9197f42ee216b706b957d70170e1a44bff523626b",
+        "id": "ev-label",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 96,
+            "start": 90
+          },
+          "path": "backend/app/models.py",
+          "symbol": "Label"
+        },
+        "summary": "Label has a name and colour and a workspace_id foreign key that cascades on delete; no ORM back-reference names the collection."
+      },
+      {
+        "contentDigest": "sha256:5f35415f67761311bd177c684790120d85e94dc0dbd4a5e2eae42140dd6b6899",
+        "id": "ev-task",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 119,
+            "start": 99
+          },
+          "path": "backend/app/models.py",
+          "symbol": "Task"
+        },
+        "summary": "Task belongs to a project, holds title, detail, status, position, optional assignee, due_on and completed_at, and owns subtasks and comments."
+      },
+      {
+        "contentDigest": "sha256:b7df026582fa461e0457934a190eed6351202275b75e40265683eaa8b72672fb",
+        "id": "ev-subtask",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 131,
+            "start": 122
+          },
+          "path": "backend/app/models.py",
+          "symbol": "Subtask"
+        },
+        "summary": "Subtask belongs to one task and carries a title, a done flag and a position."
+      },
+      {
+        "contentDigest": "sha256:d0e6f53ba37f8e083c5fd0e80d0d90fe9d25a47ea01d8d19265589e3fdef07a8",
+        "id": "ev-comment",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 144,
+            "start": 134
+          },
+          "path": "backend/app/models.py",
+          "symbol": "Comment"
+        },
+        "summary": "Comment belongs to one task, has a body and created_at, and an author that is set to NULL when the user is deleted."
+      },
+      {
+        "contentDigest": "sha256:2505fc2480965eb5b676da68a18b9b2dcb3741ee97a7806b220873feb3922449",
+        "id": "ev-activity",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 155,
+            "start": 147
+          },
+          "path": "backend/app/models.py",
+          "symbol": "ActivityEvent"
+        },
+        "summary": "ActivityEvent records a verb and detail against a task at a time, with an actor that is set to NULL when the user is deleted."
+      },
+      {
+        "contentDigest": "sha256:74cda5d84ab6896d3324fc04bc232114328e8364dec778e3d6ec8afea7f0cf1c",
+        "id": "ev-task-labels",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 35,
+            "start": 30
+          },
+          "path": "backend/app/models.py",
+          "symbol": "task_labels"
+        },
+        "summary": "task_labels is the many-to-many join table between tasks and labels, keyed on both ids."
+      },
+      {
+        "contentDigest": "sha256:0b21e29a9b2ef3ec0e8c00380341d195de81ef27caae8b707581c8c3b6a3e1f5",
+        "id": "ev-rollup",
+        "kind": "code",
+        "locator": {
+          "lineRange": {
+            "end": 174,
+            "start": 158
+          },
+          "path": "backend/app/models.py",
+          "symbol": "_roll_up"
+        },
+        "summary": "An after_update listener on Subtask: when the last unfinished subtask is ticked, the task is set to DONE and completed_at is stamped."
+      }
+    ],
+    "generatedBy": "graphpilot-materializer",
+    "intent": "tickbox-domain-structure",
+    "notation": "sysml",
+    "originalType": "bdd_diagram",
+    "requests": [
+      {
+        "at": "2026-08-05T19:29:58.892028+00:00",
+        "text": "The structure of what this system stores, and how those things relate."
+      }
+    ],
+    "source": "mcp",
+    "updatedAt": "2026-08-05T19:29:58.892028+00:00"
+  },
+  "name": "tickbox-domain-structure",
+  "nodes": [
+    {
+      "data": {
+        "features": {
+          "constraints": [
+            {
+              "expression": "slug is unique across workspaces",
+              "name": "unique"
+            }
+          ],
+          "properties": [
+            {
+              "kind": "value",
+              "name": "name",
+              "type": "str"
+            },
+            {
+              "kind": "value",
+              "name": "slug",
+              "type": "str"
+            },
+            {
+              "kind": "value",
+              "name": "created_at",
+              "type": "datetime"
+            }
+          ]
+        },
+        "label": "Workspace",
+        "semanticType": "block"
+      },
+      "height": 154.4,
+      "id": "workspace",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-workspace"
+        ],
+        "rationale": "Established by cited evidence: ev-workspace.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 621.0,
+        "y": 803.2
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "features": {
+          "constraints": [
+            {
+              "expression": "email is unique across users",
+              "name": "unique"
+            }
+          ],
+          "properties": [
+            {
+              "kind": "value",
+              "name": "email",
+              "type": "str"
+            },
+            {
+              "kind": "value",
+              "name": "name",
+              "type": "str"
+            },
+            {
+              "kind": "value",
+              "name": "password_hash",
+              "type": "str"
+            },
+            {
+              "kind": "value",
+              "name": "created_at",
+              "type": "datetime"
+            }
+          ]
+        },
+        "label": "User",
+        "semanticType": "block"
+      },
+      "height": 168.8,
+      "id": "user",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-user"
+        ],
+        "rationale": "Established by cited evidence: ev-user.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 311.25,
+        "y": 562.4
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 313.5
+    },
+    {
+      "data": {
+        "features": {
+          "constraints": [
+            {
+              "expression": "one membership per (user, workspace)",
+              "name": "unique"
+            }
+          ],
+          "properties": [
+            {
+              "kind": "value",
+              "name": "joined_at",
+              "type": "datetime"
+            }
+          ]
+        },
+        "label": "Membership",
+        "semanticType": "block"
+      },
+      "height": 140.0,
+      "id": "membership",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-membership"
+        ],
+        "rationale": "Established by cited evidence: ev-membership.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 0.0,
+        "y": 343.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    },
+    {
+      "data": {
+        "features": {
+          "literals": [
+            "owner",
+            "editor",
+            "viewer"
+          ]
+        },
+        "label": "Role",
+        "semanticType": "block",
+        "stereotype": "enumeration"
+      },
+      "height": 111.6,
+      "id": "role",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-role"
+        ],
+        "rationale": "Established by cited evidence: ev-role.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 65.0,
+        "y": 591.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    },
+    {
+      "data": {
+        "features": {
+          "properties": [
+            {
+              "kind": "value",
+              "name": "name",
+              "type": "str"
+            },
+            {
+              "default": "#4a6fa5",
+              "kind": "value",
+              "name": "colour",
+              "type": "str"
+            },
+            {
+              "default": false,
+              "kind": "value",
+              "name": "archived",
+              "type": "bool"
+            },
+            {
+              "kind": "value",
+              "name": "created_at",
+              "type": "datetime"
+            }
+          ]
+        },
+        "label": "Project",
+        "semanticType": "block"
+      },
+      "height": 126.0,
+      "id": "project",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-project"
+        ],
+        "rationale": "Established by cited evidence: ev-project.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 680.5,
+        "y": 583.8
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 201.0
+    },
+    {
+      "data": {
+        "features": {
+          "properties": [
+            {
+              "kind": "value",
+              "name": "name",
+              "type": "str"
+            },
+            {
+              "default": "#888888",
+              "kind": "value",
+              "name": "colour",
+              "type": "str"
+            }
+          ]
+        },
+        "label": "Label",
+        "semanticType": "block"
+      },
+      "height": 97.2,
+      "id": "label",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-label"
+        ],
+        "rationale": "Established by cited evidence: ev-label.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 937.25,
+        "y": 598.2
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 193.5
+    },
+    {
+      "data": {
+        "features": {
+          "properties": [
+            {
+              "kind": "value",
+              "name": "title",
+              "type": "str"
+            },
+            {
+              "default": "",
+              "kind": "value",
+              "name": "detail",
+              "type": "str"
+            },
+            {
+              "default": 0,
+              "kind": "value",
+              "name": "position",
+              "type": "int"
+            },
+            {
+              "kind": "value",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "name": "due_on",
+              "type": "datetime"
+            },
+            {
+              "kind": "value",
+              "name": "created_at",
+              "type": "datetime"
+            },
+            {
+              "kind": "value",
+              "multiplicity": {
+                "lower": 0,
+                "upper": 1
+              },
+              "name": "completed_at",
+              "type": "datetime"
+            }
+          ]
+        },
+        "label": "Task",
+        "semanticType": "block"
+      },
+      "height": 154.8,
+      "id": "task",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-task"
+        ],
+        "rationale": "Established by cited evidence: ev-task.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 660.25,
+        "y": 335.6
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 253.5
+    },
+    {
+      "data": {
+        "features": {
+          "literals": [
+            "todo",
+            "doing",
+            "done"
+          ]
+        },
+        "label": "Status",
+        "semanticType": "block",
+        "stereotype": "enumeration"
+      },
+      "height": 111.6,
+      "id": "status",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-status"
+        ],
+        "rationale": "Established by cited evidence: ev-status.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 1187.0,
+        "y": 591.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    },
+    {
+      "data": {
+        "features": {
+          "properties": [
+            {
+              "kind": "value",
+              "name": "title",
+              "type": "str"
+            },
+            {
+              "default": false,
+              "kind": "value",
+              "name": "done",
+              "type": "bool"
+            },
+            {
+              "default": 0,
+              "kind": "value",
+              "name": "position",
+              "type": "int"
+            }
+          ]
+        },
+        "label": "Subtask",
+        "semanticType": "block"
+      },
+      "height": 111.6,
+      "id": "subtask",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-subtask"
+        ],
+        "rationale": "Established by cited evidence: ev-subtask.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 858.0,
+        "y": 152.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    },
+    {
+      "data": {
+        "features": {
+          "properties": [
+            {
+              "kind": "value",
+              "name": "body",
+              "type": "str"
+            },
+            {
+              "kind": "value",
+              "name": "created_at",
+              "type": "datetime"
+            }
+          ]
+        },
+        "label": "Comment",
+        "semanticType": "block"
+      },
+      "height": 97.2,
+      "id": "comment",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-comment"
+        ],
+        "rationale": "Established by cited evidence: ev-comment.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 366.0,
+        "y": 159.2
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    },
+    {
+      "data": {
+        "features": {
+          "properties": [
+            {
+              "kind": "value",
+              "name": "verb",
+              "type": "str"
+            },
+            {
+              "default": "",
+              "kind": "value",
+              "name": "detail",
+              "type": "str"
+            },
+            {
+              "kind": "value",
+              "name": "at",
+              "type": "datetime"
+            }
+          ]
+        },
+        "label": "ActivityEvent",
+        "semanticType": "block"
+      },
+      "height": 111.6,
+      "id": "activity-event",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-activity"
+        ],
+        "rationale": "Established by cited evidence: ev-activity.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 612.0,
+        "y": 152.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 190.0
+    },
+    {
+      "data": {
+        "label": "Ticking the last subtask sets its task to done and stamps completed_at. Unticking never reverses it.",
+        "semanticType": "note"
+      },
+      "height": 80.0,
+      "id": "note-rollup",
+      "origin": {
+        "assumptionRefs": [],
+        "assurance": "grounded",
+        "evidenceRefs": [
+          "ev-rollup"
+        ],
+        "rationale": "Established by cited evidence: ev-rollup.",
+        "schemaRules": []
+      },
+      "position": {
+        "x": 1096.0,
+        "y": 152.0
+      },
+      "style": {
+        "background": "#ffffff",
+        "borderColor": "#333333",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "color": "#111111"
+      },
+      "type": "gpNode",
+      "width": 320.0
+    }
+  ],
+  "schemaVersion": "graphpilot.diagram.v1",
+  "viewport": {
+    "x": 0,
+    "y": 0,
+    "zoom": 1
+  }
+}

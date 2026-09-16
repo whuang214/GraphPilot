@@ -1,0 +1,64 @@
+{
+  "shows": "Changing relationship ends — a role and a multiplicity on relationships that already exist, with no element added or removed. These are the fields the projection silently dropped when it read them from the wrong level, so an edit deleted every `0..*` on the diagram and the round-trip test could not see it.",
+  "create": {
+    "schemaVersion": "graphpilot.draft.v1",
+    "kind": "diagramDraft",
+    "diagramName": "catalogue-ends",
+    "diagramType": "bdd_diagram",
+    "authority": "conceptual",
+    "requests": ["Draw how the product catalogue hangs together."],
+    "elements": [
+      { "id": "catalogue", "semanticType": "block", "label": "Catalogue", "assurance": "conceptual" },
+      { "id": "product", "semanticType": "block", "label": "Product", "assurance": "conceptual" },
+      { "id": "variant", "semanticType": "block", "label": "Variant", "assurance": "conceptual" },
+      { "id": "supplier", "semanticType": "block", "label": "Supplier", "assurance": "conceptual" }
+    ],
+    "relationships": [
+      {
+        "id": "products-in-catalogue",
+        "semanticType": "composition",
+        "source": "product",
+        "target": "catalogue",
+        "sourceRole": "products",
+        "sourceMultiplicity": { "lower": 0, "upper": "*" },
+        "assurance": "conceptual"
+      },
+      {
+        "id": "variants-of-product",
+        "semanticType": "composition",
+        "source": "variant",
+        "target": "product",
+        "sourceRole": "variants",
+        "assurance": "conceptual"
+      },
+      {
+        "id": "product-supplier",
+        "semanticType": "association",
+        "source": "product",
+        "target": "supplier",
+        "assurance": "conceptual"
+      }
+    ]
+  },
+  "arrange": {
+    "nodes": {
+      "catalogue": { "position": { "x": 0, "y": 0 }, "width": 300 },
+      "product": { "position": { "x": 0, "y": 260 } },
+      "variant": { "position": { "x": -340, "y": 520 } },
+      "supplier": { "position": { "x": 340, "y": 520 } }
+    }
+  },
+  "edit": {
+    "request": "A product has at least one variant, and every product names exactly one supplier.",
+    "change": {
+      "variants-of-product": {
+        "sourceMultiplicity": { "lower": 1, "upper": "*" }
+      },
+      "product-supplier": {
+        "targetRole": "suppliedBy",
+        "targetMultiplicity": { "lower": 1, "upper": 1 },
+        "targetNavigable": true
+      }
+    }
+  }
+}

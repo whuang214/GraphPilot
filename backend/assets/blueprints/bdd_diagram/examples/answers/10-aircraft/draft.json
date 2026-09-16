@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "aircraft",
+  "diagramType": "bdd_diagram",
+  "authority": "conceptual",
+  "requests": [
+    "An aircraft is composed of a fuselage and a wing; the fuselage is composed of a cabin, the cabin is composed of seat rows, each seat row is composed of seats, and the wing is composed of an engine."
+  ],
+  "evidence": [],
+  "elements": [
+    {
+      "id": "aircraft",
+      "semanticType": "block",
+      "label": "Aircraft",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "fuselage",
+      "semanticType": "block",
+      "label": "Fuselage",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "cabin",
+      "semanticType": "block",
+      "label": "Cabin",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "seatrow",
+      "semanticType": "block",
+      "label": "Seat Row",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "seat",
+      "semanticType": "block",
+      "label": "Seat",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "wing",
+      "semanticType": "block",
+      "label": "Wing",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "engine",
+      "semanticType": "block",
+      "label": "Engine",
+      "assurance": "conceptual"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "edge-1-fuselage-aircraft",
+      "semanticType": "composition",
+      "source": "fuselage",
+      "target": "aircraft",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-2-cabin-fuselage",
+      "semanticType": "composition",
+      "source": "cabin",
+      "target": "fuselage",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-3-seatrow-cabin",
+      "semanticType": "composition",
+      "source": "seatrow",
+      "target": "cabin",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-4-seat-seatrow",
+      "semanticType": "composition",
+      "source": "seat",
+      "target": "seatrow",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-5-wing-aircraft",
+      "semanticType": "composition",
+      "source": "wing",
+      "target": "aircraft",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-6-engine-wing",
+      "semanticType": "composition",
+      "source": "engine",
+      "target": "wing",
+      "assurance": "conceptual"
+    }
+  ],
+  "assumptions": []
+}

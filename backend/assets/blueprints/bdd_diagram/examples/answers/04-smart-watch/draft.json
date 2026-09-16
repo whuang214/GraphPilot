@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "smart-watch",
+  "diagramType": "bdd_diagram",
+  "authority": "conceptual",
+  "requests": [
+    "A smart watch is composed of a display, a battery, and a heart-rate sensor, tracks its battery life and water resistance, and runs in one of three modes: sport, sleep, or watch."
+  ],
+  "evidence": [],
+  "elements": [
+    {
+      "id": "watch",
+      "semanticType": "block",
+      "label": "Smart Watch",
+      "assurance": "conceptual",
+      "features": {
+        "properties": [
+          {
+            "kind": "value",
+            "name": "batteryLife",
+            "type": "18 h",
+            "multiplicity": {
+              "lower": 1,
+              "upper": 1
+            }
+          },
+          {
+            "kind": "value",
+            "name": "waterResist",
+            "type": "5 ATM",
+            "multiplicity": {
+              "lower": 1,
+              "upper": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "display",
+      "semanticType": "block",
+      "label": "Display",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "battery",
+      "semanticType": "block",
+      "label": "Battery",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "sensor",
+      "semanticType": "block",
+      "label": "Heart Sensor",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "mode",
+      "semanticType": "block",
+      "label": "Mode",
+      "assurance": "conceptual",
+      "features": {
+        "literals": [
+          "SPORT",
+          "SLEEP",
+          "WATCH"
+        ]
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "edge-1-display-watch",
+      "semanticType": "composition",
+      "source": "display",
+      "target": "watch",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-2-battery-watch",
+      "semanticType": "composition",
+      "source": "battery",
+      "target": "watch",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-3-sensor-watch",
+      "semanticType": "composition",
+      "source": "sensor",
+      "target": "watch",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-4-watch-mode",
+      "semanticType": "association",
+      "source": "watch",
+      "target": "mode",
+      "assurance": "conceptual",
+      "targetNavigable": true
+    }
+  ],
+  "assumptions": []
+}

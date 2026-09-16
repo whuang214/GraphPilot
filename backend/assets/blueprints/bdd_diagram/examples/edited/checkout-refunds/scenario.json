@@ -1,0 +1,136 @@
+{
+  "shows": "Adding a block and renaming another, to a diagram somebody arranged by hand. Nothing they did moves, the box they widened stays wide, and the description they typed survives an edit that never mentions it.",
+  "create": {
+    "schemaVersion": "graphpilot.draft.v1",
+    "kind": "diagramDraft",
+    "diagramName": "checkout-refunds",
+    "diagramType": "bdd_diagram",
+    "authority": "conceptual",
+    "requests": [
+      "Draw what the checkout stores."
+    ],
+    "elements": [
+      {
+        "id": "order",
+        "semanticType": "block",
+        "label": "Order",
+        "assurance": "conceptual",
+        "features": {
+          "properties": [
+            {
+              "kind": "value",
+              "name": "placedAt",
+              "type": "datetime"
+            },
+            {
+              "kind": "value",
+              "name": "total",
+              "type": "Money"
+            }
+          ]
+        }
+      },
+      {
+        "id": "line",
+        "semanticType": "block",
+        "label": "Order Line",
+        "assurance": "conceptual"
+      },
+      {
+        "id": "customer",
+        "semanticType": "block",
+        "label": "Customer",
+        "assurance": "conceptual"
+      },
+      {
+        "id": "payment",
+        "semanticType": "block",
+        "label": "Payment",
+        "assurance": "conceptual"
+      }
+    ],
+    "relationships": [
+      {
+        "id": "line-order",
+        "semanticType": "composition",
+        "source": "line",
+        "target": "order",
+        "sourceRole": "lines",
+        "sourceMultiplicity": {
+          "lower": 1,
+          "upper": "*"
+        },
+        "assurance": "conceptual"
+      },
+      {
+        "id": "order-customer",
+        "semanticType": "association",
+        "source": "order",
+        "target": "customer",
+        "targetRole": "placedBy",
+        "assurance": "conceptual"
+      },
+      {
+        "id": "payment-order",
+        "semanticType": "association",
+        "source": "payment",
+        "target": "order",
+        "assurance": "conceptual"
+      }
+    ]
+  },
+  "arrange": {
+    "nodes": {
+      "order": {
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "width": 340,
+        "description": "Immutable once paid. Confirmed with Priya, Aug 2026."
+      },
+      "line": {
+        "position": {
+          "x": -360,
+          "y": 260
+        }
+      },
+      "customer": {
+        "position": {
+          "x": 360,
+          "y": 260
+        }
+      },
+      "payment": {
+        "position": {
+          "x": 0,
+          "y": 520
+        }
+      }
+    }
+  },
+  "edit": {
+    "request": "Add refunds, and call the customer a Customer Account.",
+    "relabel": {
+      "customer": "Customer Account"
+    },
+    "addElements": [
+      {
+        "id": "refund",
+        "semanticType": "block",
+        "label": "Refund",
+        "assurance": "conceptual"
+      }
+    ],
+    "addRelationships": [
+      {
+        "id": "refund-payment",
+        "semanticType": "association",
+        "source": "refund",
+        "target": "payment",
+        "targetRole": "reverses",
+        "assurance": "conceptual"
+      }
+    ]
+  }
+}

@@ -1,0 +1,202 @@
+{
+  "schemaVersion": "graphpilot.delivery.semantic-review-diagnosis-proof.v1",
+  "kind": "semanticReviewDiagnosisProof",
+  "proofId": "proof-semantic-review-contract-block6-s01-20260729-01",
+  "sourceCommit": "043ff93643025ad0ccefd68f080cc34e265bd72b",
+  "status": "pass",
+  "scope": {
+    "owner": "semantic_review_prompt_projection_schema_validator_contract",
+    "providerFree": true,
+    "productionChanged": false,
+    "rawProviderResponseAccessed": false,
+    "hiddenReasoningAccessed": false,
+    "generationEndpointDiagnosed": false
+  },
+  "safeBaseline": {
+    "runId": "run-live-workflow-anchor-block5-cold-room-20260728-03",
+    "observationId": "observation-live-workflow-anchor-block5-cold-room-20260728-03",
+    "manifestDigest": "sha256:e82c9732234517b879ab26f5915ec9578fcfb1aa32ecb16179dcec12702a86ed",
+    "eventLedgerDigest": "sha256:9caa14d19ab4c5bcc47e286eecff036f9ad519ea6517f639af214e6fc1ed43ab",
+    "semanticReview": {
+      "state": "completed",
+      "durationMs": 42267.61340000667,
+      "requestBytes": 27427,
+      "responseBytes": 15307,
+      "inputTokens": 5660,
+      "outputTokens": 5096,
+      "reasoningTokens": 1536,
+      "cachedInputTokens": 0,
+      "providerRequestId": "62eaa6fa-39d6-40a9-bf87-2fb54cf85766",
+      "firstResponseValid": false,
+      "validation": {"code": "finding_invalid", "path": "$"}
+    },
+    "responseRepair": {
+      "state": "completed",
+      "durationMs": 37787.58720000042,
+      "requestBytes": 47442,
+      "responseBytes": 15259,
+      "inputTokens": 9775,
+      "outputTokens": 4875,
+      "reasoningTokens": 1314,
+      "cachedInputTokens": 0,
+      "providerRequestId": "9deb4b98-2ca7-414e-8bbe-54c77b9cc9e0"
+    },
+    "rawResponseRetained": false,
+    "rawResponseVariantKnowable": false
+  },
+  "contractTrace": {
+    "reviewPrompts": {
+      "direct": "direct-semantic-review-v1.md",
+      "context": "context-semantic-review-v1.md",
+      "findingInstruction": "Propose only allowlisted findings.",
+      "explicitPerFacetFindingCodes": false,
+      "explicitFindingFacetMatchesContainer": false,
+      "explicitFindingsOnlyBelowMinimum": false
+    },
+    "responseRepairPrompts": {
+      "direct": "direct-semantic-review-response-repair-v1.md",
+      "context": "context-semantic-review-response-repair-v1.md",
+      "explicitPerFacetFindingCodes": false,
+      "explicitFindingFacetMatchesContainer": false,
+      "explicitFindingsOnlyBelowMinimum": false
+    },
+    "reviewInputProjection": {
+      "rubricIncludesFacetId": true,
+      "rubricIncludesMinimumRating": true,
+      "rubricIncludesApplicability": true,
+      "rubricIncludesPerFacetFindingCodes": false,
+      "allowlistsIncludeElementAndAuthorityRefs": true,
+      "allowlistsIncludePerFacetFindingCodes": false
+    },
+    "backendResponseSchema": {
+      "globalFindingCodeEnum": true,
+      "perFacetFindingCodeMap": false,
+      "findingFacetMustMatchContainer": false,
+      "findingRequiresBelowMinimumRating": false
+    },
+    "providerStrictSchemaProjection": {
+      "globalFindingCodeEnumRetained": true,
+      "perFacetFindingCodeMap": false,
+      "conditionalAllOfRetained": false,
+      "findingFacetMustMatchContainer": false,
+      "findingRequiresBelowMinimumRating": false
+    },
+    "backendValidator": {
+      "perFacetFindingRegistry": "FACET_FINDING_CODES",
+      "requiresFindingFacetMatchContainer": true,
+      "requiresFacetBelowMinimum": true,
+      "requiresAllowlistedElementAndAuthorityRefs": true,
+      "requiresModeAndSeverityValidResolution": true,
+      "failureTransport": {"code": "finding_invalid", "path": "$"}
+    },
+    "responseRepair": {
+      "receivesRejectedResponse": true,
+      "receivesValidationIssue": {"code": "finding_invalid", "path": "$"},
+      "preservesAttemptedAssessment": true,
+      "suppressedOrRemoved": false
+    },
+    "resultAssembly": {
+      "validatesFullResponseSchema": true,
+      "validatesExactFacetOrder": true,
+      "calculatesBackendSeverityScoreStatus": true,
+      "validatesFindingsBeforeStableIds": true,
+      "finalReviewedResultAfterBaselineRepair": "pass_75"
+    }
+  },
+  "witnessMethod": {
+    "fixtureAuthority": "current committed direct/context training fixtures through SemanticReviewServiceTests",
+    "schemaValidation": [
+      "project_strict_output_schema plus Draft202012Validator",
+      "SemanticReviewService full response-schema validation",
+      "SemanticReviewService runtime assembly through FakeLLMClient"
+    ],
+    "baseResponse": "A complete clean response in exact rubric order; only the named facet/finding fields change.",
+    "filesCreatedByProofCommand": 0,
+    "providerCalls": 0
+  },
+  "boundedWitnesses": [
+    {
+      "id": "witness-facet-code-mismatch",
+      "mode": "context",
+      "diagramType": "bdd_diagram",
+      "mutation": {
+        "containingFacet": "goalFidelity",
+        "rating": 1,
+        "findingFacet": "goalFidelity",
+        "findingCode": "scope_violation"
+      },
+      "providerProjection": "pass",
+      "backendResponseSchema": "pass",
+      "backendRuntime": {"repairTriggered": true, "validation": {"code": "finding_invalid", "path": "$"}}
+    },
+    {
+      "id": "witness-finding-without-gap",
+      "mode": "context",
+      "diagramType": "bdd_diagram",
+      "mutation": {
+        "containingFacet": "goalFidelity",
+        "rating": 4,
+        "findingFacet": "goalFidelity",
+        "findingCode": "goal_mismatch"
+      },
+      "providerProjection": "pass",
+      "backendResponseSchema": "pass",
+      "backendRuntime": {"repairTriggered": true, "validation": {"code": "finding_invalid", "path": "$"}}
+    },
+    {
+      "id": "witness-finding-facet-mismatch",
+      "mode": "context",
+      "diagramType": "bdd_diagram",
+      "mutation": {
+        "containingFacet": "goalFidelity",
+        "rating": 1,
+        "findingFacet": "scopeCompliance",
+        "findingCode": "scope_violation"
+      },
+      "providerProjection": "pass",
+      "backendResponseSchema": "pass",
+      "backendRuntime": {"repairTriggered": true, "validation": {"code": "finding_invalid", "path": "$"}}
+    }
+  ],
+  "sixCellControl": [
+    {"mode":"direct","diagramType":"activity_diagram","witness":"facet-code-mismatch","providerProjection":"pass","backendResponseSchema":"pass","backendRuntime":"finding_invalid @ $"},
+    {"mode":"direct","diagramType":"use_case_diagram","witness":"facet-code-mismatch","providerProjection":"pass","backendResponseSchema":"pass","backendRuntime":"finding_invalid @ $"},
+    {"mode":"direct","diagramType":"bdd_diagram","witness":"facet-code-mismatch","providerProjection":"pass","backendResponseSchema":"pass","backendRuntime":"finding_invalid @ $"},
+    {"mode":"context","diagramType":"activity_diagram","witness":"facet-code-mismatch","providerProjection":"pass","backendResponseSchema":"pass","backendRuntime":"finding_invalid @ $"},
+    {"mode":"context","diagramType":"use_case_diagram","witness":"facet-code-mismatch","providerProjection":"pass","backendResponseSchema":"pass","backendRuntime":"finding_invalid @ $"},
+    {"mode":"context","diagramType":"bdd_diagram","witness":"facet-code-mismatch","providerProjection":"pass","backendResponseSchema":"pass","backendRuntime":"finding_invalid @ $"}
+  ],
+  "correctedWitness": {
+    "mode": "context",
+    "diagramType": "bdd_diagram",
+    "containingFacet": "goalFidelity",
+    "rating": 1,
+    "findingFacet": "goalFidelity",
+    "findingCode": "goal_mismatch",
+    "providerProjection": "pass",
+    "backendResponseSchema": "pass",
+    "backendAssembly": "pass",
+    "responseRepairTriggered": false,
+    "result": "blocked"
+  },
+  "rootConclusion": {
+    "owner": "semantic_review_prompt_projection_schema_validator_contract",
+    "class": "provider_visible_finding_contract_incomplete",
+    "originalPrivateVariantClaimed": false,
+    "whyUniqueOwner": "Every reproduced exact-signature witness passes the provider-visible contract and fails only at semantic-review backend finding policy; prompt, response schema projection, backend schema, validator, repair, and result assembly all belong to this one semantic-review contract boundary.",
+    "generationControlUnchanged": "bdd_relationship_endpoints_invalid @ $.edges[3]"
+  },
+  "limitations": [
+    "The raw Block 5 semantic-review response was intentionally not retained and was not accessed; no witness is claimed to be its exact private shape.",
+    "The safe code/path cannot distinguish which of the bounded finding conditions occurred.",
+    "This mechanical proof establishes a contract-owner mismatch, not semantic quality, performance improvement, representative stability, promotion, or certification."
+  ],
+  "accounting": {
+    "controlledCallsBefore": 10,
+    "controlledCallsAfter": 10,
+    "externalHostCallsBefore": 1,
+    "externalHostCallsAfter": 1,
+    "aggregateCallsAfter": 11,
+    "ceiling": 1000
+  }
+}

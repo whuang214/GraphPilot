@@ -1,0 +1,312 @@
+{
+  "observationId": "r1",
+  "claimState": "reference_host_characterized",
+  "host": "devin_cli",
+  "model": "Claude Opus 5 Max Fast",
+  "thinkingLevel": "default",
+  "interface": "a03",
+  "repositoryCommit": "8627bac5169e3a8800ea7f3ddfb64e52b4fe92c7",
+  "workflowResponseBytes": 16871,
+  "mcpCalls": [
+    {
+      "tool": "diagram_generation_workflow",
+      "count": 1
+    },
+    {
+      "tool": "context_evidence_status",
+      "count": 1
+    },
+    {
+      "tool": "context_evidence_save",
+      "count": 7
+    },
+    {
+      "tool": "diagram_request_save",
+      "count": 4
+    }
+  ],
+  "totalMcpCallCount": 13,
+  "json1AuthoringAttempts": 7,
+  "json2AuthoringAttempts": 4,
+  "deterministicValidationFailures": [
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_additionalProperties",
+      "path": "$"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_required",
+      "path": "$"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_additionalProperties",
+      "path": "$.claims[*]"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_required",
+      "path": "$.claims[*]"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_enum",
+      "path": "$.claims[*].kind"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_const",
+      "path": "$.kind"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_required",
+      "path": "$.source"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_additionalProperties",
+      "path": "$.uncertainties[*]"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_required",
+      "path": "$.uncertainties[*]"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_additionalProperties",
+      "path": "$.claims[*].versions[*]"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_required",
+      "path": "$.claims[*].versions[*]"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_pattern",
+      "path": "$.claims[*].id"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_required",
+      "path": "$.evidence[*]"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_pattern",
+      "path": "$.evidence[*].id"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_enum",
+      "path": "$.evidence[*].kind"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_additionalProperties",
+      "path": "$.evidence[*].locator"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_enum",
+      "path": "$.claims[*].versions[*].appliesToViewpoints[*]"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_required",
+      "path": "$.claims[*].versions[*].payload"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_additionalProperties",
+      "path": "$.claims[*].versions[*].support"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_required",
+      "path": "$.claims[*].versions[*].support"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_additionalProperties",
+      "path": "$.claims[*].versions[*].payload"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_type",
+      "path": "$.claims[*].versions[*].payload.sourceClaimRef"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_type",
+      "path": "$.claims[*].versions[*].payload.targetClaimRef"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_enum",
+      "path": "$.claims[*].versions[*].support.basis"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_enum",
+      "path": "$.claims[*].versions[*].support.derivation"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_additionalProperties",
+      "path": "$.claims[*].versions[*].payload.ownerClaimRef"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_required",
+      "path": "$.claims[*].versions[*].payload.ownerClaimRef"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_additionalProperties",
+      "path": "$.claims[*].versions[*].payload.subjectClaimRef"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_required",
+      "path": "$.claims[*].versions[*].payload.subjectClaimRef"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_additionalProperties",
+      "path": "$.claims[*].versions[*].payload.sourceClaimRef"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_required",
+      "path": "$.claims[*].versions[*].payload.sourceClaimRef"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_additionalProperties",
+      "path": "$.claims[*].versions[*].payload.targetClaimRef"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_required",
+      "path": "$.claims[*].versions[*].payload.targetClaimRef"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_required",
+      "path": "$.scope"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_pattern",
+      "path": "$.uncertainties[*].id"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_enum",
+      "path": "$.uncertainties[*].kind"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_type",
+      "path": "$.uncertainties[*].relatedClaimRefs[*]"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_const",
+      "path": "$.scope.baseline"
+    },
+    {
+      "tool": "context_evidence_save",
+      "code": "schema_enum",
+      "path": "$.scope.includedConcerns[*]"
+    },
+    {
+      "tool": "diagram_request_save",
+      "code": "schema_additionalProperties",
+      "path": "$"
+    },
+    {
+      "tool": "diagram_request_save",
+      "code": "schema_required",
+      "path": "$"
+    },
+    {
+      "tool": "diagram_request_save",
+      "code": "schema_additionalProperties",
+      "path": "$.request"
+    },
+    {
+      "tool": "diagram_request_save",
+      "code": "schema_required",
+      "path": "$.request"
+    },
+    {
+      "tool": "diagram_request_save",
+      "code": "schema_additionalProperties",
+      "path": "$.selectedClaims[*]"
+    },
+    {
+      "tool": "diagram_request_save",
+      "code": "schema_required",
+      "path": "$.selectedClaims[*]"
+    },
+    {
+      "tool": "diagram_request_save",
+      "code": "schema_additionalProperties",
+      "path": "$.uncertaintyDispositions[*]"
+    },
+    {
+      "tool": "diagram_request_save",
+      "code": "schema_required",
+      "path": "$.uncertaintyDispositions[*]"
+    },
+    {
+      "tool": "diagram_request_save",
+      "code": "schema_enum",
+      "path": "$.uncertaintyDispositions[*].disposition"
+    },
+    {
+      "tool": "diagram_request_save",
+      "code": "schema_required",
+      "path": "$.assumptions[*]"
+    },
+    {
+      "tool": "diagram_request_save",
+      "code": "schema_required",
+      "path": "$.decisions[*]"
+    },
+    {
+      "tool": "diagram_request_save",
+      "code": "schema_additionalProperties",
+      "path": "$.manifestRef"
+    },
+    {
+      "tool": "diagram_request_save",
+      "code": "schema_type",
+      "path": "$.uncertaintyDispositions[*].uncertaintyRef"
+    },
+    {
+      "tool": "diagram_request_save",
+      "code": "unreferenced_assumption",
+      "path": "$.assumptions[*].id"
+    }
+  ],
+  "sourceFilesRead": 11,
+  "json1": {
+    "path": ".graphpilot/context/evidence/repository.gp-evidence.json",
+    "digest": "sha256:b4c5241e5509ef8ab646c619e2b9f6cd71bb017279b5921dcd296e663738cdf1",
+    "byteCount": 69823,
+    "claimCount": 48,
+    "relationshipCount": 20
+  },
+  "json2": {
+    "path": ".graphpilot/requests/todo-api-r1.gp-request.json",
+    "digest": "sha256:e9cd8f5dc34a8b1ac2dc158d2ae064345e173d4e0989d364ee60b9beb4f25a9f",
+    "byteCount": 10532
+  },
+  "notes": "The workflow prompt routes authority clearly but documents no artifact shape, so JSON 1 and JSON 2 had to be reverse-engineered from validator output over 7 and 4 submissions. No tool returns the evidence or request schema the way diagram_get_schema does for diagram types. Validation only reaches the deepest level already satisfied, so each round exposed one more layer: claim, then versions, then payload, then claimRef. Issue lists were truncated (\"146 additional issues were omitted\"), hiding sibling problems and costing extra rounds. Enum and const values are learnable only by failing. Locator line narrowing is implied by the prose, but three spellings were rejected, so line precision was dropped. One tools/list discovery call is excluded from the counts below."
+}

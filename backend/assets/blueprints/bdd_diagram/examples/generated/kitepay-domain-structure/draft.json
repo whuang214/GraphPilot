@@ -1,0 +1,937 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "kitepay-domain-structure",
+  "diagramType": "bdd_diagram",
+  "authority": "as_implemented",
+  "requests": [
+    "The structure of what this system stores, and how those things relate."
+  ],
+  "evidence": [
+    {
+      "id": "ev-user",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 22,
+          "start": 5
+        },
+        "path": "accounts/models.py",
+        "symbol": "User"
+      },
+      "summary": "User extends AbstractUser with a unique handle, display_name, unique email, avatar_colour and joined_from_invite."
+    },
+    {
+      "id": "ev-follow",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 33,
+          "start": 25
+        },
+        "path": "accounts/models.py",
+        "symbol": "Follow"
+      },
+      "summary": "Follow joins a follower User to a followed User, unique together, and decides who sees FRIENDS-visibility payments."
+    },
+    {
+      "id": "ev-wallet",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 17,
+          "start": 5
+        },
+        "path": "wallets/models.py",
+        "symbol": "Wallet"
+      },
+      "summary": "Wallet is one-to-one with User, carries a currency and created_at, and deliberately has no balance column."
+    },
+    {
+      "id": "ev-account",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 22,
+          "start": 4
+        },
+        "path": "ledger/models.py",
+        "symbol": "Account"
+      },
+      "summary": "Account is a postable place, kind USER or HOUSE, optionally one-to-one with a Wallet; the house account has none."
+    },
+    {
+      "id": "ev-entry",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 56,
+          "start": 25
+        },
+        "path": "ledger/models.py",
+        "symbol": "LedgerEntry"
+      },
+      "summary": "LedgerEntry is one side of a movement on an Account, created in balanced pairs and never edited, optionally linked to the Payment, Deposit or Withdrawal that caused it."
+    },
+    {
+      "id": "ev-payment",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 28,
+          "start": 6
+        },
+        "path": "payments/models.py",
+        "symbol": "Payment"
+      },
+      "summary": "Payment records sender, recipient, amount_minor, note, a PUBLIC/FRIENDS/PRIVATE visibility and an idempotency_key."
+    },
+    {
+      "id": "ev-request",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 55,
+          "start": 31
+        },
+        "path": "payments/models.py",
+        "symbol": "PaymentRequest"
+      },
+      "summary": "PaymentRequest records requester, payer, amount, note, status and expires_at, and points at the Payment that settled it via SET_NULL."
+    },
+    {
+      "id": "ev-linked",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 17,
+          "start": 5
+        },
+        "path": "rails/models.py",
+        "symbol": "LinkedAccount"
+      },
+      "summary": "LinkedAccount is a user's CARD or BANK funding instrument with a label and masked_number."
+    },
+    {
+      "id": "ev-deposit",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 32,
+          "start": 20
+        },
+        "path": "rails/models.py",
+        "symbol": "Deposit"
+      },
+      "summary": "Deposit is money entering the platform for a user from a LinkedAccount source (SET_NULL), with a status and a settles_on date."
+    },
+    {
+      "id": "ev-withdrawal",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 49,
+          "start": 35
+        },
+        "path": "rails/models.py",
+        "symbol": "Withdrawal"
+      },
+      "summary": "Withdrawal is money leaving the platform for a user to a LinkedAccount destination (SET_NULL), with a status and a settles_on date."
+    },
+    {
+      "id": "ev-feeditem",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 11,
+          "start": 5
+        },
+        "path": "feed/models.py",
+        "symbol": "FeedItem"
+      },
+      "summary": "FeedItem is one-to-one with a Payment and names the acting User, newest first."
+    },
+    {
+      "id": "ev-notification",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 15,
+          "start": 5
+        },
+        "path": "notifications/models.py",
+        "symbol": "Notification"
+      },
+      "summary": "Notification stores per-user text, a link and a read flag, newest first."
+    },
+    {
+      "id": "ev-balance",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 19,
+          "start": 8
+        },
+        "path": "wallets/utils.py",
+        "symbol": "available_balance"
+      },
+      "summary": "available_balance sums settled LedgerEntry rows for the wallet's account rather than reading a stored column."
+    }
+  ],
+  "elements": [
+    {
+      "id": "user",
+      "semanticType": "block",
+      "label": "User",
+      "features": {
+        "properties": [
+          {
+            "kind": "value",
+            "name": "handle",
+            "type": "CharField(30) unique"
+          },
+          {
+            "kind": "value",
+            "name": "display_name",
+            "type": "CharField(80)"
+          },
+          {
+            "kind": "value",
+            "name": "email",
+            "type": "EmailField unique"
+          },
+          {
+            "default": "#4a6fa5",
+            "kind": "value",
+            "name": "avatar_colour",
+            "type": "CharField(7)"
+          },
+          {
+            "kind": "value",
+            "name": "joined_from_invite",
+            "type": "CharField(30)"
+          }
+        ]
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-user"
+      ]
+    },
+    {
+      "id": "follow",
+      "semanticType": "block",
+      "label": "Follow",
+      "features": {
+        "constraints": [
+          {
+            "expression": "one row per (follower, followed)",
+            "name": "unique_together"
+          }
+        ],
+        "properties": [
+          {
+            "kind": "value",
+            "name": "created_at",
+            "type": "DateTimeField"
+          }
+        ]
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-follow"
+      ]
+    },
+    {
+      "id": "wallet",
+      "semanticType": "block",
+      "label": "Wallet",
+      "features": {
+        "constraints": [
+          {
+            "expression": "balance is the sum of the ledger, never a column",
+            "name": "no stored balance"
+          }
+        ],
+        "properties": [
+          {
+            "default": "GBP",
+            "kind": "value",
+            "name": "currency",
+            "type": "CharField(3)"
+          },
+          {
+            "kind": "value",
+            "name": "created_at",
+            "type": "DateTimeField"
+          }
+        ]
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-wallet"
+      ]
+    },
+    {
+      "id": "ledger-account",
+      "semanticType": "block",
+      "label": "Account",
+      "features": {
+        "properties": [
+          {
+            "kind": "value",
+            "name": "kind",
+            "type": "USER | HOUSE"
+          },
+          {
+            "kind": "value",
+            "name": "name",
+            "type": "CharField(60)"
+          }
+        ]
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-account"
+      ]
+    },
+    {
+      "id": "ledger-entry",
+      "semanticType": "block",
+      "label": "LedgerEntry",
+      "features": {
+        "constraints": [
+          {
+            "expression": "entries are created in balanced pairs and never edited",
+            "name": "balanced pairs"
+          }
+        ],
+        "properties": [
+          {
+            "kind": "value",
+            "name": "amount_minor",
+            "type": "BigIntegerField"
+          },
+          {
+            "kind": "value",
+            "name": "description",
+            "type": "CharField(140)"
+          },
+          {
+            "default": "True",
+            "kind": "value",
+            "name": "settled",
+            "type": "BooleanField"
+          },
+          {
+            "kind": "value",
+            "name": "created_at",
+            "type": "DateTimeField"
+          }
+        ]
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-entry"
+      ]
+    },
+    {
+      "id": "payment",
+      "semanticType": "block",
+      "label": "Payment",
+      "features": {
+        "properties": [
+          {
+            "kind": "value",
+            "name": "amount_minor",
+            "type": "BigIntegerField"
+          },
+          {
+            "kind": "value",
+            "name": "note",
+            "type": "CharField(140)"
+          },
+          {
+            "default": "PUBLIC",
+            "kind": "value",
+            "name": "visibility",
+            "type": "PUBLIC | FRIENDS | PRIVATE"
+          },
+          {
+            "kind": "value",
+            "name": "idempotency_key",
+            "type": "CharField(48)"
+          },
+          {
+            "kind": "value",
+            "name": "created_at",
+            "type": "DateTimeField"
+          }
+        ]
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-payment"
+      ]
+    },
+    {
+      "id": "payment-request",
+      "semanticType": "block",
+      "label": "PaymentRequest",
+      "features": {
+        "operations": [
+          {
+            "name": "is_open"
+          }
+        ],
+        "properties": [
+          {
+            "kind": "value",
+            "name": "amount_minor",
+            "type": "BigIntegerField"
+          },
+          {
+            "kind": "value",
+            "name": "note",
+            "type": "CharField(140)"
+          },
+          {
+            "default": "pending",
+            "kind": "value",
+            "name": "status",
+            "type": "CharField(12)"
+          },
+          {
+            "kind": "value",
+            "name": "expires_at",
+            "type": "DateTimeField"
+          }
+        ]
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-request"
+      ]
+    },
+    {
+      "id": "linked-account",
+      "semanticType": "block",
+      "label": "LinkedAccount",
+      "features": {
+        "properties": [
+          {
+            "kind": "value",
+            "name": "kind",
+            "type": "CARD | BANK"
+          },
+          {
+            "kind": "value",
+            "name": "label",
+            "type": "CharField(60)"
+          },
+          {
+            "kind": "value",
+            "name": "masked_number",
+            "type": "CharField(24)"
+          }
+        ]
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-linked"
+      ]
+    },
+    {
+      "id": "deposit",
+      "semanticType": "block",
+      "label": "Deposit",
+      "features": {
+        "properties": [
+          {
+            "kind": "value",
+            "name": "amount_minor",
+            "type": "BigIntegerField"
+          },
+          {
+            "default": "pending",
+            "kind": "value",
+            "name": "status",
+            "type": "CharField(10)"
+          },
+          {
+            "kind": "value",
+            "name": "settles_on",
+            "type": "DateField"
+          }
+        ]
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-deposit"
+      ]
+    },
+    {
+      "id": "withdrawal",
+      "semanticType": "block",
+      "label": "Withdrawal",
+      "features": {
+        "properties": [
+          {
+            "kind": "value",
+            "name": "amount_minor",
+            "type": "BigIntegerField"
+          },
+          {
+            "default": "pending",
+            "kind": "value",
+            "name": "status",
+            "type": "CharField(10)"
+          },
+          {
+            "kind": "value",
+            "name": "settles_on",
+            "type": "DateField"
+          }
+        ]
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-withdrawal"
+      ]
+    },
+    {
+      "id": "feed-item",
+      "semanticType": "block",
+      "label": "FeedItem",
+      "features": {
+        "properties": [
+          {
+            "kind": "value",
+            "name": "created_at",
+            "type": "DateTimeField"
+          }
+        ]
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-feeditem"
+      ]
+    },
+    {
+      "id": "notification",
+      "semanticType": "block",
+      "label": "Notification",
+      "features": {
+        "properties": [
+          {
+            "kind": "value",
+            "name": "text",
+            "type": "CharField(200)"
+          },
+          {
+            "kind": "value",
+            "name": "link",
+            "type": "CharField(200)"
+          },
+          {
+            "default": "False",
+            "kind": "value",
+            "name": "read",
+            "type": "BooleanField"
+          },
+          {
+            "kind": "value",
+            "name": "created_at",
+            "type": "DateTimeField"
+          }
+        ]
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-notification"
+      ]
+    },
+    {
+      "id": "note-balance",
+      "semanticType": "note",
+      "label": "No balance is stored. Spendable money is the sum of settled LedgerEntry rows for the wallet's Account.",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-wallet",
+        "ev-balance"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "wallet-of-user",
+      "semanticType": "composition",
+      "source": "wallet",
+      "target": "user",
+      "sourceRole": "wallet",
+      "sourceMultiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "targetMultiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-wallet"
+      ]
+    },
+    {
+      "id": "account-of-wallet",
+      "semanticType": "composition",
+      "source": "ledger-account",
+      "target": "wallet",
+      "sourceRole": "ledger_account",
+      "sourceMultiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "targetMultiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-account"
+      ]
+    },
+    {
+      "id": "entries-of-account",
+      "semanticType": "composition",
+      "source": "ledger-entry",
+      "target": "ledger-account",
+      "sourceRole": "entries",
+      "sourceMultiplicity": {
+        "lower": 0,
+        "upper": "*"
+      },
+      "targetMultiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-entry"
+      ]
+    },
+    {
+      "id": "linked-of-user",
+      "semanticType": "composition",
+      "source": "linked-account",
+      "target": "user",
+      "sourceRole": "linked",
+      "sourceMultiplicity": {
+        "lower": 0,
+        "upper": "*"
+      },
+      "targetMultiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-linked"
+      ]
+    },
+    {
+      "id": "deposits-of-user",
+      "semanticType": "composition",
+      "source": "deposit",
+      "target": "user",
+      "sourceRole": "deposits",
+      "sourceMultiplicity": {
+        "lower": 0,
+        "upper": "*"
+      },
+      "targetMultiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-deposit"
+      ]
+    },
+    {
+      "id": "withdrawals-of-user",
+      "semanticType": "composition",
+      "source": "withdrawal",
+      "target": "user",
+      "sourceRole": "withdrawals",
+      "sourceMultiplicity": {
+        "lower": 0,
+        "upper": "*"
+      },
+      "targetMultiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-withdrawal"
+      ]
+    },
+    {
+      "id": "notifications-of-user",
+      "semanticType": "composition",
+      "source": "notification",
+      "target": "user",
+      "sourceRole": "notifications",
+      "sourceMultiplicity": {
+        "lower": 0,
+        "upper": "*"
+      },
+      "targetMultiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-notification"
+      ]
+    },
+    {
+      "id": "feeditem-of-payment",
+      "semanticType": "composition",
+      "source": "feed-item",
+      "target": "payment",
+      "sourceRole": "feed_item",
+      "sourceMultiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "targetMultiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-feeditem"
+      ]
+    },
+    {
+      "id": "payment-sender",
+      "semanticType": "association",
+      "source": "payment",
+      "target": "user",
+      "targetRole": "sender",
+      "targetMultiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "targetNavigable": true,
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-payment"
+      ]
+    },
+    {
+      "id": "payment-recipient",
+      "semanticType": "association",
+      "source": "payment",
+      "target": "user",
+      "targetRole": "recipient",
+      "targetMultiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "targetNavigable": true,
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-payment"
+      ]
+    },
+    {
+      "id": "request-requester",
+      "semanticType": "association",
+      "source": "payment-request",
+      "target": "user",
+      "targetRole": "requester",
+      "targetMultiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "targetNavigable": true,
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-request"
+      ]
+    },
+    {
+      "id": "request-payer",
+      "semanticType": "association",
+      "source": "payment-request",
+      "target": "user",
+      "targetRole": "payer",
+      "targetMultiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "targetNavigable": true,
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-request"
+      ]
+    },
+    {
+      "id": "request-settled-by",
+      "semanticType": "association",
+      "source": "payment-request",
+      "target": "payment",
+      "targetRole": "settled_payment",
+      "targetMultiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "targetNavigable": true,
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-request"
+      ]
+    },
+    {
+      "id": "follow-follower",
+      "semanticType": "association",
+      "source": "follow",
+      "target": "user",
+      "targetRole": "follower",
+      "targetMultiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "targetNavigable": true,
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-follow"
+      ]
+    },
+    {
+      "id": "follow-followed",
+      "semanticType": "association",
+      "source": "follow",
+      "target": "user",
+      "targetRole": "followed",
+      "targetMultiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "targetNavigable": true,
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-follow"
+      ]
+    },
+    {
+      "id": "feeditem-actor",
+      "semanticType": "association",
+      "source": "feed-item",
+      "target": "user",
+      "targetRole": "actor",
+      "targetMultiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "targetNavigable": true,
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-feeditem"
+      ]
+    },
+    {
+      "id": "entry-explains-payment",
+      "semanticType": "association",
+      "source": "ledger-entry",
+      "target": "payment",
+      "targetRole": "payment",
+      "targetMultiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "targetNavigable": true,
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-entry"
+      ]
+    },
+    {
+      "id": "entry-explains-deposit",
+      "semanticType": "association",
+      "source": "ledger-entry",
+      "target": "deposit",
+      "targetRole": "deposit",
+      "targetMultiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "targetNavigable": true,
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-entry"
+      ]
+    },
+    {
+      "id": "entry-explains-withdrawal",
+      "semanticType": "association",
+      "source": "ledger-entry",
+      "target": "withdrawal",
+      "targetRole": "withdrawal",
+      "targetMultiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "targetNavigable": true,
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-entry"
+      ]
+    },
+    {
+      "id": "deposit-source",
+      "semanticType": "association",
+      "source": "deposit",
+      "target": "linked-account",
+      "targetRole": "source",
+      "targetMultiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "targetNavigable": true,
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-deposit"
+      ]
+    },
+    {
+      "id": "withdrawal-destination",
+      "semanticType": "association",
+      "source": "withdrawal",
+      "target": "linked-account",
+      "targetRole": "destination",
+      "targetMultiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "targetNavigable": true,
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-withdrawal"
+      ]
+    },
+    {
+      "id": "note-balance-link",
+      "semanticType": "commentLink",
+      "source": "note-balance",
+      "target": "wallet",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-wallet"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,393 @@
+{
+  "schemaVersion": "graphpilot.context.evidence-manifest.v1",
+  "kind": "evidenceManifest",
+  "id": "evidence-order-service",
+  "source": {
+    "kind": "repository",
+    "displayName": "Order Service",
+    "root": ".",
+    "snapshot": {
+      "digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "fileCount": 84,
+      "capturedAt": "2026-07-13T14:20:00Z"
+    }
+  },
+  "scope": {
+    "baseline": "boundedArchitecture",
+    "includedPaths": [
+      "."
+    ],
+    "excludedPaths": [
+      ".git/**",
+      ".graphpilot/**",
+      "**/.env*",
+      "**/node_modules/**",
+      "**/dist/**",
+      "**/coverage/**",
+      "**/vendor/**"
+    ],
+    "includedConcerns": [
+      "systemPurpose",
+      "systemBoundaries",
+      "publicEntryPoints",
+      "topLevelComponents",
+      "externalSystems",
+      "publicCapabilities",
+      "importantInterfaces",
+      "majorWorkflows",
+      "importantConstraints"
+    ],
+    "stoppingReason": "The bounded architecture baseline is covered."
+  },
+  "evidence": [
+    {
+      "id": "evidence-order-handler-code",
+      "kind": "code",
+      "locator": {
+        "path": "src/orders/order_handler.py",
+        "symbol": "OrderHandler.submit",
+        "lineRange": {
+          "start": 42,
+          "end": 61
+        }
+      },
+      "contentDigest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "summary": "OrderHandler.submit validates an order before saving it.",
+      "capturedInSourceDigest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "status": "current",
+      "capturedAt": "2026-07-13T14:24:00Z"
+    },
+    {
+      "id": "evidence-order-handler-test",
+      "kind": "test",
+      "locator": {
+        "path": "tests/orders/test_order_handler.py",
+        "symbol": "test_rejects_invalid_order"
+      },
+      "contentDigest": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+      "summary": "The test requires invalid orders to stop before persistence.",
+      "capturedInSourceDigest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "status": "current",
+      "capturedAt": "2026-07-13T14:25:00Z"
+    },
+    {
+      "id": "evidence-order-architecture-doc",
+      "kind": "documentation",
+      "locator": {
+        "path": "docs/order-architecture.md",
+        "symbol": "Order service boundary"
+      },
+      "contentDigest": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+      "summary": "The architecture document defines the order service boundary.",
+      "capturedInSourceDigest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "status": "current",
+      "capturedAt": "2026-07-13T14:26:00Z"
+    },
+    {
+      "id": "evidence-order-repository-config",
+      "kind": "configuration",
+      "locator": {
+        "path": "config/order_repository.json"
+      },
+      "contentDigest": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+      "summary": "Configuration binds OrderHandler to OrderRepository.",
+      "capturedInSourceDigest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "status": "current",
+      "capturedAt": "2026-07-13T14:27:00Z"
+    },
+    {
+      "id": "evidence-user-order-owner",
+      "kind": "userClarification",
+      "question": "Which service owns order submission?",
+      "statement": "The order service owns order submission.",
+      "assertedAs": "as_implemented",
+      "clarifiedBy": "user",
+      "status": "current",
+      "recordedAt": "2026-07-13T14:28:00Z"
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim-order-boundary",
+      "kind": "boundary",
+      "currentVersion": 1,
+      "status": "active",
+      "versions": [
+        {
+          "version": 1,
+          "statement": "Order submission is inside the order service boundary.",
+          "appliesToViewpoints": [
+            "as_implemented"
+          ],
+          "payload": {
+            "name": "Order service",
+            "included": [
+              "order submission"
+            ],
+            "external": [
+              "customer"
+            ]
+          },
+          "support": {
+            "basis": "repositoryEvidence",
+            "derivation": "direct",
+            "evidenceRefs": [
+              "evidence-order-architecture-doc"
+            ]
+          },
+          "createdAt": "2026-07-13T14:30:00Z"
+        }
+      ]
+    },
+    {
+      "id": "claim-order-handler",
+      "kind": "entity",
+      "currentVersion": 1,
+      "status": "active",
+      "versions": [
+        {
+          "version": 1,
+          "statement": "OrderHandler orchestrates order submission.",
+          "appliesToViewpoints": [
+            "as_implemented"
+          ],
+          "payload": {
+            "name": "OrderHandler",
+            "role": "orchestration service",
+            "purpose": "Coordinate validation and persistence for submitted orders."
+          },
+          "support": {
+            "basis": "repositoryEvidence",
+            "derivation": "direct",
+            "evidenceRefs": [
+              "evidence-order-handler-code"
+            ]
+          },
+          "createdAt": "2026-07-13T14:31:00Z"
+        }
+      ]
+    },
+    {
+      "id": "claim-submit-order",
+      "kind": "capability",
+      "currentVersion": 1,
+      "status": "active",
+      "versions": [
+        {
+          "version": 1,
+          "statement": "The order service accepts valid order submissions.",
+          "appliesToViewpoints": [
+            "as_implemented"
+          ],
+          "payload": {
+            "subject": "Order service",
+            "outcome": "A valid submitted order is accepted for persistence."
+          },
+          "support": {
+            "basis": "mixed",
+            "derivation": "inferred",
+            "evidenceRefs": [
+              "evidence-order-handler-code",
+              "evidence-user-order-owner"
+            ],
+            "rationale": "The handler implements submission and the user confirms service ownership."
+          },
+          "createdAt": "2026-07-13T14:32:00Z"
+        }
+      ]
+    },
+    {
+      "id": "claim-customer-submit-order",
+      "kind": "actorGoal",
+      "currentVersion": 1,
+      "status": "active",
+      "versions": [
+        {
+          "version": 1,
+          "statement": "A customer wants to submit a valid order.",
+          "appliesToViewpoints": [
+            "as_implemented"
+          ],
+          "payload": {
+            "actor": "Customer",
+            "result": "Submit a valid order."
+          },
+          "support": {
+            "basis": "userClarification",
+            "derivation": "direct",
+            "evidenceRefs": [
+              "evidence-user-order-owner"
+            ]
+          },
+          "createdAt": "2026-07-13T14:33:00Z"
+        }
+      ]
+    },
+    {
+      "id": "claim-validate-order",
+      "kind": "behaviorStep",
+      "currentVersion": 1,
+      "status": "active",
+      "versions": [
+        {
+          "version": 1,
+          "statement": "OrderHandler validates an order before persistence.",
+          "appliesToViewpoints": [
+            "as_implemented"
+          ],
+          "payload": {
+            "actor": "OrderHandler",
+            "action": "validate submitted order",
+            "outcome": "Only valid orders continue.",
+            "order": [
+              {
+                "relation": "before",
+                "step": "persist order"
+              }
+            ],
+            "branches": [
+              {
+                "condition": "order is invalid",
+                "outcome": "reject order"
+              }
+            ]
+          },
+          "support": {
+            "basis": "repositoryEvidence",
+            "derivation": "direct",
+            "evidenceRefs": [
+              "evidence-order-handler-code",
+              "evidence-order-handler-test"
+            ]
+          },
+          "createdAt": "2026-07-13T14:34:00Z"
+        }
+      ]
+    },
+    {
+      "id": "claim-handler-submits-order",
+      "kind": "relationship",
+      "currentVersion": 1,
+      "status": "active",
+      "versions": [
+        {
+          "version": 1,
+          "statement": "OrderHandler provides the submit-order capability.",
+          "appliesToViewpoints": [
+            "as_implemented"
+          ],
+          "payload": {
+            "sourceClaimRef": {
+              "id": "claim-order-handler",
+              "version": 1
+            },
+            "relationship": "provides",
+            "targetClaimRef": {
+              "id": "claim-submit-order",
+              "version": 1
+            }
+          },
+          "support": {
+            "basis": "repositoryEvidence",
+            "derivation": "inferred",
+            "evidenceRefs": [
+              "evidence-order-handler-code",
+              "evidence-order-repository-config"
+            ],
+            "rationale": "The implementation and binding jointly establish the responsibility."
+          },
+          "createdAt": "2026-07-13T14:35:00Z"
+        }
+      ]
+    },
+    {
+      "id": "claim-order-id-property",
+      "kind": "property",
+      "currentVersion": 1,
+      "status": "active",
+      "versions": [
+        {
+          "version": 1,
+          "statement": "OrderHandler operates on an order identifier.",
+          "appliesToViewpoints": [
+            "as_implemented"
+          ],
+          "payload": {
+            "ownerClaimRef": {
+              "id": "claim-order-handler",
+              "version": 1
+            },
+            "name": "orderId",
+            "valueType": "string",
+            "multiplicity": {
+              "lower": 1,
+              "upper": 1
+            }
+          },
+          "support": {
+            "basis": "repositoryEvidence",
+            "derivation": "direct",
+            "evidenceRefs": [
+              "evidence-order-handler-code"
+            ]
+          },
+          "createdAt": "2026-07-13T14:36:00Z"
+        }
+      ]
+    },
+    {
+      "id": "claim-valid-order-required",
+      "kind": "constraint",
+      "currentVersion": 1,
+      "status": "active",
+      "versions": [
+        {
+          "version": 1,
+          "statement": "An order must be valid before persistence.",
+          "appliesToViewpoints": [
+            "as_implemented"
+          ],
+          "payload": {
+            "subjectClaimRef": {
+              "id": "claim-validate-order",
+              "version": 1
+            },
+            "rule": "Persist an order only after validation succeeds."
+          },
+          "support": {
+            "basis": "repositoryEvidence",
+            "derivation": "direct",
+            "evidenceRefs": [
+              "evidence-order-handler-test"
+            ]
+          },
+          "createdAt": "2026-07-13T14:37:00Z"
+        }
+      ]
+    }
+  ],
+  "uncertainties": [
+    {
+      "id": "uncertainty-persistence-failure",
+      "kind": "missing_information",
+      "statement": "The repository evidence does not establish persistence-failure behavior.",
+      "relatedEvidenceRefs": [
+        "evidence-order-handler-code"
+      ],
+      "relatedClaimRefs": [
+        {
+          "id": "claim-validate-order",
+          "version": 1
+        }
+      ],
+      "suggestedSearches": [
+        "OrderRepository failure tests"
+      ],
+      "createdAt": "2026-07-13T14:38:00Z"
+    }
+  ],
+  "revision": 1,
+  "digest": "sha256:aca425e6ceea38c0ef02c6b5bcf9a5e10e7e388da7c519f315007e454858cca2",
+  "createdAt": "2026-07-13T14:20:00Z",
+  "updatedAt": "2026-07-13T14:38:00Z"
+}

@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>GraphPilot Block 1 Design Review</title>
+  <style>
+    :root { color-scheme: light dark; --bg: #0b1020; --panel: #131a2b; --panel-2: #19233a; --text: #edf2ff; --muted: #aebbd6; --border: #344466; --accent: #8bb8ff; --good: #61d6a7; --warn: #ffca6a; --bad: #ff8d96; --focus: #f7dc72; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font: 16px/1.55 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--bg); color: var(--text); }
+    a { color: var(--accent); }
+    button, textarea, input { font: inherit; }
+    button:focus-visible, textarea:focus-visible, input:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+    header, main, footer { width: min(1120px, calc(100% - 32px)); margin-inline: auto; }
+    header { padding: 48px 0 24px; }
+    h1 { margin: 0 0 8px; font-size: clamp(2rem, 5vw, 3.4rem); line-height: 1.08; }
+    h2 { margin-top: 0; }
+    h3 { margin: 0; }
+    code { background: #080d19; padding: 2px 6px; border-radius: 5px; overflow-wrap: anywhere; }
+    .eyebrow { color: var(--accent); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .lede { max-width: 78ch; color: var(--muted); font-size: 1.1rem; }
+    .scope { border-left: 4px solid var(--warn); background: #241e14; padding: 14px 18px; border-radius: 8px; }
+    .meta, .progress, .section, .final, .sources { border: 1px solid var(--border); background: var(--panel); border-radius: 14px; }
+    .meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; padding: 18px; margin: 24px 0; }
+    .meta strong { display: block; color: var(--muted); font-size: .82rem; text-transform: uppercase; letter-spacing: .05em; }
+    .progress { position: sticky; top: 8px; z-index: 4; padding: 14px 18px; margin-bottom: 18px; box-shadow: 0 10px 30px #0007; }
+    progress { width: 100%; height: 14px; accent-color: var(--good); }
+    .section { padding: 22px; margin: 18px 0; }
+    .section-head { display: flex; justify-content: space-between; align-items: start; gap: 16px; margin-bottom: 12px; }
+    .number { min-width: 2.2rem; height: 2.2rem; display: grid; place-items: center; border-radius: 999px; background: var(--panel-2); color: var(--accent); font-weight: 800; }
+    .content { color: var(--muted); }
+    .content, li, td, th, .meta span { overflow-wrap: anywhere; }
+    .content strong { color: var(--text); }
+    .content li { margin: 5px 0; }
+    .flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 18px 0; }
+    .flow div { position: relative; min-height: 82px; padding: 13px; display: grid; place-items: center; text-align: center; border: 1px solid var(--border); border-radius: 10px; background: var(--panel-2); }
+    table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: .95rem; }
+    th, td { border: 1px solid var(--border); padding: 10px; text-align: left; vertical-align: top; }
+    th { background: var(--panel-2); }
+    fieldset { border: 1px solid var(--border); border-radius: 10px; margin-top: 18px; padding: 14px; }
+    legend { font-weight: 700; padding: 0 6px; }
+    .choices { display: flex; flex-wrap: wrap; gap: 12px; }
+    .choice { display: flex; align-items: center; gap: 8px; border: 1px solid var(--border); border-radius: 999px; padding: 8px 12px; cursor: pointer; }
+    .choice:has(input:checked) { border-color: var(--good); background: #123127; }
+    .choice.revise:has(input:checked) { border-color: var(--warn); background: #372a13; }
+    textarea { width: 100%; min-height: 76px; margin-top: 12px; padding: 10px; border: 1px solid var(--border); border-radius: 8px; background: #0b1222; color: var(--text); resize: vertical; }
+    .final, .sources { padding: 22px; margin: 24px 0; }
+    .gate { display: flex; gap: 10px; align-items: start; margin: 16px 0; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+    button { border: 1px solid var(--border); border-radius: 9px; padding: 10px 15px; background: var(--panel-2); color: var(--text); cursor: pointer; }
+    button.primary { background: #185f49; border-color: var(--good); font-weight: 800; }
+    button:disabled { opacity: .45; cursor: not-allowed; }
+    pre { max-height: 360px; overflow: auto; padding: 14px; border-radius: 10px; background: #080d19; border: 1px solid var(--border); white-space: pre-wrap; overflow-wrap: anywhere; }
+    .status { min-height: 1.5em; color: var(--good); font-weight: 700; }
+    .warning { color: var(--warn); }
+    footer { color: var(--muted); padding: 18px 0 48px; }
+    @media (max-width: 700px) { .section-head { flex-direction: column-reverse; } .table-wrap { overflow-x: auto; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="eyebrow">Epic 3 · Part 6 · Block 1</div>
+    <h1>Workflow Audit and Measurement</h1>
+    <p class="lede">Approval review for a reusable, versioned, provider-free workflow audit and the fresh pre-Block 2 parity baseline. The recommendation refactors the existing S15 audit foundation without carrying forward its H/M identities or live experiment package.</p>
+    <p class="scope"><strong>Approval boundary:</strong> Approval authorizes the nested Block 1 Slice 01–06 plans under <code>01-workflow-audit-and-measurement/</code> and provider-free implementation/commits. It does not authorize Azure calls, any live budget, S15 identity reuse, Block 2, promotion, certification, <code>.env</code> changes, push, or remote changes.</p>
+    <div class="meta">
+      <div><strong>Plan ID</strong><span>graphpilot-epic3-part6-block1-v1</span></div>
+      <div><strong>Review base</strong><code>4a0ab8ba04bf2566b122e85a0b38fd29510dce8f</code></div>
+      <div><strong>Package</strong><code>C:\Users\w105098\Desktop\Projects\GraphPilot\docs\internal\epic-3-block-1-design-review</code></div>
+      <div><strong>State</strong><span>Proposed, independently audited</span></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="progress" aria-labelledby="progress-title">
+      <strong id="progress-title">Review progress: <span id="progress-text">0 of 6 sections decided</span></strong>
+      <progress id="progress-bar" max="6" value="0">0 of 6</progress>
+      <div id="progress-guidance" class="warning">Decide each section, add notes where needed, then use the final gate.</div>
+    </section>
+
+    <article class="section" data-section="direction">
+      <div class="section-head"><div><h2>Recommended Direction</h2><p class="content">Reuse and complete the existing audit, do not generalize the frozen H/M package.</p></div><span class="number">1</span></div>
+      <div class="content">
+        <p>Refactor <code>full_workflow_audit_service.py</code> in place. Preserve its W01–W22 map, real-stdio worker, service wrappers, observer, cold/warm orchestration, recovery proof, accounting, and summaries. Rename the internal class to <code>WorkflowAuditService</code> while retaining the filename until Block 2 owns repository organization.</p>
+        <p>Remove its runtime dependencies on both <code>FullEffortCaseSetService</code> and <code>FullEffortFakeClientFactory</code>, including the current fake client. Keep every S15 <code>full_effort_*</code> case, manifest, runner, report, stopped identity, budget, and outcome unchanged.</p>
+        <p><strong>Internal CLI migration:</strong> add canonical <code>run_workflow_audit</code>; remove only <code>audit_offline</code> from <code>run_full_effort_evaluation</code>, which continues to own <code>offline|prepare|stage_b|stage_c</code>. No public MCP/API contract changes.</p>
+        <div class="flow" aria-label="Proposed audit flow">
+          <div>Versioned scenarios</div><div>Refactored runner</div><div>Real stdio and services</div><div>Captured fake provider</div><div>Built-preview browser</div><div>W01–W22 evidence</div><div>Report and ranking</div><div>Baseline ledger</div>
+        </div>
+        <p><strong>Strongest alternative:</strong> generalize the complete S15 stack and retain its command. That reuses more names but leaks H/M conditions, stage budgets, and stopped-run semantics into the permanent capability. The recommended selective extraction accepts a new scenario/report contract for clean ownership.</p>
+      </div>
+      <fieldset><legend>Section decision</legend><div class="choices"><label class="choice"><input type="radio" name="decision-direction" value="approve"> Approve</label><label class="choice revise"><input type="radio" name="decision-direction" value="revise"> Needs changes</label></div><label for="note-direction">Notes</label><textarea id="note-direction" placeholder="Optional for approval, required context for requested changes"></textarea></fieldset>
+    </article>
+
+    <article class="section" data-section="contracts">
+      <div class="section-head"><div><h2>Contracts and Evidence Model</h2><p class="content">Versioned inputs and outputs make the audit rerunnable and comparisons truthful.</p></div><span class="number">2</span></div>
+      <div class="content">
+        <ul>
+          <li>Retain W01–W22 as stable detailed IDs mapped to Block 1's ten broad areas.</li>
+          <li>Use non-overlapping <code>host</code>, <code>azure</code>, <code>mcp</code>, <code>local</code>, <code>browser</code>, and <code>residual</code> accounting.</li>
+          <li>Every value has status, source, reason, and confidence. Unavailable is <code>null</code>; zero requires observed zero or explicit provider-free <code>not_called</code>.</li>
+          <li>Add bounded namespace-first scenario-set, external-evidence, run-manifest, observation, report, and baseline-ledger contracts.</li>
+          <li>Default scenarios use new identities with no S15/H/M/full-effort runtime dependency: six basic/complex type anchors plus the smallest blocked, repair, failure/interruption, recovery, and no-rerun guards.</li>
+          <li>Fake-provider time remains local harness time; host credits remain separate; no provider or host value is estimated.</li>
+        </ul>
+        <p>The first implementation slice defines storage, ledger, compatibility, and security contracts before runner code, preventing the artifact model from being backfilled around implementation.</p>
+      </div>
+      <fieldset><legend>Section decision</legend><div class="choices"><label class="choice"><input type="radio" name="decision-contracts" value="approve"> Approve</label><label class="choice revise"><input type="radio" name="decision-contracts" value="revise"> Needs changes</label></div><label for="note-contracts">Notes</label><textarea id="note-contracts"></textarea></fieldset>
+    </article>
+
+    <article class="section" data-section="capture">
+      <div class="section-head"><div><h2>Capture, Recovery, and Browser Proof</h2><p class="content">Evaluation-only adapters cover external boundaries without changing production acceptance.</p></div><span class="number">3</span></div>
+      <div class="content">
+        <ul>
+          <li>A provider-free fixture-host adapter and optional validated external-host importer represent W01–W05.</li>
+          <li>An evaluation-only capturing client wraps the existing LLM seam and records role/state, bytes, duration, tokens, cache, provider identity/tier, and requested/effective controls. The production observer event contract is unchanged.</li>
+          <li>The existing generation observer retains stage/candidate/repair/quality/result evidence; real stdio measures startup, discovery, transport, serialization, response bytes, and recovery.</li>
+          <li>Immutable observations and terminal identities prove blocked, failure/interruption, finalized recovery, and no unchanged rerun.</li>
+          <li>Playwright uses built Vite preview and existing dedicated ports 15173/18080. One exact generated representative loads cold and warm with API timing, visible diagram identity, and console/page/network checks.</li>
+          <li>W22 may be omitted only for a diagnostic report. Any recorded baseline fails closed without browser proof.</li>
+        </ul>
+        <p>Instrumentation equivalence must prove identical provider-call order, result, canonical JSON, SVG, and writes. Capture callback failures remain isolated from production behavior.</p>
+      </div>
+      <fieldset><legend>Section decision</legend><div class="choices"><label class="choice"><input type="radio" name="decision-capture" value="approve"> Approve</label><label class="choice revise"><input type="radio" name="decision-capture" value="revise"> Needs changes</label></div><label for="note-capture">Notes</label><textarea id="note-capture"></textarea></fieldset>
+    </article>
+
+    <article class="section" data-section="artifacts">
+      <div class="section-head"><div><h2>Reports, Ranking, and Baselines</h2><p class="content">Immutable run evidence becomes a bounded, comparable Block 2 input.</p></div><span class="number">4</span></div>
+      <div class="content">
+        <p>Store non-canonical packages below <code>.graphpilot/evaluation/workflow-audit/</code>: immutable run manifest/observations, browser evidence, machine-authoritative JSON, human Markdown, and one logical append-only baseline ledger.</p>
+        <ul>
+          <li>Artifacts contain safe metrics, identities, versions, output digests, and byte counts, never raw source, prompts, provider responses, hidden reasoning, secrets, or hidden gold.</li>
+          <li>Ledger updates are bounded and atomic with expected-digest checks. Duplicate IDs and stale/concurrent writers fail.</li>
+          <li>Comparison requires an exact compatibility key over audit/report/scenario/schedule/assets/dependencies/platform/browser mode; otherwise results are explicitly incomparable.</li>
+          <li>S13–S15 remain prior evidence only, never ledger baselines.</li>
+          <li>Deterministic ranking prioritizes reliability/quality failure, then valid complete-wall contribution, then attribution-blocking unknowns.</li>
+          <li>Every finding contains evidence refs, owner confidence, proven fix or smallest diagnostic proof, alternative, trade-off, benefit ceiling, offline/live proof, and disposition. No model output changes behavior.</li>
+        </ul>
+      </div>
+      <fieldset><legend>Section decision</legend><div class="choices"><label class="choice"><input type="radio" name="decision-artifacts" value="approve"> Approve</label><label class="choice revise"><input type="radio" name="decision-artifacts" value="revise"> Needs changes</label></div><label for="note-artifacts">Notes</label><textarea id="note-artifacts"></textarea></fieldset>
+    </article>
+
+    <article class="section" data-section="slices">
+      <div class="section-head"><div><h2>Block 1 Slice Group</h2><p class="content">A nested group owns six locally numbered slices, each independently audited and committed.</p></div><span class="number">5</span></div>
+      <div class="content">
+        <p>The high-level Block 1 document remains at the roadmap root. Executable work lives under <code>01-workflow-audit-and-measurement/</code>, whose <code>00-group.md</code> owns its slice index. Future blocks receive separate numbered folders only after approval.</p>
+        <pre>01-workflow-audit-and-measurement/
+  00-group.md
+  01-audit-contracts-and-scenarios.md
+  02-capture-and-evidence-adapters.md
+  03-audit-runner-and-recovery.md
+  04-browser-completion-proof.md
+  05-reports-and-baseline-ledger.md
+  06-fresh-provider-free-baseline.md</pre>
+      </div>
+      <div class="table-wrap"><table><thead><tr><th>Slice</th><th>Deliverable</th><th>Exit proof</th></tr></thead><tbody>
+        <tr><td><strong>01</strong><br>Audit Contracts and Scenarios</td><td>Canonical design owner, all versioned contracts, storage/compatibility/security policy, independent scenario bundle and loader.</td><td>Schema/examples pass; bundle is bounded and free of S15/H/M/stopped identities; invalid status/path/size/ref/null-zero/security cases fail.</td></tr>
+        <tr><td><strong>02</strong><br>Capture and Evidence Adapters</td><td>Normalized W01–W22 collector/accounting, scenario-backed fake and capturing clients, fixture/external-host and real-stdio adapters.</td><td>Instrumented equivalence, failure isolation, exact rich metadata, and truthful missing-evidence behavior.</td></tr>
+        <tr><td><strong>03</strong><br>Audit Runner and Recovery</td><td>Refactored service/fake client without S15 imports; immutable cold/warm and guard observations; recovery and no-rerun state.</td><td>All success/guard scenarios pass; every boundary has an explicit evidence status/reason; completed/uncertain provider identities cannot rerun; Azure remains zero constructed/called.</td></tr>
+        <tr><td><strong>04</strong><br>Browser Completion Proof</td><td>Built-preview Playwright adapter and merged W22 evidence.</td><td>Exact representative is visible cold/warm with healthy API/console/page/network; browser or evidence mismatch blocks baseline.</td></tr>
+        <tr><td><strong>05</strong><br>Reports and Baseline Ledger</td><td>Deterministic findings, JSON/Markdown, artifact store, compatibility/ledger, new command, old command/class/test/doc migration.</td><td>Schemas validate; atomicity and incompatibility guards pass; command is provider-free; old audit tests migrate rather than disappear.</td></tr>
+        <tr><td><strong>06</strong><br>Fresh Provider-Free Baseline</td><td>Execute the complete package with new identities and record pre-Block 2 parity evidence.</td><td>Exact commit/assets/scenarios/cold-warm/browser/quality/gaps/rankings/compatibility key recorded after all gates; no live call.</td></tr>
+      </tbody></table></div>
+      <fieldset><legend>Section decision</legend><div class="choices"><label class="choice"><input type="radio" name="decision-slices" value="approve"> Approve</label><label class="choice revise"><input type="radio" name="decision-slices" value="revise"> Needs changes</label></div><label for="note-slices">Notes</label><textarea id="note-slices"></textarea></fieldset>
+    </article>
+
+    <article class="section" data-section="delivery">
+      <div class="section-head"><div><h2>Verification, Rollback, and Scope</h2><p class="content">The normal slice cadence remains intact, and no later block is pulled forward.</p></div><span class="number">6</span></div>
+      <div class="content">
+        <p>Each slice follows plan audit → plan commit → implementation → implementation audit → checks → implementation commit. Required final gates are the full backend suite, Django check, real stdio smoke, Python compile, frontend verify, dedicated built-preview audit proof, focused schema/scenario/capture/runner/report/ledger/command tests, redaction/equivalence/no-rerun tests, <code>git diff --check</code>, and final security/diff audit.</p>
+        <p>Rollback removes the new non-canonical package/command/contracts and restores the old internal audit entry if necessary. It does not migrate or delete canonical diagrams, context/request artifacts, S15 evidence, or baseline files. The unrelated untracked <code>backend/_diag_llm.py</code> remains untouched and excluded from commits.</p>
+        <p><strong>Deferred:</strong> behavioral fixes, repository restructuring, readiness redesign/correction, live provider use, H/M replacement screening, Stage C, runtime prompt/setting/schema/cache/async/architecture changes, representative validation, promotion, and certification.</p>
+        <p><strong>Plan audit:</strong> pass after independent review and revision. No critical, high, or unresolved medium defect remains.</p>
+      </div>
+      <fieldset><legend>Section decision</legend><div class="choices"><label class="choice"><input type="radio" name="decision-delivery" value="approve"> Approve</label><label class="choice revise"><input type="radio" name="decision-delivery" value="revise"> Needs changes</label></div><label for="note-delivery">Notes</label><textarea id="note-delivery"></textarea></fieldset>
+    </article>
+
+    <section class="final" aria-labelledby="final-title">
+      <h2 id="final-title">Final Gate</h2>
+      <p id="final-summary">Complete all section decisions before finalizing.</p>
+      <label for="final-note">Overall note</label>
+      <textarea id="final-note" placeholder="Optional overall approval note or revision summary"></textarea>
+      <label class="gate"><input id="scope-confirm" type="checkbox"> <span>I understand that approval covers provider-free Block 1 implementation and verified commits only. It does not approve live calls, later blocks, promotion, certification, push, or remote changes.</span></label>
+      <div class="actions">
+        <button id="finalize" class="primary" type="button" disabled>Finalize review record</button>
+        <button id="copy" type="button" disabled>Copy JSON</button>
+        <button id="download" type="button" disabled>Download JSON</button>
+        <button id="reset" type="button">Reset review</button>
+      </div>
+      <p id="action-status" class="status" aria-live="polite"></p>
+      <details><summary>Machine-readable review record</summary><pre id="record">No finalized record yet.</pre></details>
+    </section>
+
+    <section class="sources" aria-labelledby="sources-title">
+      <h2 id="sources-title">Canonical Sources</h2>
+      <p>The page renders all approval content directly. These files supplied the authoritative constraints and evidence:</p>
+      <ul>
+        <li><code>AGENTS.md</code> and <code>.devin/rules/graphpilot.md</code></li>
+        <li><code>docs/03-development-and-delivery/epics/00-current-state.md</code></li>
+        <li><code>docs/02-design-and-features/decision-decisions.md</code></li>
+        <li><code>docs/03-development-and-delivery/epics/03-mcp-generation-and-wrappers/06-workflow-reliability-and-optimization/00-group.md</code></li>
+        <li><code>.../01-success-contract.md</code> and <code>.../02-block-01-workflow-audit-and-measurement.md</code></li>
+        <li><code>docs/03-development-and-delivery/epics/03-mcp-generation-and-wrappers/04-context-backed-generation/13-*.md</code>, <code>14-*.md</code>, and <code>15-*.md</code></li>
+        <li><code>docs/02-design-and-features/07-evaluation-and-doe-design.md</code> and <code>08-context-backed-generation/</code></li>
+        <li><code>docs/01-architecture/01-backend-architecture.md</code> and <code>03-mcp-tools/</code></li>
+      </ul>
+      <p>Full prose source: <code>C:\Users\w105098\Desktop\Projects\GraphPilot\docs\internal\epic-3-block-1-design-review\plan.md</code></p>
+    </section>
+  </main>
+
+  <footer>GraphPilot local design review · State persists only in this browser's local storage until reset.</footer>
+
+  <script>
+    const PLAN_ID = 'graphpilot-epic3-part6-block1-v1'
+    const STORAGE_KEY = `${PLAN_ID}:review-state`
+    const PACKAGE_PATH = 'C:\\Users\\w105098\\Desktop\\Projects\\GraphPilot\\docs\\internal\\epic-3-block-1-design-review'
+    const REVIEW_BASE = '4a0ab8ba04bf2566b122e85a0b38fd29510dce8f'
+    const sourceDocuments = [
+      'AGENTS.md',
+      '.devin/rules/graphpilot.md',
+      'docs/03-development-and-delivery/epics/00-current-state.md',
+      'docs/02-design-and-features/decision-decisions.md',
+      'docs/03-development-and-delivery/epics/03-mcp-generation-and-wrappers/00-epic.md',
+      'docs/03-development-and-delivery/epics/03-mcp-generation-and-wrappers/06-workflow-reliability-and-optimization/00-group.md',
+      'docs/03-development-and-delivery/epics/03-mcp-generation-and-wrappers/06-workflow-reliability-and-optimization/01-success-contract.md',
+      'docs/03-development-and-delivery/epics/03-mcp-generation-and-wrappers/06-workflow-reliability-and-optimization/02-block-01-workflow-audit-and-measurement.md',
+      'docs/03-development-and-delivery/epics/03-mcp-generation-and-wrappers/04-context-backed-generation/13-context-performance-and-recovery.md',
+      'docs/03-development-and-delivery/epics/03-mcp-generation-and-wrappers/04-context-backed-generation/14-readiness-effort-evaluation.md',
+      'docs/03-development-and-delivery/epics/03-mcp-generation-and-wrappers/04-context-backed-generation/15-full-effort-evaluation.md',
+      'docs/02-design-and-features/07-evaluation-and-doe-design.md',
+      'docs/02-design-and-features/08-context-backed-generation/',
+      'docs/01-architecture/01-backend-architecture.md',
+      'docs/01-architecture/03-mcp-tools/'
+    ]
+    const sectionElements = [...document.querySelectorAll('[data-section]')]
+    const sectionIds = sectionElements.map((element) => element.dataset.section)
+    let finalizedRecord = null
+
+    function readState() {
+      try {
+        const value = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}')
+        return value && typeof value === 'object' ? value : {}
+      } catch {
+        return {}
+      }
+    }
+
+    function collectState() {
+      const sections = {}
+      for (const element of sectionElements) {
+        const id = element.dataset.section
+        const checked = element.querySelector(`input[name="decision-${id}"]:checked`)
+        sections[id] = {
+          decision: checked ? checked.value : null,
+          note: element.querySelector(`#note-${id}`).value.trim()
+        }
+      }
+      return {
+        sections,
+        finalNote: document.querySelector('#final-note').value.trim(),
+        scopeConfirmed: document.querySelector('#scope-confirm').checked
+      }
+    }
+
+    function saveState() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(collectState()))
+      finalizedRecord = null
+      document.querySelector('#record').textContent = 'No finalized record yet.'
+      document.querySelector('#copy').disabled = true
+      document.querySelector('#download').disabled = true
+      updateProgress()
+    }
+
+    function restoreState() {
+      const state = readState()
+      for (const element of sectionElements) {
+        const id = element.dataset.section
+        const section = state.sections?.[id]
+        if (section?.decision) {
+          const input = element.querySelector(`input[name="decision-${id}"][value="${section.decision}"]`)
+          if (input) input.checked = true
+        }
+        element.querySelector(`#note-${id}`).value = section?.note || ''
+      }
+      document.querySelector('#final-note').value = state.finalNote || ''
+      document.querySelector('#scope-confirm').checked = !!state.scopeConfirmed
+      updateProgress()
+    }
+
+    function updateProgress() {
+      const state = collectState()
+      const decided = Object.values(state.sections).filter((section) => section.decision).length
+      const revisions = Object.values(state.sections).filter((section) => section.decision === 'revise').length
+      const progress = document.querySelector('#progress-bar')
+      progress.value = decided
+      progress.textContent = `${decided} of ${sectionIds.length}`
+      document.querySelector('#progress-text').textContent = `${decided} of ${sectionIds.length} sections decided`
+      const ready = decided === sectionIds.length && state.scopeConfirmed
+      document.querySelector('#finalize').disabled = !ready
+      document.querySelector('#progress-guidance').textContent = ready
+        ? revisions > 0 ? `${revisions} section(s) need changes. Finalizing will export revision feedback.` : 'All sections approved and scope confirmed. Final approval can be exported.'
+        : 'Decide each section and confirm the scope before finalizing.'
+      document.querySelector('#final-summary').textContent = decided < sectionIds.length
+        ? `Complete ${sectionIds.length - decided} remaining section decision(s).`
+        : revisions > 0
+          ? `${revisions} section(s) request changes. The final record will be revision_requested.`
+          : state.scopeConfirmed
+            ? 'All sections are approved. The final record will authorize provider-free Block 1 implementation.'
+            : 'All sections are approved. Confirm the implementation scope to enable finalization.'
+    }
+
+    function buildRecord() {
+      const state = collectState()
+      const revisions = Object.values(state.sections).filter((section) => section.decision === 'revise').length
+      return {
+        schemaVersion: 'graphpilot.design-review.approval.v1',
+        planId: PLAN_ID,
+        planVersion: 1,
+        packagePath: PACKAGE_PATH,
+        reviewBaseCommit: REVIEW_BASE,
+        canonicalSourceDocuments: sourceDocuments,
+        sections: state.sections,
+        scopeConfirmed: state.scopeConfirmed,
+        finalNote: state.finalNote,
+        finalDecision: revisions === 0 ? 'approved_for_provider_free_implementation' : 'revision_requested',
+        approvalDoesNotAuthorize: [
+          'azure_or_other_live_provider_calls',
+          'reuse_or_rerun_of_s15_identities',
+          'block_2_or_later_implementation',
+          'promotion_or_certification',
+          'environment_secret_changes',
+          'push_or_remote_changes'
+        ],
+        finalizedAt: new Date().toISOString()
+      }
+    }
+
+    function finalize() {
+      finalizedRecord = buildRecord()
+      const json = JSON.stringify(finalizedRecord, null, 2)
+      document.querySelector('#record').textContent = json
+      document.querySelector('#copy').disabled = false
+      document.querySelector('#download').disabled = false
+      document.querySelector('#action-status').textContent = finalizedRecord.finalDecision === 'revision_requested'
+        ? 'Revision feedback record is ready to copy or download.'
+        : 'Approval record is ready to copy or download. Implementation has not started from this page.'
+    }
+
+    async function copyRecord() {
+      if (!finalizedRecord) return
+      const text = JSON.stringify(finalizedRecord, null, 2)
+      try {
+        await navigator.clipboard.writeText(text)
+      } catch {
+        const area = document.createElement('textarea')
+        area.value = text
+        area.setAttribute('readonly', '')
+        area.style.position = 'fixed'
+        area.style.opacity = '0'
+        document.body.append(area)
+        area.select()
+        document.execCommand('copy')
+        area.remove()
+      }
+      document.querySelector('#action-status').textContent = 'Approval record copied as JSON.'
+    }
+
+    function downloadRecord() {
+      if (!finalizedRecord) return
+      const blob = new Blob([JSON.stringify(finalizedRecord, null, 2)], { type: 'application/json' })
+      const link = document.createElement('a')
+      link.href = URL.createObjectURL(blob)
+      link.download = `${PLAN_ID}-approval.json`
+      document.body.append(link)
+      link.click()
+      link.remove()
+      URL.revokeObjectURL(link.href)
+      document.querySelector('#action-status').textContent = 'Approval record downloaded as JSON.'
+    }
+
+    function resetReview() {
+      localStorage.removeItem(STORAGE_KEY)
+      for (const input of document.querySelectorAll('input[type="radio"], input[type="checkbox"]')) input.checked = false
+      for (const area of document.querySelectorAll('textarea')) area.value = ''
+      finalizedRecord = null
+      document.querySelector('#record').textContent = 'No finalized record yet.'
+      document.querySelector('#copy').disabled = true
+      document.querySelector('#download').disabled = true
+      document.querySelector('#action-status').textContent = 'Review state reset.'
+      updateProgress()
+    }
+
+    for (const input of document.querySelectorAll('input, textarea')) input.addEventListener('input', saveState)
+    document.querySelector('#finalize').addEventListener('click', finalize)
+    document.querySelector('#copy').addEventListener('click', copyRecord)
+    document.querySelector('#download').addEventListener('click', downloadRecord)
+    document.querySelector('#reset').addEventListener('click', resetReview)
+    restoreState()
+  </script>
+</body>
+</html>

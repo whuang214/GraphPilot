@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "streaming-service",
+  "diagramType": "use_case_diagram",
+  "authority": "conceptual",
+  "requests": [
+    "On a streaming platform a viewer browses the catalog and watches content, where watching a movie and watching a series are both kinds of watching content, and an admin manages the content."
+  ],
+  "evidence": [],
+  "elements": [
+    {
+      "id": "viewer",
+      "semanticType": "actor",
+      "label": "Viewer",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "admin",
+      "semanticType": "actor",
+      "label": "Admin",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "sys",
+      "semanticType": "subject",
+      "label": "Streaming Platform",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "browse",
+      "semanticType": "useCase",
+      "label": "Browse Catalog",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    },
+    {
+      "id": "watch",
+      "semanticType": "useCase",
+      "label": "Watch Content",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    },
+    {
+      "id": "movie",
+      "semanticType": "useCase",
+      "label": "Watch Movie",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    },
+    {
+      "id": "series",
+      "semanticType": "useCase",
+      "label": "Watch Series",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    },
+    {
+      "id": "manage",
+      "semanticType": "useCase",
+      "label": "Manage Content",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "edge-1-viewer-browse",
+      "semanticType": "association",
+      "source": "viewer",
+      "target": "browse",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-2-viewer-watch",
+      "semanticType": "association",
+      "source": "viewer",
+      "target": "watch",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-3-admin-manage",
+      "semanticType": "association",
+      "source": "admin",
+      "target": "manage",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-4-movie-watch",
+      "semanticType": "generalization",
+      "source": "movie",
+      "target": "watch",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-5-series-watch",
+      "semanticType": "generalization",
+      "source": "series",
+      "target": "watch",
+      "assurance": "conceptual"
+    }
+  ],
+  "assumptions": []
+}

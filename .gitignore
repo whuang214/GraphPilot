@@ -1,0 +1,113 @@
+# Local dot folders are machine/session data, not repository content.
+.*/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+.clinerules
+*.swp
+*.swo
+~$*.docx
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Django / Python build artifacts
+*.log
+db.sqlite3
+staticfiles/
+dist/
+build/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+coverage/
+frontend/dist/
+frontend/node_modules/
+
+# Environment files; only non-secret setup templates are shared.
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+
+# Tooling caches
+.cache/
+.parcel-cache/
+.eslintcache
+*.tsbuildinfo
+
+# Preserve any user-owned legacy local Graphviz installation without using or committing it.
+# Pinned PyGraphviz 2.0 with bundled libgvc is the sole runtime layout engine.
+backend/.graphviz/
+
+# Generated uploads / exports
+media/
+tmp/
+temp/
+
+# Local GraphPilot test/scratch workspace.
+# Real diagram workspaces live inside the end-user's project, not this repo.
+# A committed seed sample lives under samples/ (see samples/README.md).
+.graphpilot/
+
+# Example-gallery contact sheets. Regenerated review artifacts
+# (render_example_gallery -> <timestamp>/index.html); never committed.
+backend/review_galleries/
+
+# Playwright CLI (@playwright/cli) per-session working dir created in the cwd
+# (page snapshots, traces, videos). Local scratch — never commit.
+.playwright-cli/
+
+# Serena (semantic-code MCP) per-project data: config, memories, LSP symbol cache.
+# Local tooling — regenerate the config per clone with:
+#   serena project create . --language python --language typescript
+.serena/
+
+# Graphify knowledge-graph output (generated: graph.json + report + html + AST cache).
+# Local navigation aid — rebuild with:
+#   $env:GRAPHIFY_OUT='.graphify'; py -m graphify extract . --code-only
+.graphify/
+
+# Local agent execution archives and downloaded tooling.
+.hyperspace/
+
+# Legacy Devin configuration and skills from a previous development environment.
+.devin/
+
+# Internal-only planning / source docs (kept on disk, not in version control).
+docs/internal/
+
+# Misc
+*.bak
+*.tmp
+# Written by run.py while the launcher holds its ports; removed on shutdown.
+runtime.json

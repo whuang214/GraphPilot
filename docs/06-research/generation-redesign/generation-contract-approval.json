@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "graphpilot.research.generation-contract-approval.v1",
+  "kind": "generationContractApproval",
+  "documentVersion": "generation-redesign-blocks-2026-07-17",
+  "status": "approved",
+  "recordedAt": "2026-07-17T19:38:02Z",
+  "reviewer": "user",
+  "overallNote": "Approved in chat after sequential review of all seven generation-contract design blocks.",
+  "sections": [
+    {
+      "id": "authority",
+      "title": "Authority and unified workflow",
+      "decision": "approved",
+      "notes": ""
+    },
+    {
+      "id": "requests",
+      "title": "Persisted requests and lifecycle",
+      "decision": "approved",
+      "notes": "Context persisted request is JSON 2; direct uses its parallel direct request contract."
+    },
+    {
+      "id": "generation",
+      "title": "Strict generation and deterministic repair",
+      "decision": "approved",
+      "notes": ""
+    },
+    {
+      "id": "semantic",
+      "title": "Semantic review and quality mode",
+      "decision": "approved",
+      "notes": ""
+    },
+    {
+      "id": "examples",
+      "title": "Training examples and future held-out scope",
+      "decision": "approved",
+      "notes": ""
+    },
+    {
+      "id": "canonical-trace",
+      "title": "Canonical output, compact trace, and diagnostics",
+      "decision": "approved",
+      "notes": ""
+    },
+    {
+      "id": "layout-safety",
+      "title": "PyGraphviz, safety bounds, and failure behavior",
+      "decision": "approved",
+      "notes": ""
+    }
+  ],
+  "amendments": [
+    {
+      "recordedAt": "2026-07-17T22:25:45Z",
+      "decision": "Generation quality mode now defaults to reviewed. Standard remains an explicit environment-only diagnostic/ablation mode and is never an automatic fallback.",
+      "approvedBy": "user"
+    }
+  ],
+  "scope": {
+    "approvesGenerationContractDesign": true,
+    "approvesImplementation": false,
+    "approvesProductionPromotion": false
+  }
+}

@@ -1,0 +1,1107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema#",
+  "$id": "graphpilot.diagram.v1",
+  "title": "GraphPilot Diagram",
+  "description": "Canonical saved JSON format for GraphPilot diagrams, shared by backend services and the React Flow load/edit/save adapter.",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "kind",
+    "diagramType",
+    "id",
+    "name",
+    "metadata",
+    "viewport",
+    "nodes",
+    "edges"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "graphpilot.diagram.v1"
+    },
+    "kind": {
+      "type": "string",
+      "const": "diagram"
+    },
+    "diagramType": {
+      "type": "string",
+      "enum": [
+        "activity_diagram",
+        "use_case_diagram",
+        "bdd_diagram",
+        "custom"
+      ]
+    },
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        },
+        "generatedBy": {
+          "type": "string"
+        },
+        "authority": {
+          "description": "What the diagram claims. as_implemented cites evidence; conceptual makes no claim about this repository.",
+          "enum": [
+            "as_implemented",
+            "conceptual"
+          ]
+        },
+        "assurance": {
+          "$ref": "#/$defs/diagramAssurance"
+        },
+        "evidence": {
+          "type": "array",
+          "description": "The cited source regions this diagram was built from, carried inline so the diagram is self-contained.",
+          "maxItems": 128,
+          "items": {
+            "$ref": "#/$defs/evidenceRecord"
+          }
+        },
+        "requests": {
+          "type": "array",
+          "description": "Every ask made of this diagram, oldest first, each stamped when it arrived. Append-only: a host adds one entry per edit and may not alter the rest. This is the only durable record of why the diagram looks the way it does.",
+          "maxItems": 64,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "at",
+              "text"
+            ],
+            "properties": {
+              "at": {
+                "type": "string"
+              },
+              "text": {
+                "$ref": "#/$defs/nonBlankText"
+              }
+            }
+          }
+        },
+        "authoring": {
+          "description": "How the diagram came to exist. `generated` means a host authored a draft and the backend materialized it.",
+          "type": "string"
+        },
+        "intent": {
+          "description": "The diagram's name, carried so an exported file still says what it was for once separated from its path.",
+          "type": "string"
+        },
+        "notation": {
+          "description": "The notation family whose rules the diagram was drawn under.",
+          "type": "string"
+        },
+        "originalType": {
+          "description": "The diagram type requested by the draft. Retained separately from the top-level `diagramType` so a later conversion cannot erase what was asked for.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": true,
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "evidence"
+            ]
+          },
+          "then": {
+            "required": [
+              "authority"
+            ]
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "authority"
+            ],
+            "properties": {
+              "authority": {
+                "const": "as_implemented"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "evidence"
+            ]
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "authority"
+            ],
+            "properties": {
+              "authority": {
+                "const": "conceptual"
+              }
+            }
+          },
+          "then": {
+            "not": {
+              "required": [
+                "evidence"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "viewport": {
+      "type": "object",
+      "required": [
+        "x",
+        "y",
+        "zoom"
+      ],
+      "properties": {
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        },
+        "zoom": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": false
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/node"
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/edge"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "metadata": {
+            "required": [
+              "authority"
+            ],
+            "properties": {
+              "authority": {
+                "const": "as_implemented"
+              }
+            }
+          }
+        },
+        "required": [
+          "metadata"
+        ]
+      },
+      "then": {
+        "properties": {
+          "nodes": {
+            "items": {
+              "required": [
+                "origin"
+              ]
+            }
+          },
+          "edges": {
+            "items": {
+              "required": [
+                "origin"
+              ]
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "positiveInteger": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 2147483647
+    },
+    "nonBlankText": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000,
+      "pattern": "\\S"
+    },
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "timestamp": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-(?:0[1-9]|1[0-2])-(?:[0-2][0-9]|3[01])T(?:[01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](?:\\.[0-9]{1,6})?Z$"
+    },
+    "evidenceId": {
+      "type": "string",
+      "minLength": 4,
+      "maxLength": 128,
+      "pattern": "^ev-[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "assumptionId": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 128,
+      "pattern": "^asm-[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "elementOrigin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "assurance",
+        "evidenceRefs",
+        "assumptionRefs",
+        "schemaRules",
+        "rationale"
+      ],
+      "properties": {
+        "assurance": {
+          "$ref": "#/$defs/assurance"
+        },
+        "evidenceRefs": {
+          "type": "array",
+          "maxItems": 16,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/evidenceId"
+          }
+        },
+        "assumptionRefs": {
+          "type": "array",
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/assumptionId"
+          }
+        },
+        "schemaRules": {
+          "type": "array",
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "activity.initial-node"
+            ]
+          }
+        },
+        "rationale": {
+          "$ref": "#/$defs/nonBlankText"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "assurance": {
+                "const": "grounded"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "evidenceRefs": {
+                "minItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "assurance": {
+                "const": "assumed"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "assumptionRefs": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "node": {
+      "type": "object",
+      "required": [
+        "id",
+        "type",
+        "position",
+        "data"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "position": {
+          "type": "object",
+          "required": [
+            "x",
+            "y"
+          ],
+          "properties": {
+            "x": {
+              "type": "number"
+            },
+            "y": {
+              "type": "number"
+            }
+          },
+          "additionalProperties": false
+        },
+        "width": {
+          "type": "number"
+        },
+        "height": {
+          "type": "number"
+        },
+        "data": {
+          "type": "object",
+          "required": [
+            "label"
+          ],
+          "properties": {
+            "label": {
+              "type": "string"
+            },
+            "semanticType": {
+              "type": "string"
+            },
+            "stereotype": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "metadata": {
+              "type": "object",
+              "additionalProperties": true
+            },
+            "appliedStereotypes": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/appliedStereotype"
+              }
+            },
+            "features": {
+              "$ref": "#/$defs/features"
+            },
+            "extensionPoints": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "isAbstract": {
+              "type": "boolean"
+            },
+            "unit": {
+              "type": "string"
+            },
+            "quantityKind": {
+              "type": "string"
+            },
+            "constraintExpression": {
+              "type": "string"
+            },
+            "constraintParameters": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/parameter"
+              }
+            },
+            "port": {
+              "$ref": "#/$defs/portData"
+            },
+            "joinSpec": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": true
+        },
+        "style": {
+          "$ref": "#/$defs/nodeStyle"
+        },
+        "parentId": {
+          "type": "string"
+        },
+        "origin": {
+          "$ref": "#/$defs/elementOrigin"
+        }
+      },
+      "additionalProperties": false
+    },
+    "edge": {
+      "type": "object",
+      "required": [
+        "id",
+        "source",
+        "target"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "sourceHandle": {
+          "type": "string"
+        },
+        "targetHandle": {
+          "type": "string"
+        },
+        "route": {
+          "$ref": "#/$defs/edgeRoute"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "semanticType": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "metadata": {
+              "type": "object",
+              "additionalProperties": true
+            },
+            "appliedStereotypes": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/appliedStereotype"
+              }
+            },
+            "sourceEnd": {
+              "$ref": "#/$defs/relationshipEnd"
+            },
+            "targetEnd": {
+              "$ref": "#/$defs/relationshipEnd"
+            },
+            "condition": {
+              "type": "string"
+            },
+            "extensionLocations": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "itemFlows": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/itemFlow"
+              }
+            },
+            "guard": {
+              "type": "string"
+            },
+            "weight": {
+              "type": "number"
+            },
+            "isInterrupting": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": true
+        },
+        "style": {
+          "$ref": "#/$defs/edgeStyle"
+        },
+        "origin": {
+          "$ref": "#/$defs/elementOrigin"
+        }
+      },
+      "additionalProperties": false
+    },
+    "point": {
+      "type": "object",
+      "required": [
+        "x",
+        "y"
+      ],
+      "properties": {
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": false
+    },
+    "routeAnchor": {
+      "type": "object",
+      "required": [
+        "side",
+        "offset"
+      ],
+      "properties": {
+        "side": {
+          "enum": [
+            "top",
+            "right",
+            "bottom",
+            "left"
+          ]
+        },
+        "offset": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "edgeRoute": {
+      "type": "object",
+      "minProperties": 1,
+      "properties": {
+        "mode": {
+          "enum": [
+            "orthogonal",
+            "straight"
+          ]
+        },
+        "sourceAnchor": {
+          "$ref": "#/$defs/routeAnchor"
+        },
+        "targetAnchor": {
+          "$ref": "#/$defs/routeAnchor"
+        },
+        "waypoints": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 32,
+          "items": {
+            "$ref": "#/$defs/point"
+          }
+        },
+        "labelOffset": {
+          "$ref": "#/$defs/point"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "mode"
+            ],
+            "properties": {
+              "mode": {
+                "const": "straight"
+              }
+            }
+          },
+          "then": {
+            "not": {
+              "required": [
+                "waypoints"
+              ]
+            }
+          }
+        }
+      ],
+      "additionalProperties": false
+    },
+    "appliedStereotype": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "multiplicity": {
+      "type": "object",
+      "required": [
+        "lower",
+        "upper"
+      ],
+      "properties": {
+        "lower": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "upper": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "const": "*"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "parameter": {
+      "type": "object",
+      "required": [
+        "name",
+        "direction"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "direction": {
+          "enum": [
+            "in",
+            "out",
+            "inout",
+            "return"
+          ]
+        },
+        "multiplicity": {
+          "$ref": "#/$defs/multiplicity"
+        },
+        "default": {}
+      },
+      "additionalProperties": false
+    },
+    "property": {
+      "type": "object",
+      "required": [
+        "kind",
+        "name"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "part",
+            "reference",
+            "value",
+            "constraint",
+            "flow"
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "multiplicity": {
+          "$ref": "#/$defs/multiplicity"
+        },
+        "default": {},
+        "direction": {
+          "enum": [
+            "in",
+            "out",
+            "inout"
+          ]
+        },
+        "isReadOnly": {
+          "type": "boolean"
+        },
+        "isOrdered": {
+          "type": "boolean"
+        },
+        "isUnique": {
+          "type": "boolean"
+        },
+        "isDerived": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "operation": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/parameter"
+          }
+        },
+        "returnType": {
+          "type": "string"
+        },
+        "isAbstract": {
+          "type": "boolean"
+        },
+        "isStatic": {
+          "type": "boolean"
+        },
+        "isQuery": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "constraint": {
+      "type": "object",
+      "required": [
+        "expression"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "expression": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "features": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/property"
+          }
+        },
+        "operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/operation"
+          }
+        },
+        "receptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "constraints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/constraint"
+          }
+        },
+        "literals": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "portData": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "side": {
+          "enum": [
+            "top",
+            "right",
+            "bottom",
+            "left"
+          ]
+        },
+        "offset": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "isConjugated": {
+          "type": "boolean"
+        },
+        "isBehavior": {
+          "type": "boolean"
+        },
+        "providedFeatures": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requiredFeatures": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "relationshipEnd": {
+      "type": "object",
+      "properties": {
+        "role": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "multiplicity": {
+          "$ref": "#/$defs/multiplicity"
+        },
+        "navigable": {
+          "type": "boolean"
+        },
+        "aggregation": {
+          "enum": [
+            "none",
+            "shared",
+            "composite"
+          ]
+        },
+        "isOrdered": {
+          "type": "boolean"
+        },
+        "isUnique": {
+          "type": "boolean"
+        },
+        "propertyPath": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "itemFlow": {
+      "type": "object",
+      "required": [
+        "direction",
+        "item"
+      ],
+      "properties": {
+        "direction": {
+          "enum": [
+            "sourceToTarget",
+            "targetToSource"
+          ]
+        },
+        "item": {
+          "type": "string"
+        },
+        "itemProperty": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "nodeStyle": {
+      "type": "object",
+      "properties": {
+        "background": {
+          "type": "string"
+        },
+        "borderColor": {
+          "type": "string"
+        },
+        "color": {
+          "type": "string"
+        },
+        "borderWidth": {
+          "type": "number"
+        },
+        "borderStyle": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "edgeStyle": {
+      "type": "object",
+      "properties": {
+        "stroke": {
+          "type": "string"
+        },
+        "strokeWidth": {
+          "type": "number"
+        },
+        "strokeDasharray": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "assurance": {
+      "type": "string",
+      "description": "grounded is backed by cited source; assumed is accepted judgement; conceptual makes no repository claim; user was drawn in the editor.",
+      "enum": [
+        "grounded",
+        "assumed",
+        "conceptual",
+        "user"
+      ]
+    },
+    "diagramAssurance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "assumedElementIds": {
+          "type": "array",
+          "maxItems": 256,
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "assumptions": {
+          "type": "array",
+          "maxItems": 64,
+          "description": "The assumptions the assumed elements rest on, carried inline. A reader who does not have the draft must still be able to see what was assumed and why — an element marked assumed with no recoverable statement is worse than one not marked at all.",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "statement",
+              "reason",
+              "acceptedBy"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "statement": {
+                "type": "string"
+              },
+              "reason": {
+                "type": "string"
+              },
+              "acceptedBy": {
+                "type": "string",
+                "enum": [
+                  "host",
+                  "user"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "evidenceRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "locator",
+        "contentDigest",
+        "summary"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/evidenceId"
+        },
+        "kind": {
+          "enum": [
+            "code",
+            "test",
+            "documentation",
+            "configuration"
+          ]
+        },
+        "locator": {
+          "$ref": "#/$defs/evidenceLocator"
+        },
+        "contentDigest": {
+          "$ref": "#/$defs/digest"
+        },
+        "summary": {
+          "$ref": "#/$defs/nonBlankText"
+        }
+      }
+    },
+    "evidenceLocator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "lineRange"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        "symbol": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "lineRange": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "start",
+            "end"
+          ],
+          "properties": {
+            "start": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "end": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        }
+      }
+    }
+  }
+}

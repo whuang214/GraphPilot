@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "graphpilot.delivery.block6-ranked-backlog.v2",
+  "kind": "workflowOptimizationBacklog",
+  "status": "reranked_after_reverted_semantic_review_wave",
+  "liveHarnessPrerequisite": {
+    "owner": "evaluation_live_anchor_identity_path_gate",
+    "state": "required_before_any_future_live_wave",
+    "proof": "Provider-free reject overlong derived Windows artifact paths before manifest freeze; use shorter bounded package/run/observation/debug identities.",
+    "performanceClaim": false
+  },
+  "waves": [
+    {
+      "rank": 1,
+      "id": "wave-b2-generation-endpoints-contract",
+      "lane": "B",
+      "owner": "generation_prompt_projection_schema_validator_contract",
+      "baseline": {"failure": "bdd_relationship_endpoints_invalid @ $.edges[3]", "repairWallMs": 26052.517600008287},
+      "state": "plan_audited_s05_ready",
+      "plan": ["05-generation-endpoint-diagnosis.md", "06-generation-endpoint-correction.md", "07-generation-endpoint-proof.md", "08-generation-wave-decision.md"],
+      "proof": "Diagnose provider-free under current V1; do not assume correction. Bind the harness path prerequisite before any live package.",
+      "separation": "Semantic review and host work remain unchanged controls."
+    },
+    {
+      "rank": 2,
+      "id": "wave-a1-host-relationship-closure",
+      "lane": "A",
+      "owner": "graphpilot_host_facing_context_contract",
+      "baseline": {"externalWallMs": 470824.0, "outsideReadinessProviderMs": 406024.6594, "authoringAttempts": 5, "validationFailures": 5},
+      "state": "provider_free_correction_allowed_performance_pending_external_warm_02",
+      "proof": "Demonstrate compact templates, exact relationship closure, and fewer deterministic correction steps; claim no Copilot wall benefit before external rerun."
+    },
+    {
+      "rank": 3,
+      "id": "wave-b3-provider-packet-and-cache",
+      "lane": "B",
+      "owner": "provider_packet_cache_contract",
+      "baseline": {"inputTokens": 38710, "outputTokens": 20546, "cachedInputTokens": 0},
+      "state": "deferred_until_first_response_repairs_are_addressed"
+    },
+    {
+      "rank": 4,
+      "id": "wave-a2-mcp-session-guidance",
+      "lane": "A",
+      "owner": "mcp_host_integration",
+      "baseline": {"controlledMcpMs": 865.764299989678},
+      "state": "deferred_small_contributor"
+    },
+    {
+      "rank": 5,
+      "id": "wave-b4-local-deterministic",
+      "lane": "B",
+      "owner": "measured_local_subboundary",
+      "baseline": {"controlledLocalMs": 3995.3401000238955},
+      "state": "deferred_below_provider_calls"
+    },
+    {
+      "rank": 6,
+      "id": "wave-b5-browser",
+      "lane": "B",
+      "owner": "editor_load_render",
+      "baseline": {"controlledBrowserMs": 543.8000000119209},
+      "state": "deferred_small_contributor"
+    },
+    {
+      "rank": 7,
+      "id": "wave-b1-semantic-review-contract-rework",
+      "lane": "B",
+      "owner": "semantic_review_prompt_projection_schema_validator_contract",
+      "baseline": {"repairWallMs": 37787.58720000042},
+      "state": "deferred_after_reverted_unmeasured_attempt",
+      "trigger": "New audited wave, new human live authorization, harness path prerequisite, and current-V1 in-place design. No second candidate under the completed wave."
+    }
+  ],
+  "hostMeasurement": {
+    "warmProfile02": "pending_external_GitHub_Copilot",
+    "measuredHostWallClaimAllowed": false
+  },
+  "accounting": {
+    "controlledUsed": 10,
+    "aggregateUsed": 11,
+    "ceiling": 1000
+  },
+  "digest": "sha256:a0080ea1c6b73a1c9dc307de306de71201dec8a46eddc523d80c03088dee4197"
+}

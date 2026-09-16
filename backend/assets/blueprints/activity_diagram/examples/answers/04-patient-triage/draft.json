@@ -1,0 +1,148 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "patient-triage",
+  "diagramType": "activity_diagram",
+  "authority": "conceptual",
+  "requests": [
+    "A patient arrives and is assessed; emergencies go straight to the ER, others register and see a doctor, then everyone is discharged."
+  ],
+  "evidence": [],
+  "elements": [
+    {
+      "id": "start",
+      "semanticType": "initialNode",
+      "label": "Initial",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "arrive",
+      "semanticType": "opaqueAction",
+      "label": "Patient Arrives",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "assess",
+      "semanticType": "opaqueAction",
+      "label": "Assess Condition",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "decide",
+      "semanticType": "decisionNode",
+      "label": "Emergency?",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "er",
+      "semanticType": "opaqueAction",
+      "label": "Send to ER",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "register",
+      "semanticType": "opaqueAction",
+      "label": "Register",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "doctor",
+      "semanticType": "opaqueAction",
+      "label": "See Doctor",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "merge",
+      "semanticType": "mergeNode",
+      "label": "Merge",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "discharge",
+      "semanticType": "opaqueAction",
+      "label": "Discharge",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "end",
+      "semanticType": "activityFinalNode",
+      "label": "Activity Final",
+      "assurance": "conceptual"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "edge-1-start-arrive",
+      "semanticType": "controlFlow",
+      "source": "start",
+      "target": "arrive",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-2-arrive-assess",
+      "semanticType": "controlFlow",
+      "source": "arrive",
+      "target": "assess",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-3-assess-decide",
+      "semanticType": "controlFlow",
+      "source": "assess",
+      "target": "decide",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-4-decide-er",
+      "semanticType": "controlFlow",
+      "source": "decide",
+      "target": "er",
+      "assurance": "conceptual",
+      "guard": "Yes"
+    },
+    {
+      "id": "edge-5-er-merge",
+      "semanticType": "controlFlow",
+      "source": "er",
+      "target": "merge",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-6-decide-register",
+      "semanticType": "controlFlow",
+      "source": "decide",
+      "target": "register",
+      "assurance": "conceptual",
+      "guard": "No"
+    },
+    {
+      "id": "edge-7-register-doctor",
+      "semanticType": "controlFlow",
+      "source": "register",
+      "target": "doctor",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-8-doctor-merge",
+      "semanticType": "controlFlow",
+      "source": "doctor",
+      "target": "merge",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-9-merge-discharge",
+      "semanticType": "controlFlow",
+      "source": "merge",
+      "target": "discharge",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-10-discharge-end",
+      "semanticType": "controlFlow",
+      "source": "discharge",
+      "target": "end",
+      "assurance": "conceptual"
+    }
+  ],
+  "assumptions": []
+}

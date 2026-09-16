@@ -1,0 +1,79 @@
+You are acting as an IDE host performing a repository-grounded diagram workflow. Follow this exactly.
+
+WORKSPACE
+C:\Users\w105098\Desktop\Projects\GraphPilot-Test-Repos\todo-api-fixture
+
+Original user request, preserved verbatim:
+Can you build me a system design diagram of this?
+
+CLEAN-ROOM RULES — mandatory; the observation is void if any is broken
+- Use the `graphpilot-mcp` skill with its default provider-free entry point.
+- Read source files ONLY inside the Todo fixture workspace above.
+- Do NOT open, read, grep, or search anything under
+  C:\Users\w105098\Desktop\Projects\GraphPilot.
+  You may execute the skill's script, but you may not read GraphPilot's source, docs,
+  schemas, tests, or evidence. Learn every artifact shape ONLY from what the MCP tools
+  return to you.
+- Do not consult git history, other repositories, or prior notes about this task.
+- Pin one model for the entire run. Do not use Adaptive, and do not change model or
+  thinking level mid-run.
+- The Todo repository is read-only. Do not edit its tracked source or tests.
+
+IDENTITIES
+- evidence identity: evidence-todo-api-r1
+- draft path: .graphpilot/context/drafts/todo-api-r1.gp-evidence.candidate.json
+- requestId: request-todo-api-r1
+- diagramName: todo-api-r1
+- request path: .graphpilot/requests/todo-api-r1.gp-request.json
+
+EXECUTION
+1. Call diagram_generation_workflow first with the original request. Record the exact byte
+   length of its response.
+2. Follow the returned context-branch instructions. Authority mode is context; diagram type
+   is bdd_diagram.
+3. Call context_evidence_status.
+4. Search the eligible source, read only what is decisive, author a COMPLETE JSON 1 draft,
+   and call context_evidence_save. If deterministic validation fails, correct the complete
+   draft using the returned {code, path} evidence and resubmit. Never repeat an unchanged call.
+5. Author one complete context JSON 2 and call diagram_request_save, using the same
+   correction rule.
+6. STOP as soon as diagram_request_save succeeds. Do NOT call context_readiness_assess,
+   diagram_generate_from_context, diagram_generate_direct, or diagram_render.
+
+RECORD
+Write exactly one file at:
+C:\Users\w105098\Desktop\Projects\GraphPilot\docs\03-development-and-delivery\epics\03-mcp-generation-and-wrappers\06-workflow-reliability-and-optimization\06-whole-workflow-optimization\evidence\lane-a-reference-host\r1.json
+
+{
+  "observationId": "r1",
+  "claimState": "reference_host_characterized",
+  "host": "devin_cli",
+  "model": "<exact pinned model identity>",
+  "thinkingLevel": "<level in effect, or 'default'>",
+  "interface": "a03",
+  "repositoryCommit": "<git rev-parse HEAD of the Todo fixture>",
+  "workflowResponseBytes": <integer>,
+  "mcpCalls": [{"tool": "<name>", "count": <integer>}],
+  "totalMcpCallCount": <integer>,
+  "json1AuthoringAttempts": <integer>,
+  "json2AuthoringAttempts": <integer>,
+  "deterministicValidationFailures": [{"tool": "<name>", "code": "<code>", "path": "<$ path>"}],
+  "sourceFilesRead": <integer>,
+  "json1": {"path": "<returned path>", "digest": "<returned digest>", "byteCount": <integer>,
+            "claimCount": <integer>, "relationshipCount": <integer>},
+  "json2": {"path": "<returned path>", "digest": "<returned digest>", "byteCount": <integer>},
+  "notes": "<= 800 chars: what the interface made hard, ambiguous, or verbose, in your own words>"
+}
+
+RECORDING RULES
+- Do NOT record elapsed time, wall clock, or any duration. Timing from this host is not
+  comparable evidence.
+- Never include raw source text, search queries, prompts, absolute paths, credentials, or
+  secrets.
+- Use null only where a value genuinely does not exist. Never estimate.
+- If you cannot complete JSON 1 or JSON 2, still write the file with json1 and/or json2 as
+  null and describe the exact blocker in notes. A blocked observation is valid evidence.
+
+FINAL RESPONSE
+Brief: JSON 1 and JSON 2 paths and digests, attempt counts, any validation failure codes, and
+confirmation that readiness, generation, and render were never called.

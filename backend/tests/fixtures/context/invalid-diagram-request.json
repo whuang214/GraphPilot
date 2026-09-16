@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "graphpilot.context.diagram-request.v1",
+  "kind": "contextDiagramRequest",
+  "requestId": "request-invalid-order",
+  "diagramName": "invalid-order",
+  "manifestRef": {
+    "path": ".graphpilot/context/evidence/repository.gp-evidence.json",
+    "id": "evidence-order-service",
+    "digest": "sha256:aca425e6ceea38c0ef02c6b5bcf9a5e10e7e388da7c519f315007e454858cca2"
+  },
+  "request": {
+    "original": "Create an invalid request fixture.",
+    "goal": "Exercise deterministic semantic validation.",
+    "diagramType": "activity_diagram",
+    "audience": "Backend developers",
+    "detailLevel": "standard"
+  },
+  "scope": {
+    "included": [
+      "Order validation"
+    ],
+    "excluded": []
+  },
+  "selectedClaims": [
+    {
+      "claimRef": {
+        "id": "claim-validate-order",
+        "version": 1
+      },
+      "role": "primary",
+      "reason": "First selection of the claim."
+    },
+    {
+      "claimRef": {
+        "id": "claim-validate-order",
+        "version": 1
+      },
+      "role": "supporting",
+      "reason": "Duplicate selection of the same claim version."
+    },
+    {
+      "claimRef": {
+        "id": "claim-order-handler",
+        "version": 2
+      },
+      "role": "primary",
+      "reason": "References a missing historical version."
+    }
+  ],
+  "uncertaintyDispositions": [
+    {
+      "uncertaintyRef": "uncertainty-persistence-failure",
+      "disposition": "assume",
+      "reason": "References an assumption that does not exist.",
+      "assumptionRef": "assumption-missing"
+    }
+  ],
+  "assumptions": [
+    {
+      "id": "assumption-standalone",
+      "statement": "A standalone assumption is invalid.",
+      "reason": "It has no matching disposition.",
+      "origin": "host",
+      "acceptedBy": "host",
+      "acceptedAt": "2026-07-13T17:00:00Z"
+    }
+  ],
+  "decisions": [
+    {
+      "id": "decision-invalid-emphasis",
+      "kind": "labeling",
+      "statement": "Use source-backed labels.",
+      "reason": "This host-owned labeling preference is valid.",
+      "origin": "host",
+      "acceptedBy": "host",
+      "acceptedAt": "2026-07-13T17:00:00Z"
+    }
+  ]
+}

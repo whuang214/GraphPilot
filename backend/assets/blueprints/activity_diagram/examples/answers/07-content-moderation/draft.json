@@ -1,0 +1,176 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "content-moderation",
+  "diagramType": "activity_diagram",
+  "authority": "conceptual",
+  "requests": [
+    "A user post is auto-scanned; flagged posts go to human review and are removed if they violate policy, everything else is published."
+  ],
+  "evidence": [],
+  "elements": [
+    {
+      "id": "start",
+      "semanticType": "initialNode",
+      "label": "Initial",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "post",
+      "semanticType": "opaqueAction",
+      "label": "User Posts",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "scan",
+      "semanticType": "opaqueAction",
+      "label": "Auto-Scan",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "note",
+      "semanticType": "note",
+      "label": "ML confidence >= 0.8",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "d1",
+      "semanticType": "decisionNode",
+      "label": "Flagged?",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "review",
+      "semanticType": "opaqueAction",
+      "label": "Human Review",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "d2",
+      "semanticType": "decisionNode",
+      "label": "Violates Policy?",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "remove",
+      "semanticType": "opaqueAction",
+      "label": "Remove Post",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "end-rm",
+      "semanticType": "activityFinalNode",
+      "label": "End (Removed)",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "merge",
+      "semanticType": "mergeNode",
+      "label": "Merge",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "publish",
+      "semanticType": "opaqueAction",
+      "label": "Publish",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "end-pub",
+      "semanticType": "activityFinalNode",
+      "label": "End (Published)",
+      "assurance": "conceptual"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "edge-1-start-post",
+      "semanticType": "controlFlow",
+      "source": "start",
+      "target": "post",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-2-post-scan",
+      "semanticType": "controlFlow",
+      "source": "post",
+      "target": "scan",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-3-scan-note",
+      "semanticType": "commentLink",
+      "source": "scan",
+      "target": "note",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-4-scan-d1",
+      "semanticType": "controlFlow",
+      "source": "scan",
+      "target": "d1",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-5-d1-review",
+      "semanticType": "controlFlow",
+      "source": "d1",
+      "target": "review",
+      "assurance": "conceptual",
+      "guard": "Yes"
+    },
+    {
+      "id": "edge-6-review-d2",
+      "semanticType": "controlFlow",
+      "source": "review",
+      "target": "d2",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-7-d2-remove",
+      "semanticType": "controlFlow",
+      "source": "d2",
+      "target": "remove",
+      "assurance": "conceptual",
+      "guard": "Yes"
+    },
+    {
+      "id": "edge-8-remove-end-rm",
+      "semanticType": "controlFlow",
+      "source": "remove",
+      "target": "end-rm",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-9-d2-merge",
+      "semanticType": "controlFlow",
+      "source": "d2",
+      "target": "merge",
+      "assurance": "conceptual",
+      "guard": "No"
+    },
+    {
+      "id": "edge-10-d1-merge",
+      "semanticType": "controlFlow",
+      "source": "d1",
+      "target": "merge",
+      "assurance": "conceptual",
+      "guard": "No"
+    },
+    {
+      "id": "edge-11-merge-publish",
+      "semanticType": "controlFlow",
+      "source": "merge",
+      "target": "publish",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-12-publish-end-pub",
+      "semanticType": "controlFlow",
+      "source": "publish",
+      "target": "end-pub",
+      "assurance": "conceptual"
+    }
+  ],
+  "assumptions": []
+}

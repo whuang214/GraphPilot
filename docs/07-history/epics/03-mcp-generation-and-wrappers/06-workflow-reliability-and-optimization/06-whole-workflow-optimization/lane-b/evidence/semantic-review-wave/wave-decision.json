@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "graphpilot.delivery.workflow-optimization-wave-decision.v1",
+  "kind": "workflowOptimizationWaveDecision",
+  "waveId": "wave-b1-semantic-review-contract",
+  "owner": "semantic_review_prompt_projection_schema_validator_contract",
+  "decision": "revert",
+  "claimState": "unmeasured_candidate_reverted",
+  "reason": "The only authorized candidate failed pre-dispatch before checkpoint, MCP, provider, quality, or browser evidence; no retention gate could pass and no retry was permitted.",
+  "commits": {
+    "plan": "043ff93643025ad0ccefd68f080cc34e265bd72b",
+    "diagnosis": "a4f52ba2eff4211afaf683bd0763abaa881ff9d2",
+    "correction": "e6e4a6b63ff225fa1f0f99e4926bd012562809a2",
+    "correctionFollowup": "9232944dc3222499c6b2eba51ffa22e8510bdafe",
+    "authorization": "873413c2fa411e52ee5222689663a324d98b3eb3",
+    "candidateEvidence": "feb90d2",
+    "rollback": "3ccf5cf25370bc165e3c350412e42dcdeb4c84da"
+  },
+  "baseline": {
+    "runId": "run-live-workflow-anchor-block5-cold-room-20260728-03",
+    "completeWallMs": 186759.67260004627,
+    "semanticReviewResponseRepairMs": 37787.58720000042,
+    "providerCalls": 5,
+    "semanticReviewFirstResponseValid": false,
+    "semanticReviewResponseRepairCalls": 1,
+    "quality": "pass",
+    "browser": "pass"
+  },
+  "candidate": {
+    "runId": "run-live-workflow-anchor-block6-semantic-review-cold-room-20260729-03",
+    "manifestDigest": "sha256:3549135438921f8ae4fb3cbd3bdbbe8e7b17b4e4f8940d25beba279ea5fdf1c4",
+    "packageTerminalDigest": "sha256:7d7424ed281108d17ece0ac06100aec2aebd4743dc7fafded05637d27c137bd3",
+    "trackedResultDigest": "sha256:f6dca02cd7085639477fcb15a2d6fa08c4e77d0d1f25c188c3e1d8379f60c70b",
+    "status": "failed_pre_dispatch",
+    "errorCode": "host_evidence_path_too_long",
+    "providerCalls": 0,
+    "semanticReviewFirstResponseValid": null,
+    "semanticReviewResponseRepairCalls": 0,
+    "completeWallMs": null,
+    "quality": "not_reached",
+    "browser": "not_reached"
+  },
+  "comparison": {
+    "compatibleCompleteDenominator": false,
+    "completeWallAbsoluteMs": null,
+    "completeWallPercent": null,
+    "providerCallEffect": null,
+    "tokenEffect": null,
+    "repairEffect": null,
+    "interpretation": "The candidate's zero calls are a pre-dispatch stop, not an optimization benefit. No baseline/candidate percentage or repair-removal claim is permitted."
+  },
+  "rollback": {
+    "applied": true,
+    "behaviorRestoredToCommit": "a4f52ba2eff4211afaf683bd0763abaa881ff9d2",
+    "verificationCommit": "3ccf5cf25370bc165e3c350412e42dcdeb4c84da",
+    "productionDiffFromBaseline": false,
+    "evidenceRetained": true
+  },
+  "providerFreeGuard": {
+    "runId": "run-workflow-audit-block6-semantic-review-revert-20260729-01",
+    "sourceCommit": "3ccf5cf25370bc165e3c350412e42dcdeb4c84da",
+    "manifestDigest": "sha256:b58245bb88ab320e8913f699734b0fb22d53d423dc2060ab5881344872cac5cc",
+    "reportDigest": "sha256:fdfcbc928ac87e2dab6afa2efbd4467601f9362ade83e5cfcb1beb612c4aa639",
+    "browserEvidenceDigest": "sha256:becacf084db0ebae1bfbf85f3145157eacc9faca49e64ca0c8a0bbe3a4333294",
+    "compatibilityKey": "sha256:d77f21f801006fe95a436171697ac1d38869bde834c619b802971fde5529ebd1",
+    "ledgerDigest": "sha256:a00573f9f787614dbcf52e5a677347977de6b9e84d6d15e4e20f67022321994c",
+    "baselineEligible": true,
+    "observations": 19,
+    "generated": 16,
+    "blocked": 1,
+    "errors": 2,
+    "interrupted": 0,
+    "fakeCalls": 56,
+    "azureCalls": 0,
+    "browser": "pass",
+    "qualityFailures": 0,
+    "recoveryExercised": 4,
+    "recoveryFailures": 0,
+    "completeWallMs": 27126.6787,
+    "completeWallInterpretation": "Provider-free orchestration evidence only; not a live performance denominator."
+  },
+  "accounting": {
+    "controlled": {"completed": 10, "failed": 0, "uncertain": 0, "used": 10, "ceiling": 1000, "remaining": 990},
+    "externalHost": {"completed": 1, "failed": 0, "uncertain": 0},
+    "aggregate": {"completed": 11, "failed": 0, "uncertain": 0, "used": 11, "ceiling": 1000, "remaining": 989}
+  },
+  "qualitySecurityCompatibility": {
+    "backendBaselineRestored": true,
+    "providerFreeGuardPassed": true,
+    "rawProviderContentAccessed": false,
+    "secretValuePersisted": false,
+    "s15Accessed": false,
+    "stageCOpened": false,
+    "promotion": false,
+    "certification": false
+  },
+  "futurePolicy": {
+    "privateContractVersioning": "Future authorized private-contract rework changes the current V1 in place; the reverted unpromoted V2 layer is not preserved.",
+    "liveHarnessPrerequisite": "Reject derived Windows artifact paths beyond the active limit before manifest freeze and use shorter bounded live identities.",
+    "nextMeasuredOwner": "generation_prompt_projection_schema_validator_contract",
+    "nextWavePlan": {
+      "slices": ["05-generation-endpoint-diagnosis.md", "06-generation-endpoint-correction.md", "07-generation-endpoint-proof.md", "08-generation-wave-decision.md"],
+      "audit": "pass_after_topology_and_ownership_corrections",
+      "providerFreeReadySlice": "S05",
+      "liveAuthorization": false
+    }
+  },
+  "audit": {
+    "state": "pass",
+    "reviewer": "independent-local-filesystem-agent-7ffa0b1f",
+    "informationalFindings": 5,
+    "remainingCritical": 0,
+    "remainingHigh": 0,
+    "remainingMedium": 0
+  },
+  "digest": "sha256:2efe25f7c686182518efee385a96dcb385ed653a5de1a6518d4df8ad9efe5a19"
+}

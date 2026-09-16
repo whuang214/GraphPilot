@@ -1,0 +1,237 @@
+{
+  "schemaVersion": "graphpilot.delivery.semantic-review-retry-correction-evidence.v1",
+  "kind": "semanticReviewRetryCorrectionEvidence",
+  "sourceCommit": "5ec80b7ed4cd5eb24fbced0532079cb737ad58c4",
+  "versionPolicy": "current_private_v1_in_place_only",
+  "providerCalls": 0,
+  "preImplementation": {
+    "state": "expected_failure_captured",
+    "command": "cd backend; uv run python manage.py test tests.generation.test_semantic_review_service.SemanticReviewServiceTests.test_review_input_exposes_finding_codes_for_every_rubric_facet tests.generation.test_semantic_review_service.SemanticReviewServiceTests.test_current_v1_review_input_schema_requires_finding_codes_by_facet_in_both_modes tests.generation.test_semantic_review_service.SemanticReviewServiceTests.test_facet_code_contract_is_consistent_for_all_six_cells tests.llm.test_prompt_service.RealTemplatesExistTests.test_review_prompt_exposes_finding_conditional_contract tests.llm.test_prompt_service.RealTemplatesExistTests.test_review_prompt_requires_below_minimum_rating_for_findings tests.llm.test_prompt_service.RealTemplatesExistTests.test_review_repair_prompt_exposes_finding_conditional_contract tests.llm.test_prompt_service.RealTemplatesExistTests.test_review_repair_prompt_requires_below_minimum_rating_for_findings tests.generation.test_semantic_review_service.SemanticReviewServiceTests.test_invalid_private_response_repair_reuses_current_v1_finding_contract --verbosity 2",
+    "exitCode": 1,
+    "testsRun": 8,
+    "failureRecords": 18,
+    "durationSeconds": 3.326,
+    "systemCheck": "System check identified no issues (0 silenced).",
+    "terminalSummary": "FAILED (failures=18)",
+    "namedRegressions": [
+      {
+        "name": "test_review_input_exposes_finding_codes_for_every_rubric_facet",
+        "result": "failed",
+        "subcases": ["context.bdd_diagram"],
+        "sourceLine": "backend/tests/generation/test_semantic_review_service.py:153",
+        "exactFailure": "AssertionError: None != [{'facet': 'goalFidelity', 'codes': ['goa[2117 chars]a']}]"
+      },
+      {
+        "name": "test_current_v1_review_input_schema_requires_finding_codes_by_facet_in_both_modes",
+        "result": "failed",
+        "subcases": ["direct", "context"],
+        "sourceLine": "backend/tests/generation/test_semantic_review_service.py:167",
+        "exactFailures": [
+          "AssertionError: 'findingCodesByFacet' not found in ['elementIds', 'requirementRefs', 'assumptionRefs']",
+          "AssertionError: 'findingCodesByFacet' not found in ['elementIds', 'claimRefs', 'assumptionRefs', 'schemaRules']"
+        ]
+      },
+      {
+        "name": "test_facet_code_contract_is_consistent_for_all_six_cells",
+        "result": "failed",
+        "subcases": [
+          "direct.activity_diagram",
+          "direct.use_case_diagram",
+          "direct.bdd_diagram",
+          "context.activity_diagram",
+          "context.use_case_diagram",
+          "context.bdd_diagram"
+        ],
+        "sourceLine": "backend/tests/generation/test_semantic_review_service.py:195",
+        "exactFailure": "AssertionError: unexpectedly None"
+      },
+      {
+        "name": "test_review_prompt_exposes_finding_conditional_contract",
+        "result": "failed",
+        "subcases": ["direct", "context"],
+        "sourceLine": "backend/tests/llm/test_prompt_service.py:72",
+        "exactFailures": [
+          "AssertionError: 'must equal its containing rubric facet `id`' not found in 'Review the supplied direct logical candidate against every composed rubric facet and the exact conceptual authority.\\n\\nReturn every facet exactly once in rubric order. Propose only allowlisted findings, references, and direct resolution kinds. Do not assign severity, score, status, or pass/fail; backend policy owns those values. Do not rewrite the candidate, add authority, expose hidden reasoning, or return prose outside the strict response schema.\\n'",
+          "AssertionError: 'must equal its containing rubric facet `id`' not found in 'Review the supplied context logical candidate against every composed rubric facet and the exact selected-claim/accepted-assumption authority.\\n\\nReturn every facet exactly once in rubric order. Check viewpoint fidelity, grounding completeness, and origin relevance/minimality. Propose only allowlisted findings, references, and context resolution kinds. Do not assign severity, score, status, or pass/fail; backend policy owns those values. Do not rewrite authority, expose hidden reasoning, or return prose outside the strict response schema.\\n'"
+        ]
+      },
+      {
+        "name": "test_review_prompt_requires_below_minimum_rating_for_findings",
+        "result": "failed",
+        "subcases": ["direct", "context"],
+        "sourceLine": "backend/tests/llm/test_prompt_service.py:80",
+        "exactFailures": [
+          "AssertionError: 'below its rubric `minimumRating`' not found in 'Review the supplied direct logical candidate against every composed rubric facet and the exact conceptual authority.\\n\\nReturn every facet exactly once in rubric order. Propose only allowlisted findings, references, and direct resolution kinds. Do not assign severity, score, status, or pass/fail; backend policy owns those values. Do not rewrite the candidate, add authority, expose hidden reasoning, or return prose outside the strict response schema.\\n'",
+          "AssertionError: 'below its rubric `minimumRating`' not found in 'Review the supplied context logical candidate against every composed rubric facet and the exact selected-claim/accepted-assumption authority.\\n\\nReturn every facet exactly once in rubric order. Check viewpoint fidelity, grounding completeness, and origin relevance/minimality. Propose only allowlisted findings, references, and context resolution kinds. Do not assign severity, score, status, or pass/fail; backend policy owns those values. Do not rewrite authority, expose hidden reasoning, or return prose outside the strict response schema.\\n'"
+        ]
+      },
+      {
+        "name": "test_review_repair_prompt_exposes_finding_conditional_contract",
+        "result": "failed",
+        "subcases": ["direct", "context"],
+        "sourceLine": "backend/tests/llm/test_prompt_service.py:88",
+        "exactFailures": [
+          "AssertionError: 'must equal its containing rubric facet `id`' not found in 'Repair only the shape and allowlisted references of the rejected direct semantic-review response.\\n\\nPreserve the attempted assessment; do not re-evaluate the candidate or change ratings to improve the result. Return every required facet exactly once and only the strict private response schema. Do not return severity, score, status, prose, or hidden reasoning.\\n'",
+          "AssertionError: 'must equal its containing rubric facet `id`' not found in 'Repair only the shape and allowlisted references of the rejected context semantic-review response.\\n\\nPreserve the attempted assessment; do not re-evaluate the candidate or change ratings to improve the result. Return every required facet exactly once and only the strict private response schema. Do not return severity, score, status, prose, or hidden reasoning.\\n'"
+        ]
+      },
+      {
+        "name": "test_review_repair_prompt_requires_below_minimum_rating_for_findings",
+        "result": "failed",
+        "subcases": ["direct", "context"],
+        "sourceLine": "backend/tests/llm/test_prompt_service.py:96",
+        "exactFailures": [
+          "AssertionError: 'below its rubric `minimumRating`' not found in 'Repair only the shape and allowlisted references of the rejected direct semantic-review response.\\n\\nPreserve the attempted assessment; do not re-evaluate the candidate or change ratings to improve the result. Return every required facet exactly once and only the strict private response schema. Do not return severity, score, status, prose, or hidden reasoning.\\n'",
+          "AssertionError: 'below its rubric `minimumRating`' not found in 'Repair only the shape and allowlisted references of the rejected context semantic-review response.\\n\\nPreserve the attempted assessment; do not re-evaluate the candidate or change ratings to improve the result. Return every required facet exactly once and only the strict private response schema. Do not return severity, score, status, prose, or hidden reasoning.\\n'"
+        ]
+      },
+      {
+        "name": "test_invalid_private_response_repair_reuses_current_v1_finding_contract",
+        "result": "failed",
+        "subcases": ["context.bdd_diagram"],
+        "sourceLine": "backend/tests/generation/test_semantic_review_service.py:224",
+        "exactFailure": "AssertionError: None != [{'facet': 'goalFidelity', 'codes': ['goa[2117 chars]a']}]"
+      }
+    ],
+    "preservationBaseline": {
+      "command": "cd backend; uv run python manage.py test tests.generation.test_semantic_review_service.SemanticReviewServiceTests.test_three_finding_contract_witnesses_trigger_exact_response_repair tests.generation.test_semantic_review_service.SemanticReviewServiceTests.test_corrected_finding_contract_witness_is_first_response_valid tests.generation.test_generation_foundation.GenerationContractIdentityTests.test_current_v1_semantic_review_contract_has_no_v2_assets_or_identities tests.generation.test_semantic_review_service.SemanticReviewServiceTests.test_clean_review_for_all_six_cells tests.generation.test_semantic_review_service.SemanticReviewServiceTests.test_finding_facet_and_context_resolution_refs_are_fail_closed tests.generation.test_semantic_review_service.SemanticReviewServiceTests.test_wrong_order_and_unallowlisted_refs_fail_response_contract tests.generation.test_semantic_review_service.SemanticReviewServiceTests.test_semantic_candidate_repair_reruns_deterministic_checks_and_review --verbosity 1",
+      "exitCode": 0,
+      "testsRun": 7,
+      "durationSeconds": 4.363,
+      "result": "OK",
+      "systemCheck": "System check identified no issues (0 silenced)."
+    },
+    "setup": {
+      "initialAttempt": "uv run python manage.py test ...",
+      "initialExitCode": 1,
+      "initialFailure": "ModuleNotFoundError: No module named 'django'",
+      "remediation": [
+        "uv venv",
+        "uv pip install -r requirements.txt"
+      ],
+      "dependencyInstallResult": "45 packages installed; no project dependency files changed"
+    }
+  },
+  "implementation": {
+    "state": "implemented_and_provider_free_verified",
+    "correction": [
+      "SemanticReviewService derives findingCodesByFacet in composed rubric order from the existing FACET_FINDING_CODES registry and projects it into direct and context review inputs.",
+      "Both current V1 review-input schemas require a bounded facet/code projection; both response-repair schemas require the identical nested review input through their existing V1 references, and all four schema examples carry the map.",
+      "All four existing current V1 initial/response-repair prompts state containing-facet equality, per-facet code membership, findings only for applicable below-minimum insufficient/unsupported meaning, and empty findings for sufficient/not-applicable facets."
+    ],
+    "preservedAuthority": [
+      "backend finding validation",
+      "backend score/status/severity calculation",
+      "one response-contract repair",
+      "bounded semantic candidate repair",
+      "current V1 prompt and schema identities",
+      "semantic-review response/result schemas"
+    ],
+    "noV2AssetsOrIdentities": true,
+    "noCompatibilityBranch": true,
+    "genericSchemaProjectorChanged": false,
+    "selfReview": {
+      "state": "pass",
+      "remainingCritical": 0,
+      "remainingHigh": 0,
+      "remainingMedium": 0,
+      "parentIndependentReviewPending": true
+    }
+  },
+  "checks": [
+    {
+      "name": "named_correction_and_preservation_regressions",
+      "command": "cd backend; uv run python manage.py test tests.generation.test_semantic_review_service.SemanticReviewServiceTests.test_review_input_exposes_finding_codes_for_every_rubric_facet tests.generation.test_semantic_review_service.SemanticReviewServiceTests.test_current_v1_review_input_schema_requires_finding_codes_by_facet_in_both_modes tests.generation.test_semantic_review_service.SemanticReviewServiceTests.test_facet_code_contract_is_consistent_for_all_six_cells tests.llm.test_prompt_service.RealTemplatesExistTests.test_review_prompt_exposes_finding_conditional_contract tests.llm.test_prompt_service.RealTemplatesExistTests.test_review_prompt_requires_below_minimum_rating_for_findings tests.llm.test_prompt_service.RealTemplatesExistTests.test_review_repair_prompt_exposes_finding_conditional_contract tests.llm.test_prompt_service.RealTemplatesExistTests.test_review_repair_prompt_requires_below_minimum_rating_for_findings tests.generation.test_semantic_review_service.SemanticReviewServiceTests.test_invalid_private_response_repair_reuses_current_v1_finding_contract tests.generation.test_semantic_review_service.SemanticReviewServiceTests.test_three_finding_contract_witnesses_trigger_exact_response_repair tests.generation.test_semantic_review_service.SemanticReviewServiceTests.test_corrected_finding_contract_witness_is_first_response_valid tests.generation.test_generation_foundation.GenerationContractIdentityTests.test_current_v1_semantic_review_contract_has_no_v2_assets_or_identities tests.generation.test_semantic_review_service.SemanticReviewServiceTests.test_clean_review_for_all_six_cells tests.generation.test_semantic_review_service.SemanticReviewServiceTests.test_finding_facet_and_context_resolution_refs_are_fail_closed tests.generation.test_semantic_review_service.SemanticReviewServiceTests.test_wrong_order_and_unallowlisted_refs_fail_response_contract tests.generation.test_semantic_review_service.SemanticReviewServiceTests.test_semantic_candidate_repair_reruns_deterministic_checks_and_review --verbosity 1",
+      "exitCode": 0,
+      "testsRun": 15,
+      "durationSeconds": 8.756,
+      "result": "OK",
+      "systemCheck": "System check identified no issues (0 silenced)."
+    },
+    {
+      "name": "focused_semantic_prompt_schema_gate",
+      "command": "cd backend; uv run python manage.py test tests.generation.test_semantic_review_service tests.generation.test_semantic_review_rubric tests.llm.test_prompt_service tests.generation.test_generation_foundation tests.support.test_schema_registry --verbosity 1",
+      "exitCode": 0,
+      "testsRun": 62,
+      "durationSeconds": 24.476,
+      "result": "OK",
+      "systemCheck": "System check identified no issues (0 silenced)."
+    },
+    {
+      "name": "full_backend_gate",
+      "command": "cd backend; uv run python manage.py test",
+      "exitCode": 0,
+      "testsRun": 1080,
+      "testsSkipped": 5,
+      "durationSeconds": 1283.513,
+      "result": "OK"
+    },
+    {
+      "name": "initial_frontend_gate",
+      "command": "cd frontend; npm run verify",
+      "exitCode": 1,
+      "unitTestsPassed": 419,
+      "e2eTestsPassed": 42,
+      "e2eTestsFailed": 1,
+      "exactFailure": "[chromium] e2e/smoke.spec.ts:53:1 moves and reloads every authorable node without starting connections: Test timeout of 30000ms exceeded.",
+      "context": "The frontend e2e gate ran concurrently with the 1283-second full backend gate on the same host."
+    },
+    {
+      "name": "timed_out_frontend_test_rerun",
+      "command": "cd frontend; npm run e2e -- --grep \"moves and reloads every authorable node without starting connections\"",
+      "exitCode": 0,
+      "testsRun": 1,
+      "durationSeconds": 33.3,
+      "testDurationSeconds": 27.7,
+      "result": "1 passed"
+    },
+    {
+      "name": "complete_frontend_gate_rerun",
+      "command": "cd frontend; npm run verify",
+      "exitCode": 0,
+      "lint": "0 warnings and 0 errors",
+      "build": "succeeded",
+      "unitTestsPassed": 419,
+      "e2eTestsPassed": 43,
+      "result": "OK"
+    },
+    {
+      "name": "diff_whitespace_gate",
+      "command": "git diff --check",
+      "exitCode": 0,
+      "result": "clean"
+    },
+    {
+      "name": "evidence_json_parse",
+      "command": "uv run python -m json.tool <provider-free-correction.json> $null",
+      "exitCode": 0,
+      "result": "valid JSON"
+    }
+  ],
+  "scope": {
+    "semanticReviewProductionChanged": true,
+    "currentV1PromptsChangedInPlace": true,
+    "currentV1InputSchemasChangedInPlace": true,
+    "scopedTestsChanged": true,
+    "exactRuntimeDesignOwnersChanged": true,
+    "s10OutcomeAndEvidenceChanged": true,
+    "generationCorrectionChanged": false,
+    "b0Changed": false,
+    "laneAChanged": false,
+    "currentBoardChanged": false,
+    "epicOrSharedIntegrationChanged": false,
+    "environmentFilesChanged": false,
+    "providerOrLiveAssetsChanged": false,
+    "s15OrStageCChanged": false,
+    "providerCalls": 0,
+    "committedAtCapture": false
+  },
+  "audit": {
+    "state": "pass",
+    "reviewer": "independent-read-only-subagent-0c074fc6",
+    "remainingCritical": 0,
+    "remainingHigh": 0,
+    "remainingMedium": 0
+  },
+  "digest": "sha256:fa23ae51ca8999dea406a868713eb4477baee4e91054c1da4b4166488cb285ce"
+}

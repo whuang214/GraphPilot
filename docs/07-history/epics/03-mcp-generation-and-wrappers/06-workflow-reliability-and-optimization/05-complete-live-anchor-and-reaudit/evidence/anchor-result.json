@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "graphpilot.delivery.live-anchor-safe-result.v1",
+  "kind": "liveAnchorSafeResult",
+  "anchorId": "anchor-cold-room-climate-controller-20260728-01",
+  "runId": "run-live-workflow-anchor-block5-cold-room-20260728-03",
+  "observationId": "observation-live-workflow-anchor-block5-cold-room-20260728-03",
+  "status": "pass",
+  "digests": {
+    "anchor": "sha256:12a4528c6d717bba44d7408a78bb7f1723d0c53a55261984a252eba6f553b51b",
+    "approval": "sha256:d25ffb3e5638d11e59883578d840819af7d01a935bf53450b1a24bd2dd0f3b88",
+    "manifest": "sha256:e82c9732234517b879ab26f5915ec9578fcfb1aa32ecb16179dcec12702a86ed",
+    "observation": "sha256:d7b0a1b3e8386484145c4542330393bf941dfb07e96c6d78f222107c2b2036db",
+    "terminal": "sha256:cf50cbb2b0a1801b8f6a66b0126215ab4e7a9caab28d57cc7ca4f3c084e4bc85",
+    "result": "sha256:9db4e4272ae108e67faa25bd16af50a286aea571191e7c2a4785692eb158b561",
+    "diagram": "sha256:0af062820a9b374410803005791f1881325e276419b861392d6eda36a772930b",
+    "svg": "sha256:fcfafbed06ed9a6ff6c3e63ddff0a9cbf8d04de6f56e4f85a00ad248dbf0a12a",
+    "trace": "sha256:3f655cb17e981b210d7a420c8a0f5c18ee3282006ef9ce625b8c5688ac287a3d",
+    "browserEvidence": "sha256:d2a53147b281705173b0f361ebe8b707ea38925b9b995ddf56443e3d973f73be",
+    "synthesis": "sha256:2ee871f96b2816163fb5eefd01c03ca9eb71184ebeab4e926160f5697bc08f3e"
+  },
+  "attempts": {
+    "stale01": "never_dispatched",
+    "manifestOnly02": "stopped_pre_checkpoint_no_provider_call",
+    "completed03": "generated_terminal_no_rerun"
+  },
+  "budget": {
+    "priorCompletedCalls": 5,
+    "anchorCompletedCalls": 5,
+    "failedCalls": 0,
+    "uncertainCalls": 0,
+    "used": 10,
+    "ceiling": 1000,
+    "remaining": 990
+  },
+  "provider": {
+    "reasoningEffort": "medium",
+    "roles": ["readiness", "generation", "generation_repair", "semantic_review", "semantic_review_response_repair"],
+    "inputTokens": 38710,
+    "outputTokens": 20546,
+    "reasoningTokens": 9754,
+    "cachedInputTokens": 0,
+    "wallMs": 180843.12469995348,
+    "firstResponseFailures": [
+      {"role": "generation", "code": "bdd_relationship_endpoints_invalid", "path": "$.edges[3]", "repairWallMs": 26052.517600008287},
+      {"role": "semantic_review", "code": "finding_invalid", "path": "$", "repairWallMs": 37787.58720000042}
+    ]
+  },
+  "quality": {
+    "readinessStatus": "ready",
+    "readinessScore": 91,
+    "reviewStatus": "pass",
+    "reviewScore": 75,
+    "deterministicRepairRounds": 1,
+    "semanticRepairRounds": 0,
+    "requiredMeaning": "pass",
+    "forbiddenMeaning": "pass",
+    "provenance": "pass",
+    "delivery": "pass",
+    "browser": "pass"
+  },
+  "browser": {
+    "mode": "built_preview",
+    "browser": "chromium",
+    "browserVersion": "150.0.0.0",
+    "apiStatus": 200,
+    "apiMs": 4.600000023841858,
+    "completionMs": 543.8000000119209,
+    "nodeCount": 4,
+    "edgeCount": 3,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "failedResponses": 0
+  },
+  "accounting": {
+    "totalMs": 186759.67260004627,
+    "host": {
+      "classification": "prepared_imported",
+      "wallMs": 251.62430002819747,
+      "json1": "prepared_imported",
+      "json2": "prepared_imported",
+      "authoringMs": null,
+      "tokens": null,
+      "credits": null,
+      "measurementGap": "Real host routing, search, read, authoring, validation-retry, token, and credit measurements are outside this controlled anchor."
+    },
+    "azure": {"wallMs": 180843.12469995348},
+    "mcp": {"wallMs": 865.764299989678},
+    "local": {"wallMs": 3995.3401000238955},
+    "browser": {"wallMs": 543.8000000119209},
+    "residual": {"wallMs": 260.0192000390962}
+  },
+  "warnings": [
+    {
+      "code": "diagnostics_write_failed",
+      "classification": "non_fatal",
+      "effect": "Optional diagnostics inventory unavailable; canonical diagram, SVG, trace, events, result, observation, terminal, browser evidence, and synthesis are complete."
+    }
+  ],
+  "scope": {
+    "hostExperimentIncluded": false,
+    "copilotComparisonIncluded": false,
+    "calibration": false,
+    "certification": false,
+    "promotion": false,
+    "deployment": false
+  },
+  "digest": "sha256:949435397b51c864cfe89ef8c9096c9dbacff255638b188d05c956b13039cc3a"
+}

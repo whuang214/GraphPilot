@@ -1,0 +1,141 @@
+{
+  "schemaVersion": "graphpilot.delivery.readiness-correction-proof.v1",
+  "kind": "readinessCorrectionProof",
+  "resultId": "result-readiness-correction-block4-medium-20260728-01",
+  "sourceCommit": "77fc7cb5643d5f982d0a3172f57d4afb2139c6f7",
+  "correctionCommit": "3b9bcbdb10c41235904a674057b560e7dde9b53a",
+  "manifest": {
+    "packageId": "package-readiness-diagnostic-block4-correction-medium-20260728-01",
+    "digest": "sha256:64f0ed0ce16b6e971f02ac617e180d72fde6358410c58edee0663934f57ec1a5",
+    "runId": "run-readiness-diagnostic-block4-correction-medium-20260728-01",
+    "observationId": "observation-readiness-diagnostic-block4-correction-medium-20260728-01",
+    "reasoningEffort": "medium",
+    "callMaximum": 2
+  },
+  "observation": {
+    "digest": "sha256:6201c76e1e0667f1537e252318d535ffe35c2cfc3366bd74887e36c1ff667503",
+    "eventLedgerDigest": "sha256:7572c4ec784175c75903e8311cba36f7bea32ba2af1f0d238033e01ec28c499a",
+    "status": "completed",
+    "providerStartState": "started",
+    "errorCode": null,
+    "captureComplete": true,
+    "captureFailureCodes": [],
+    "startedAt": "2026-07-28T18:39:07.162838Z",
+    "completedAt": "2026-07-28T18:39:58.961825Z"
+  },
+  "call": {
+    "sequence": 1,
+    "role": "readiness",
+    "state": "completed",
+    "durationMs": 51706.85509999748,
+    "requestBytes": 33079,
+    "responseBytes": 3932,
+    "inputTokens": 6369,
+    "outputTokens": 3547,
+    "reasoningTokens": 2679,
+    "cachedInputTokens": 0,
+    "providerRequestId": "39940cd9-3f03-4189-b18b-58e29154f578",
+    "serviceTier": "default",
+    "requestedControl": "medium",
+    "effectiveControl": "medium",
+    "firstResponseValid": true,
+    "validationIssues": []
+  },
+  "readiness": {
+    "status": "needs_context",
+    "score": 72,
+    "blockerCodes": ["conditional_facet_below_minimum"],
+    "warningCodes": [],
+    "blockerPolicy": {
+      "category": "coverage",
+      "severity": "blocking",
+      "overrideable": true,
+      "permittedActions": ["select_existing_claim", "search_source", "ask_user"]
+    }
+  },
+  "proof": {
+    "resultClass": "clean_pass",
+    "firstResponseValid": true,
+    "repairTriggered": false,
+    "callsStarted": 1,
+    "callsCompleted": 1,
+    "callsFailed": 0,
+    "callsUncertain": 0,
+    "e1E2CoverageTriggerAbsent": true,
+    "e1E2RecommendationTriggerAbsent": true,
+    "terminalNoRerun": true,
+    "safeCaptureComplete": true
+  },
+  "comparisonToE2": {
+    "e2ResultDigest": "sha256:32ff890695b635e7ed40337a88031758a793a4f809db6bd4957dbbd226394733",
+    "sameCase": true,
+    "sameAssetPaths": true,
+    "changedRuntimeAssets": [
+      "backend/graphpilot/prompts/readiness-review.md",
+      "backend/graphpilot/prompts/readiness-review-repair.md",
+      "backend/services/readiness/context_readiness_service.py",
+      "backend/services/readiness/readiness_review_validator.py"
+    ],
+    "callsDelta": -1,
+    "callsDeltaPercent": -50.0,
+    "durationDeltaMs": -52214.372500020545,
+    "durationDeltaPercent": -50.2441837013206,
+    "inputTokenDelta": -6175,
+    "inputTokenDeltaPercent": -49.22672193877551,
+    "outputTokenDelta": -4466,
+    "outputTokenDeltaPercent": -55.734431548733305,
+    "reasoningTokenDelta": -2834,
+    "reasoningTokenDeltaPercent": -51.405768184291674,
+    "requestByteDelta": -32297,
+    "requestByteDeltaPercent": -49.40192119432208,
+    "responseByteDelta": -7738,
+    "responseByteDeltaPercent": -66.30676949443016
+  },
+  "offlineVerification": {
+    "failingBefore": {"passed": 2, "failed": 3, "errors": 1},
+    "exactPassingAfter": {"passed": 6},
+    "focusedReadiness": {"passed": 44, "skipped": 1},
+    "broaderReadinessDiagnosisManagement": {"passed": 124, "skipped": 1},
+    "fullBackend": {"passed": 1015, "skipped": 5},
+    "implementationAudit": {"remainingCritical": 0, "remainingHigh": 0, "remainingMedium": 0}
+  },
+  "azureAccounting": {
+    "completed": 5,
+    "failed": 0,
+    "uncertain": 0,
+    "used": 5,
+    "ceiling": 1000,
+    "remaining": 995
+  },
+  "limitations": [
+    "This is one visible mechanical same-case proof, not calibration, certification, or a representative stability matrix.",
+    "The safe diagnosis observation retains readiness summary and validation metadata, not raw provider output or the complete private review.",
+    "Offline tests remain the authority for detailed blocker/ref/action invariants beyond the retained live summary."
+  ],
+  "exitAudit": {
+    "state": "passed",
+    "reviewer": "independent-read-only-subagent-992b572d",
+    "cleanPassAccepted": true,
+    "initialCritical": 0,
+    "initialHigh": 0,
+    "initialMedium": 3,
+    "documentationCorrections": [
+      "Clarify pass versus skip counts without changing test totals.",
+      "Complete the S02 Outcome.",
+      "Advance current-state to the Block 5 gate."
+    ],
+    "remainingCritical": 0,
+    "remainingHigh": 0,
+    "remainingMedium": 0
+  },
+  "block5Recommendation": "proceed_to_block5_complete_live_anchor_and_reaudit",
+  "scope": {
+    "mechanicalProviderPerformanceOnly": true,
+    "generation": false,
+    "semanticReview": false,
+    "calibration": false,
+    "certification": false,
+    "promotion": false
+  },
+  "digest": "sha256:2de690fd030610ea65bbe61fe51cb71c8e468129cafe6b3a1e8ef65d0735e2f7"
+}

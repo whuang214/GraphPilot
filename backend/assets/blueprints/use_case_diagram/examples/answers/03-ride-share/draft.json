@@ -1,0 +1,113 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "ride-share",
+  "diagramType": "use_case_diagram",
+  "authority": "conceptual",
+  "requests": [
+    "In a ride-share app a rider requests a ride (which includes matching a driver) and pays the fare, rating the trip optionally extends paying, and a driver accepts rides."
+  ],
+  "evidence": [],
+  "elements": [
+    {
+      "id": "rider",
+      "semanticType": "actor",
+      "label": "Rider",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "driver",
+      "semanticType": "actor",
+      "label": "Driver",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "sys",
+      "semanticType": "subject",
+      "label": "Ride-Share App",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "request",
+      "semanticType": "useCase",
+      "label": "Request Ride",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    },
+    {
+      "id": "match",
+      "semanticType": "useCase",
+      "label": "Match Driver",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    },
+    {
+      "id": "accept",
+      "semanticType": "useCase",
+      "label": "Accept Ride",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    },
+    {
+      "id": "pay",
+      "semanticType": "useCase",
+      "label": "Pay Fare",
+      "assurance": "conceptual",
+      "parentId": "sys",
+      "extensionPoints": [
+        "extensionPoint"
+      ]
+    },
+    {
+      "id": "rate",
+      "semanticType": "useCase",
+      "label": "Rate Trip",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "edge-1-rider-request",
+      "semanticType": "association",
+      "source": "rider",
+      "target": "request",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-2-rider-pay",
+      "semanticType": "association",
+      "source": "rider",
+      "target": "pay",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-3-driver-accept",
+      "semanticType": "association",
+      "source": "driver",
+      "target": "accept",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-4-request-match",
+      "semanticType": "include",
+      "source": "request",
+      "target": "match",
+      "assurance": "conceptual",
+      "label": "«include»"
+    },
+    {
+      "id": "edge-5-rate-pay",
+      "semanticType": "extend",
+      "source": "rate",
+      "target": "pay",
+      "assurance": "conceptual",
+      "condition": "optional",
+      "extensionLocations": [
+        "extensionPoint"
+      ],
+      "label": "«extend»"
+    }
+  ],
+  "assumptions": []
+}

@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "graphpilot.delivery.block6-ranked-backlog.v1",
+  "kind": "workflowOptimizationBacklog",
+  "sourceBlock": 5,
+  "status": "authorized",
+  "hostMeasurementPrerequisite": {
+    "state": "required_before_host_wall_claim_or_final_wave_selection",
+    "experiments": [
+      {"profile": "copilot-todo-cold-01", "repository": "todo_fixture_repository", "request": "missing_json1", "cacheState": "cold"},
+      {"profile": "copilot-todo-warm-02", "repository": "same_todo_fixture_repository", "request": "reuse_current_json1", "cacheState": "warm"}
+    ],
+    "requiredBindings": ["repositoryCommit", "requestDigest", "hostName", "hostVersion", "modelIdentity", "cacheState", "searchCount", "focusedReadCount", "sourceBytesRead", "authoringAttempts", "validationRetries", "elapsedMs", "exposedInputTokens", "exposedOutputTokens", "credits", "json1Digest", "json2Digest"],
+    "comparisonRule": "Compare strict external cold/warm host observations and the controlled GraphPilot anchor as separate denominators; never force percentages across incompatible repositories or requests.",
+    "postChangeRule": "After any retained host-interface wave, rerun a comparable strict external host observation before claiming measured savings.",
+    "currentColdObservation": "informative_but_not_strictly_bound",
+    "warmProfile02": "missing"
+  },
+  "selectedFirstWave": "wave-b1-semantic-review-contract",
+  "waves": [
+    {
+      "rank": 1,
+      "id": "wave-b1-semantic-review-contract",
+      "lane": "B",
+      "owner": "semantic_review_prompt_projection_schema_validator_contract",
+      "baselineEvidence": {"runId": "run-live-workflow-anchor-block5-cold-room-20260728-03", "role": "semantic_review", "firstResponseValid": false, "failureCode": "finding_invalid", "failurePath": "$", "repairRole": "semantic_review_response_repair", "repairWallMs": 37787.58720000042},
+      "confidence": "high",
+      "claimState": "measured_controlled_baseline",
+      "smallestProof": "Reproduce the exact invalid finding shape provider-free, identify missing/ambiguous allowlist or bounded rule, add failing-before/passing-after contract regressions, then use a new-identity controlled live anchor after independent audit.",
+      "retentionGate": "First semantic-review response valid with no response-repair call; quality/provenance/compatibility/browser remain pass.",
+      "rollback": "Revert only the semantic-review contract correction and retain immutable failed/candidate evidence.",
+      "separation": "No host, generation, MCP, local, or browser change in this wave."
+    },
+    {
+      "rank": 2,
+      "id": "wave-b2-generation-endpoints-contract",
+      "lane": "B",
+      "owner": "generation_prompt_projection_schema_validator_contract",
+      "baselineEvidence": {"runId": "run-live-workflow-anchor-block5-cold-room-20260728-03", "role": "generation", "firstResponseValid": false, "failureCode": "bdd_relationship_endpoints_invalid", "failurePath": "$.edges[3]", "repairRole": "generation_repair", "repairWallMs": 26052.517600008287},
+      "confidence": "high",
+      "claimState": "measured_controlled_baseline",
+      "smallestProof": "Reproduce the exact fourth-edge endpoint shape provider-free, identify missing relationship endpoint/allowlist rule, add contract regressions, then use a new-identity controlled live anchor after independent audit.",
+      "retentionGate": "First generation response valid with no generation-repair call; required/forbidden meaning, provenance, reviewed quality, compatibility, and browser remain pass.",
+      "rollback": "Revert only the generation contract correction.",
+      "separation": "Separate from semantic-review and host waves."
+    },
+    {
+      "rank": 3,
+      "id": "wave-a1-host-relationship-closure",
+      "lane": "A",
+      "owner": "graphpilot_host_facing_context_contract",
+      "baselineEvidence": {"source": "user_supplied_external_cold_observation", "totalWallMs": 470824.0, "outsideReadinessProviderMs": 406024.6594, "authoringAttempts": 5, "validationFailures": 5, "blockedCause": "explicit_relationship_closure_omitted", "comparability": "different_repository_and_request"},
+      "confidence": "medium",
+      "claimState": "provider_free_characterization_allowed_measured_wall_pending",
+      "smallestProof": "Add compact discoverable JSON 1/JSON 2 summaries/templates and actionable exact relationship-closure validation guidance; prove fewer deterministic correction steps and unchanged public authority/safety provider-free.",
+      "retentionGate": "Demonstrated contract/usability defect fixed, independent audit passes, and performance benefit remains labeled pending strict host rerun.",
+      "rollback": "Revert host-facing documentation/validation guidance only.",
+      "separation": "No provider prompt/runtime change in this wave."
+    },
+    {
+      "rank": 4,
+      "id": "wave-b3-provider-packet-and-cache",
+      "lane": "B",
+      "owner": "provider_packet_cache_contract",
+      "baselineEvidence": {"inputTokens": 38710, "outputTokens": 20546, "cachedInputTokens": 0, "requestBytes": 193171},
+      "confidence": "medium",
+      "claimState": "deferred_until_first_response_validity",
+      "smallestProof": "Characterize repeated immutable prompt/schema/rubric bytes and provider cache eligibility after repair calls are eliminated.",
+      "retentionGate": "Lower complete wall/tokens/bytes with unchanged quality and call validity.",
+      "rollback": "Restore packet/cache behavior."
+    },
+    {
+      "rank": 5,
+      "id": "wave-a2-mcp-session-guidance",
+      "lane": "A",
+      "owner": "mcp_host_integration",
+      "baselineEvidence": {"controlledMcpMs": 865.764299989678, "providerFreeScheduleMcpMs": 902.1306},
+      "confidence": "medium",
+      "claimState": "measured_small_contributor",
+      "smallestProof": "Separate process startup from transport and document/test persistent session or reference adapter behavior.",
+      "retentionGate": "Measured host-side MCP startup reduction without protocol/recovery change.",
+      "rollback": "Restore process/session guidance."
+    },
+    {
+      "rank": 6,
+      "id": "wave-b4-local-deterministic",
+      "lane": "B",
+      "owner": "measured_local_subboundary",
+      "baselineEvidence": {"controlledLocalMs": 3995.3401000238955},
+      "confidence": "high",
+      "claimState": "deferred_below_provider_calls",
+      "smallestProof": "Profile non-nested local sub-boundaries; optimize only a material owner.",
+      "retentionGate": "Measured complete-wall benefit exceeds complexity with identical artifacts.",
+      "rollback": "Revert local optimization."
+    },
+    {
+      "rank": 7,
+      "id": "wave-b5-browser",
+      "lane": "B",
+      "owner": "editor_load_render",
+      "baselineEvidence": {"controlledBrowserMs": 543.8000000119209},
+      "confidence": "high",
+      "claimState": "deferred_small_contributor",
+      "smallestProof": "Profile API/load/render only after larger provider/host work.",
+      "retentionGate": "Measured visible completion improvement with exact identity and clean console/network.",
+      "rollback": "Revert browser optimization."
+    }
+  ],
+  "guardSet": {
+    "controlledAnchor": "new identity per live proof; never rerun Block 5 identity",
+    "callCeilingPerAnchor": 9,
+    "providerFreeBaseline": "current 19-observation Block 1 method",
+    "required": ["fail_closed_readiness", "nontrivial_generation", "semantic_review", "canonical_validation", "provenance", "browser_identity", "recovery_no_rerun", "compatibility"]
+  },
+  "budget": {"used": 10, "ceiling": 1000, "remaining": 990},
+  "digest": "sha256:437d41a97fc5ddc01fcff92fc1782a2691fcde129dfab9aed88a3198be1d4ea0"
+}

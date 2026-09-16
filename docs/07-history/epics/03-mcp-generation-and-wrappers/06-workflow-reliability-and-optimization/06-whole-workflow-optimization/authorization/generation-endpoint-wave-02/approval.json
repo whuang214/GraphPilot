@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "graphpilot.delivery.generation-endpoint-wave-approval.v1",
+  "kind": "generationEndpointWaveApproval",
+  "approvalId": "approval-live-anchor-b6-generation-20260729-02",
+  "packageId": "package-live-anchor-b6-generation-cold-room-20260729-02",
+  "anchorDigest": "sha256:7e482e579499d61b8ad85070dcea86b64856f756ea5eaa33987408c2095a2987",
+  "decision": "approve",
+  "reviewer": {"kind": "product_owner", "id": "product-owner-user", "attestation": "I am the human product owner making this decision; no agent made it for me."},
+  "reviewedAt": "2026-07-29T22:02:50.370613Z",
+  "sections": {
+    "identity": {"decision": "approve", "notes": "Use the unchanged cold-room semantics/checklist under wholly new short B0-safe package, request, run, observation, diagnostics, browser, and synthesis identities."},
+    "readiness": {"decision": "approve", "notes": "The same complete source-backed meaning remains the mandatory final-readiness input; readiness behavior is unchanged."},
+    "requiredMeaning": {"decision": "approve", "notes": "The original required checklist remains exact and evaluator-only; no future diagram is pre-approved."},
+    "forbiddenMeaning": {"decision": "approve", "notes": "The original forbidden unsupported-meaning boundary remains exact."},
+    "delivery": {"decision": "approve", "notes": "Retention requires generation first-response validity with no generation-repair role plus reviewed quality, provenance, persistence, SVG, exact editor identity, browser health, compatibility, recovery, and no material regression."},
+    "liveSchedule": {"decision": "approve", "notes": "Authorize exactly one medium-effort sequential candidate with at most nine naturally reached calls, aggregate 11/1000 before and 20/1000 worst case after; no retry or second candidate."},
+    "scope": {"decision": "approve", "notes": "This authorizes one Block 6 generation-endpoint proof after committed S06 and B0 path/package audit, not semantic-review retry, Lane A, packet/cache, readiness, local, calibration, certification, promotion, deployment, or another live wave."}
+  },
+  "attestations": {"humanReview": true, "agentReviewExcluded": true, "notCalibrationOrCertification": true, "checklistExcludedFromProvider": true, "singleCandidateOnly": true, "aggregateBudgetAccepted": true, "s06CommitBound": true, "b0PathGateBound": true},
+  "overallNotes": "The user's current Lane B instruction explicitly authorizes exactly one new controlled candidate for this approved generation wave after all provider-free, path-safety, clean-source, package, resource, security, and budget gates pass. The first package was rejected before freeze by B0 and made zero calls; this corrected short package is the sole live candidate. Failure, block, interruption, uncertainty, quality failure, or browser failure is terminal and never retried.",
+  "digest": "sha256:a5388cbccaba54fe2f33eae0434cdd7f1ad8b5d7d8bd0155cdae1a365f2d1b86"
+}

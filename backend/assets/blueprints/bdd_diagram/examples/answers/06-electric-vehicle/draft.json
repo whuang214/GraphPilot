@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "electric-vehicle",
+  "diagramType": "bdd_diagram",
+  "authority": "conceptual",
+  "requests": [
+    "An electric car and a hybrid car are kinds of vehicle; the electric car is composed of a battery pack made of cells and exposes its range."
+  ],
+  "evidence": [],
+  "elements": [
+    {
+      "id": "vehicle",
+      "semanticType": "block",
+      "label": "Vehicle",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "ev",
+      "semanticType": "block",
+      "label": "Electric Car",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "hybrid",
+      "semanticType": "block",
+      "label": "Hybrid Car",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "pack",
+      "semanticType": "block",
+      "label": "Battery Pack",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "cell",
+      "semanticType": "block",
+      "label": "Battery Cell",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "range",
+      "semanticType": "block",
+      "label": "Range",
+      "assurance": "conceptual"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "edge-1-ev-vehicle",
+      "semanticType": "generalization",
+      "source": "ev",
+      "target": "vehicle",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-2-hybrid-vehicle",
+      "semanticType": "generalization",
+      "source": "hybrid",
+      "target": "vehicle",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-3-pack-ev",
+      "semanticType": "composition",
+      "source": "pack",
+      "target": "ev",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-4-cell-pack",
+      "semanticType": "composition",
+      "source": "cell",
+      "target": "pack",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-5-range-ev",
+      "semanticType": "composition",
+      "source": "range",
+      "target": "ev",
+      "assurance": "conceptual"
+    }
+  ],
+  "assumptions": []
+}

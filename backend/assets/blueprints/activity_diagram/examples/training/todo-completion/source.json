@@ -1,0 +1,6 @@
+{
+  "repository": "todo-api-fixture",
+  "fromRepository": true,
+  "diagramType": "activity_diagram",
+  "note": "Served by diagram_get_authoring_contract as this type's worked example."
+}

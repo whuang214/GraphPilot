@@ -1,0 +1,141 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "conference-management",
+  "diagramType": "use_case_diagram",
+  "authority": "conceptual",
+  "requests": [
+    "In a conference system an author submits a paper, a reviewer reviews papers, a chair assigns reviewers, and an attendee registers; every one of these actions authenticates the user first."
+  ],
+  "evidence": [],
+  "elements": [
+    {
+      "id": "author",
+      "semanticType": "actor",
+      "label": "Author",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "reviewer",
+      "semanticType": "actor",
+      "label": "Reviewer",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "chair",
+      "semanticType": "actor",
+      "label": "Chair",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "attendee",
+      "semanticType": "actor",
+      "label": "Attendee",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "sys",
+      "semanticType": "subject",
+      "label": "Conference System",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "submit",
+      "semanticType": "useCase",
+      "label": "Submit Paper",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    },
+    {
+      "id": "review",
+      "semanticType": "useCase",
+      "label": "Review Paper",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    },
+    {
+      "id": "assign",
+      "semanticType": "useCase",
+      "label": "Assign Reviewers",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    },
+    {
+      "id": "register",
+      "semanticType": "useCase",
+      "label": "Register",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    },
+    {
+      "id": "auth",
+      "semanticType": "useCase",
+      "label": "Authenticate",
+      "assurance": "conceptual",
+      "parentId": "sys"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "edge-1-author-submit",
+      "semanticType": "association",
+      "source": "author",
+      "target": "submit",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-2-reviewer-review",
+      "semanticType": "association",
+      "source": "reviewer",
+      "target": "review",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-3-chair-assign",
+      "semanticType": "association",
+      "source": "chair",
+      "target": "assign",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-4-attendee-register",
+      "semanticType": "association",
+      "source": "attendee",
+      "target": "register",
+      "assurance": "conceptual"
+    },
+    {
+      "id": "edge-5-submit-auth",
+      "semanticType": "include",
+      "source": "submit",
+      "target": "auth",
+      "assurance": "conceptual",
+      "label": "«include»"
+    },
+    {
+      "id": "edge-6-review-auth",
+      "semanticType": "include",
+      "source": "review",
+      "target": "auth",
+      "assurance": "conceptual",
+      "label": "«include»"
+    },
+    {
+      "id": "edge-7-assign-auth",
+      "semanticType": "include",
+      "source": "assign",
+      "target": "auth",
+      "assurance": "conceptual",
+      "label": "«include»"
+    },
+    {
+      "id": "edge-8-register-auth",
+      "semanticType": "include",
+      "source": "register",
+      "target": "auth",
+      "assurance": "conceptual",
+      "label": "«include»"
+    }
+  ],
+  "assumptions": []
+}

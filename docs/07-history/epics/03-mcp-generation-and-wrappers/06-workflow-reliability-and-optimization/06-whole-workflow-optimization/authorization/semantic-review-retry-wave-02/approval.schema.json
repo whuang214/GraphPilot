@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "graphpilot.delivery.semantic-review-wave-approval.v1",
+  "title": "GraphPilot Block 6 Semantic Review Retry Approval v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "kind", "approvalId", "packageId", "anchorDigest", "decision", "reviewer", "reviewedAt", "sections", "attestations", "overallNotes", "digest"],
+  "properties": {
+    "schemaVersion": {"const": "graphpilot.delivery.semantic-review-wave-approval.v1"},
+    "kind": {"const": "semanticReviewWaveApproval"},
+    "approvalId": {"type": "string", "pattern": "^approval-live-anchor-block6-semantic-review-[a-z0-9]+(?:-[a-z0-9]+)*$", "maxLength": 160},
+    "packageId": {"const": "package-live-anchor-b6-semantic-cold-room-20260730-01"},
+    "anchorDigest": {"const": "sha256:d41d0f09b12c7d52088bc115f2f249d0cfd1c5e54712a1f87e225745fcc19e17"},
+    "decision": {"enum": ["approve", "revise"]},
+    "reviewer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "id", "attestation"],
+      "properties": {
+        "kind": {"const": "product_owner"},
+        "id": {"type": "string", "pattern": "^product-owner-[a-z0-9]+(?:-[a-z0-9]+)*$", "maxLength": 128},
+        "attestation": {"const": "I am the human product owner making this decision; no agent made it for me."}
+      }
+    },
+    "reviewedAt": {"type": "string", "format": "date-time", "pattern": "Z$", "maxLength": 32},
+    "sections": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["identity", "readiness", "requiredMeaning", "forbiddenMeaning", "delivery", "liveSchedule", "scope"],
+      "properties": {
+        "identity": {"$ref": "#/$defs/section"},
+        "readiness": {"$ref": "#/$defs/section"},
+        "requiredMeaning": {"$ref": "#/$defs/section"},
+        "forbiddenMeaning": {"$ref": "#/$defs/section"},
+        "delivery": {"$ref": "#/$defs/section"},
+        "liveSchedule": {"$ref": "#/$defs/section"},
+        "scope": {"$ref": "#/$defs/section"}
+      }
+    },
+    "attestations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["humanReview", "agentReviewExcluded", "notCalibrationOrCertification", "checklistExcludedFromProvider", "singleCandidateOnly", "aggregateBudgetAccepted", "s10CommitBound"],
+      "properties": {
+        "humanReview": {"type": "boolean"},
+        "agentReviewExcluded": {"type": "boolean"},
+        "notCalibrationOrCertification": {"type": "boolean"},
+        "checklistExcludedFromProvider": {"type": "boolean"},
+        "singleCandidateOnly": {"type": "boolean"},
+        "aggregateBudgetAccepted": {"type": "boolean"},
+        "s10CommitBound": {"type": "boolean"}
+      }
+    },
+    "overallNotes": {"type": "string", "maxLength": 4000},
+    "digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+  },
+  "$defs": {
+    "section": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["decision", "notes"],
+      "properties": {
+        "decision": {"enum": ["approve", "revise"]},
+        "notes": {"type": "string", "maxLength": 2000}
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"decision": {"const": "approve"}}, "required": ["decision"]},
+      "then": {
+        "properties": {
+          "sections": {
+            "properties": {
+              "identity": {"properties": {"decision": {"const": "approve"}}},
+              "readiness": {"properties": {"decision": {"const": "approve"}}},
+              "requiredMeaning": {"properties": {"decision": {"const": "approve"}}},
+              "forbiddenMeaning": {"properties": {"decision": {"const": "approve"}}},
+              "delivery": {"properties": {"decision": {"const": "approve"}}},
+              "liveSchedule": {"properties": {"decision": {"const": "approve"}}},
+              "scope": {"properties": {"decision": {"const": "approve"}}}
+            }
+          },
+          "attestations": {
+            "properties": {
+              "humanReview": {"const": true},
+              "agentReviewExcluded": {"const": true},
+              "notCalibrationOrCertification": {"const": true},
+              "checklistExcludedFromProvider": {"const": true},
+              "singleCandidateOnly": {"const": true},
+              "aggregateBudgetAccepted": {"const": true},
+              "s10CommitBound": {"const": true}
+            }
+          }
+        }
+      }
+    }
+  ]
+}

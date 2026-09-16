@@ -1,0 +1,573 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "shelfmark-issue-a-copy",
+  "diagramType": "activity_diagram",
+  "authority": "as_implemented",
+  "requests": [
+    "What happens when a librarian issues a copy to a member."
+  ],
+  "evidence": [
+    {
+      "id": "ev-desk-form",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 7,
+          "start": 3
+        },
+        "path": "templates/desk/desk.html",
+        "symbol": "Check out"
+      },
+      "summary": "The desk page's Check out card posts the checkout form's membership number and barcode fields to the desk URL under an Issue button."
+    },
+    {
+      "id": "ev-desk-url",
+      "kind": "configuration",
+      "locator": {
+        "lineRange": {
+          "end": 6,
+          "start": 6
+        },
+        "path": "desk/urls.py",
+        "symbol": "desk"
+      },
+      "summary": "The desk view is mounted at the root of /desk/ under the route name desk."
+    },
+    {
+      "id": "ev-librarian-gate",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 10,
+          "start": 10
+        },
+        "path": "desk/views.py",
+        "symbol": "librarian_only"
+      },
+      "summary": "librarian_only is a user_passes_test that admits only an authenticated user whose is_librarian is true."
+    },
+    {
+      "id": "ev-desk-entry",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 18,
+          "start": 13
+        },
+        "path": "desk/views.py",
+        "symbol": "desk"
+      },
+      "summary": "The desk view is wrapped in login_required and librarian_only, binds CheckoutForm with the out prefix, and only proceeds when the request is a POST carrying out-barcode and the form validates."
+    },
+    {
+      "id": "ev-desk-outcome",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 30,
+          "start": 18
+        },
+        "path": "desk/views.py",
+        "symbol": "check_out"
+      },
+      "summary": "On a valid POST the view calls check_out, turns a NotAllowed into an error message, and on success reports the title, the member and the due date before redirecting back to the desk; anything that falls through re-renders the desk page."
+    },
+    {
+      "id": "ev-form-clean",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 32,
+          "start": 7
+        },
+        "path": "desk/forms.py",
+        "symbol": "CheckoutForm"
+      },
+      "summary": "CheckoutForm resolves the membership number to a Member and the barcode to a BookCopy, erroring when either is unknown, and rejects the account outright if it has any open loan that is overdue."
+    },
+    {
+      "id": "ev-checkout-service",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 22,
+          "start": 13
+        },
+        "path": "circulation/services.py",
+        "symbol": "check_out"
+      },
+      "summary": "check_out is a single atomic transaction: it refuses when can_borrow says no, refuses when the copy is not on the shelf, and otherwise creates the Loan with a due date from due_date_for."
+    },
+    {
+      "id": "ev-can-borrow",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 26,
+          "start": 19
+        },
+        "path": "circulation/eligibility.py",
+        "symbol": "can_borrow"
+      },
+      "summary": "can_borrow refuses a locked account with its reason, then refuses when the member already has MAX_CONCURRENT_LOANS items out."
+    },
+    {
+      "id": "ev-account-locked",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 16,
+          "start": 8
+        },
+        "path": "circulation/eligibility.py",
+        "symbol": "account_is_locked"
+      },
+      "summary": "An account is locked by any open loan that is overdue, and otherwise by owing more than LOCK_BALANCE_PENCE."
+    },
+    {
+      "id": "ev-on-shelf",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 47,
+          "start": 45
+        },
+        "path": "catalog/models.py",
+        "symbol": "is_on_shelf"
+      },
+      "summary": "A copy is on the shelf exactly when it has no loan whose returned_at is still null."
+    },
+    {
+      "id": "ev-due-date",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 13,
+          "start": 8
+        },
+        "path": "catalog/utils.py",
+        "symbol": "due_date_for"
+      },
+      "summary": "The due date is the borrow date plus the title's loan period, which is HIGH_DEMAND_LOAN_DAYS for a high-demand book and LOAN_DAYS otherwise."
+    },
+    {
+      "id": "ev-lending-rules",
+      "kind": "configuration",
+      "locator": {
+        "lineRange": {
+          "end": 80,
+          "start": 74
+        },
+        "path": "shelfmark/settings.py",
+        "symbol": "LOAN_DAYS"
+      },
+      "summary": "The lending rules: LOAN_DAYS 21, HIGH_DEMAND_LOAN_DAYS 7, LOCK_BALANCE_PENCE 1000 and MAX_CONCURRENT_LOANS 10."
+    },
+    {
+      "id": "ev-issue-test",
+      "kind": "test",
+      "locator": {
+        "lineRange": {
+          "end": 50,
+          "start": 42
+        },
+        "path": "desk/tests.py",
+        "symbol": "test_a_librarian_can_issue_a_copy"
+      },
+      "summary": "Posting the desk form as a signed-in librarian creates one Loan for the reader, due twenty-one days from today."
+    },
+    {
+      "id": "ev-not-librarian-test",
+      "kind": "test",
+      "locator": {
+        "lineRange": {
+          "end": 57,
+          "start": 52
+        },
+        "path": "desk/tests.py",
+        "symbol": "test_a_member_cannot_reach_the_desk"
+      },
+      "summary": "A signed-in member who is not a librarian does not get a 200 from /desk/."
+    },
+    {
+      "id": "ev-overdue-refused-test",
+      "kind": "test",
+      "locator": {
+        "lineRange": {
+          "end": 71,
+          "start": 59
+        },
+        "path": "desk/tests.py",
+        "symbol": "test_issuing_to_an_account_with_an_overdue_item_is_refused"
+      },
+      "summary": "Issuing to an account holding an overdue item comes back saying overdue, and no loan is created for the copy."
+    },
+    {
+      "id": "ev-unknown-barcode-test",
+      "kind": "test",
+      "locator": {
+        "lineRange": {
+          "end": 103,
+          "start": 98
+        },
+        "path": "desk/tests.py",
+        "symbol": "test_an_unknown_barcode_is_rejected"
+      },
+      "summary": "An unknown barcode is answered with No copy with that barcode."
+    }
+  ],
+  "elements": [
+    {
+      "id": "start",
+      "semanticType": "initialNode",
+      "label": "Librarian submits the issue form",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-desk-form",
+        "ev-desk-url"
+      ]
+    },
+    {
+      "id": "is-librarian",
+      "semanticType": "decisionNode",
+      "label": "Signed in as a librarian?",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-librarian-gate",
+        "ev-desk-entry"
+      ]
+    },
+    {
+      "id": "turned-away",
+      "semanticType": "activityFinalNode",
+      "label": "Turned away from the desk",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-librarian-gate",
+        "ev-not-librarian-test"
+      ]
+    },
+    {
+      "id": "resolve-inputs",
+      "semanticType": "opaqueAction",
+      "label": "Resolve the membership number and the barcode",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-form-clean",
+        "ev-desk-entry"
+      ]
+    },
+    {
+      "id": "form-valid",
+      "semanticType": "decisionNode",
+      "label": "Does the form validate?",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-form-clean",
+        "ev-desk-entry"
+      ]
+    },
+    {
+      "id": "may-borrow",
+      "semanticType": "decisionNode",
+      "label": "May this member borrow?",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-checkout-service",
+        "ev-can-borrow",
+        "ev-account-locked"
+      ]
+    },
+    {
+      "id": "copy-on-shelf",
+      "semanticType": "decisionNode",
+      "label": "Is the copy on the shelf?",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-checkout-service",
+        "ev-on-shelf"
+      ]
+    },
+    {
+      "id": "create-loan",
+      "semanticType": "opaqueAction",
+      "label": "Create the loan and set its due date",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-checkout-service",
+        "ev-due-date"
+      ]
+    },
+    {
+      "id": "confirm",
+      "semanticType": "opaqueAction",
+      "label": "Confirm the title, the member and the due date, then reload the desk",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-desk-outcome"
+      ]
+    },
+    {
+      "id": "issued",
+      "semanticType": "activityFinalNode",
+      "label": "Copy issued to the member",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-desk-outcome",
+        "ev-issue-test"
+      ]
+    },
+    {
+      "id": "refused",
+      "semanticType": "mergeNode",
+      "label": "Refused",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-desk-outcome"
+      ]
+    },
+    {
+      "id": "show-reason",
+      "semanticType": "opaqueAction",
+      "label": "Re-render the desk showing the reason",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-desk-outcome"
+      ]
+    },
+    {
+      "id": "nothing-issued",
+      "semanticType": "activityFinalNode",
+      "label": "Nothing issued",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-overdue-refused-test",
+        "ev-unknown-barcode-test"
+      ]
+    },
+    {
+      "id": "note-form-checks",
+      "semanticType": "note",
+      "label": "An unknown membership number, an unknown barcode, or any overdue item on the account all fail here.",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-form-clean"
+      ]
+    },
+    {
+      "id": "note-checked-twice",
+      "semanticType": "note",
+      "label": "The overdue rule runs twice: the form rejects the account, and can_borrow checks it again inside the service.",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-form-clean",
+        "ev-account-locked",
+        "ev-can-borrow"
+      ]
+    },
+    {
+      "id": "note-due-date",
+      "semanticType": "note",
+      "label": "Due in 21 days, or 7 for a high-demand title. The whole check-out runs in one transaction.",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-due-date",
+        "ev-lending-rules",
+        "ev-checkout-service"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "f-start",
+      "semanticType": "controlFlow",
+      "source": "start",
+      "target": "is-librarian",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-desk-entry"
+      ]
+    },
+    {
+      "id": "f-librarian-yes",
+      "semanticType": "controlFlow",
+      "source": "is-librarian",
+      "target": "resolve-inputs",
+      "guard": "a librarian",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-librarian-gate",
+        "ev-desk-entry"
+      ]
+    },
+    {
+      "id": "f-librarian-no",
+      "semanticType": "controlFlow",
+      "source": "is-librarian",
+      "target": "turned-away",
+      "guard": "not a librarian",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-librarian-gate",
+        "ev-not-librarian-test"
+      ]
+    },
+    {
+      "id": "f-to-validation",
+      "semanticType": "controlFlow",
+      "source": "resolve-inputs",
+      "target": "form-valid",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-form-clean"
+      ]
+    },
+    {
+      "id": "f-form-ok",
+      "semanticType": "controlFlow",
+      "source": "form-valid",
+      "target": "may-borrow",
+      "guard": "member and copy both found, nothing overdue",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-desk-entry",
+        "ev-checkout-service"
+      ]
+    },
+    {
+      "id": "f-form-bad",
+      "semanticType": "controlFlow",
+      "source": "form-valid",
+      "target": "refused",
+      "guard": "unknown member or barcode, or overdue account",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-form-clean",
+        "ev-unknown-barcode-test",
+        "ev-overdue-refused-test"
+      ]
+    },
+    {
+      "id": "f-borrow-ok",
+      "semanticType": "controlFlow",
+      "source": "may-borrow",
+      "target": "copy-on-shelf",
+      "guard": "not locked, under ten items",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-can-borrow",
+        "ev-checkout-service"
+      ]
+    },
+    {
+      "id": "f-borrow-no",
+      "semanticType": "controlFlow",
+      "source": "may-borrow",
+      "target": "refused",
+      "guard": "locked, or ten items already out",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-can-borrow",
+        "ev-account-locked",
+        "ev-checkout-service"
+      ]
+    },
+    {
+      "id": "f-shelf-ok",
+      "semanticType": "controlFlow",
+      "source": "copy-on-shelf",
+      "target": "create-loan",
+      "guard": "on the shelf",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-on-shelf",
+        "ev-checkout-service"
+      ]
+    },
+    {
+      "id": "f-shelf-no",
+      "semanticType": "controlFlow",
+      "source": "copy-on-shelf",
+      "target": "refused",
+      "guard": "already out",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-checkout-service"
+      ]
+    },
+    {
+      "id": "f-loan-created",
+      "semanticType": "controlFlow",
+      "source": "create-loan",
+      "target": "confirm",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-desk-outcome"
+      ]
+    },
+    {
+      "id": "f-issued",
+      "semanticType": "controlFlow",
+      "source": "confirm",
+      "target": "issued",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-desk-outcome",
+        "ev-issue-test"
+      ]
+    },
+    {
+      "id": "f-refused-shown",
+      "semanticType": "controlFlow",
+      "source": "refused",
+      "target": "show-reason",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-desk-outcome"
+      ]
+    },
+    {
+      "id": "f-nothing-issued",
+      "semanticType": "controlFlow",
+      "source": "show-reason",
+      "target": "nothing-issued",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-desk-outcome",
+        "ev-overdue-refused-test"
+      ]
+    },
+    {
+      "id": "link-form-checks",
+      "semanticType": "commentLink",
+      "source": "note-form-checks",
+      "target": "form-valid",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-form-clean"
+      ]
+    },
+    {
+      "id": "link-twice",
+      "semanticType": "commentLink",
+      "source": "note-checked-twice",
+      "target": "may-borrow",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-form-clean",
+        "ev-can-borrow"
+      ]
+    },
+    {
+      "id": "link-due-date",
+      "semanticType": "commentLink",
+      "source": "note-due-date",
+      "target": "create-loan",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-due-date"
+      ]
+    }
+  ]
+}

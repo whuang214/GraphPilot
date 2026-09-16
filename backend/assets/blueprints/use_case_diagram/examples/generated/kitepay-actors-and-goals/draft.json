@@ -1,0 +1,798 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "kitepay-actors-and-goals",
+  "diagramType": "use_case_diagram",
+  "authority": "as_implemented",
+  "requests": [
+    "Who uses this system, and what they use it for."
+  ],
+  "evidence": [
+    {
+      "id": "ev-roots",
+      "kind": "configuration",
+      "locator": {
+        "lineRange": {
+          "end": 12,
+          "start": 4
+        },
+        "path": "kitepay/urls.py",
+        "symbol": "urlpatterns"
+      },
+      "summary": "The project routing table: the Django admin plus the feed, accounts, payments, wallet, rails and notifications URL sets."
+    },
+    {
+      "id": "ev-loginurl",
+      "kind": "configuration",
+      "locator": {
+        "lineRange": {
+          "end": 68,
+          "start": 66
+        },
+        "path": "kitepay/settings.py",
+        "symbol": "LOGIN_URL"
+      },
+      "summary": "LOGIN_URL sends anyone hitting a login-protected view to /login/, and sign-in lands on the feed."
+    },
+    {
+      "id": "ev-register",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 20,
+          "start": 11
+        },
+        "path": "accounts/views.py",
+        "symbol": "register"
+      },
+      "summary": "register creates the User, creates their Wallet, signs them in and redirects to the feed; an already-authenticated visitor is bounced."
+    },
+    {
+      "id": "ev-login",
+      "kind": "configuration",
+      "locator": {
+        "lineRange": {
+          "end": 9,
+          "start": 8
+        },
+        "path": "accounts/urls.py",
+        "symbol": "LoginView"
+      },
+      "summary": "Sign-in and sign-out are Django's stock LoginView and LogoutView on /login/ and /logout/."
+    },
+    {
+      "id": "ev-pay",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 45,
+          "start": 18
+        },
+        "path": "payments/views.py",
+        "symbol": "pay"
+      },
+      "summary": "The login-protected /pay/ view takes a handle, amount, note and visibility and calls send_payment under an idempotency key."
+    },
+    {
+      "id": "ev-request-money",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 61,
+          "start": 48
+        },
+        "path": "payments/views.py",
+        "symbol": "request_money"
+      },
+      "summary": "/request/ creates a PaymentRequest against another user with an expiry taken from REQUEST_EXPIRY_DAYS."
+    },
+    {
+      "id": "ev-requests-list",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 70,
+          "start": 64
+        },
+        "path": "payments/views.py",
+        "symbol": "requests"
+      },
+      "summary": "/requests/ lists the money requests addressed to the user and the ones they raised."
+    },
+    {
+      "id": "ev-accept",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 94,
+          "start": 73
+        },
+        "path": "payments/views.py",
+        "symbol": "accept_request"
+      },
+      "summary": "accept_request pays an open request by calling send_payment, then marks the request accepted and records the settling payment."
+    },
+    {
+      "id": "ev-decline",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 103,
+          "start": 97
+        },
+        "path": "payments/views.py",
+        "symbol": "decline_request"
+      },
+      "summary": "decline_request lets the payer close a pending request without paying it."
+    },
+    {
+      "id": "ev-cancel",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 112,
+          "start": 106
+        },
+        "path": "payments/views.py",
+        "symbol": "cancel_request"
+      },
+      "summary": "cancel_request lets the requester withdraw a pending request they raised."
+    },
+    {
+      "id": "ev-wallet-view",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 25,
+          "start": 8
+        },
+        "path": "wallets/views.py",
+        "symbol": "wallet"
+      },
+      "summary": "The wallet page shows available and pending balances and the last fifty ledger entries."
+    },
+    {
+      "id": "ev-deposit-view",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 35,
+          "start": 28
+        },
+        "path": "rails/views.py",
+        "symbol": "deposit"
+      },
+      "summary": "The deposit view starts a top up from a linked account and warns that it clears in a couple of days."
+    },
+    {
+      "id": "ev-withdraw-view",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 53,
+          "start": 38
+        },
+        "path": "rails/views.py",
+        "symbol": "withdraw"
+      },
+      "summary": "The withdraw view starts a cash out to a linked account and refuses it when the available balance is short."
+    },
+    {
+      "id": "ev-linked-view",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 25,
+          "start": 12
+        },
+        "path": "rails/views.py",
+        "symbol": "linked_accounts"
+      },
+      "summary": "linked_accounts lists the user's cards and bank accounts and adds new ones."
+    },
+    {
+      "id": "ev-feed-view",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 34,
+          "start": 11
+        },
+        "path": "feed/views.py",
+        "symbol": "feed"
+      },
+      "summary": "The feed shows public payments, friends-only payments from people the viewer follows, and the viewer's own payments."
+    },
+    {
+      "id": "ev-people",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 61,
+          "start": 55
+        },
+        "path": "accounts/views.py",
+        "symbol": "people"
+      },
+      "summary": "people searches users by handle, excluding the searcher."
+    },
+    {
+      "id": "ev-profile",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 37,
+          "start": 23
+        },
+        "path": "accounts/views.py",
+        "symbol": "profile"
+      },
+      "summary": "A profile page shows a person's public payments and whether the viewer follows them."
+    },
+    {
+      "id": "ev-follow",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 52,
+          "start": 40
+        },
+        "path": "accounts/views.py",
+        "symbol": "follow"
+      },
+      "summary": "follow and unfollow create and delete the Follow row that decides who sees FRIENDS-visibility payments."
+    },
+    {
+      "id": "ev-inbox",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 11,
+          "start": 7
+        },
+        "path": "notifications/views.py",
+        "symbol": "inbox"
+      },
+      "summary": "The inbox lists the user's notifications and marks the unread ones read."
+    },
+    {
+      "id": "ev-settle-cmd",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 11,
+          "start": 6
+        },
+        "path": "rails/management/commands/settle_rails.py",
+        "symbol": "Command"
+      },
+      "summary": "The settle_rails management command lands every deposit and withdrawal whose settlement date has arrived."
+    },
+    {
+      "id": "ev-expire-cmd",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 16,
+          "start": 7
+        },
+        "path": "payments/management/commands/expire_requests.py",
+        "symbol": "Command"
+      },
+      "summary": "The expire_requests management command closes pending money requests past their expiry."
+    },
+    {
+      "id": "ev-housekeeping",
+      "kind": "documentation",
+      "locator": {
+        "lineRange": {
+          "end": 35,
+          "start": 26
+        },
+        "path": "README.md",
+        "symbol": "settle_rails"
+      },
+      "summary": "The README lists settle_rails, expire_requests and seed_demo as housekeeping commands run outside the web interface."
+    },
+    {
+      "id": "ev-admin-reg",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 7,
+          "start": 1
+        },
+        "path": "accounts/admin.py",
+        "symbol": "admin.site.register"
+      },
+      "summary": "User and Follow are registered with the Django admin site."
+    }
+  ],
+  "elements": [
+    {
+      "id": "kitepay",
+      "semanticType": "subject",
+      "label": "kitepay",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-roots"
+      ]
+    },
+    {
+      "id": "visitor",
+      "semanticType": "actor",
+      "label": "Visitor",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-register",
+        "ev-login"
+      ]
+    },
+    {
+      "id": "member",
+      "semanticType": "actor",
+      "label": "Member",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-loginurl",
+        "ev-wallet-view"
+      ]
+    },
+    {
+      "id": "operator",
+      "semanticType": "actor",
+      "label": "Operator (scheduled job)",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-housekeeping",
+        "ev-settle-cmd",
+        "ev-expire-cmd"
+      ]
+    },
+    {
+      "id": "administrator",
+      "semanticType": "actor",
+      "label": "Administrator",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-roots",
+        "ev-admin-reg"
+      ]
+    },
+    {
+      "id": "uc-register",
+      "semanticType": "useCase",
+      "label": "Register and get a wallet",
+      "parentId": "kitepay",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-register"
+      ]
+    },
+    {
+      "id": "uc-signin",
+      "semanticType": "useCase",
+      "label": "Sign in and out",
+      "parentId": "kitepay",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-login"
+      ]
+    },
+    {
+      "id": "uc-send-money",
+      "semanticType": "useCase",
+      "label": "Send money to someone",
+      "parentId": "kitepay",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-pay"
+      ]
+    },
+    {
+      "id": "uc-ask-money",
+      "semanticType": "useCase",
+      "label": "Ask someone for money",
+      "parentId": "kitepay",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-request-money"
+      ]
+    },
+    {
+      "id": "uc-review-requests",
+      "semanticType": "useCase",
+      "label": "Review money requests",
+      "parentId": "kitepay",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-requests-list"
+      ]
+    },
+    {
+      "id": "uc-pay-request",
+      "semanticType": "useCase",
+      "label": "Pay a money request",
+      "parentId": "kitepay",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-accept"
+      ]
+    },
+    {
+      "id": "uc-decline-request",
+      "semanticType": "useCase",
+      "label": "Decline a money request",
+      "parentId": "kitepay",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-decline"
+      ]
+    },
+    {
+      "id": "uc-cancel-request",
+      "semanticType": "useCase",
+      "label": "Cancel a request I raised",
+      "parentId": "kitepay",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-cancel"
+      ]
+    },
+    {
+      "id": "uc-check-wallet",
+      "semanticType": "useCase",
+      "label": "Check balance and statement",
+      "parentId": "kitepay",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-wallet-view"
+      ]
+    },
+    {
+      "id": "uc-top-up",
+      "semanticType": "useCase",
+      "label": "Top up from a card or bank",
+      "parentId": "kitepay",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-deposit-view"
+      ]
+    },
+    {
+      "id": "uc-cash-out",
+      "semanticType": "useCase",
+      "label": "Cash out to a card or bank",
+      "parentId": "kitepay",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-withdraw-view"
+      ]
+    },
+    {
+      "id": "uc-manage-linked",
+      "semanticType": "useCase",
+      "label": "Manage linked accounts",
+      "parentId": "kitepay",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-linked-view"
+      ]
+    },
+    {
+      "id": "uc-browse-feed",
+      "semanticType": "useCase",
+      "label": "Browse the payment feed",
+      "parentId": "kitepay",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-feed-view"
+      ]
+    },
+    {
+      "id": "uc-find-people",
+      "semanticType": "useCase",
+      "label": "Find people by handle",
+      "parentId": "kitepay",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-people"
+      ]
+    },
+    {
+      "id": "uc-view-profile",
+      "semanticType": "useCase",
+      "label": "View someone's profile",
+      "parentId": "kitepay",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-profile"
+      ]
+    },
+    {
+      "id": "uc-follow",
+      "semanticType": "useCase",
+      "label": "Follow or unfollow someone",
+      "parentId": "kitepay",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-follow"
+      ]
+    },
+    {
+      "id": "uc-notifications",
+      "semanticType": "useCase",
+      "label": "Read my notifications",
+      "parentId": "kitepay",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-inbox"
+      ]
+    },
+    {
+      "id": "uc-settle-rails",
+      "semanticType": "useCase",
+      "label": "Settle deposits and withdrawals that are due",
+      "parentId": "kitepay",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-settle-cmd"
+      ]
+    },
+    {
+      "id": "uc-expire-requests",
+      "semanticType": "useCase",
+      "label": "Expire unanswered money requests",
+      "parentId": "kitepay",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-expire-cmd"
+      ]
+    },
+    {
+      "id": "uc-admin",
+      "semanticType": "useCase",
+      "label": "Administer records in the Django admin",
+      "parentId": "kitepay",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-roots",
+        "ev-admin-reg"
+      ]
+    },
+    {
+      "id": "note-login",
+      "semanticType": "note",
+      "label": "Every goal except registering and signing in sits behind @login_required.",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-loginurl"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "visitor-register",
+      "semanticType": "association",
+      "source": "visitor",
+      "target": "uc-register",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-register"
+      ]
+    },
+    {
+      "id": "visitor-signin",
+      "semanticType": "association",
+      "source": "visitor",
+      "target": "uc-signin",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-login"
+      ]
+    },
+    {
+      "id": "member-send",
+      "semanticType": "association",
+      "source": "member",
+      "target": "uc-send-money",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-pay"
+      ]
+    },
+    {
+      "id": "member-ask",
+      "semanticType": "association",
+      "source": "member",
+      "target": "uc-ask-money",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-request-money"
+      ]
+    },
+    {
+      "id": "member-review",
+      "semanticType": "association",
+      "source": "member",
+      "target": "uc-review-requests",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-requests-list"
+      ]
+    },
+    {
+      "id": "member-pay-request",
+      "semanticType": "association",
+      "source": "member",
+      "target": "uc-pay-request",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-accept"
+      ]
+    },
+    {
+      "id": "member-decline",
+      "semanticType": "association",
+      "source": "member",
+      "target": "uc-decline-request",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-decline"
+      ]
+    },
+    {
+      "id": "member-cancel",
+      "semanticType": "association",
+      "source": "member",
+      "target": "uc-cancel-request",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-cancel"
+      ]
+    },
+    {
+      "id": "member-wallet",
+      "semanticType": "association",
+      "source": "member",
+      "target": "uc-check-wallet",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-wallet-view"
+      ]
+    },
+    {
+      "id": "member-topup",
+      "semanticType": "association",
+      "source": "member",
+      "target": "uc-top-up",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-deposit-view"
+      ]
+    },
+    {
+      "id": "member-cashout",
+      "semanticType": "association",
+      "source": "member",
+      "target": "uc-cash-out",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-withdraw-view"
+      ]
+    },
+    {
+      "id": "member-linked",
+      "semanticType": "association",
+      "source": "member",
+      "target": "uc-manage-linked",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-linked-view"
+      ]
+    },
+    {
+      "id": "member-feed",
+      "semanticType": "association",
+      "source": "member",
+      "target": "uc-browse-feed",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-feed-view"
+      ]
+    },
+    {
+      "id": "member-find",
+      "semanticType": "association",
+      "source": "member",
+      "target": "uc-find-people",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-people"
+      ]
+    },
+    {
+      "id": "member-profile",
+      "semanticType": "association",
+      "source": "member",
+      "target": "uc-view-profile",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-profile"
+      ]
+    },
+    {
+      "id": "member-follow",
+      "semanticType": "association",
+      "source": "member",
+      "target": "uc-follow",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-follow"
+      ]
+    },
+    {
+      "id": "member-notifications",
+      "semanticType": "association",
+      "source": "member",
+      "target": "uc-notifications",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-inbox"
+      ]
+    },
+    {
+      "id": "operator-settle",
+      "semanticType": "association",
+      "source": "operator",
+      "target": "uc-settle-rails",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-settle-cmd",
+        "ev-housekeeping"
+      ]
+    },
+    {
+      "id": "operator-expire",
+      "semanticType": "association",
+      "source": "operator",
+      "target": "uc-expire-requests",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-expire-cmd",
+        "ev-housekeeping"
+      ]
+    },
+    {
+      "id": "admin-manage",
+      "semanticType": "association",
+      "source": "administrator",
+      "target": "uc-admin",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-admin-reg"
+      ]
+    },
+    {
+      "id": "pay-request-includes-send",
+      "semanticType": "include",
+      "source": "uc-pay-request",
+      "target": "uc-send-money",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-accept",
+        "ev-pay"
+      ]
+    },
+    {
+      "id": "note-login-link",
+      "semanticType": "commentLink",
+      "source": "note-login",
+      "target": "member",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-loginurl"
+      ]
+    }
+  ]
+}

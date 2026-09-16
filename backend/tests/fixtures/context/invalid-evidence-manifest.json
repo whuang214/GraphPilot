@@ -1,0 +1,131 @@
+{
+  "schemaVersion": "graphpilot.context.evidence-manifest.v1",
+  "kind": "evidenceManifest",
+  "id": "evidence-invalid-repository",
+  "source": {
+    "kind": "repository",
+    "displayName": "Invalid Repository",
+    "root": ".",
+    "snapshot": {
+      "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "fileCount": 1,
+      "capturedAt": "2026-07-13T14:20:00Z"
+    }
+  },
+  "scope": {
+    "baseline": "boundedArchitecture",
+    "includedPaths": [
+      "."
+    ],
+    "excludedPaths": [
+      ".git/**",
+      ".graphpilot/**",
+      "**/.env*"
+    ],
+    "includedConcerns": [
+      "majorWorkflows"
+    ],
+    "stoppingReason": "The invalid fixture is bounded."
+  },
+  "evidence": [
+    {
+      "id": "evidence-invalid-code",
+      "kind": "code",
+      "locator": {
+        "path": "src/invalid.py"
+      },
+      "contentDigest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "summary": "A source observation exists.",
+      "capturedInSourceDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "status": "current",
+      "capturedAt": "2026-07-13T14:21:00Z"
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim-invalid-step",
+      "kind": "behaviorStep",
+      "currentVersion": 2,
+      "status": "active",
+      "versions": [
+        {
+          "version": 1,
+          "statement": "The invalid step exists.",
+          "appliesToViewpoints": [
+            "as_implemented"
+          ],
+          "payload": {
+            "actor": "Invalid actor",
+            "action": "perform invalid step"
+          },
+          "support": {
+            "basis": "repositoryEvidence",
+            "derivation": "direct",
+            "evidenceRefs": [
+              "evidence-missing-code"
+            ]
+          },
+          "createdAt": "2026-07-13T14:22:00Z"
+        }
+      ]
+    },
+    {
+      "id": "claim-invalid-relationship",
+      "kind": "relationship",
+      "currentVersion": 1,
+      "status": "active",
+      "versions": [
+        {
+          "version": 1,
+          "statement": "The relationship references a missing claim.",
+          "appliesToViewpoints": [
+            "as_implemented"
+          ],
+          "payload": {
+            "sourceClaimRef": {
+              "id": "claim-missing-source",
+              "version": 1
+            },
+            "relationship": "calls",
+            "targetClaimRef": {
+              "id": "claim-invalid-step",
+              "version": 1
+            }
+          },
+          "support": {
+            "basis": "repositoryEvidence",
+            "derivation": "direct",
+            "evidenceRefs": [
+              "evidence-invalid-code"
+            ]
+          },
+          "createdAt": "2026-07-13T14:23:00Z"
+        }
+      ]
+    }
+  ],
+  "uncertainties": [
+    {
+      "id": "uncertainty-invalid-reference",
+      "kind": "missing_information",
+      "statement": "The fixture references missing records.",
+      "relatedEvidenceRefs": [
+        "evidence-missing-code"
+      ],
+      "relatedClaimRefs": [
+        {
+          "id": "claim-missing-source",
+          "version": 1
+        }
+      ],
+      "suggestedSearches": [
+        "missing source"
+      ],
+      "createdAt": "2026-07-13T14:24:00Z"
+    }
+  ],
+  "revision": 1,
+  "digest": "sha256:65d27c0f2a06f4b763214bdcd307f9a73f812d952d0e9bf301e2fdfa835825c1",
+  "createdAt": "2026-07-13T14:20:00Z",
+  "updatedAt": "2026-07-13T14:24:00Z"
+}

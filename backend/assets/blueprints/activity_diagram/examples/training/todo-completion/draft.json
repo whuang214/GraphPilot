@@ -1,0 +1,338 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "todo-completion",
+  "diagramType": "activity_diagram",
+  "authority": "as_implemented",
+  "requests": [
+    "What happens when someone completes a todo?"
+  ],
+  "evidence": [
+    {
+      "id": "ev-route",
+      "kind": "code",
+      "locator": {
+        "path": "src/todo_api/api/routes_todos.py",
+        "symbol": "complete_todo",
+        "lineRange": {
+          "start": 46,
+          "end": 51
+        }
+      },
+      "summary": "The route delegates to the service and turns any exception into a status code."
+    },
+    {
+      "id": "ev-complete",
+      "kind": "code",
+      "locator": {
+        "path": "src/todo_api/services/todo_service.py",
+        "symbol": "TodoService.complete",
+        "lineRange": {
+          "start": 73,
+          "end": 89
+        }
+      },
+      "summary": "complete() loads the todo and its list, checks permission and the rules, then sets DONE, saves, and publishes."
+    },
+    {
+      "id": "ev-require",
+      "kind": "code",
+      "locator": {
+        "path": "src/todo_api/services/permissions.py",
+        "symbol": "PermissionService.require",
+        "lineRange": {
+          "start": 36,
+          "end": 41
+        }
+      },
+      "summary": "require raises PermissionDenied unless the caller's role allows the action."
+    },
+    {
+      "id": "ev-actions",
+      "kind": "code",
+      "locator": {
+        "path": "src/todo_api/services/permissions.py",
+        "symbol": "_REQUIRED",
+        "lineRange": {
+          "start": 17,
+          "end": 24
+        }
+      },
+      "summary": "complete_todo needs COLLABORATOR, OWNER or ADMIN."
+    }
+  ],
+  "elements": [
+    {
+      "id": "start",
+      "semanticType": "initialNode",
+      "label": "Request arrives",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-route"
+      ]
+    },
+    {
+      "id": "load-todo",
+      "semanticType": "opaqueAction",
+      "label": "Load the todo",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-complete"
+      ]
+    },
+    {
+      "id": "todo-found",
+      "semanticType": "decisionNode",
+      "label": "Does the todo exist?",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-complete"
+      ]
+    },
+    {
+      "id": "load-list",
+      "semanticType": "opaqueAction",
+      "label": "Load its list",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-complete"
+      ]
+    },
+    {
+      "id": "may-complete",
+      "semanticType": "decisionNode",
+      "label": "May this caller complete it?",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-require",
+        "ev-actions"
+      ]
+    },
+    {
+      "id": "check-rules",
+      "semanticType": "opaqueAction",
+      "label": "Check the list is not archived and the todo is completable",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-complete"
+      ]
+    },
+    {
+      "id": "mark-done",
+      "semanticType": "opaqueAction",
+      "label": "Set DONE and stamp completedAt",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-complete"
+      ]
+    },
+    {
+      "id": "save",
+      "semanticType": "opaqueAction",
+      "label": "Update the repository",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-complete"
+      ]
+    },
+    {
+      "id": "publish",
+      "semanticType": "opaqueAction",
+      "label": "Publish TodoCompleted",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-complete"
+      ]
+    },
+    {
+      "id": "refuse",
+      "semanticType": "opaqueAction",
+      "label": "Map the exception to a status code",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-route"
+      ]
+    },
+    {
+      "id": "done",
+      "semanticType": "activityFinalNode",
+      "label": "200 with the todo",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-route"
+      ]
+    },
+    {
+      "id": "stopped",
+      "semanticType": "activityFinalNode",
+      "label": "Error response",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-route"
+      ]
+    },
+    {
+      "id": "note-catch",
+      "semanticType": "note",
+      "label": "The route catches bare Exception, so an unexpected fault is reported as a handled error like any refusal.",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-route"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "f1",
+      "semanticType": "controlFlow",
+      "source": "start",
+      "target": "load-todo",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-route"
+      ]
+    },
+    {
+      "id": "f2",
+      "semanticType": "controlFlow",
+      "source": "load-todo",
+      "target": "todo-found",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-complete"
+      ]
+    },
+    {
+      "id": "f3",
+      "semanticType": "controlFlow",
+      "source": "todo-found",
+      "target": "load-list",
+      "guard": "it exists",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-complete"
+      ]
+    },
+    {
+      "id": "f4",
+      "semanticType": "controlFlow",
+      "source": "todo-found",
+      "target": "refuse",
+      "guard": "no such todo",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-complete"
+      ]
+    },
+    {
+      "id": "f5",
+      "semanticType": "controlFlow",
+      "source": "load-list",
+      "target": "may-complete",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-complete"
+      ]
+    },
+    {
+      "id": "f6",
+      "semanticType": "controlFlow",
+      "source": "may-complete",
+      "target": "check-rules",
+      "guard": "role allows it",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-require"
+      ]
+    },
+    {
+      "id": "f7",
+      "semanticType": "controlFlow",
+      "source": "may-complete",
+      "target": "refuse",
+      "guard": "permission denied",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-require"
+      ]
+    },
+    {
+      "id": "f8",
+      "semanticType": "controlFlow",
+      "source": "check-rules",
+      "target": "mark-done",
+      "guard": "both rules pass",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-complete"
+      ]
+    },
+    {
+      "id": "f8b",
+      "semanticType": "controlFlow",
+      "source": "check-rules",
+      "target": "refuse",
+      "guard": "archived, or already done",
+      "assurance": "assumed",
+      "assumptionRef": "asm-rules-reach-the-same-handler"
+    },
+    {
+      "id": "f9",
+      "semanticType": "controlFlow",
+      "source": "mark-done",
+      "target": "save",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-complete"
+      ]
+    },
+    {
+      "id": "f10",
+      "semanticType": "controlFlow",
+      "source": "save",
+      "target": "publish",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-complete"
+      ]
+    },
+    {
+      "id": "f11",
+      "semanticType": "controlFlow",
+      "source": "publish",
+      "target": "done",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-route"
+      ]
+    },
+    {
+      "id": "f12",
+      "semanticType": "controlFlow",
+      "source": "refuse",
+      "target": "stopped",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-route"
+      ]
+    },
+    {
+      "id": "catch-note-link",
+      "semanticType": "commentLink",
+      "source": "note-catch",
+      "target": "refuse",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-route"
+      ]
+    }
+  ],
+  "assumptions": [
+    {
+      "id": "asm-rules-reach-the-same-handler",
+      "statement": "A rules failure leaves through the same except branch as the other refusals.",
+      "reason": "The route wraps the whole call in one try, but no test covers a rules failure so the resulting status is unverified.",
+      "acceptedBy": "host"
+    }
+  ]
+}

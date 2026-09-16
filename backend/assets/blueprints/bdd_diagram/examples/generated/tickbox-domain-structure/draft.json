@@ -1,0 +1,777 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "tickbox-domain-structure",
+  "diagramType": "bdd_diagram",
+  "authority": "as_implemented",
+  "requests": [
+    "The structure of what this system stores, and how those things relate."
+  ],
+  "evidence": [
+    {
+      "id": "ev-user",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 47,
+          "start": 38
+        },
+        "path": "backend/app/models.py",
+        "symbol": "User"
+      },
+      "summary": "The users table: unique email, name, password hash, created_at, and a memberships collection cascaded on delete."
+    },
+    {
+      "id": "ev-workspace",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 59,
+          "start": 50
+        },
+        "path": "backend/app/models.py",
+        "symbol": "Workspace"
+      },
+      "summary": "The workspaces table: name and unique slug, owning its memberships and projects with cascade all, delete-orphan."
+    },
+    {
+      "id": "ev-membership",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 73,
+          "start": 62
+        },
+        "path": "backend/app/models.py",
+        "symbol": "Membership"
+      },
+      "summary": "Membership joins one user to one workspace with a role, unique on (user_id, workspace_id) and defaulting to EDITOR."
+    },
+    {
+      "id": "ev-role",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 21,
+          "start": 18
+        },
+        "path": "backend/app/models.py",
+        "symbol": "Role"
+      },
+      "summary": "The three membership roles: owner, editor, viewer."
+    },
+    {
+      "id": "ev-status",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 27,
+          "start": 24
+        },
+        "path": "backend/app/models.py",
+        "symbol": "Status"
+      },
+      "summary": "The three task states: todo, doing, done."
+    },
+    {
+      "id": "ev-project",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 87,
+          "start": 76
+        },
+        "path": "backend/app/models.py",
+        "symbol": "Project"
+      },
+      "summary": "Project belongs to a workspace, carries a name, colour and archived flag, and owns its tasks with cascade all, delete-orphan."
+    },
+    {
+      "id": "ev-label",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 96,
+          "start": 90
+        },
+        "path": "backend/app/models.py",
+        "symbol": "Label"
+      },
+      "summary": "Label has a name and colour and a workspace_id foreign key that cascades on delete; no ORM back-reference names the collection."
+    },
+    {
+      "id": "ev-task",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 119,
+          "start": 99
+        },
+        "path": "backend/app/models.py",
+        "symbol": "Task"
+      },
+      "summary": "Task belongs to a project, holds title, detail, status, position, optional assignee, due_on and completed_at, and owns subtasks and comments."
+    },
+    {
+      "id": "ev-subtask",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 131,
+          "start": 122
+        },
+        "path": "backend/app/models.py",
+        "symbol": "Subtask"
+      },
+      "summary": "Subtask belongs to one task and carries a title, a done flag and a position."
+    },
+    {
+      "id": "ev-comment",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 144,
+          "start": 134
+        },
+        "path": "backend/app/models.py",
+        "symbol": "Comment"
+      },
+      "summary": "Comment belongs to one task, has a body and created_at, and an author that is set to NULL when the user is deleted."
+    },
+    {
+      "id": "ev-activity",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 155,
+          "start": 147
+        },
+        "path": "backend/app/models.py",
+        "symbol": "ActivityEvent"
+      },
+      "summary": "ActivityEvent records a verb and detail against a task at a time, with an actor that is set to NULL when the user is deleted."
+    },
+    {
+      "id": "ev-task-labels",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 35,
+          "start": 30
+        },
+        "path": "backend/app/models.py",
+        "symbol": "task_labels"
+      },
+      "summary": "task_labels is the many-to-many join table between tasks and labels, keyed on both ids."
+    },
+    {
+      "id": "ev-rollup",
+      "kind": "code",
+      "locator": {
+        "lineRange": {
+          "end": 174,
+          "start": 158
+        },
+        "path": "backend/app/models.py",
+        "symbol": "_roll_up"
+      },
+      "summary": "An after_update listener on Subtask: when the last unfinished subtask is ticked, the task is set to DONE and completed_at is stamped."
+    }
+  ],
+  "elements": [
+    {
+      "id": "workspace",
+      "semanticType": "block",
+      "label": "Workspace",
+      "features": {
+        "constraints": [
+          {
+            "expression": "slug is unique across workspaces",
+            "name": "unique"
+          }
+        ],
+        "properties": [
+          {
+            "kind": "value",
+            "name": "name",
+            "type": "str"
+          },
+          {
+            "kind": "value",
+            "name": "slug",
+            "type": "str"
+          },
+          {
+            "kind": "value",
+            "name": "created_at",
+            "type": "datetime"
+          }
+        ]
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-workspace"
+      ]
+    },
+    {
+      "id": "user",
+      "semanticType": "block",
+      "label": "User",
+      "features": {
+        "constraints": [
+          {
+            "expression": "email is unique across users",
+            "name": "unique"
+          }
+        ],
+        "properties": [
+          {
+            "kind": "value",
+            "name": "email",
+            "type": "str"
+          },
+          {
+            "kind": "value",
+            "name": "name",
+            "type": "str"
+          },
+          {
+            "kind": "value",
+            "name": "password_hash",
+            "type": "str"
+          },
+          {
+            "kind": "value",
+            "name": "created_at",
+            "type": "datetime"
+          }
+        ]
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-user"
+      ]
+    },
+    {
+      "id": "membership",
+      "semanticType": "block",
+      "label": "Membership",
+      "features": {
+        "constraints": [
+          {
+            "expression": "one membership per (user, workspace)",
+            "name": "unique"
+          }
+        ],
+        "properties": [
+          {
+            "kind": "value",
+            "name": "joined_at",
+            "type": "datetime"
+          }
+        ]
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-membership"
+      ]
+    },
+    {
+      "id": "role",
+      "semanticType": "block",
+      "label": "Role",
+      "stereotype": "enumeration",
+      "features": {
+        "literals": [
+          "owner",
+          "editor",
+          "viewer"
+        ]
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-role"
+      ]
+    },
+    {
+      "id": "project",
+      "semanticType": "block",
+      "label": "Project",
+      "features": {
+        "properties": [
+          {
+            "kind": "value",
+            "name": "name",
+            "type": "str"
+          },
+          {
+            "default": "#4a6fa5",
+            "kind": "value",
+            "name": "colour",
+            "type": "str"
+          },
+          {
+            "default": false,
+            "kind": "value",
+            "name": "archived",
+            "type": "bool"
+          },
+          {
+            "kind": "value",
+            "name": "created_at",
+            "type": "datetime"
+          }
+        ]
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-project"
+      ]
+    },
+    {
+      "id": "label",
+      "semanticType": "block",
+      "label": "Label",
+      "features": {
+        "properties": [
+          {
+            "kind": "value",
+            "name": "name",
+            "type": "str"
+          },
+          {
+            "default": "#888888",
+            "kind": "value",
+            "name": "colour",
+            "type": "str"
+          }
+        ]
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-label"
+      ]
+    },
+    {
+      "id": "task",
+      "semanticType": "block",
+      "label": "Task",
+      "features": {
+        "properties": [
+          {
+            "kind": "value",
+            "name": "title",
+            "type": "str"
+          },
+          {
+            "default": "",
+            "kind": "value",
+            "name": "detail",
+            "type": "str"
+          },
+          {
+            "default": 0,
+            "kind": "value",
+            "name": "position",
+            "type": "int"
+          },
+          {
+            "kind": "value",
+            "multiplicity": {
+              "lower": 0,
+              "upper": 1
+            },
+            "name": "due_on",
+            "type": "datetime"
+          },
+          {
+            "kind": "value",
+            "name": "created_at",
+            "type": "datetime"
+          },
+          {
+            "kind": "value",
+            "multiplicity": {
+              "lower": 0,
+              "upper": 1
+            },
+            "name": "completed_at",
+            "type": "datetime"
+          }
+        ]
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-task"
+      ]
+    },
+    {
+      "id": "status",
+      "semanticType": "block",
+      "label": "Status",
+      "stereotype": "enumeration",
+      "features": {
+        "literals": [
+          "todo",
+          "doing",
+          "done"
+        ]
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-status"
+      ]
+    },
+    {
+      "id": "subtask",
+      "semanticType": "block",
+      "label": "Subtask",
+      "features": {
+        "properties": [
+          {
+            "kind": "value",
+            "name": "title",
+            "type": "str"
+          },
+          {
+            "default": false,
+            "kind": "value",
+            "name": "done",
+            "type": "bool"
+          },
+          {
+            "default": 0,
+            "kind": "value",
+            "name": "position",
+            "type": "int"
+          }
+        ]
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-subtask"
+      ]
+    },
+    {
+      "id": "comment",
+      "semanticType": "block",
+      "label": "Comment",
+      "features": {
+        "properties": [
+          {
+            "kind": "value",
+            "name": "body",
+            "type": "str"
+          },
+          {
+            "kind": "value",
+            "name": "created_at",
+            "type": "datetime"
+          }
+        ]
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-comment"
+      ]
+    },
+    {
+      "id": "activity-event",
+      "semanticType": "block",
+      "label": "ActivityEvent",
+      "features": {
+        "properties": [
+          {
+            "kind": "value",
+            "name": "verb",
+            "type": "str"
+          },
+          {
+            "default": "",
+            "kind": "value",
+            "name": "detail",
+            "type": "str"
+          },
+          {
+            "kind": "value",
+            "name": "at",
+            "type": "datetime"
+          }
+        ]
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-activity"
+      ]
+    },
+    {
+      "id": "note-rollup",
+      "semanticType": "note",
+      "label": "Ticking the last subtask sets its task to done and stamps completed_at. Unticking never reverses it.",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-rollup"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "membership-in-workspace",
+      "semanticType": "composition",
+      "source": "membership",
+      "target": "workspace",
+      "sourceRole": "memberships",
+      "sourceMultiplicity": {
+        "lower": 0,
+        "upper": "*"
+      },
+      "targetMultiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-workspace",
+        "ev-membership"
+      ]
+    },
+    {
+      "id": "project-in-workspace",
+      "semanticType": "composition",
+      "source": "project",
+      "target": "workspace",
+      "sourceRole": "projects",
+      "sourceMultiplicity": {
+        "lower": 0,
+        "upper": "*"
+      },
+      "targetMultiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-workspace",
+        "ev-project"
+      ]
+    },
+    {
+      "id": "label-in-workspace",
+      "semanticType": "composition",
+      "source": "label",
+      "target": "workspace",
+      "targetMultiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-label"
+      ]
+    },
+    {
+      "id": "task-in-project",
+      "semanticType": "composition",
+      "source": "task",
+      "target": "project",
+      "sourceRole": "tasks",
+      "sourceMultiplicity": {
+        "lower": 0,
+        "upper": "*"
+      },
+      "targetMultiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-project",
+        "ev-task"
+      ]
+    },
+    {
+      "id": "subtask-in-task",
+      "semanticType": "composition",
+      "source": "subtask",
+      "target": "task",
+      "sourceRole": "subtasks",
+      "sourceMultiplicity": {
+        "lower": 0,
+        "upper": "*"
+      },
+      "targetMultiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-task",
+        "ev-subtask"
+      ]
+    },
+    {
+      "id": "comment-in-task",
+      "semanticType": "composition",
+      "source": "comment",
+      "target": "task",
+      "sourceRole": "comments",
+      "sourceMultiplicity": {
+        "lower": 0,
+        "upper": "*"
+      },
+      "targetMultiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-task",
+        "ev-comment"
+      ]
+    },
+    {
+      "id": "event-in-task",
+      "semanticType": "composition",
+      "source": "activity-event",
+      "target": "task",
+      "targetMultiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-activity"
+      ]
+    },
+    {
+      "id": "membership-of-user",
+      "semanticType": "association",
+      "source": "membership",
+      "target": "user",
+      "targetRole": "user",
+      "targetMultiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "targetNavigable": true,
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-membership",
+        "ev-user"
+      ]
+    },
+    {
+      "id": "membership-has-role",
+      "semanticType": "association",
+      "source": "membership",
+      "target": "role",
+      "targetRole": "role",
+      "targetMultiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "targetNavigable": true,
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-membership",
+        "ev-role"
+      ]
+    },
+    {
+      "id": "task-has-status",
+      "semanticType": "association",
+      "source": "task",
+      "target": "status",
+      "targetRole": "status",
+      "targetMultiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "targetNavigable": true,
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-task",
+        "ev-status"
+      ]
+    },
+    {
+      "id": "task-assigned-to",
+      "semanticType": "association",
+      "source": "task",
+      "target": "user",
+      "targetRole": "assignee",
+      "targetMultiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "targetNavigable": true,
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-task"
+      ]
+    },
+    {
+      "id": "task-carries-labels",
+      "semanticType": "association",
+      "source": "task",
+      "target": "label",
+      "targetRole": "labels",
+      "sourceMultiplicity": {
+        "lower": 0,
+        "upper": "*"
+      },
+      "targetMultiplicity": {
+        "lower": 0,
+        "upper": "*"
+      },
+      "targetNavigable": true,
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-task-labels",
+        "ev-task"
+      ]
+    },
+    {
+      "id": "comment-written-by",
+      "semanticType": "association",
+      "source": "comment",
+      "target": "user",
+      "targetRole": "author",
+      "targetMultiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "targetNavigable": true,
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-comment"
+      ]
+    },
+    {
+      "id": "event-caused-by",
+      "semanticType": "association",
+      "source": "activity-event",
+      "target": "user",
+      "targetRole": "actor",
+      "targetMultiplicity": {
+        "lower": 0,
+        "upper": 1
+      },
+      "targetNavigable": true,
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-activity"
+      ]
+    },
+    {
+      "id": "rollup-note-link",
+      "semanticType": "commentLink",
+      "source": "note-rollup",
+      "target": "subtask",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-rollup"
+      ]
+    }
+  ]
+}

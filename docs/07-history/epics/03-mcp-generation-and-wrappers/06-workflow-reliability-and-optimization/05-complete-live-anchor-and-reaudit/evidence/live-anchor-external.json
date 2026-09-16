@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "graphpilot.delivery.live-anchor-external-binding.v1",
+  "kind": "liveAnchorExternalBinding",
+  "bindingId": "binding-live-anchor-block5-cold-room-20260728-03",
+  "sourceType": "controlled_graphpilot_live_anchor",
+  "sourceCommit": "8ec8320799e8666d11b1ebd150ced555d2bf2aee",
+  "browserValidationCommit": "505f9e9a06c3e2db90908d982191b38089545c7a",
+  "runId": "run-live-workflow-anchor-block5-cold-room-20260728-03",
+  "observationId": "observation-live-workflow-anchor-block5-cold-room-20260728-03",
+  "digests": {
+    "anchor": "sha256:12a4528c6d717bba44d7408a78bb7f1723d0c53a55261984a252eba6f553b51b",
+    "approval": "sha256:d25ffb3e5638d11e59883578d840819af7d01a935bf53450b1a24bd2dd0f3b88",
+    "manifest": "sha256:e82c9732234517b879ab26f5915ec9578fcfb1aa32ecb16179dcec12702a86ed",
+    "observation": "sha256:d7b0a1b3e8386484145c4542330393bf941dfb07e96c6d78f222107c2b2036db",
+    "terminal": "sha256:cf50cbb2b0a1801b8f6a66b0126215ab4e7a9caab28d57cc7ca4f3c084e4bc85",
+    "result": "sha256:9db4e4272ae108e67faa25bd16af50a286aea571191e7c2a4785692eb158b561",
+    "browserEvidence": "sha256:d2a53147b281705173b0f361ebe8b707ea38925b9b995ddf56443e3d973f73be",
+    "synthesis": "sha256:2ee871f96b2816163fb5eefd01c03ca9eb71184ebeab4e926160f5697bc08f3e",
+    "safeResult": "sha256:949435397b51c864cfe89ef8c9096c9dbacff255638b188d05c956b13039cc3a"
+  },
+  "outcome": {"status": "pass", "providerCalls": 5, "quality": "pass", "browser": "pass", "noRerun": true},
+  "accounting": {
+    "denominator": "controlled_live_request_to_visible_diagram",
+    "totalMs": 186759.67260004627,
+    "domains": {
+      "host": {"ms": 251.62430002819747, "classification": "prepared_imported", "authoringMeasured": false},
+      "azure": {"ms": 180843.12469995348, "classification": "measured"},
+      "mcp": {"ms": 865.764299989678, "classification": "measured"},
+      "local": {"ms": 3995.3401000238955, "classification": "measured"},
+      "browser": {"ms": 543.8000000119209, "classification": "measured"},
+      "residual": {"ms": 260.0192000390962, "classification": "derived"}
+    }
+  },
+  "separation": {"fakeBaselineData": false, "hostExperimentData": false, "mergeDenominators": false, "percentageComparisonAuthorized": false},
+  "knownGap": "Real external host routing/search/read/authoring/retry/token/credit evidence is unavailable in this binding.",
+  "digest": "sha256:08ad9d5a8a5cbc40efba04093fb5d0a671b586cd78d54f04d3009905ab76e25f"
+}

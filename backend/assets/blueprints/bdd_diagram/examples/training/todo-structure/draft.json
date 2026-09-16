@@ -1,0 +1,336 @@
+{
+  "schemaVersion": "graphpilot.draft.v1",
+  "kind": "diagramDraft",
+  "diagramName": "todo-structure",
+  "diagramType": "bdd_diagram",
+  "authority": "as_implemented",
+  "requests": [
+    "Show how the todo service is put together."
+  ],
+  "evidence": [
+    {
+      "id": "ev-list",
+      "kind": "code",
+      "locator": {
+        "path": "src/todo_api/domain/models.py",
+        "symbol": "TodoList",
+        "lineRange": {
+          "start": 73,
+          "end": 85
+        }
+      },
+      "summary": "TodoList holds a name, an owner and a member-to-role mapping."
+    },
+    {
+      "id": "ev-todo",
+      "kind": "code",
+      "locator": {
+        "path": "src/todo_api/domain/models.py",
+        "symbol": "Todo",
+        "lineRange": {
+          "start": 51,
+          "end": 69
+        }
+      },
+      "summary": "Todo names the list it belongs to and carries its own state and priority."
+    },
+    {
+      "id": "ev-state",
+      "kind": "code",
+      "locator": {
+        "path": "src/todo_api/domain/models.py",
+        "symbol": "TodoState",
+        "lineRange": {
+          "start": 23,
+          "end": 29
+        }
+      },
+      "summary": "The three states a todo can be in."
+    },
+    {
+      "id": "ev-role",
+      "kind": "code",
+      "locator": {
+        "path": "src/todo_api/domain/models.py",
+        "symbol": "Role",
+        "lineRange": {
+          "start": 32,
+          "end": 38
+        }
+      },
+      "summary": "The four membership roles."
+    },
+    {
+      "id": "ev-port",
+      "kind": "code",
+      "locator": {
+        "path": "src/todo_api/repositories/base.py",
+        "symbol": "TodoRepository",
+        "lineRange": {
+          "start": 14,
+          "end": 25
+        }
+      },
+      "summary": "The repository port: add, get, update, list_for, count_for, due_before."
+    },
+    {
+      "id": "ev-sql",
+      "kind": "code",
+      "locator": {
+        "path": "src/todo_api/repositories/sql.py",
+        "symbol": "SqlTodoRepository",
+        "lineRange": {
+          "start": 18,
+          "end": 73
+        }
+      },
+      "summary": "A SQL adapter implementing every method of the port."
+    }
+  ],
+  "elements": [
+    {
+      "id": "todo-list",
+      "semanticType": "block",
+      "label": "TodoList",
+      "features": {
+        "properties": [
+          {
+            "kind": "value",
+            "name": "name",
+            "type": "str"
+          },
+          {
+            "kind": "value",
+            "name": "ownerId",
+            "type": "str"
+          },
+          {
+            "kind": "reference",
+            "name": "members",
+            "type": "Role",
+            "multiplicity": {
+              "lower": 0,
+              "upper": "*"
+            }
+          },
+          {
+            "kind": "value",
+            "name": "archived",
+            "type": "bool",
+            "default": "False"
+          }
+        ],
+        "operations": [
+          {
+            "name": "role_of"
+          }
+        ]
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-list"
+      ]
+    },
+    {
+      "id": "todo",
+      "semanticType": "block",
+      "label": "Todo",
+      "features": {
+        "properties": [
+          {
+            "kind": "value",
+            "name": "title",
+            "type": "str"
+          },
+          {
+            "kind": "value",
+            "name": "state",
+            "type": "TodoState"
+          },
+          {
+            "kind": "value",
+            "name": "dueAt",
+            "type": "datetime",
+            "multiplicity": {
+              "lower": 0,
+              "upper": 1
+            }
+          }
+        ],
+        "operations": [
+          {
+            "name": "is_overdue"
+          }
+        ]
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-todo"
+      ]
+    },
+    {
+      "id": "todo-state",
+      "semanticType": "block",
+      "label": "TodoState",
+      "features": {
+        "literals": [
+          "OPEN",
+          "DONE",
+          "ARCHIVED"
+        ]
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-state"
+      ]
+    },
+    {
+      "id": "role",
+      "semanticType": "block",
+      "label": "Role",
+      "features": {
+        "literals": [
+          "VIEWER",
+          "COLLABORATOR",
+          "OWNER",
+          "ADMIN"
+        ]
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-role"
+      ]
+    },
+    {
+      "id": "port",
+      "semanticType": "block",
+      "label": "TodoRepository",
+      "features": {
+        "operations": [
+          {
+            "name": "add"
+          },
+          {
+            "name": "get"
+          },
+          {
+            "name": "update"
+          },
+          {
+            "name": "list_for"
+          },
+          {
+            "name": "due_before"
+          }
+        ]
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-port"
+      ]
+    },
+    {
+      "id": "sql-repo",
+      "semanticType": "block",
+      "label": "SqlTodoRepository",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-sql"
+      ]
+    },
+    {
+      "id": "note-owner",
+      "semanticType": "note",
+      "label": "role_of returns OWNER for the owner without consulting members, so the owner is never listed as a member.",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-list"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "todos-in-list",
+      "semanticType": "composition",
+      "source": "todo",
+      "target": "todo-list",
+      "sourceRole": "todos",
+      "sourceMultiplicity": {
+        "lower": 0,
+        "upper": "*"
+      },
+      "targetMultiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-todo"
+      ]
+    },
+    {
+      "id": "todo-has-state",
+      "semanticType": "association",
+      "source": "todo",
+      "target": "todo-state",
+      "targetRole": "state",
+      "targetMultiplicity": {
+        "lower": 1,
+        "upper": 1
+      },
+      "targetNavigable": true,
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-todo"
+      ]
+    },
+    {
+      "id": "members-have-roles",
+      "semanticType": "association",
+      "source": "todo-list",
+      "target": "role",
+      "targetRole": "members",
+      "targetMultiplicity": {
+        "lower": 0,
+        "upper": "*"
+      },
+      "targetNavigable": true,
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-list"
+      ]
+    },
+    {
+      "id": "sql-implements-port",
+      "semanticType": "generalization",
+      "source": "sql-repo",
+      "target": "port",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-sql",
+        "ev-port"
+      ]
+    },
+    {
+      "id": "port-stores-todo",
+      "semanticType": "dependency",
+      "source": "port",
+      "target": "todo",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-port"
+      ]
+    },
+    {
+      "id": "owner-note-link",
+      "semanticType": "commentLink",
+      "source": "note-owner",
+      "target": "todo-list",
+      "assurance": "grounded",
+      "evidenceRefs": [
+        "ev-list"
+      ]
+    }
+  ],
+  "assumptions": []
+}
